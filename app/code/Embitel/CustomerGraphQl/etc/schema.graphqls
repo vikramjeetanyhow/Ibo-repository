@@ -1,0 +1,211 @@
+type Mutation {
+ createCustomer (input: CustomerInput!): CustomerOutput @resolver(class: "\\Embitel\\CustomerGraphQl\\Model\\Resolver\\CreateCustomer") @doc(description:"Create customer account")
+ createEboCustomer (input: CustomerEboInput!): CustomerOutput @resolver(class: "\\Embitel\\CustomerGraphQl\\Model\\Resolver\\CreateEboCustomer") @doc(description:"Create customer account")
+ updateEboCustomer (input: CustomerEboInput!): CustomerOutput @resolver(class: "\\Embitel\\CustomerGraphQl\\Model\\Resolver\\UpdateEboCustomer") @doc(description:"Create customer account")
+ updateReferrerCustomer (input: UpdateReferrerCustomer!): CustomerOutput @resolver(class: "\\Embitel\\CustomerGraphQl\\Model\\Resolver\\UpdateReferrerCustomer") @doc(description:"Update referrer customer")
+ passwordResetEmail(email: String!): Boolean  @resolver(class: "\\Embitel\\CustomerGraphQl\\Model\\Resolver\\PasswordResetEmail") @doc(description: "Request an email with a reset password token for the registered customer identified by the specified email.")
+ generateLoginToken (userid: String!, secret: String!) : CustomerToken @resolver(class: "\\Embitel\\CustomerGraphQl\\Model\\Resolver\\GenerateCustomerToken") @doc(description:"Retrieve the customer token")
+ resetCustomerPassword(email: String!, resetPasswordToken: String!, newPassword: String!): Boolean  @resolver(class: "\\Embitel\\CustomerGraphQl\\Model\\Resolver\\ResetPassword") @doc(description: "Reset a customer's password using the reset password token that the customer received in an email after requesting it using passwordResetEmail.")
+isMobileAvailable  (mobilenumber: String!): VerifyMobile @resolver(class: "\\Embitel\\CustomerGraphQl\\Model\\Resolver\\VerifyMobile") @doc(description:"Verify mobile number for Customer")
+resendConfirmationEmail(email: String!): Boolean  @resolver(class: "\\Embitel\\CustomerGraphQl\\Model\\Resolver\\ResendConfirmationEmail") @doc(description: "Resend an email with a email confirmation link for the registered customer identified by the specified email.")
+ createCustomerToken (mobilenumber: String!, m2m_token: String!): VerifyOutput @resolver(class: "\\Embitel\\CustomerGraphQl\\Model\\Resolver\\CreateCustomerToken") @doc(description:"Customer token using mobile number")
+ generateCustomerData (mobilenumber: String, customerId: Int, m2m_token: String!): CustomerData @resolver(class: "\\Embitel\\CustomerGraphQl\\Model\\Resolver\\GenerateCustomerData") @doc(description:"Customer data using mobile number")
+ setIrCampaigndetails (customerId: Int, m2m_token: String!, campaign_id: String, referral_id: String, personalised_coupon_code: String): CampaignData @resolver(class: "\\Embitel\\CustomerGraphQl\\Model\\Resolver\\SetCampaignData") @doc(description:"Customer Campaign Details")
+}
+
+type Query {
+    generateCampaign: GenerateCampaign @resolver(class: "Embitel\\CustomerGraphQl\\Model\\Resolver\\GenerateCampaign") @doc(description: "The customer query returns information about a Customer campaign info") @cache(cacheable: false)
+}
+
+type GenerateCampaign {
+    campaign_id: Int @doc(description: "Customer Campaign Id")
+    campaign_label: String @doc(description:"Customer Campaign Label")
+}
+
+input UpdateReferrerCustomer {
+    customer_id: String @doc(description: "Customer Email Id")
+    referrer_date: String @doc(description: "Customer Referrer Date")
+    referrer_customer_id: String @doc(description: "Customer Referrer Email")
+}
+
+input CustomerEboInput {
+    prefix: String @doc(description: "An honorific, such as Dr., Mr., or Mrs.")
+    firstname: String @doc(description: "The customer's first name")
+    lastname: String @doc(description: "The customer's family name")
+    suffix: String @doc(description: "A value such as Sr., Jr., or III")
+    email: String @doc(description: "The customer's email address. Required for customer creation")
+    customer_type:String @doc(description: "Customer Type")
+    entity_type:String @doc(description: "Customer Entity Type")
+    customer_group:String! @doc(description: "Customer Group")
+    owner_name: String @doc(description: "Customer's owner name")
+    longitude: String @doc(description: "Customer's longitude")
+    latitude: String @doc(description: "Customer's latitude")
+    erp_id: String @doc(description: "Customer's ERP Id")
+    outlet_category: String @doc(description: "Customer's Category")
+    pan_card_number: String @doc(description: "Customer's pan card")
+    customer_contribution_info: String @doc(description: "Customer's contribution info")
+    sales_rep_email:String @doc(description: "The sales rep email address")
+    dob: String @doc(description: "Deprecated: Use `date_of_birth` instead")
+    date_of_birth: String @doc(description: "The customer's date of birth")
+    taxvat: String @doc(description: "The customer's Tax/VAT number (for corporate customers)")
+    gender: String @doc(description: "The customer's gender (Male - 1, Female - 2)")
+    approval_status: String @doc(description: "The customer's Approval Status (Approved - approved, Pending - pending,Rejected - rejected)")
+    password: String @doc(description: "The customer's password")
+    sales_rep_name: String @doc(description: "Customer Sales Representative Name")
+    sales_rep_number: String @doc(description: "Customer Sales Representative Number")
+    proprietor_name:String @doc(description: "Customer Proprietor Name")
+    mobilenumber:String @doc(description: "Customer Mobile Number")
+    is_subscribed: Boolean @doc(description: "Indicates whether the customer is subscribed to the company's newsletter")
+    business_activities: [String] @doc(description: "Customer business activities")
+    billing_address: CustomerEboAddressInput
+    shipping_address:CustomerEboAddressInput
+    insurance_opt_in:Boolean @doc(description: "Indicates whether the customer Insurance Opt is active or inactive")
+    relationship_with_nominee:String @doc(description: "Relationship With Nominee")
+    name_of_insured:String @doc(description: "Name of Insured")
+    nominee_name:String @doc(description: "Nominee Name")
+    referrer_name:String @doc(description: "Referrer Name")
+    referrer_phone_number:String @doc(description: "Referrer phone number")
+    customer_id: String @doc(description: "Customer Id")
+    virtual_account_bank: String @doc(description: "Virtual Account Bank")
+    virtual_account_ifsc: String @doc(description: "Virtual Account Ifsc")
+    virtual_customer_account: String @doc(description: "Virtual account number virtual_account_no")
+    enable_offline_payment: Boolean @doc(description: "Enable Offline Payment")
+    enable_paylater_payment: Boolean @doc(description: "Enable Pay Later")
+    loan_partner: String @doc(description: "Loan Partner")
+    pay_later_limit: Int @doc(description: "Pay later limit")
+}
+
+input CustomerEboAddressInput {
+    firstname: String @doc(description: "The first name of the person associated with the shipping/billing address")
+    lastname: String @doc(description: "The family name of the person associated with the shipping/billing address")
+    company: String @doc(description: "The customer's company")
+    telephone: String @doc(description: "The telephone number")
+    street: [String] @doc(description: "An array of strings that define the street number and name")
+    city: String @doc(description: "The city or town")
+    landmark: String @doc(description: "The landmark")
+    region: CustomerEboAddressRegionInput @doc(description: "An object containing the region name, region code, and region ID")
+    postcode: String @doc(description: "The customer's ZIP or postal code")
+    country_code: CountryCodeEnum @doc(description: "The customer's country")
+    default_shipping: Boolean @doc(description: "Indicates whether the address is the default shipping address")
+    default_billing: Boolean @doc(description: "Indicates whether the address is the default billing address")
+}
+
+input CustomerEboAddressRegionInput @doc(description: "CustomerEboAddressRegionInput defines the customer's state or province") {
+    region_code: String @doc(description: "The address region code")
+    region: String @doc(description: "The state or province name")
+}
+
+input CustomerInput {
+    mobilenumber: String @doc(description: "Customer Mobile Number")
+}
+
+type Customer {
+    proprietor_name: String @doc(description: "Customer Proprietor Name")
+    mobilenumber: String @doc(description: "Customer Mobile Number")
+    customer_increment_id: Int @doc(description: "Customer Id")
+    sales_rep_name: String @doc(description: "Customer Sales Representative Name")
+    sales_rep_number: String @doc(description: "Customer Sales Representative Number")
+    sales_rep_email: String @doc(description: "Customer Sales Representative Email")
+    customer_group: String @doc(description: "Customer Group name") @resolver(class: "\\Embitel\\CustomerGraphQl\\Model\\Resolver\\CustomerGroup")
+    customer_type: String @doc(description: "Customer type name")  @resolver(class: "\\Embitel\\CustomerGraphQl\\Model\\Resolver\\CustomerType")
+     area: String @doc(description: "The billing address area")
+    customer_default_billing: [BillingAddress] @doc(description: "An array containing the customer' billing addresses") @resolver(class: "\\Embitel\\CustomerGraphQl\\Model\\Resolver\\BillingAddress")
+    approval_status: String @doc(description: "The customer's Approval Status (Approved - approved, Pending - pending,Rejected - rejected)")
+    customer_insurance_number : String @doc(description: "The customer insurance number")
+    customer_insurance_contact_no : String @doc(description: "The customer insurance contact no")
+    customer_insurance_agency : String @doc(description: "The insurance agency")
+    customer_secondary_email: String @doc(description: "The customer secondary email")
+}
+
+type BillingAddress @doc(description: "A price based on the quantity purchased.") {
+    firstname: String @doc(description: "The billing address firstname")
+    lastname: String @doc(description: "The billing address lastname")
+    street: [String] @doc(description: "The billing address street")
+    city:  String @doc(description: "The billing address street")
+    region: CustomerAddressRegion @doc(description: "The billing address regin")
+     landmark: String @doc(description: "The billing address landmark")
+      country_code: String @doc(description: "The billing address country_code")
+       postcode:String @doc(description: "The billing address postcode")
+      telephone:String @doc(description: "The billing address telephone")
+}
+
+type VerifyEmailAndMobile @doc(description: "Otp query output for customer") {
+    is_customer: Boolean @doc(description: "returns if Customer is existing in our database or not")
+    msg: String @doc(description: "message for customer")
+    is_mobile_match: Boolean @doc(description: "returns if mobile number matches with associated existing email or not")
+}
+
+type VerifyMobile @doc(description: "verify mobile query output for customer") {
+    msg: String @doc(description: "message for customer")
+    is_mobile_match: Boolean @doc(description: "returns if mobile number existing or not")
+}
+
+input CustomerAddressInput {
+    landmark: String @doc(description: "The customer's address landmark")
+    is_gst: Boolean @doc(description: "The customer's taxvat number")
+}
+
+type CustomerAddress @doc(description: "CustomerAddress contains detailed information about a customer's billing and shipping addresses"){
+    landmark: String @doc(description: "The customer's address landmark")
+    is_gst: Boolean @doc(description: "The customer's taxvat number")
+    is_serviceable: Boolean @doc(description: "The customer's address pincode check")
+}
+
+type VerifyOutput @doc(description: "Otp query output for customer") {
+    is_customer: Boolean @doc(description: "returns if Customer is existing in our database or not")
+    msg: String @doc(description: "message for customer")
+    token: String @doc(description: "The customer token")
+    customer_increment_id: Int @doc(description: "Customer Id")
+    firstname: String @doc(description: "The customer firstname")
+    lastname: String @doc(description: "The customer lastname")
+    email: String @doc(description: "The customer email")
+    mobilenumber: String @doc(description: "The customer mobilenumber")
+    profile_picture: String @doc(description: "The customer profile picture")
+    is_customer_new: Boolean @doc(description: "returns if Customer is new customer")
+    customer_type: String @doc(description: "Customer's customer_type")
+    customer_group: String @doc(description: "Customer's customer_group")
+}
+
+type CustomerData @doc(description: "customer data query output for customer") {
+    status: Boolean @doc(description: "returns if Customer is existing in our database or not")
+    message: String @doc(description: "message for customer")
+    customer: CustomerDetails @doc(description: "The customer details")
+}
+
+type CustomerDetails @doc(description: "The billing address regin") {
+    customer_id: String @doc(description: "The customer Id")
+    customer_group: String @doc(description: "The customer's segment")
+    customer_type: String @doc(description: "Customer type name")
+    email_id: String @doc(description: "The customer's email id")
+    customer_name: CustomerName @doc(description: "The customer's name data")
+    phone_number: PhoneNumber @doc(description: "The customer's phone data")
+    is_b2b_customer: Boolean @doc(description: "The customer's b2b customer check")
+    entity_name: String @doc(description: "The customer's entity name")
+    gstin: String @doc(description: "The customer's taxvat")
+    billing_address: CustomerAddress @doc(description: "The customer's default billing address")
+    shipping_address: CustomerAddress @doc(description: "The customer's default billing address")
+}
+
+type CustomerName @doc(description: "The customer's name data") {
+    salutation: String @doc(description: "The customer's salutation")
+    first_name: String @doc(description: "The customer's firstname")
+    middle_name: String @doc(description: "The customer's middle name")
+    last_name: String @doc(description: "The customer's lastname")
+    suffix: String @doc(description: "The customer's name suffix")
+}
+
+type PhoneNumber {
+    country_code: String
+    number: String
+}
+
+input CustomerUpdateInput {
+    customer_type: String @doc(description: "The customer's customer type")
+    customer_secondary_email: String @doc(description: "The customer's secondary email")
+    my_profile: Int @doc(description: "The customer's profile flag")
+}
+
+type CampaignData {
+    status: String
+    message: String
+}

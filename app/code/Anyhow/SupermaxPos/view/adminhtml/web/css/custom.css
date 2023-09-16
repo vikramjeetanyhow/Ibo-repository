@@ -1,0 +1,59 @@
+/**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */
+
+ .admin__menu .level-0.item-ah-supermaxpos > a:before {
+    content: url('../images/icon-supermax-pos.png') !important;
+    height: auto !important;
+}
+
+.supermax-button{
+    margin-left: 175px !important;
+}
+
+tr#row_ah_supermax_pos_cust_display_configuration_ah_supermax_pos_basic_configutaion_ah_supermax_pos_home_screen_layout > td.value> div.admin__control-wysiwig > div.mce-tinymce.mce-container.mce-panel{
+    width: 160% !important;
+}
+
+img#ah_supermax_pos_barcode_printing_configuration_ah_supermax_pos_barcode_label_logo_settings_ah_supermax_pos_barcode_label_Header_logo_image{
+    width: 75px !important;
+    height: 75px !important;
+    float: right !important;
+}
+
+.supermax-barcode-image{
+    width: 12rem !important;
+}
+
+/* for barcode print popup width */
+aside.supermax-barcode-popup-box > div.modal-inner-wrap{
+    max-width: 50rem !important;
+}
+
+/* for admin outlet's product listing design */
+div.supermax_outlet_form_areas_assigned_products_assigned_products_insertListing > div.admin__data-grid-outer-wrap > div.admin__data-grid-header > div.admin__data-grid-header-row > div.col-xs-2 > div.action-select-wrap > button.action-select, div.supermax_outlet_form_areas_assign_products_assign_products_insertListing > div.admin__data-grid-outer-wrap > div.admin__data-grid-header > div.admin__data-grid-header-row > div.col-xs-2 > div.action-select-wrap > button.action-select{
+    width: 60% !important;
+    padding: 6px 13px !important;
+}
+
+div.supermax_outlet_form_areas_assigned_products_assigned_products_insertListing > div.admin__data-grid-outer-wrap > div.admin__data-grid-header > div.admin__data-grid-header-row > div.col-xs-2,
+div.supermax_outlet_form_areas_assign_products_assign_products_insertListing > div.admin__data-grid-outer-wrap > div.admin__data-grid-header > div.admin__data-grid-header-row > div.col-xs-2{
+    padding: 0px !important;
+}
+
+div.supermax_outlet_form_areas_assigned_products_assigned_products_insertListing > div.admin__data-grid-outer-wrap > div.admin__data-grid-header > div.admin__data-grid-header-row > div.col-xs-10,
+div.supermax_outlet_form_areas_assign_products_assign_products_insertListing > div.admin__data-grid-outer-wrap > div.admin__data-grid-header > div.admin__data-grid-header-row > div.col-xs-10{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+div.supermax_outlet_form_areas_assigned_products_assigned_products_insertListing > div.admin__data-grid-outer-wrap > div.admin__data-grid-header > div.admin__data-grid-header-row > div.col-xs-10 > div.row > div.col-xs-9 > div.admin__data-grid-pager-wrap > div.selectmenu, 
+div.supermax_outlet_form_areas_assign_products_assign_products_insertListing > div.admin__data-grid-outer-wrap > div.admin__data-grid-header > div.admin__data-grid-header-row > div.col-xs-10 > div.row > div.col-xs-9 > div.admin__data-grid-pager-wrap > div.selectmenu{
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}

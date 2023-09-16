@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    /**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */
+
+ -->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">supermax_cashier_role_form.cashier_role_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Cashier Role Data</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save_and_continue" class="Anyhow\SupermaxPos\Block\Adminhtml\CashierRole\Edit\SaveAndContinueButton"/>
+            <button name="save" class="Anyhow\SupermaxPos\Block\Adminhtml\CashierRole\Edit\SaveButton"/>
+            <button name="reset" class="Anyhow\SupermaxPos\Block\Adminhtml\CashierRole\Edit\ResetButton"/>
+            <button name="delete" class="Anyhow\SupermaxPos\Block\Adminhtml\CashierRole\Edit\DeleteButton"/>
+            <button name="back" class="Anyhow\SupermaxPos\Block\Adminhtml\CashierRole\Edit\BackButton"/>
+        </buttons>
+        <namespace>supermax_cashier_role_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>supermax_cashier_role_form.cashier_role_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="cashier_role_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="supermax/cashierrole/save"/>
+        </settings>
+        <dataProvider class="Anyhow\SupermaxPos\Model\CashierRole\DataProvider" name="cashier_role_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>pos_user_role_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label/>
+        </settings>
+        <field name="pos_user_role_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">CashierRole</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>pos_user_role_id</dataScope>
+            </settings>
+        </field>
+        <field name="status" sortOrder="10" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">CashierRole</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Status</label>
+                <dataScope>status</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="title" sortOrder="45" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">CashierRole</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Role Title</label>
+                <dataScope>title</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="access_permission" sortOrder="90" formElement="multiselect">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Anyhow\SupermaxPos\Model\Cashier\Attribute\Permissions\AccessPermissions</item>
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">CashierRole</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">POS Terminal Permissions</label>
+                <dataScope>access_permission</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+    </fieldset>
+</form>

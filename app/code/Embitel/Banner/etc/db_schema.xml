@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="embitel_banner" resource="default" engine="innodb" comment="Banner Slider">        
+        <column xsi:type="int" name="banner_id" unsigned="true" nullable="false" identity="true" comment="Banner Id"/> 
+        <column xsi:type="int" name="banner_type" nullable="true" comment="Banner Type"/>
+        <column xsi:type="varchar" name="customer_group" nullable="true" length="64" comment="Customer Group"/>
+        <column xsi:type="varchar" name="display_zone" nullable="true" length="64" comment="Display Zone" />
+        <column xsi:type="varchar" name="title" nullable="true" default="NULL" comment="Banner title"/>
+        <column xsi:type="text" name="cat_ids" nullable="true" comment="Category Ids"/>
+        <column xsi:type="text" name="attribute_ids" nullable="true" comment="Attribute Ids"/>
+        <column xsi:type="text" name="products_sku" nullable="true" comment="Product SKUs"/>
+        <column xsi:type="text" name="mobile_image" nullable="true" comment="Mobile Image"/>
+        <column xsi:type="text" name="desktop_image" nullable="true" comment="Desktop Image"/>
+        <column xsi:type="int" name="banner_position" nullable="true" default="0" comment="Banner Position"/>
+        <column xsi:type="timestamp" name="from_date_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="From Date"/>
+        <column xsi:type="timestamp" name="to_date_time" on_update="false" comment="To Date"/>   
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>              
+        <column xsi:type="int" name="status" nullable="false" default="0" comment="Status"/>
+        <column xsi:type="text" name="mobile_image_custom" nullable="true" comment="Mobile Image Custom"/>
+        <column xsi:type="text" name="desktop_image_custom" nullable="true" comment="Desktop Image Custom"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="banner_id"/>
+        </constraint>
+        <index referenceId="EMBITEL_BANNER_BANNER_ID" indexType="btree">
+            <column name="banner_id"/>
+        </index>
+        <index referenceId="EMBITEL_BANNER_POSITION" indexType="btree">
+            <column name="banner_position"/>
+        </index>                  
+    </table>
+</schema>

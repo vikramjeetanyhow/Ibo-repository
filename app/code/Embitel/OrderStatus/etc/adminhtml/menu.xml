@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Embitel_OrderStatus::orderrepush" title="OMS Order Repush" module="Embitel_OrderStatus" sortOrder="200" parent="Magento_Backend::system_convert" action="iboorders/oms/index" resource="Embitel_OrderStatus::orderrepush"/>
+    </menu>
+</config>

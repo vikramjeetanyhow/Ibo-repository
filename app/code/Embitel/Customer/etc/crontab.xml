@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+<group id="default">
+    <job name="customer_push_to_moengage" instance="Embitel\Customer\Cron\CustomerPushToMoengage" method="execute">
+        <config_path>ebo_customer_export/moengage_cron/cron_expression</config_path>
+    </job>
+    <job name="ibo_wallet_create_cron" instance="Embitel\Customer\Cron\IboWalletCreate" method="execute">
+        <config_path>ibo_wallet/ibo_wallet_api/cron_ibo_wallet_create</config_path>
+    </job>
+</group>
+</config>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\SalesGraphQl\Model\Order\OrderAddress"
+                type="Embitel\SalesGraphQl\Model\Order\OrderAddress"/>
+    <preference for="Magento\SalesGraphQl\Model\OrderItem\DataProvider"
+                type="Embitel\SalesGraphQl\Model\OrderItem\DataProvider"/>
+ <preference for="Magento\SalesGraphQl\Model\Resolver\CustomerOrders"
+                type="Embitel\SalesGraphQl\Model\Resolver\CustomerOrders"/>
+
+</config>

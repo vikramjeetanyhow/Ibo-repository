@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="email_notification" translate="label" type="text" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Email Notification</label>
+            <tab>embitel</tab>
+            <resource>Embitel_SalesRule::configuration</resource>
+            <group id="sales_rule_cron" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Promotions Report Cron</label>
+                <field id="sales_rule_report_cron_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="sales_rule_report_email" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Email ids</label>
+                    <comment>Email Ids comma(,) separated</comment>
+                </field>
+                <field id="sales_rule_report_cron_expression" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Run Time</label>
+                    <comment>Need to pass the cron expression like */5 * * * * for run every 5min.</comment>
+                </field>
+            </group>
+            <group id="sales_rule_cron_status" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Promotion Coupon Status Update Cron</label>
+                <field id="sales_rule_update_status_cron" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="sales_rule_status_update_expression" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Run Time</label>
+                    <comment>Need to pass the cron expression like */5 * * * * for run every 5min.</comment>
+                </field>
+            </group>
+        </section>
+        <section id="cart_price_rules" translate="label" type="text" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Cart Price Rules</label>
+            <tab>embitel</tab>
+            <resource>Embitel_SalesRule::configuration</resource>
+            <group id="codition" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Condition Config</label>
+                <field id="channel_info" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Channel Details</label>
+                    <comment>Channel Specific devices</comment>
+                </field>
+            </group>
+        </section>
+
+        <section id="inactive_cart_rule_cron" translate="label" type="text" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Inactive Cart Rule Cron</label>
+            <tab>embitel</tab>
+            <resource>Embitel_SalesRule::embitel</resource>
+            <group id="sales_rule_cron_status" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Condition Configuration</label>
+                <field id="sales_rule_report_cron_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="inactive_cart_rule_cron_time" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Run Time</label>
+                    <comment>Need to pass the cron expression like 0 */24 * * * for run 12Am.</comment>
+                </field>
+            </group>
+        </section>
+
+        <section id="referrer_promotion" translate="label" type="text" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Special Referral Promotion</label>
+            <tab>embitel</tab>
+            <resource>Embitel_SalesRule::configuration</resource>
+            <group id="special_referrer_promotion" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>B2P Referral Promotion</label>
+                <field id="referral_promotion_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Referral Promotion Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="referral_promotion_rule_id" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Referral Promotion Rule Id</label>
+                </field>
+                <field id="referral_customer_group" translate="label" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Referral Promotion Applied For</label>
+                    <source_model>Embitel\Checkout\Model\Source\UserGroups</source_model>
+                </field>
+                <field id="customer_apply_group" translate="label" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Customer Groups Applied To</label>
+                    <source_model>Embitel\Checkout\Model\Source\UserGroups</source_model>
+                </field>
+                <field id="promo_log_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Referral Promotion Log Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="special_c2c_referrer_promotion" translate="label tooltip" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>C2C Referral Promotion</label>
+                <field id="referral_promotion_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Referral Promotion Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="referral_promotion_rule_id" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Referral Promotion Rule Id</label>
+                </field>
+                <field id="min_cart_total" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Min Cart Total</label>
+                </field>
+                <field id="referral_customer_group" translate="label" type="multiselect" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Referral Promotion Applied For</label>
+                    <source_model>Embitel\SalesRule\Model\Source\CustomerGroups</source_model>
+                </field>
+                <field id="customer_apply_group" translate="label" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Customer Groups Applied To</label>
+                    <source_model>Embitel\SalesRule\Model\Source\CustomerGroups</source_model>
+                </field>
+                <field id="promo_log_enabled" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Referral Promotion Log Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="special_on_invoice_promotion" translate="label tooltip" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>On Invoice Promotion</label>
+                <field id="on_invoice_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>On Invoice Promotion Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="on_invoice_rule_id" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>On Invoice Promotion Rule Id</label>
+                </field>
+                <field id="on_invoice_customer_apply_group" translate="label" type="multiselect" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Customer Groups Applied To</label>
+                    <source_model>Embitel\SalesRule\Model\Source\CustomerGroups</source_model>
+                </field>
+            </group>
+        </section>
+        <section id="first_time_promotion" translate="label" type="text" sortOrder="260" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>First Time Promotion</label>
+            <tab>embitel</tab>
+            <resource>Embitel_SalesRule::configuration</resource>
+            <group id="first_time_promotion_group" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="first_time_promotion_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>First Time Promotion</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="first_time_promotion_rule_id" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>First Time Promotion Rule Id</label>
+                </field>
+                <field id="first_time_promotion_log_enabled" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>First Time Promotion Log Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

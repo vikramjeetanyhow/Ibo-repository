@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <ibo_google_feed>
+            <google_feed_settings>
+                <google_feed_status>0</google_feed_status>
+                <primary_feeder_cron>* * * * *</primary_feeder_cron>
+                <secondary_feeder_cron>* * * * *</secondary_feeder_cron>
+                <gmc_offer_ids_cron>* * * * *</gmc_offer_ids_cron>
+                <google_feed_log_status>0</google_feed_log_status>
+            </google_feed_settings>
+        </ibo_google_feed>
+    </default>
+</config>

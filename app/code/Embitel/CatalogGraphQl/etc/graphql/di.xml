@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\CatalogGraphQl\Model\Resolver\Products">
+        <plugin name="Products_Query_Before_Resolver"
+                type="Embitel\CatalogGraphQl\Plugin\Model\Resolver\ProductsBeforePlugin" sortOrder="10"
+                disabled="false"/>
+    </type>
+    <type name='Embitel\CatalogGraphQl\Model\Resolver\CategoryTree'>
+        <arguments>
+            <argument name='categoryTree' xsi:type='object'>
+                Embitel\CatalogGraphQl\Model\Resolver\Products\DataProvider\CategoryTree
+            </argument>
+            <!-- <argument name='extractDataFromCategoryTree' xsi:type='object'>Embitel\CatalogGraphQl\Model\Resolver\Products\DataProvider\ExtractDataFromCategoryTree</argument> -->
+        </arguments>
+    </type>
+    <type
+        name="Magento\CatalogGraphQl\Model\Resolver\Products\DataProvider\Product\CollectionProcessor\AttributeProcessor">
+        <arguments>
+            <argument name="fieldToAttributeMap" xsi:type="array">
+                <item name="ebo_price_range" xsi:type="array">
+                    <item name="price" xsi:type="string">price</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Magento\CatalogGraphQl\Model\Resolver\Product\PriceRange" type="Embitel\CatalogGraphQl\Model\Resolver\Product\PriceRange" />
+    <!-- MDVA-37288_v2.patch applied -->
+    <preference for="Magento\CatalogCustomerGraphQl\Model\Resolver\PriceTiers" type="Embitel\CatalogGraphQl\Model\Resolver\PriceTiers" />
+    <!-- MDVA-40601.patch applied -->
+    <preference for="Magento\CatalogGraphQl\Model\Resolver\Products\DataProvider\ExtractDataFromCategoryTree" type="Embitel\CatalogGraphQl\Model\Resolver\Products\DataProvider\ExtractDataFromCategoryTree" />
+    <preference for="Magento\CatalogGraphQl\DataProvider\Product\SearchCriteriaBuilder" type="Embitel\CatalogGraphQl\DataProvider\Product\SearchCriteriaBuilder" />
+</config>
+
+
+

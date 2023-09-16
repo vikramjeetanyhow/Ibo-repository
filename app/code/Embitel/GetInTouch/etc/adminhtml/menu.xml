@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Embitel_GetInTouch::info" title="Get In Touch" translate="title" module="Embitel_GetInTouch" sortOrder="110" parent="Magento_Customer::customer" action="getintouch/getintouchitem" resource="Embitel_GetInTouch::info"/>
+    </menu>
+</config>
+

@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>       
+        <section id="ibo_google_feed" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Google Feed</label>
+            <tab>embitel</tab>
+            <resource>Embitel_Quote::configuration</resource>
+            <group id="google_feed_settings" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Settings</label>   
+                <field id="google_feed_status" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" >
+                    <label>Google Feed Enable Status</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="feed_product_base_url" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Feed Product Base Url </label>
+                    <comment>Add / at end of the base url.</comment>
+                </field>
+                 <field id="primary_feeder_cron" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Primary Feeder Cron Run Time</label>
+                    <comment>0 0 * * * it should be in this format. this will run every night at midnight.</comment>
+                </field>
+                <field id="secondary_feeder_cron" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Supplimentary Feeder Cron Run Time</label>
+                    <comment>0 0 * * * it should be in this format. this will run every night at midnight.</comment>
+                </field>                
+                <field id="feeder_file_location" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Feeder File Location</label>
+                </field>
+                <field id="google_feed_log_status" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="0" >
+                    <label>Google Feed Log Status</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="google_feed_email_status" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="0" >
+                    <label>Primary Feed Email Enable</label>
+                    <comment>Set Yes if wants to send email once cron run.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="google_feed_email_address" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Primary Feed Email Address</label>
+                    <comment>Add email address by comma separated if have more than one</comment>
+                </field>
+                <field id="google_feed_email_body" translate="label" type="textarea" sortOrder="130" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Primary Feed Email Body</label>
+                </field>
+                <field id="gmc_offer_ids_cron" translate="label" type="text" sortOrder="135" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>GMC Offer Ids Cron Run Time</label>
+                    <comment>0 0 * * * it should be in this format. this will run every night at midnight.</comment>
+                </field>
+                <field id="offerid_csv_email_status" translate="label" type="select" sortOrder="140" showInDefault="1" showInWebsite="0" >
+                    <label>Offer-Id CSV Email Enable</label>
+                    <comment>Set Yes if wants to send email once cron run.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="offerid_csv_email_address" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Offer-Id CSV Email Address</label>
+                    <comment>Add email address by comma separated if have more than one</comment>
+                </field>
+                <field id="offerid_csv_email_body" translate="label" type="textarea" sortOrder="160" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Offer-Id CSV Email Body</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

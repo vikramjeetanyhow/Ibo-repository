@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Embitel_ProductImport::import" title="EBO Product Import" module="Embitel_ProductImport" sortOrder="100" parent="Magento_Backend::system_convert" action="productimport/import" resource="Embitel_ProductImport::import"/>
+        <add id="Embitel_ProductImport::publish" title="EBO Product Publish" module="Embitel_ProductImport" sortOrder="101" parent="Magento_Backend::system_convert" action="productimport/publish" resource="Embitel_ProductImport::publish"/>
+        <add id="Embitel_ProductImport::disable" title="EBO Product Disable" module="Embitel_ProductImport" sortOrder="101" parent="Magento_Backend::system_convert" action="productimport/disable" resource="Embitel_ProductImport::disable"/>
+    </menu>
+</config>

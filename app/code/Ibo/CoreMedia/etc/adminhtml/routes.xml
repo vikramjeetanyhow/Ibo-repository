@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   IBO
+ * @package    Ibo_CoreMedia
+ * @author     hitendra.badiani@embitel.com
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/App/etc/routes.xsd">
+    <router id="admin">
+        <route id="ibo_coremedia" frontName="ibo_coremedia">
+            <module name="Ibo_CoreMedia" />
+        </route>
+    </router>
+</config>

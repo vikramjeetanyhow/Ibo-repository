@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="ebo_product_export_history" resource="default" engine="innodb"
+           comment="EBO Export Table">
+        <column xsi:type="int" name="history_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="History ID"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="255"
+                comment="Export Type(Full_Catalog OR Attribute_Set)"/>
+        <column xsi:type="varchar" name="filename" nullable="false" length="255" comment="File Name"/>
+        <column xsi:type="varchar" name="status" nullable="false" length="50" comment="Job Status" default="new"/>
+        <column xsi:type="int" name="failure_hits" default="0"
+                comment="Failure Hits Logic"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="history_id"/>
+        </constraint>
+    </table>
+</schema>

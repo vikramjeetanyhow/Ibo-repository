@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="Order_success_status" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Order Count</label>
+            <tab>embitel</tab>
+            <resource>Embitel_OrderStatus::configuration</resource>
+            <group id="order_count_settings" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Settings</label>
+                <field id="Order_status_count_id" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Order count</label>
+                </field>
+            </group>
+            <group id="order_cancel_cron" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Cron Setting to Cancel Pending Payment Orders</label>
+                <field id="cron_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Run Time</label>
+                    <comment>Need to pass the cron expression like */5 * * * * for run every 5min.</comment>
+                </field>
+                <field id="ordertime" translate="label comment" sortOrder="2" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Pick Orders Older than Y Minute </label>
+                </field>
+                <field id="fromstatus" translate="label comment" sortOrder="2" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Change Order Status From </label>
+                </field>
+                <field id="tostatus" translate="label comment" sortOrder="2" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Change Order Status To </label>
+                </field>
+                <field id="olimit" translate="label comment" sortOrder="2" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order Collection Limit </label>
+                </field>
+            </group>
+        </section>
+        <section id="email_notification" translate="label" type="text" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Email Notification</label>
+            <tab>embitel</tab>
+            <resource>Embitel_OrderStatus::configuration</resource>
+            <group id="order_report_cron" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Order Report Cron</label>
+                <field id="order_report_cron_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="order_report_email" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Email ids</label>
+                    <comment>Email Ids comma(,) separated</comment>
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Run Time</label>
+                    <comment>Need to pass the cron expression like */5 * * * * for run every 5min.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

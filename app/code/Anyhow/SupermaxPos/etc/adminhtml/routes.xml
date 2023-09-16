@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */ 
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="supermax" frontName="supermax">
+            <module name="Anyhow_SupermaxPos"/>
+        </route>
+    </router>
+</config>

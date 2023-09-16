@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="ibo_exclude_subclass" resource="default" engine="innodb" comment="Exclude Subclass List">        
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="Id"/>
+        <column xsi:type="int" name="subclass_id" nullable="false" comment="Subclass Id"/>
+        <column xsi:type="varchar" name="subclass_name" nullable="true" length="64" comment="Subclass Name"/>       
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="IBO_EXCLUDE_SUBCLASS_ID" indexType="btree">
+            <column name="id"/>
+        </index>
+        <index referenceId="IBO_EXCLUDE_SUBCLASS_SUBCLASS_ID" indexType="btree">
+            <column name="subclass_id"/>
+        </index>
+    </table>
+</schema>

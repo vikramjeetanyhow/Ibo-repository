@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Embitel TaxMaster routes xml
+ * @category  Embitel
+ * @package   Embitel_TaxMaster
+ * @author    Embitel
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="grid" frontName="grid">
+            <module name="Embitel_TaxMaster" />
+        </route>
+    </router>
+</config>

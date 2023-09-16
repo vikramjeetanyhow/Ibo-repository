@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <BHARATPE>
+                <active>0</active>
+                <model>Ibo\PayLaterBharatpe\Model\Bharatpe</model>
+                <order_status>pending</order_status>
+                <title>Pay Later through BharatPe</title>
+                <allowspecific>0</allowspecific>
+                <group>offline</group>
+            </BHARATPE>
+        </payment>
+    </default>
+</config>

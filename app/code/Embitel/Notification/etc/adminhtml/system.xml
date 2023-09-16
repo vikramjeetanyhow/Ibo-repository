@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="embitel" translate="label" sortOrder="101" class="embitel-config">
+            <label>IBO EXTENSIONS</label>
+        </tab>   
+        <section id="sms_notification" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Notification Engine</label>
+            <tab>embitel</tab>
+            <resource>Embitel_Notification::configuration</resource>
+            <group id="settings" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            	<label>Notification Settings</label>
+            	<field id="enable" translate="label tooltip" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Notification</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="url" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Notification Engine URL</label>
+                    <comment>URL of Notification Engine</comment>
+                </field>
+                <field id="api_key" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>X-API-KEY</label>
+                    <comment>API Key for trigger notification</comment>
+                </field> 
+            </group>
+            <group id="unapproved_customer" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            	<label>Unapproved Customer SMS settings</label>
+            	<field id="enable" translate="label tooltip" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Notification</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="event_id" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Event id</label>
+                    <comment>Based on the event id sms will be sent to customer</comment>
+                </field>
+                <field id="customer_type" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Customer Type</label>
+                    <comment>Only for Un approved customers, sms will be triggered</comment>
+                </field> 
+            </group>
+            <group id="bizom_to_magento" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            	<label>Bizom to Magento SMS settings</label>
+            	<field id="enable" translate="label tooltip" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Notification</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="event_id" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Event id</label>
+                    <comment>Based on the event id sms will be sent to customer</comment>
+                </field>
+                <field id="ibo_url" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Ibo APP Url</label>
+                    <comment>IBO APP Url</comment>
+                </field> 
+            </group>
+            <group id="sales_order" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            	<label>Sales Order SMS settings</label>
+            	<field id="enable" translate="label tooltip" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Notification</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="event_id" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Event id</label>
+                    <comment>Based on the event id sms will be sent to customer</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

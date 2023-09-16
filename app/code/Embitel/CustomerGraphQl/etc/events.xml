@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- <event name="order_cancel_after">
+        <observer name="magento_customersegment" instance="Embitel\CustomerGraphQl\Observer\RefreshCustomerSegment"/>
+    </event>
+    <event name="update_order_status">
+        <observer name="magento_customersegment" instance="Embitel\CustomerGraphQl\Observer\RefreshCustomerSegment"/>
+    </event> -->
+</config>

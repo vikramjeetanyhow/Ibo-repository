@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+<default>   
+    <promise_engine>
+        <promise_engine_settings>
+            <promise_engine_client_id>abc</promise_engine_client_id>           
+        </promise_engine_settings>
+    </promise_engine>
+</default>
+</config>

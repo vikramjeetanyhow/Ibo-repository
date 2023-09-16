@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="customer_entity" resource="default" engine="innodb">
+        <column xsi:type="varchar" name="mobilenumber" nullable="true" default="NULL" length="255" comment="Customer Mobile Number"/>
+        <column xsi:type="varchar" name="sales_rep_name" nullable="true" length="255" comment="Sales Representative Name"/>
+        <column xsi:type="varchar" name="sales_rep_number" nullable="true" length="255" comment="Sales Representative Number"/>
+    </table>
+    <table name="customer_group" resource="default" engine="innodb" comment="Customer Group">
+        <column xsi:type="varchar" name="customer_campaign_id" nullable="false" length="100"
+                comment="Customer IR Campaign Id"/>
+        <column xsi:type="varchar" name="campaign_label" nullable="false" length="100"
+                comment="Customer IR Campaign Label"/>
+    </table>
+    <table name="ibo_customer_wallet" resource="default" engine="innodb">
+        <!-- <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Entity Id"/> -->
+        <column xsi:type="int" name="customer_id" nullable="false" unsigned="true" identity="false"  comment="customer_id"/>
+        <column xsi:type="int" name="retry_attempt" nullable="false" default="0" comment="Retry attempt"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="customer_id"/>
+        </constraint>
+        <index referenceId="IBO_CUSTOMER_WALLET_RETRY_ATTEMPT" indexType="btree">
+            <column name="retry_attempt"/>
+        </index>
+    </table>
+</schema>

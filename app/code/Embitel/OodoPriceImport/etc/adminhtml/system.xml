@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>       
+        <section id="tierprice_cron" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Oodo Tier Price Cron</label>
+            <tab>embitel</tab>
+            <resource>Embitel_OodoPriceImport::configuration</resource>
+            <group id="cron_settings" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Settings</label>   
+                <field id="cron_expression" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cron Expression</label>
+                </field>
+                <field id="cron_status_update" translate="label" type="select" sortOrder="29" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cron Status</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>            
+                <field id="statusupdate_log_active" translate="label" type="select" sortOrder="102" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Log Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>                                   
+            </group>
+        </section>
+    </system>
+</config>

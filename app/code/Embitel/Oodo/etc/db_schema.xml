@@ -1,0 +1,13 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+<table name="oodo_customer_master" resource="default" engine="innodb"
+           comment="Magento to Oodo Customer push">
+    <column xsi:type="int" name="id" padding="11" unsigned="true" nullable="false" identity="true" comment="Oodo Primary Id"/>
+    <column xsi:type="int" name="customer_id" unsigned="true" nullable="false" default="0" comment="Customer Id"/>
+    <column xsi:type="boolean" name="flag" nullable="false" default="1" comment="Magento to Oodo Customer Push flag"/>
+    <column xsi:type="int" name="attempts" unsigned="true" nullable="false" default="0" comment="No of attempts"/>
+    <column xsi:type="datetime" name="created_at" on_update="false" default="CURRENT_TIMESTAMP" nullable="false" comment="Created at date"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+        <column name="id"/>
+    </constraint>
+</table>
+</schema>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="categorywidget" translate="label" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="0">
+            <class>separator-top</class>
+            <label>Category ES Indexer</label>
+            <tab>embitel</tab>
+            <resource>Ibo_CategoryWidget::widget_config</resource>
+            <group id="widget_config" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Category ES Indexer Cron Config</label>
+                <field id="cron_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>                
+                <field id="cron_expression" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Schedule Expression</label>
+                    <comment>0 0 * * * it should be in this format. this will run every night at midnight.</comment>
+                </field>
+                <field id="catindexer_log_active" translate="label" type="select" sortOrder="102" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Log Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>                
+            </group>
+        </section>
+    </system>
+</config>

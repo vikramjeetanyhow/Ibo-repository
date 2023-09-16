@@ -1,0 +1,12 @@
+{
+    "catalog_product_entity_tier_price": {
+        "column": {
+            "customer_zone": true
+        },
+        "constraint": {
+            "UNQ_4C16C03CB868096198508EA979585B6B": true,
+            "UNQ_E8AB433B9ACB00343ABB312AD2FAB087": true,
+            "UNQ_EBC6A54F44DFA66FA9024CAD97FED6C7": true
+        }
+    }
+}

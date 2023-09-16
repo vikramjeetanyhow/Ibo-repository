@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">   
+    
+    <table name="oodo_priceimport" resource="default" engine="innodb"
+           comment="Oodo Price Import Table" disabled="true">
+    </table>
+    <table name="oodo_price_import" resource="default" engine="innodb"
+           comment="Oodo Price Import Table">
+        <column xsi:type="int" name="price_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Price ID"/>
+        <column xsi:type="varchar" name="offer_id" nullable="false" length="64" comment="Offer ID (SKU)"/>
+        <column xsi:type="text" name="base_price_data" nullable="true" comment="Base Price Data"/>
+        <column xsi:type="text" name="tier_prices_data" nullable="false" comment="All Price Tiers Data"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="price_id"/>
+        </constraint>
+    </table>
+</schema>

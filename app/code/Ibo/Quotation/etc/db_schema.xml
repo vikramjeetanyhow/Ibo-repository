@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="embitel_quotation_attribute_default" resource="default" engine="innodb"
+           comment="Embitel Quotation Attribute Default">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="varchar" name="attribute_code" nullable="false" length="255" comment="Attribute Code"/>
+        <column xsi:type="varchar" name="value" nullable="false" length="255" comment="Attribute Option Value"/>
+        <column xsi:type="varchar" name="label" nullable="false" length="255" comment="Attribute Option Label"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="EMBITEL_QUOTATION_ATTRIBUTE_DEFAULT_ENTITY_ID" indexType="btree">
+            <column name="entity_id"/>
+        </index>
+        <index referenceId="EMBITEL_QUOTATION_ATTRIBUTE_DEFAULT_ATTRIBUTE_CODE" indexType="btree">
+            <column name="attribute_code"/>
+        </index>
+    </table>
+
+    <table name="embitel_quotation_odoo_values" resource="default" engine="innodb"
+           comment="Embitel Quotation Odoo Values">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="varchar" name="sku" nullable="false" length="255" comment="SKU"/>
+        <column xsi:type="text" name="cp_json" nullable="false"  comment="CP JSON"/>
+        <column xsi:type="text" name="sp_json" nullable="false"  comment="SP JSON"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="EBO_QUOTATION_ODOO_SKU" indexType="btree">
+            <column name="sku" />
+        </index>
+    </table>
+</schema>

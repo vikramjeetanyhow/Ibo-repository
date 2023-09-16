@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mrpprice_update>
+            <settings>
+                <send_consolidated_report>1</send_consolidated_report>
+                <consolidated_report_cron>0 0 * * *</consolidated_report_cron>
+                <consolidated_report_hours>24</consolidated_report_hours>
+            </settings>
+        </mrpprice_update>    
+    </default>
+</config>

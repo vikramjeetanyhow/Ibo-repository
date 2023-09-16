@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">   
+    
+    <table name="ebo_import_history" resource="default" engine="innodb"
+           comment="EBO Import Table">
+        <column xsi:type="int" name="history_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="History ID"/>
+        <column xsi:type="smallint" name="user_id" padding="5" unsigned="true" nullable="false" identity="false"
+                default="0" comment="User ID"/>        
+        <column xsi:type="varchar" name="success_filename" nullable="true" length="255" comment="Success File Name"/>  
+        <column xsi:type="varchar" name="odoo_filename" nullable="true" length="255" comment="Odoo File Name"/>  
+        <column xsi:type="varchar" name="failure_filename" nullable="true" length="255" comment="Failure File Name"/>
+        <column xsi:type="boolean" name="is_bulk_upload" default="false" comment="Is Bulk Upload"/>
+        <column xsi:type="varchar" name="upload_file_name" comment="Bulk Upload Filename"/>
+        <column xsi:type="varchar" name="bulk_upload_status" default="pending" comment="Status for Bulk Upload"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="history_id"/>
+        </constraint>
+        <index referenceId="EBO_IMPORT_SUCCESS_FILENAME" indexType="btree">
+            <column name="success_filename"/>
+        </index>
+        <index referenceId="EBO_IMPORT_ODOO_FILENAME" indexType="btree">
+            <column name="odoo_filename"/>
+        </index>
+        <index referenceId="EBO_IMPORT_FAILURE_FILENAME" indexType="btree">
+            <column name="failure_filename"/>
+        </index>
+    </table>
+    <table name="ebo_publish_history" resource="default" engine="innodb"
+           comment="EBO Publish Table">
+        <column xsi:type="int" name="history_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="History ID"/>
+        <column xsi:type="smallint" name="user_id" padding="5" unsigned="true" nullable="false" identity="false"
+                default="0" comment="User ID"/>        
+        <column xsi:type="varchar" name="success_filename" nullable="true" length="255" comment="Success File Name"/>
+        <column xsi:type="varchar" name="failure_filename" nullable="true" length="255" comment="Failure File Name"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="history_id"/>
+        </constraint>
+        <index referenceId="EBO_PUBLISH_SUCCESS_FILENAME" indexType="btree">
+            <column name="success_filename"/>
+        </index>
+        <index referenceId="EBO_PUBLISH_FAILURE_FILENAME" indexType="btree">
+            <column name="failure_filename"/>
+        </index>
+    </table>
+    <table name="ebo_disable_history" resource="default" engine="innodb"
+           comment="EBO Disable Table">
+        <column xsi:type="int" name="history_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="History ID"/>
+        <column xsi:type="smallint" name="user_id" padding="5" unsigned="true" nullable="false" identity="false"
+                default="0" comment="User ID"/>        
+        <column xsi:type="varchar" name="success_filename" nullable="true" length="255" comment="Success File Name"/>
+        <column xsi:type="varchar" name="failure_filename" nullable="true" length="255" comment="Failure File Name"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="history_id"/>
+        </constraint>
+        <index referenceId="EBO_DISABLE_SUCCESS_FILENAME" indexType="btree">
+            <column name="success_filename"/>
+        </index>
+        <index referenceId="EBO_DISABLE_FAILURE_FILENAME" indexType="btree">
+            <column name="failure_filename"/>
+        </index>
+    </table>
+    <table name="autonumber_offerid" resource="default" engine="innodb"
+           comment="EBO Auto Number Offerid">
+        <column xsi:type="int" name="id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="ID"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>

@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    /**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */
+
+ -->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">supermax_register_form.supermax_register_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Register Cash Management</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+
+
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save_and_continue" class="Anyhow\SupermaxPos\Block\Adminhtml\Register\Edit\SaveAndContinueButton"/>
+            <button name="save" class="Anyhow\SupermaxPos\Block\Adminhtml\Register\Edit\SaveButton"/>
+            <button name="reset" class="Anyhow\SupermaxPos\Block\Adminhtml\Register\Edit\ResetButton"/>
+            <button name="back" class="Anyhow\SupermaxPos\Block\Adminhtml\Register\Edit\BackButton"/>
+        </buttons>
+        <namespace>supermax_register_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>supermax_register_form.supermax_register_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="supermax_register_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="supermax/register/save"/>
+        </settings>
+        <dataProvider class="Anyhow\SupermaxPos\Model\Register\DataProvider" name="supermax_register_form_data_source">
+            <settings>
+                <requestFieldName>pos_register_id</requestFieldName>
+                <primaryFieldName>pos_register_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label/>
+        </settings>
+        <field name="pos_register_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>pos_register_id</dataScope>
+            </settings>
+        </field>
+
+        <field formElement="input" name="outlet_name" sortOrder="10">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Store Name</label>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+        <field formElement="input" name="cashierName" sortOrder="20">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Name </label>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+        <field formElement="input" name="floatamount" sortOrder="25">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Float Amount</label>
+                <dataScope>floatamount</dataScope>
+                <dataType>text</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+        <field formElement="input" name="cashexpected" sortOrder="30">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Expected-Cash </label>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+
+        <field formElement="input" name="cashtotal" sortOrder="40">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Cashier Declared-Cash</label>
+                <dataScope>cashtotal</dataScope>
+                <dataType>text</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+
+        <field formElement="input" name="cashdifference" sortOrder="50">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Difference-Cash </label>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+
+        <field name="head_cashier_cash_total" sortOrder="60" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Head Cashier Input-Cash </label>
+                <dataScope>head_cashier_cash_total</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field formElement="input" name="cardexpected" sortOrder="70">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Expected-Card </label>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+
+        <field formElement="input" name="cardtotal" sortOrder="80">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Declared-Card</label>
+                <dataScope>cardtotal</dataScope>
+                <dataType>text</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+
+        <field formElement="input" name="carddifference" sortOrder="90">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Difference-Card</label>
+                <dataType>text</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+
+        <field name="head_cashier_card_total" sortOrder="100" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Head Cashier Input-Card</label>
+                <dataScope>head_cashier_card_total</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field formElement="input" name="customexpected" sortOrder="110">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Expected-UPI</label>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+        <field formElement="input" name="customtotal" sortOrder="120">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Declared-UPI</label>
+                <dataScope>customtotal</dataScope>
+                <dataType>number</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+
+        <field name="customdifference" formElement="input" sortOrder="130">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Difference-UPI</label>
+                <dataScope>customdifference</dataScope>
+                <dataType>number</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+
+        <field name="head_cashier_custom_total" sortOrder="140" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Head Cashier Input-UPI</label>
+                <dataScope>head_cashier_custom_total</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="offlineexpected" formElement="input" sortOrder="150">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Expected-Offline </label>
+                <!-- <dataScope>offlineexpected</dataScope> -->
+                <dataType>number</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+
+        <field formElement="input" name="offlinetotal" sortOrder="160">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Declared-Offline </label>
+                <dataScope>offlinetotal</dataScope>
+                <dataType>number</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+        <field formElement="input" name="offlinedifference" sortOrder="170">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Difference-Offline</label>
+                <dataScope>offlinedifference</dataScope>
+                <dataType>number</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+        <field formElement="input" name="head_cashier_offline_total" sortOrder="180">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Head Cashier Input-Offline </label>
+                <dataScope>head_cashier_offline_total</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="walletexpected" formElement="input" sortOrder="190">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Expected-Wallet</label>
+                <dataType>number</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+
+        <field name="wallettotal" formElement="input" sortOrder="200">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Declared-Wallet</label>
+                <dataType>number</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+        <field name="walletdifference" formElement="input" sortOrder="210">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Difference-Wallet</label>
+                <dataType>number</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+        <field name="head_cashier_wallet_total" sortOrder="220" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Head Cashier Input-Wallet </label>
+                <dataScope>head_cashier_wallet_total</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="emiexpected" formElement="input" sortOrder="250">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Expected-EMI </label>
+                <!-- <dataScope>emiexpected</dataScope> -->
+                <dataType>number</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+
+        <field formElement="input" name="emitotal" sortOrder="260">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Declared-EMI </label>
+                <dataType>number</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+        <field formElement="input" name="emidifference" sortOrder="270">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Difference-EMI</label>
+                <dataType>number</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+        <field formElement="input" name="head_cashier_emi_total" sortOrder="280">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Head Cashier Input-EMI </label>
+                <dataScope>head_cashier_emi_total</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="bankdepositexpected" formElement="input" sortOrder="285">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Expected-Bank-Deposit</label>
+                <!-- <dataScope>bankDepositexpected</dataScope> -->
+                <dataType>number</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+        <field formElement="input" name="bankdeposittotal" sortOrder="290">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Declared-Bank-Deposit </label>
+                <dataType>number</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+        <field formElement="input" name="bankdepositdifference" sortOrder="300">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Difference-Bank-Deposit</label>
+                <dataType>number</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+        <field formElement="input" name="head_cashier_bank_deposit_total" sortOrder="310">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Head Cashier Input-Bank-Deposit </label>
+                <dataScope>head_cashier_bank_deposit_total</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="paylaterexpected" formElement="input" sortOrder="320">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Expected-Pay Later</label>
+                <!-- <dataScope>bankDepositexpected</dataScope> -->
+                <dataType>number</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+        <field formElement="input" name="paylatertotal" sortOrder="330">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Declared-Pay Later </label>
+                <dataType>number</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+        <field formElement="input" name="paylaterdifference" sortOrder="340">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cashier Difference-Pay Later</label>
+                <dataType>number</dataType>
+                <disabled>1</disabled>
+            </settings>
+        </field>
+        <field formElement="input" name="head_cashier_pay_later_total" sortOrder="350">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Head Cashier Input-Pay Later </label>
+                <dataScope>head_cashier_pay_later_total</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>            
+        <field name="head_cashier_close_note" sortOrder="500" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Register</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="cols" xsi:type="number">15</item>
+                    <item name="rows" xsi:type="number">5</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Head Cashier Clouser Note</label>
+                <dataScope>head_cashier_close_note</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+    </fieldset>
+
+
+</form>

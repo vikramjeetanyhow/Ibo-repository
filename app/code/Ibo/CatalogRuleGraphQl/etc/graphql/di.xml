@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!-- MDVA-33975_2.4.1.patch applied -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\CatalogRule\Pricing\Price\CatalogRulePrice">
+        <plugin name="update_catalog_rule_price_for_logged_in_customer_group" type="Ibo\CatalogRuleGraphQl\Plugin\Pricing\Price\UpdateCatalogRulePrice"/>
+    </type>
+</config>

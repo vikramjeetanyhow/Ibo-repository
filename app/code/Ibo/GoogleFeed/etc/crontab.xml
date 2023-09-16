@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="google_feed">
+        <job name="embitel_google_primary_feed" instance="Ibo\GoogleFeed\Cron\PrimaryFeedCron" method="execute" >
+            <config_path>ibo_google_feed/google_feed_settings/primary_feeder_cron</config_path>
+        </job>
+        <job name="embitel_google_supplimentary_feed" instance="Ibo\GoogleFeed\Cron\SupplimentaryFeedCron" method="execute" >
+            <config_path>ibo_google_feed/google_feed_settings/secondary_feeder_cron</config_path>
+        </job>
+        <job name="embitel_google_offer_ids" instance="Ibo\GoogleFeed\Cron\GmcOfferIdsCron" method="execute" >
+            <config_path>ibo_google_feed/google_feed_settings/gmc_offer_ids_cron</config_path>
+        </job>
+    </group>
+</config>

@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="embitel_productimport">        
+        <job name="embitel_productimport" instance="Embitel\ProductImport\Cron\EboImport" method="execute" >
+            <config_path>ebo/ebo_config/cron_expression</config_path>
+        </job>
+        <job name="embitel_product_title_update" instance="Embitel\ProductImport\Cron\ProductTitleUpdateCron" method="execute">
+            <config_path>ebo/ebo_product_title/cron_expression</config_path>
+        </job>
+        <job name="embitel_product_publish" instance="Embitel\ProductImport\Cron\ProductPublishCron" method="execute">
+            <config_path>ebo/ebo_product_publish/cron_expression</config_path>
+        </job>
+        <job name="embitel_product_enable" instance="Embitel\ProductImport\Cron\ProductEnableCron" method="execute">
+            <config_path>ebo/ebo_product_enable/cron_expression</config_path>
+        </job>
+        <job name="embitel_unpublished_product_report" instance="Embitel\ProductImport\Cron\UnpublishProductReport" method="execute">
+            <config_path>ebo/ebo_product_publish/consolidated_report_cron</config_path>
+        </job>
+        <job name="embitel_disabled_product_report" instance="Embitel\ProductImport\Cron\DisableProductReport" method="execute">
+            <config_path>ebo/ebo_product_enable/consolidated_report_cron</config_path>
+        </job>
+        <job name="embitel_full_product_title_update" instance="Embitel\ProductImport\Cron\ProductTitleUpdateCron" method="fullExecute">
+            <config_path>ebo/ebo_product_title/full_cron_expression</config_path>
+        </job>
+    </group>
+    <group id="ebo_exports">
+        <job name="ebo_product_import" instance="Embitel\ProductImport\Cron\ProductImport" method="execute">
+            <config_path>ebo/ebo_product_import/cron_expression</config_path>
+        </job>
+    </group>
+</config>

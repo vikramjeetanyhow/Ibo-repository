@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\CatalogInventory\Model\Indexer\Stock\Action\Full">
+        <arguments>
+            <argument name="batchRowsCount" xsi:type="array">
+                <item name="default" xsi:type="number">5000</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Catalog\Model\ResourceModel\Product\Indexer\Price\BatchSizeCalculator">
+        <arguments>
+            <argument name="batchRowsCount" xsi:type="array">
+                <item name="default" xsi:type="number">1200</item>
+                <item name="simple" xsi:type="number">5000</item>
+                <item name="configurable" xsi:type="number">20000000</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

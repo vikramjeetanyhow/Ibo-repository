@@ -1,0 +1,22 @@
+{
+    "name": "ibo/module-productwidget",
+    "description": "Product Widget",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "hitendrabadiani",
+            "email": "hitendra.badiani@embitel.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ibo\\ProductWidget\\": ""
+        }
+    }
+}

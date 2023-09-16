@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="oodo" translate="label" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="0">
+            <class>separator-top</class>
+            <label>Oodo</label>
+            <tab>embitel</tab>
+            <resource>Embitel_Oodo::customer_push</resource>
+            <group id="customer_push" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Magento to Oodo Push</label>
+                <field id="cron_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>                
+                <field id="cron_expression" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Schedule Expression</label>
+                    <comment>*/5 * * * * it should be in this format. this will every 5 minutes.</comment>
+                </field>
+                <field id="attempt_threshold" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Attempt Threshold</label>
+                    <comment>Number of re-attempt for failure data push</comment>
+                </field>
+                <field id="authorization" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Authorization</label>
+                    <comment>Set Header Authorization</comment>
+                </field>
+                <field id="url" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Url</label>
+                    <comment>Oodo Rest Url</comment>
+                </field>
+                <field id="cron_log_active" translate="label" type="select" sortOrder="102" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Log Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="records_per_hour" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Records in hour</label>
+                    <comment>How many hours record needed</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

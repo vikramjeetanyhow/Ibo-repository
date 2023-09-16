@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="catalog_product_save_after">
+        <observer name="update_product_two_step_cron_flag" instance="Embitel\ProductImport\Observer\ProductSaveAfter"/>
+    </event>
+    <event name="odoo_price_update_after">
+        <observer name="product_enable_publish_flag_reset" instance="Embitel\ProductImport\Observer\OodoPriceUpdateAfter"/>
+    </event>
+</config>

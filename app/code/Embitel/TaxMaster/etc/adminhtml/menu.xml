@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/** TaxMaster menu xml
+ * @category  Embitel
+ * @package   Embitel_TaxMaster
+ * @author    Embitel
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Embitel_TaxMaster::add_row" title="Tax Master" module="Embitel_TaxMaster" sortOrder="40" parent="Magento_Catalog::catalog" action="grid/grid" resource="Embitel_TaxMaster::add_row"/>
+    </menu>
+</config>

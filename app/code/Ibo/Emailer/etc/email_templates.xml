@@ -1,0 +1,10 @@
+<config
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="ebo_customer_insurance_details"
+              label="Customer Insurance Report"
+              file="ebo_customer_insurance.html"
+              type="html"
+              module="Ibo_Emailer"
+              area="frontend"
+    />
+</config>

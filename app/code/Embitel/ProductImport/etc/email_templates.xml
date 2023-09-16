@@ -1,0 +1,16 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="unpublishedProductReport"
+              label="Unpublished Product Report"
+              file="unpublishedProductReport.html"
+              type="html"
+              module="Embitel_ProductImport"
+              area="frontend"
+    />
+    <template id="disabledProductReport"
+              label="Disabled Product Report"
+              file="disabledProductReport.html"
+              type="html"
+              module="Embitel_ProductImport"
+              area="frontend"
+    />
+</config>

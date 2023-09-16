@@ -1,0 +1,27 @@
+<?php
+ $product = $block->getProduct();
+ $baseUrl = $block->getCoreMediaUrl();
+ 
+?>
+
+<div>
+   
+   <?php if($product->getBaseImageCustom()) { ?>
+        <div><span><?php echo __("Primary Image : ");?></span></div>
+        <li style="display:inline-block; padding:5px; "><image src="<?php echo $product->getBaseImageCustom() ?>" width="150" height="150" /></li>
+    <?php } ?>
+
+    <?php if($product->getMediaGalleryCustom()) {  ?>
+        <div><span><?php echo __("Gallery Images : ");?></span></div>
+        <ul>
+        <?php
+        $galleryImages = explode(',',$product->getMediaGalleryCustom());
+        foreach($galleryImages as $gallerImage) {
+    ?>
+        <li style="display:inline-block; padding:5px; "><image src="<?php echo $gallerImage ?>" width="150" height="150" /></li>
+        
+    <?php } ?>
+    </ul> <?php
+} ?>
+
+</div>

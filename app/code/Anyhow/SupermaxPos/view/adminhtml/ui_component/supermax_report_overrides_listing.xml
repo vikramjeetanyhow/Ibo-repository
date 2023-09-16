@@ -1,0 +1,278 @@
+<!-- 
+    /**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */
+
+ -->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">supermax_report_overrides_listing.supermax_report_overrides_listing_data_source</item>
+            <item name="deps" xsi:type="string">supermax_report_overrides_listing.supermax_report_overrides_listing_data_source</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="export" xsi:type="array">
+                <item name="name" xsi:type="string">export</item>
+                <item name="label" xsi:type="string" translate="true">Export Override Report</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">supermax/report/overridesexport</item>
+                <item name="sortOrder" xsi:type="number">30</item>
+            </item>
+        </item>
+        <item name="spinner" xsi:type="string">report_overrides_columns</item>
+    </argument>
+	<dataSource name="supermax_report_overrides_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">supermax_report_overrides_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">pos_user_override_detail_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+			<argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">pos_user_override_detail_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+		<!-- <bookmark name="bookmarks"/> -->
+		<!-- <columnsControls name="columns_controls" /> -->
+		<!-- <filterSearch name="fulltext"/> -->
+		<!-- <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+        </filters> -->
+		<paging name="listing_paging"/>
+    </listingToolbar>
+	<columns name="report_overrides_columns">
+        <!-- <selectionsColumn name="ids">
+            <settings>
+                <indexField>pos_user_override_detail_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>55</resizeDefaultWidth>
+            </settings>
+        </selectionsColumn> -->
+        <column name="date_added" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Date</label>
+            </settings>
+        </column>
+        <column name="increment_id" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\OrderId">
+            <settings>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Order Id</label>
+            </settings>
+        </column>
+        <column name="outlet_name">
+            <settings>
+                <filter>select</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Store</label>
+            </settings>
+        </column>
+        <column name="user_name">
+            <settings>
+                <filter>select</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Cashier</label>
+            </settings>
+        </column>
+        <column name="approver_name">
+            <settings>
+                <filter>select</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Approver</label>
+            </settings>
+        </column>
+        <column name="customer_name">
+            <settings>
+                <filter>select</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Customer</label>
+            </settings>
+        </column>
+        <column name="customer_group_code">
+            <settings>
+                <filter>select</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Customer Group</label>
+            </settings>
+        </column>
+        <column name="product_id" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\ProductId">
+            <settings>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Offer Id</label>
+            </settings>
+        </column>
+        <!-- <column name="sku">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Product SKU</label>
+            </settings>
+        </column> -->
+        <column name="name">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Product Name</label>
+            </settings>
+        </column>
+        <column name="permission_type" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\OverridePermissionType">
+            <settings>
+                <filter>select</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Override Type</label>
+            </settings>
+        </column>
+        <column name="price_reduction_title" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\OverrideReason">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Price Change Reason</label>
+            </settings>
+        </column>
+        <column name="original_price" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\PriceWithCurrency">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Product Original Price</label>
+            </settings>
+        </column>
+        <column name="discount" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\OverrideReason">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Discount</label>
+            </settings>
+        </column>
+        <column name="discount_type" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\OverrideDiscountType">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Discount Type</label>
+            </settings>
+        </column>
+        <column name="overrided_price" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\PriceWithCurrency">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Product Overrided/Discounted Price</label>
+            </settings>
+        </column>
+        <column name="quantity" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\ProductQty">
+            <settings>
+                <filter>select</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Quantity</label>
+            </settings>
+        </column>
+        <column name="overrided_row_total" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\OverridedRowTotal">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Overrided Row Total</label>
+            </settings>
+        </column>
+        <column name="original_delivery_price" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\PriceWithCurrency">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Delivery Original Price</label>
+            </settings>
+        </column>
+        <column name="overrided_delivery_price" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\PriceWithCurrency">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Delivery Overrided Price</label>
+            </settings>
+        </column>
+        <column name="payment_data" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\OrderPaymentData">
+            <settings>
+                <filter>select</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Payment Method</label>
+            </settings>
+        </column>
+        <column name="order_status">
+            <settings>
+                <filter>select</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Order Status</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

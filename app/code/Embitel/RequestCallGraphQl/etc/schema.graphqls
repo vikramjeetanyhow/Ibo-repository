@@ -1,0 +1,8 @@
+type Mutation {
+    requestCall(mobile_number: String!): RequestCallResponse @resolver(class: "\\Embitel\\RequestCallGraphQl\\Model\\Resolver\\RequestItem") @doc(description:"Request for call")
+}
+
+type RequestCallResponse {
+    status: String @doc(description: "Status of the entry.")
+    message: String @doc(description: "Message return from the model.")
+}

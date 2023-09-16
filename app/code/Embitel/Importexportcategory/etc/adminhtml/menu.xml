@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Embitel_Importexportcategory::importexportcategory" 
+             title="EBO Category Import" 
+             module="Embitel_Importexportcategory" 
+             sortOrder="130" 
+             parent="Magento_Backend::system_convert" 
+             action="embcategory/importcategory/new" 
+             resource="Embitel_Importexportcategory::importexportcategory"/>
+        <add id="Embitel_Importexportcategory::exportcategory" 
+             title="EBO Category Export" 
+             module="Embitel_Importexportcategory" 
+             sortOrder="140" 
+             parent="Magento_Backend::system_convert" 
+             action="embcategory/exportcategory/new" 
+             resource="Embitel_Importexportcategory::importexportcategory"/>
+    </menu>
+</config>

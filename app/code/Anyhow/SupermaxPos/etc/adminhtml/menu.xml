@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */ 
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <!-- main menu Supermax POS -->
+        <add id="Anyhow_SupermaxPos::ah_supermaxpos" title="IBO POS" module="Anyhow_SupermaxPos" sortOrder="20" resource="Anyhow_SupermaxPos::ah_supermaxpos"/>
+        
+        <!-- submenu POS Management -->
+        <add id="Anyhow_SupermaxPos::ah_pos" title="POS Management" module="Anyhow_SupermaxPos" sortOrder="5" parent="Anyhow_SupermaxPos::ah_supermaxpos" 
+        resource="Anyhow_SupermaxPos::ah_pos"/>
+
+        <!-- submenu Configuration -->
+        <add id="Anyhow_SupermaxPos::ah_configuration" title="Configuration" module="Anyhow_SupermaxPos" sortOrder="10" parent="Anyhow_SupermaxPos::ah_pos" 
+        action="adminhtml/system_config/edit/section/ah_supermax_pos_configuration" resource="Anyhow_SupermaxPos::ah_configuration"/>
+        
+        <!-- submenu Products -->
+        <add id="Anyhow_SupermaxPos::ah_products" title="Products" module="Anyhow_SupermaxPos" sortOrder="20" parent="Anyhow_SupermaxPos::ah_pos" 
+        action="supermax/product/index" resource="Anyhow_SupermaxPos::ah_products"/>
+        
+        <!-- submenu Outlet Management -->
+        <add id="Anyhow_SupermaxPos::ah_outlets" title="Store Management" module="Anyhow_SupermaxPos" sortOrder="30" parent="Anyhow_SupermaxPos::ah_pos" 
+        action="supermax/outlet/index" resource="Anyhow_SupermaxPos::ah_outlets"/>
+
+        <!-- submenu Outlet Management -->
+        <add id="Anyhow_SupermaxPos::ah_pos_terminals" title="POS Terminal Management" module="Anyhow_SupermaxPos" sortOrder="31" parent="Anyhow_SupermaxPos::ah_pos" 
+        action="supermax/posterminal/index" resource="Anyhow_SupermaxPos::ah_pos_terminals"/>
+
+        <!-- submenu Cashier Management -->
+        <add id="Anyhow_SupermaxPos::ah_cashiers_roles" title="Employee Role Management" module="Anyhow_SupermaxPos" sortOrder="35" parent="Anyhow_SupermaxPos::ah_pos" 
+        action="supermax/cashierrole/index" resource="Anyhow_SupermaxPos::ah_cashiers_roles"/>
+
+        <!-- submenu Cashier Management -->
+        <add id="Anyhow_SupermaxPos::ah_cashiers" title="Employee Management" module="Anyhow_SupermaxPos" sortOrder="40" parent="Anyhow_SupermaxPos::ah_pos" 
+        action="supermax/cashier/index" resource="Anyhow_SupermaxPos::ah_cashiers"/>
+
+        <!-- POS Terminal Release -->
+        <add id="Anyhow_SupermaxPos::ah_pos_terminal_release_new" title="POS Terminal Release" module="Anyhow_SupermaxPos" sortOrder="40" parent="Anyhow_SupermaxPos::ah_pos" 
+        action="supermax/terminal/index" resource="Anyhow_SupermaxPos::ah_pos_terminal_release_new"/>
+        
+        <!-- submenu Receipt Management -->
+        <add id="Anyhow_SupermaxPos::ah_receipts" title="Receipt Management" module="Anyhow_SupermaxPos" sortOrder="50" parent="Anyhow_SupermaxPos::ah_pos" 
+        action="supermax/receipt/index" resource="Anyhow_SupermaxPos::ah_receipts"/>
+
+        <!-- submenu Override Management -->
+        <add id="Anyhow_SupermaxPos::ah_price_reductions" title="Override Management" module="Anyhow_SupermaxPos" sortOrder="60" parent="Anyhow_SupermaxPos::ah_pos" 
+        action="supermax/pricereduction/index" resource="Anyhow_SupermaxPos::ah_price_reductions"/>
+
+        <!-- submenu Report Management -->
+        <add id="Anyhow_SupermaxPos::ah_reports" title="Reports" module="Anyhow_SupermaxPos" sortOrder="9" parent="Anyhow_SupermaxPos::ah_supermaxpos" resource="Anyhow_SupermaxPos::ah_reports"/>
+
+        <!-- submenu Sales Report Management -->
+        <add id="Anyhow_SupermaxPos::ah_sales_reports" title="Sales Report" module="Anyhow_SupermaxPos" sortOrder="80" parent="Anyhow_SupermaxPos::ah_reports" 
+        action="supermax/report/sales" resource="Anyhow_SupermaxPos::ah_sales_reports"/>
+
+        <!-- submenu Old Sales Report Management -->
+        <add id="Anyhow_SupermaxPos::ah_oldsales_reports" title="Old Sales Report" module="Anyhow_SupermaxPos" sortOrder="80" parent="Anyhow_SupermaxPos::ah_reports" 
+        action="supermax/report/oldsales" resource="Anyhow_SupermaxPos::ah_oldsales_reports"/>
+
+        <!-- submenu Inventory Report Management -->
+        <add id="Anyhow_SupermaxPos::ah_inventory_reports" title="Inventory Report" module="Anyhow_SupermaxPos" sortOrder="90" parent="Anyhow_SupermaxPos::ah_reports" 
+        action="supermax/report/inventory" resource="Anyhow_SupermaxPos::ah_inventory_reports"/>
+
+        <!-- submenu Customer Report Management -->
+        <add id="Anyhow_SupermaxPos::ah_customer_reports" title="Customer Report" module="Anyhow_SupermaxPos" sortOrder="100" parent="Anyhow_SupermaxPos::ah_reports" 
+        action="supermax/report/customer" resource="Anyhow_SupermaxPos::ah_customer_reports"/>
+        
+        <!-- submenu Tax Report Management -->
+        <add id="Anyhow_SupermaxPos::ah_tax_reports" title="Tax Report" module="Anyhow_SupermaxPos" sortOrder="110" parent="Anyhow_SupermaxPos::ah_reports" 
+        action="supermax/report/tax" resource="Anyhow_SupermaxPos::ah_tax_reports"/>
+
+        <!-- submenu Overrides Report Management -->
+        <add id="Anyhow_SupermaxPos::ah_overrides_reports" title="Overrides Report" module="Anyhow_SupermaxPos" sortOrder="120" parent="Anyhow_SupermaxPos::ah_reports" 
+        action="supermax/report/overrides" resource="Anyhow_SupermaxPos::ah_overrides_reports"/>
+
+         <!-- submenu Head Cashier Reconcile Report Management -->
+        <add id="Anyhow_SupermaxPos::ah_headreconcile_reports" title="Head Cahier Reconcile Report" module="Anyhow_SupermaxPos" sortOrder="130" parent="Anyhow_SupermaxPos::ah_reports" 
+        action="supermax/report/headreconcile" resource="Anyhow_SupermaxPos::ah_headreconcile_reports"/>
+
+        <!-- submenu Customer Referral Report Management -->
+        <add id="Anyhow_SupermaxPos::ah_customerreferral_reports" title="Supermax Customer Referral" module="Anyhow_SupermaxPos" sortOrder="140" parent="Anyhow_SupermaxPos::ah_reports" 
+        action="supermax/report/customerreferral" resource="Anyhow_SupermaxPos::ah_customerreferral_reports"/>
+        
+        <!-- submenu Product Label Printing -->
+        <add id="Anyhow_SupermaxPos::ah_pos_barcode_printing" title="Product Label Printing" module="Anyhow_SupermaxPos" sortOrder="8" parent="Anyhow_SupermaxPos::ah_supermaxpos" 
+        resource="Anyhow_SupermaxPos::ah_pos"/>
+
+        <!-- submenu barcode printing Configuration -->
+        <add id="Anyhow_SupermaxPos::ah_pos_barcode_printing_configuration" title="Configuration" module="Anyhow_SupermaxPos" sortOrder="10" parent="Anyhow_SupermaxPos::ah_pos_barcode_printing" 
+        action="adminhtml/system_config/edit/section/ah_supermax_pos_barcode_printing_configuration" resource="Anyhow_SupermaxPos::ah_configuration"/>
+
+        <!-- main menu Supermax Sales -->
+        <add id="Anyhow_SupermaxPos::ah_supermax_sales" title="Sales" parent="Anyhow_SupermaxPos::ah_supermaxpos" module="Anyhow_SupermaxPos" sortOrder="6" resource="Anyhow_SupermaxPos::ah_supermax_sales"/>
+
+         <!-- submenu Pos Orders -->
+        <add id="Anyhow_SupermaxPos::ah_orders" title="Orders" module="Anyhow_SupermaxPos" sortOrder="15" parent="Anyhow_SupermaxPos::ah_supermax_sales" 
+        action="supermax/order/index" resource="Anyhow_SupermaxPos::ah_orders"/>
+
+        <!-- main menu Cash Register -->
+        <add id="Anyhow_SupermaxPos::ah_supermax_cash_register" title="Cash Register" module="Anyhow_SupermaxPos" sortOrder="7"  parent="Anyhow_SupermaxPos::ah_supermaxpos" resource="Anyhow_SupermaxPos::ah_supermax_cash_register"/>
+
+        <!-- submenu Register Management -->
+        <add id="Anyhow_SupermaxPos::ah_registers" title="Register &amp; Cash Management" module="Anyhow_SupermaxPos" sortOrder="10" parent="Anyhow_SupermaxPos::ah_supermax_cash_register" 
+        action="supermax/register/index" resource="Anyhow_SupermaxPos::ah_registers"/>
+    </menu>
+</config>

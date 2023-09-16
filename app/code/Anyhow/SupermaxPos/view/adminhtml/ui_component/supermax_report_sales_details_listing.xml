@@ -1,0 +1,188 @@
+<!-- 
+    /**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */
+
+ -->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">supermax_report_sales_details_listing.supermax_report_sales_details_listing_data_source</item>
+            <item name="deps" xsi:type="string">supermax_report_sales_details_listing.supermax_report_sales_details_listing_data_source</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="array">
+                <item name="name" xsi:type="string">back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">supermax/report/sales</item>
+                <item name="sortOrder" xsi:type="number">10</item>
+            </item>
+            <item name="export" xsi:type="array">
+                <item name="name" xsi:type="string">export</item>
+                <item name="label" xsi:type="string" translate="true">Export Sales Report</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">supermax/report/salesdetailexport</item>
+                <item name="sortOrder" xsi:type="number">30</item>
+            </item>
+        </item>
+        <item name="spinner" xsi:type="string">report_sales_details_columns</item>
+    </argument>
+    <dataSource name="supermax_report_sales_details_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">supermax_report_sales_details_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">entity_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+
+    <columns name="report_sales_details_columns">
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>entity_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>55</resizeDefaultWidth>
+            </settings>
+        </selectionsColumn>
+        <column name="increment_id" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\OrderId">
+            <settings>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <filter>textRange</filter>
+                <label translate="true">Order ID</label>
+                <!-- <sorting>asc</sorting> -->
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+             <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Date</label>
+           </settings>
+        </column>
+        
+        <!-- <column name="created_at">
+            <settings>
+                <filter>dateRange</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Date</label>
+            </settings>
+        </column> -->
+        <column name="store">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Store</label>
+            </settings>
+        </column>
+        <column name="cashier" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\CashierName">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Cashier</label>
+            </settings>
+        </column>
+        <column name="customer_name">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Customer</label>
+            </settings>
+        </column>
+        <!-- <column name="entity_id">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Order ID</label>
+            </settings>
+        </column> -->
+        <column name="base_grand_total" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\SalesTotal">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Total</label>
+            </settings>
+        </column>
+        <column name="total_profit_loss" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\TotalProfitLoss">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <label translate="true">Total Profit / Loss</label>
+            </settings>
+        </column>
+        <column name="ah_pos_order_id" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\Merchant">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Merchant</label>
+            </settings>
+        </column>
+        <column name="payment_data" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\OrderPaymentData">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Payment Methods</label>
+            </settings>
+        </column>
+        <column name="additional_data" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\OnInvoiceData">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">On Invoice Promotion Discount</label>
+            </settings>
+        </column>
+        <column name="status">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>textarea</editorType>
+                </editor>
+                <label translate="true">Order Status</label>
+            </settings>
+        </column>
+        <column name="comment" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\OrderCommentDeclared">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Order Comment</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

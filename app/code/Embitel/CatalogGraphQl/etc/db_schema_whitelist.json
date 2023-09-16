@@ -1,0 +1,11 @@
+{
+    "catalog_eav_attribute": {
+        "column": {
+            "is_required_for_publish": true,
+            "used_in_product_specs": true,
+            "attribute_type": true,
+            "attribute_category_ids": true,
+            "product_specs_position": true
+        }
+    }
+}

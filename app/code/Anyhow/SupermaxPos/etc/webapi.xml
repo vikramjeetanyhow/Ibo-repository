@@ -1,0 +1,601 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */
+ -->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    
+    <!-- <route url="/V1/cros/test" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\CrosPosInterface" method="test"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route> -->
+    
+    <!-- Login API -->
+    <route url="/V1/supermaxpos/login" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\LoginInterface" method="login"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+        <!-- <data>
+            <parameter name="username" force="true">%username%</parameter>
+            <parameter name="password" force="true">%password%</parameter>
+        </data> -->
+    </route>
+    
+    <!-- Connection API -->
+    <route url="/V1/supermaxpos/connection/:conn" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\ConnectionInterface" method="connection"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Configuration API -->
+    <route url="/V1/supermaxpos/configuration" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\ConfigurationInterface" method="configuration"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Products GET API -->
+    <route url="/V1/supermaxpos/products/:page" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\AllProductsInterface" method="getAllProducts"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Products POST API -->
+    <route url="/V1/supermaxpos/products/:page" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\AllProductsInterface" method="getAllProducts"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Tax API -->
+    <route url="/V1/supermaxpos/tax" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\TaxInterface" method="getAllTaxes"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+        <!-- <data>
+            <parameter name="countryid" force="true">%countryid%</parameter>
+            <parameter name="regionid" force="true">%regionid%</parameter>
+            <parameter name="postcode" force="true">%postcode%</parameter>
+        </data> -->
+    </route>
+
+    <!-- Country API -->
+    <route url="/V1/supermaxpos/country" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\CountryInterface" method="getAllCountries"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- User API -->
+    <route url="/V1/supermaxpos/user" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\UserInterface" method="getUser"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Currency API -->
+    <route url="/V1/supermaxpos/currency" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\CurrencyInterface" method="getCurrency"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- All Customers GET API -->
+    <route url="/V1/supermaxpos/customers/:page" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\AllCustomersInterface" method="getAllCustomers"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- All Customers POST API -->
+    <route url="/V1/supermaxpos/customers/:page" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\AllCustomersInterface" method="getAllCustomers"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Customer Address API -->
+    <route url="/V1/supermaxpos/customer/address/:customer_id" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\CustomerAddressInterface" method="getCustomerAddress"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- All Order Status API -->
+    <route url="/V1/supermaxpos/allorderstatus" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\AllOrderStatusInterface" method="getAllOrderStatus"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- All Categories API -->
+    <route url="/V1/supermaxpos/categories" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\AllCategoriesInterface" method="getAllCategories"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Popular Products API -->
+    <route url="/V1/supermaxpos/popularproducts" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\AllPopularProductsInterface" method="getAllPopularProducts"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Create Customer API -->
+    <route url="/V1/supermaxpos/addcustomer" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\CreateCustomerInterface" method="createCustomer"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+        <!-- <data>
+            <parameter name="firstname" force="true">%firstname%</parameter>
+            <parameter name="lastname" force="true">%lastname%</parameter>
+            <parameter name="email" force="true">%email%</parameter>
+        </data> -->
+    </route>
+
+    <!-- Create Customer Address API -->
+    <route url="/V1/supermaxpos/addcustomeraddress" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\CreateCustomerAddressInterface" method="createCustomerAddress"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+        <!-- <data>
+            <parameter name="customerid" force="true">%customerid%</parameter>
+            <parameter name="firstname" force="true">%firstname%</parameter>
+            <parameter name="lastname" force="true">%lastname%</parameter>
+            <parameter name="street" force="true">%street%</parameter>
+            <parameter name="city" force="true">%city%</parameter>
+            <parameter name="regionid" force="true">%regionid%</parameter>
+            <parameter name="countryid" force="true">%countryid%</parameter>
+            <parameter name="postcode" force="true">%postcode%</parameter>
+            <parameter name="telephone" force="true">%telephone%</parameter>
+        </data> -->
+    </route>
+
+    <!-- Create Order API -->
+    <route url="/V1/supermaxpos/createorder" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\CreateOrderInterface" method="createOrder"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Get Order API -->
+    <route url="/V1/supermaxpos/getorders/:startdate/:enddate" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\GetOrdersInterface" method="getOrders"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+        <!-- <data>
+            <parameter name="filter_date_start" force="true">%filter_date_start%</parameter>
+            <parameter name="filter_date_end" force="true">%filter_date_end%</parameter>
+        </data> -->
+    </route>
+
+    <!-- Delete update connection API -->
+    <route url="/V1/supermaxpos/deleteconnectionupdate/:code" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\DeleteConnectionInterface" method="deleteConnection"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Product Connection Update API -->
+    <route url="/V1/supermaxpos/productconnectionupdate" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\ProductConnectionUpdateInterface" method="productConnectionUpdate"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Customer Connection Update API -->
+    <route url="/V1/supermaxpos/customerconnectionupdate" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\CustomerConnectionUpdateInterface" method="customerConnectionUpdate"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Create Register API -->
+    <route url="/V1/supermaxpos/createregister" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\CreateRegisterInterface" method="createRegister"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Get Register API -->
+    <route url="/V1/supermaxpos/getregister" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\GetRegisterInterface" method="getRegister"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Close Register API -->
+    <route url="/V1/supermaxpos/closeregister" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\CloseRegisterInterface" method="closeRegister"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Get Last Close Register API -->
+    <route url="/V1/supermaxpos/getlastcloseregister" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\GetLastCloseRegisterInterface" method="getLastCloseRegister"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Cash Management API -->
+    <route url="/V1/supermaxpos/cashmanagement" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\CashManagementInterface" method="cashManagement"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Get Reports API -->
+    <route url="/V1/supermaxpos/reports/:startdate/:enddate" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\GetReportInterface" method="getReport"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Get Register API -->
+    <route url="/V1/supermaxpos/getallregisters/:startdate/:enddate" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\GetAllRegisterInterface" method="getAllRegister"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Coupon API -->
+    <route url="/V1/supermaxpos/coupon" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\CouponInterface" method="coupons"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    
+    <!-- send order receipt in email API -->
+    <route url="/V1/supermaxpos/mail/receipt" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\MailOrderReceiptInterface" method="mailOrderReceipt"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- send order email API -->
+    <route url="/V1/supermaxpos/mail/order" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\MailOrderInterface" method="mailOrder"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- All Customer Groups GET API -->
+    <route url="/V1/supermaxpos/customergroups" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\AllCustomerGroupsInterface" method="getAllCustomerGroups"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- email API -->
+    <route url="/V1/supermaxpos/email" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\EmailInterface" method="email"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- override permission API -->
+    <route url="/V1/supermaxpos/overridepermission" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\OverridePermissionInterface" method="overridePermission"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- resetpassword API -->
+    <route url="/V1/supermaxpos/resetuserpassword" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\ResetUserPasswordInterface" method="resetUserPassword"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- All Price Reductions GET API -->
+    <route url="/V1/supermaxpos/pricereductions" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\PriceReductionsInterface" method="getPriceReductions"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Start EDC Payment API -->
+    <route url="/V1/supermaxpos/startedcpayment" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\StartEdcPaymentInterface" method="startEdcPayment"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Chcek EDC Payment Status API -->
+    <route url="/V1/supermaxpos/getedcpaymentstatus" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\GetEdcPaymentStatusInterface" method="getEdcPaymentStatus"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Cancel EDC Payment API -->
+    <route url="/V1/supermaxpos/canceledcpayment" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\CancelEdcPaymentInterface" method="cancelEdcPayment"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Create Quote API -->
+    <route url="/V1/supermaxpos/createquote" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\CreateQuoteInterface" method="createQuote"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Update Quote API -->
+    <route url="/V1/supermaxpos/updatequote" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\UpdateQuoteInterface" method="updateQuote"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Update Quote API -->
+    <route url="/V1/supermaxpos/deletequote" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\DeleteQuoteInterface" method="deleteQuote"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/fulfillment" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\FulfillmentInterface" method="fulfillment"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/postpromise" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\PostPromiseInterface" method="postPromise"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/promiseselection" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\PromiseSelectionInterface" method="promiseSelection"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/reservation" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\ReservationInterface" method="reservation"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/serviceability" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\ServiceabilityInterface" method="serviceability"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/getatp" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\GetAtpInterface" method="getAtp"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/orderfulfillment" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\OrderFulfillmentInterface" method="orderFulfillment"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/paymentintent" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\PaymentIntentInterface" method="paymentIntent"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/printinvoice" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\PrintInvoiceInterface" method="printInvoice"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/pincodeaddress" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\PincodeAddressInterface" method="pincodeAddress"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/generateotp" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\GenerateOtpInterface" method="generateOtp"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/validateotp" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\ValidateOtpInterface" method="validateOtp"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/getterminals" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\GetTerminalsInterface" method="getTerminals"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/logout" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\LogoutInterface" method="logout"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/paymentintentbk" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\PaymentIntentBkInterface" method="paymentIntent"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Start Pinelabs Payment API -->
+    <route url="/V1/supermaxpos/startpinelabspayment" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\StartPinelabsPaymentInterface" method="startPinelabsPayment"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Chcek Pinelabs Payment Status API -->
+    <route url="/V1/supermaxpos/getpinelabspaymentstatus" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\GetPinelabsPaymentStatusInterface" method="getPinelabsPaymentStatus"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Cancel Pinelabs Payment API -->
+    <route url="/V1/supermaxpos/cancelpinelabspayment" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\CancelPinelabsPaymentInterface" method="cancelPinelabsPayment"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/migratepaymentdata" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\MigratePaymentInterface" method="migratePayment"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/emptypayment" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\MigratePaymentInterface" method="emptyPayment"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/migratesinglepayment" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\MigratePaymentInterface" method="migrateSinglePaymentData"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/fetchquote" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\FetchQuoteInterface" method="fetchQuote"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    
+    <route url="/V1/supermaxpos/migrategettotal" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\MigratePaymentInterface" method="getTotal"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/updatehold" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\HoldQuoteInterface" method="updateHold"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/gethold" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\HoldQuoteInterface" method="getHold"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/resumehold" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\HoldQuoteInterface" method="resumeHold"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/supermaxpos/validateCashier" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\ValidateCashierInterface" method="validateCashier"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    
+    <!-- Customer Referral API -->
+    <route url="/V1/supermaxpos/getcustomerreferral" method="GET">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\CustomerReferralInterface" method="getcustomerreferral"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/supermaxpos/addcustomerreferral" method="POST">
+        <service class="Anyhow\SupermaxPos\Api\Supermax\CustomerReferralInterface" method="addcustomerreferral"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+</routes>

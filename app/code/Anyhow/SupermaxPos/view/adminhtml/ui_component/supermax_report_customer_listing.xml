@@ -1,0 +1,175 @@
+<!-- 
+    /**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */
+
+ -->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">supermax_report_customer_listing.supermax_report_customer_listing_data_source</item>
+            <item name="deps" xsi:type="string">supermax_report_customer_listing.supermax_report_customer_listing_data_source</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="export" xsi:type="array">
+                <item name="name" xsi:type="string">export</item>
+                <item name="label" xsi:type="string" translate="true">Export Customer Report</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">supermax/report/customerexport</item>
+                <item name="sortOrder" xsi:type="number">30</item>
+            </item>
+        </item>
+        <item name="spinner" xsi:type="string">report_customer_columns</item>
+    </argument>
+	<dataSource name="supermax_report_customer_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">supermax_report_customer_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+			<argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">entity_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+	<!-- <listingToolbar name="listing_top">
+		<bookmark name="bookmarks"/>
+		<columnsControls name="columns_controls" />
+		<filterSearch name="fulltext"/>
+		<filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+        </filters>
+		<paging name="listing_paging"/>
+    </listingToolbar> -->
+
+	<columns name="report_customer_columns">
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>entity_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>55</resizeDefaultWidth>
+            </settings>
+        </selectionsColumn>
+        <!-- <column name="entity_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column> -->
+        <column name="date_start" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Date Added</label>
+            </settings>
+        </column>
+        <!-- <column name="date_end">
+            <settings>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Date End</label>
+            </settings>
+        </column> -->
+        <column name="customer_name" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\CustomerName">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Customer Name</label>
+            </settings>
+        </column>
+        <column name="email">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Email</label>
+            </settings>
+        </column>
+        <column name="customer_group_code">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Customer Group</label>
+            </settings>
+        </column>
+        <column name="is_active" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\CustomerStatus">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <column name="orders">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">No. Orders</label>
+            </settings>
+        </column>
+        <column name="products">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">No. Products</label>
+            </settings>
+        </column>
+        <column name="total" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\SalesTotal">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Total</label>
+            </settings>
+        </column>
+        <column name="customer_id" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\CustomerId">
+            <settings>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Action</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

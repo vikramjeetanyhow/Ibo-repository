@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="ibo_config_tab" translate="label" sortOrder="999">
+            <label>Category Banner Configurations</label>
+        </tab>
+        <section id="image" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>MultiSlider</label>
+            <tab>ibo_config_tab</tab>
+            <resource>Ibo_MultiSlider::multislider_config</resource>
+            <!--CategorySlider-->
+            <group id="hero_slider" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Category Slider</label>               
+                <field id="image_file_type" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Image file Type</label>
+                    <validate>required-entry</validate>
+                    <comment>Multiple values are seperated with comma</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

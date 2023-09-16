@@ -1,0 +1,18 @@
+{
+    "name": "embitel/module-catalog",
+    "type": "magento2-module",
+    "authors":[
+        {
+            "name":"urvisha",
+            "email":"urvisha.patel@embitel.com"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Embitel\\Catalog\\": ""
+        }
+    }
+}

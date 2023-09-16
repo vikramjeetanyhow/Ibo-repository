@@ -1,0 +1,86 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Ibo\HomePage\Block\Adminhtml\Bestdeal\Import\Index */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+?>
+<div class="productimport-export-tax-rates">
+    <div class="import-tax-rates">
+        <?php if ($block->getUseContainer()):?>
+        <form id="export-form"
+              class="admin__fieldset"
+              action="<?= $block->escapeUrl($block->getUrl('ibo_homepage/topcategory/export')) ?>"
+              method="post"
+              enctype="multipart/form-data">
+        <?php endif; ?>
+            <?= $block->getBlockHtml('formkey') ?>
+            <div class="fieldset admin__field">
+                <label for="ibo_export_file" class="admin__field-label">
+                    <span><?= $block->escapeHtml(__('Export HomePage Top Category & Brand')) ?></span>
+                </label>
+                <div class="admin__field-control">
+                <?= $block->getButtonHtml(__('Export'),'', 'export-submit') ?>                
+                </div> 
+        </div>
+        <?php if ($block->getUseContainer()):?>
+        </form>
+        <?php endif; ?>
+        <?php if ($block->getUseContainer()):?>
+        <form id="import-form"
+              class="admin__fieldset"
+              action="<?= $block->escapeUrl($block->getUrl('ibo_homepage/topcategory/save')) ?>"
+              method="post"
+              enctype="multipart/form-data">
+        <?php endif; ?>
+            <?= $block->getBlockHtml('formkey') ?>
+            <div class="fieldset admin__field">
+                <label for="ibo_import_file" class="admin__field-label">
+                    <span><?= $block->escapeHtml(__('Select CSV File to Import')) ?></span>
+                </label>
+                <div class="admin__field-control">
+                    <input type="file"
+                           id="ibo_import_file"
+                           name="ibo_import_file"
+                           class="input-file required-entry"/>
+                    <?= $block->getButtonHtml(__('Import'), '', 'import-submit') ?>
+                </div>
+            </div>
+        <?php if ($block->getUseContainer()):?>
+        </form>
+        <?php endif; ?>
+        
+        <?php $scriptString = <<<script
+
+    require(['jquery', 'Magento_Ui/js/modal/alert', "mage/mage", "loadingPopup", 'mage/translate'],
+        function(jQuery, uiAlert){
+
+    jQuery('#import-form').mage('form').mage('validation');
+    (function ($) {
+         $('.export-submit').click(function(){
+                $(this.form).submit();
+        });
+        $('.import-submit').click(function(){
+            if($(':input[name="ibo_import_file"]').val()) {
+                $('body').loadingPopup({
+                    timeout: false
+                });
+
+                $(this.form).submit();
+            } else {
+                uiAlert({
+                    content: $.mage.__('Please select a file to import!')
+                });
+            }
+        });
+    })(jQuery);
+
+});
+
+script;
+        ?>
+        <?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
+    </div>
+</div>

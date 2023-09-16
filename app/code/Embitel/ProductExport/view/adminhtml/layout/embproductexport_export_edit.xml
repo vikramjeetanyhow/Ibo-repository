@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Embitel\ProductExport\Block\Adminhtml\Export\Edit" name="embitel_product_export_edit"/>
+            <uiComponent name="eboexport_history_listing" />
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Embitel\ProductExport\Block\Adminhtml\Export\Edit\Tabs" name="embitel_product_export_tabs">
+                <block class="Embitel\ProductExport\Block\Adminhtml\Export\Edit\Tab\Product" name="embitel_product_export_tab"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">productexport</argument>
+                    <argument name="block" xsi:type="string">embitel_product_export_tab</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

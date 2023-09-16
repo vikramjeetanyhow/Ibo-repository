@@ -1,0 +1,280 @@
+type Cart {
+ promotions_list: promo_info @doc (description: "An array containing list of promotions.") @resolver(class: "Embitel\\QuoteGraphQl\\Model\\Resolver\\Promotions")
+ order_number: String @resolver (class: "Embitel\\QuoteGraphQl\\Model\\Resolver\\OrdernumberResolver")
+ postal_code: String @resolver (class: "Embitel\\QuoteGraphQl\\Model\\Resolver\\PostalCodeResolver")
+ cart_count: Int @resolver (class: "Embitel\\QuoteGraphQl\\Model\\Resolver\\CartcountResolver")
+ allow_cod: Boolean @resolver (class: "Embitel\\QuoteGraphQl\\Model\\Resolver\\AllowCodResolver")
+ show_referal_section: Boolean @resolver (class: "Embitel\\QuoteGraphQl\\Model\\Resolver\\ShowReferalResolver")
+ promise_id: String @resolver (class: "Embitel\\QuoteGraphQl\\Model\\Resolver\\PromiseIdResolver")
+ available_payment_methods: [AvailablePaymentMethod] @resolver(class: "Embitel\\QuoteGraphQl\\Model\\Resolver\\AvailablePaymentMethods") @doc(description: "Available payment methods")
+ shipping_addresses: [ShippingCartAddress]! @resolver(class: "Embitel\\QuoteGraphQl\\Model\\Resolver\\ShippingAddresses")
+ billing_address: BillingCartAddress @resolver(class: "Embitel\\QuoteGraphQl\\Model\\Resolver\\BillingAddress")
+}
+type promo_info {
+items: [PromotionsResultItems]
+}
+type PromotionsResultItems @doc(description: "Information related to promotions") {
+    id: String @doc(description: "Identifier of the promotion")
+    name: String @doc(description: "Name of the promotion")
+    desc: String @doc(description: "Description of the promotion")
+    terms_cond: String @doc(description: "Terms of the promotion")
+    sort_order: String @doc(description: "Order to list the promotion")
+    is_applied: Boolean @doc(description: "Is the promotion already applied")
+}
+interface CartItemInterface @typeResolver(class: "Magento\\QuoteGraphQl\\Model\\Resolver\\CartItemTypeResolver") {
+    prices: CartItemPrices @resolver(class: "\\Embitel\\QuoteGraphQl\\Model\\Resolver\\CartItemPrice")
+    promise_response: promiseResult @resolver(class: "\\Embitel\\QuoteGraphQl\\Model\\Resolver\\CartItemFulfillableQty")
+}
+type promiseResult {
+    fulfillable_quantity:  Float @doc(description:"Fulfillable qty")
+    quantity_message: String  @doc(description:"Status message")
+    fulfill_error: Boolean @doc(description: "If any error with fullfilment")
+    }
+
+type CartItemPrices {
+    price_incl_tax: Money @doc(description:"item price include tax")
+}
+type Mutation {
+    addProductsToCart(cartId: String!, cartItems: [CartItemInput!]!, postal_code: String): AddProductsToCartOutput @doc(description:"Add any type of product to the cart") @resolver(class: "Embitel\\QuoteGraphQl\\Model\\Resolver\\AddProductsToCart")
+    setCartShippingAddresses(input: SetCartShippingAddressesInput): SetCartShippingAddressesOutput @resolver(class: "\\Embitel\\QuoteGraphQl\\Model\\Resolver\\SetCartShippingAddresses")
+    getCartByQuoteId(quoteId: Int!, m2m_token: String!): QuoteDataOutput @resolver(class: "\\Embitel\\QuoteGraphQl\\Model\\Resolver\\GetCartByQuoteId")
+    applyCouponToCart(input: ApplyCouponToCartInput): ApplyCouponToCartOutput @resolver(class: "\\Embitel\\QuoteGraphQl\\Model\\Resolver\\ApplyCouponToCart")
+}
+
+type SetCartShippingAddressesOutput {
+    cart: Cart!
+    promise_data: PromiseDataResult!
+}
+
+input SetCartShippingAddressesInput {
+    cart_id: String!
+    delivery_together: Boolean
+    shipping_addresses: [CartShippingAddressInput!]!
+}
+
+input CartShippingAddressInput {
+    customer_address_id: Int # If provided then will be used address from address book
+}
+
+type Query {
+    getCheckoutInventory (
+        cart_id: String! @doc(description: "Id of the cart")
+        pincode: String! @doc(description: "Pincode of the customer")
+    ): CheckoutInventoryResult @resolver(class: "\\Embitel\\QuoteGraphQl\\Model\\Resolver\\CheckoutInventory") @doc(description: "This query check items availability for the given cart")
+    getCheckoutInventorySelection (
+        cart_id: String! @doc(description: "Id of the cart")
+        pincode: String! @doc(description: "Pincode of the customer")
+        promise_id: String! @doc(description: "promise id of the customer")
+        delivery_group_id: String! @doc(description: "delivery group id of the customer")
+        delivery_method: String! @doc(description: "delivery method of the customer")
+        delivery_option: String! @doc(description: "delivery option of the customer")
+        node_id: String! @doc(description: "node id of the customer")
+        slot_id: String! @doc(description: "slot id of the customer")
+        order_number: String! @doc(description: "order id of the customer")
+
+        ): CheckoutInventorySelectionResult @resolver(class: "\\Embitel\\QuoteGraphQl\\Model\\Resolver\\CheckoutInventorySelection") @doc(description: "This query check items availability for the given cart")
+
+    getPromiseInventory (
+        cart_id: String @doc(description: "Id of the cart")
+        product_sku: String @doc(description: "Sku of the product")
+        pincode: String @doc(description: "Pincode of the customer")
+        page_type_id: Int @doc(description: "page_type_id as (0 - PDP , 1- Cart)")
+    ): PromiseInventoryResult @resolver(class: "\\Embitel\\QuoteGraphQl\\Model\\Resolver\\PromiseInventory") @doc(description: "This query check items availability for the given cart")
+
+    getPromiseData (
+        cart_id: String! @doc(description: "Id of the cart")
+        pincode: String! @doc(description: "Pincode of the customer")
+    ): PromiseDataResult @resolver(class: "\\Embitel\\QuoteGraphQl\\Model\\Resolver\\PromiseData") @doc(description: "This query return the promise response data")
+    setShippingCharge(cart_id: String!, shipping_amount: String!): setShippingChargeOutput @resolver(class: "\\Embitel\\QuoteGraphQl\\Model\\Resolver\\setShippingChargeResolver")
+}
+type CheckoutInventorySelectionResult @doc(description: " Items availability response.") {
+   status: Boolean @doc(description: "item is available or not")
+    message: String @doc(description: "Status message")
+    promise_message:[promise_message]
+
+}
+type promise_message @doc(description:"promise message") {
+  delivery_method:String @doc(description: "Delivery method")
+    delivery_option:String @doc(description: "Delivery option")
+    node_id:String @doc(description: "Node Id")
+     promise_delivery_info:[promise_delivery_info]
+
+}
+type CheckoutInventoryResult @doc(description: "Cart items availability response.") {
+    status: Boolean @doc(description: "item is available or not")
+    message: String @doc(description: "Status message")
+}
+type PromiseInventoryResult @doc(description: "Given page Items availability response.") {
+    status: Boolean @doc(description: "item is available or not")
+    message: String @doc(description: "Status message")
+    promise_options:[promise_options]
+    promise_delivery_info:[promise_delivery_info]
+}
+
+type PromiseDataResult @doc(description: "Given page Items availability response.") {
+    status: Boolean @doc(description: "item is available or not")
+    message: String @doc(description: "Status message")
+    promise_id : String
+    delivery_groups : [delivery_groups]
+    expires_at : String
+    created_at : String
+    out_of_stock : [outofstockData]
+}
+
+type delivery_groups {
+    delivery_group_lines : [delivery_group_lines]
+    promise_options : [promise_options]
+    delivery_group_id : String
+}
+
+type outofstockData {
+    offer_id : String
+    is_courierable : Boolean
+    reason : String
+}
+
+type delivery_group_lines {
+    delivery_group_line_id : String
+    promise_line_id : String
+    parent_promise_line_id :String
+    item : item
+    quantity : quantity
+    fulfillable_quantity : quantity
+    }
+
+type item {
+    offer_id : String
+    service_category : String
+    category_id : String
+    category_code : String
+    requires_shipping : String
+}
+
+type quantity {
+    quantity_number : String
+    quantity_uom : String
+    }
+
+
+type promise_options @doc(description:"Promise options") {
+    delivery_method:String @doc(description: "Delivery method")
+    delivery_option:String @doc(description: "Delivery option")
+    node_id:String @doc(description: "Node Id")
+    promise_delivery_info:[promise_delivery_info]
+}
+type promise_delivery_info @doc(description:"Promise delivery info"){
+    is_selected: Boolean @doc(description:"Whether selected or not")
+    delivery_slot:delivery_slot
+    delivery_cost:delivery_cost
+    carrier_info:carrierInfo
+    }
+
+type delivery_slot @doc(description:"Promise delivery slots"){
+    slot_id:String @doc(description: "Slot id")
+    slot_type:String @doc(description: "Slot type")
+    from_date_time:String @doc(description: "From Date time")
+    to_date_time:String @doc(description: "To Date time")
+    estimated_shipping_date:String @doc(description: "Estimate Shipping date")
+    }
+type delivery_cost @doc(description:"Promise delivery cost"){
+    currency:String @doc(description: "currency")
+    cent_amount:String @doc(description: "Cent Amount")
+    fraction:String @doc(description: "fraction")
+}
+type carrierInfo @doc(description:"CarrierInfo"){
+    operator_id:String @doc(description: "operator_id")
+    carrier_type:String @doc(description: "carrier_type")
+    is_cod_available: Boolean
+    }
+    interface CartAddressInterface {
+    landmark: String @doc(description: "Landmark field")
+}
+input CartAddressInput {
+    landmark: String @doc(description: "Landmark field")
+}
+type AddConfigurableProductsToCartOutput {
+    user_errors: [CartUserInputError!]! @doc(description: "An error encountered while adding an item to the cart.")
+}
+type CartUserInputError @doc(description:"An error encountered while adding an item to the the cart.") {
+    message: String! @doc(description: "A localized error message")
+    code:  String!
+}
+type PlaceOrderOutput {
+    order: OrderType!
+}
+
+type OrderType {
+    order_number: String! @doc(description: "The unique ID for a `Order` object.")
+    order_id: String @deprecated(reason: "The order_id field is deprecated, use order_number instead.")
+    items: [OrderItems] @doc(description: "An array containing the items purchased in this order")
+
+}
+type OrderItems {
+    id: ID! @doc(description: "The unique ID for a `OrderItemInterface` object")
+    sku: String @doc(description: "Item Sku.")
+    product_sale_price: Money! @doc(description: "The sale price of the base product, including selected options")
+    quantity_ordered: Float @doc(description: "The number of units ordered for this item")
+    order_line_number: String @doc(description: "The Order line number")
+}
+input UpdateCartItemsInput {
+    cart_id: String!
+    cart_items: [CartItemUpdateInput]
+    postal_code: String
+}
+
+type QuoteDataOutput {
+    entity_id: Int
+    items_count: String
+    items_qty: String
+    base_currency_code: String
+    grand_total: String
+    base_grand_total: String
+    reserved_order_id: String
+    subtotal: String
+    base_subtotal: String
+    subtotal_with_discount: String
+    base_subtotal_with_discount: String
+}
+
+type CartPrices {
+    grand_total: Money
+    subtotal_including_tax: Money
+    subtotal_excluding_tax: Money
+    discount: CartDiscount @deprecated(reason: "Use discounts instead ")
+    subtotal_with_discount_excluding_tax: Money
+    applied_taxes: [CartTaxItem]
+    discounts: [Discount] @doc(description:"An array of applied discounts") @resolver(class: "\\Magento\\QuoteGraphQl\\Model\\Resolver\\Discounts")
+    total_mrp: [TotalMrp] @doc(description:"Total MRP values ") @resolver(class: "\\Embitel\\QuoteGraphQl\\Model\\Resolver\\MRPTotals")
+    mrp_discounts: [MrpDiscounts] @doc(description:"Applied MRP discounts") @resolver(class: "\\Embitel\\QuoteGraphQl\\Model\\Resolver\\MRPDiscounts")
+    total_discounts: [TotalDiscounts] @doc(description:"Total discounts") @resolver(class: "\\Embitel\\QuoteGraphQl\\Model\\Resolver\\TotalDiscounts")
+}
+
+type MrpDiscounts @doc(description:"Defines an individual discount. A discount can be applied to the cart as a whole or to an item.") {
+    amount: Money! @doc(description:"The amount of the discount")
+}
+
+type TotalMrp @doc(description:"Defines an individual discount. A discount can be applied to the cart as a whole or to an item.") {
+    amount: Money! @doc(description:"The total MRP amount")
+}
+
+type TotalDiscounts @doc(description:"Total discount to the cart as a whole item.") {
+    amount: Money! @doc(description:"The amount of the total discount")
+}
+
+type CartUserInputError  {
+    promise_response: promiseResult
+}
+type setShippingChargeOutput {
+    status: String
+    message: String
+}
+input PlaceOrderInput {
+    cart_id: String!
+    orderChannelInfo: String!
+    executive_id: String
+}
+type AppliedCoupon {
+    code: String!
+    special_promo_code: String
+}
+

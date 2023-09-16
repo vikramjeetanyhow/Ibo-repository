@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="sendgrid" translate="label" type="text" sortOrder="199" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>SendGrid</label>
+            <tab>embitel</tab>
+            <resource>Ibo_Emailer::configuration</resource>
+            <group id="configuration" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Configuration Settings</label>
+                <field id="is_enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="sendgrid_api_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>SendGrid API Key</label>
+                </field>
+                <field id="sender_name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Sender Name</label>
+                </field>
+                <field id="sender_email" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Sender Email</label>
+                </field>
+            </group>
+        </section>
+        <section id="email_reciever" translate="label" type="text" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Order Not Push Oms Notification</label>
+            <tab>embitel</tab>
+            <resource>Ibo_Emailer::reciever</resource>
+            <group id="order_reciever_cron" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                 <label>Reciever Settings</label>
+                <field id="order_reciever_email" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Email ids</label>
+                    <comment>Email Ids comma(,) separated</comment>
+                </field>
+                 <field id="order_reciever_name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Reciever Name</label>
+                    <comment>Email Ids comma(,) separated</comment>
+                </field>
+                
+            </group>
+        </section>
+    </system>
+</config>

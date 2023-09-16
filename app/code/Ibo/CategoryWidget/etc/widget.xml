@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget class="Ibo\CategoryWidget\Block\Widget\CategoryWidget" id="featured_category_widget">
+        <label>Category Widget</label>
+        <description>Category Widget</description>
+        <parameters>            
+            <parameter name="header_title" xsi:type="text" required="false" sort_order="1">
+                <label translate="true">Header Title</label>
+            </parameter>
+            <parameter name="display_type" xsi:type="select" required="true" visible="true" sort_order="2" source_model="Ibo\CategoryWidget\Model\Source\Type">
+                <label translate="true">Select Display Type</label>
+            </parameter>
+            <parameter name="categories" xsi:type="multiselect" required="true" visible="true" sort_order="8" source_model="Ibo\CategoryWidget\Model\Source\Categorylist">
+                <label translate="true">Select Category</label>
+            </parameter>           
+        </parameters>
+    </widget>
+</widgets>

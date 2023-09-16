@@ -1,0 +1,33 @@
+{
+    "category_hero_slider_primary": {
+        "column": {
+            "id": true,
+            "identifier": true,
+            "type": true,
+            "status": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "category_hero_slider_secondary": {
+        "column": {
+            "id": true,
+            "slider_id": true,
+            "banner_name": true,
+            "title": true,
+            "label": true,
+            "link": true,
+            "web_link": true,
+            "app_link": true,
+            "status": true,
+            "sort_order": true,
+            "small_image": true,
+            "large_image": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "CTGR_HERO_SLIDER_SECONDARY_SLIDER_ID_CTGR_HERO_SLIDER_PRIMARY_ID": true
+        }
+    }
+}

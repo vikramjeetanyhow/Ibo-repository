@@ -1,0 +1,92 @@
+type OrderAddress @doc(description: "OrderAddress contains detailed information about an order's billing and shipping addresses"){
+    lastname: String @doc(description: "The family name of the person associated with the shipping/billing address")
+    landmark: String @doc(description: "Landmark detail for the address")
+}
+interface OrderItemInterface @doc(description: "Order item details") @typeResolver(class: "Magento\\SalesGraphQl\\Model\\TypeResolver\\OrderItem") {
+    product_image: String @doc(description: "URL key of the base product")
+    product_sale_price_incl_tax: Money! @doc(description: "The product sale price, including tax") 
+    esin: String @doc(description: "Product esin")
+    image_custom: String @doc(description: "external url of the product")
+}
+
+type Query {
+    customerOrders (input: CustomerOrderFilterInput): CustomerOrders @resolver(class: "Embitel\\SalesGraphQl\\Model\\Resolver\\Orders") @cache(cacheable: false)
+    fetchCustomerCoupon: [FetchCustomerCouponDetails] @doc(description: "Return a list of customer coupon details") @resolver(class: "\\Embitel\\SalesGraphQl\\Model\\Resolver\\FetchCustomerCouponDetails") @cache(cacheable: true)
+}
+
+type FetchCustomerCouponDetails @resolver(class: "\\Embitel\\SalesGraphQl\\Model\\Resolver\\FetchCustomerCouponDetails") {
+    name: String! @doc(description: "Customer Coupon name")
+    description: String! @doc(description: "Coupon Description")
+    sort_order: String! @doc(description: "Coupon sort order")
+    terms_cond: String! @doc(description: "Coupon terms and condition")
+    code: String! @doc(description: "Coupon Code")
+}
+type CustomerOrders @doc(description: "The collection of orders that match the conditions defined in the filter") {
+    items: [CustomerOrder]! @doc(description: "An array of customer orders")
+    page_info: SearchResultPageInfo @doc(description: "An object that includes the current_page, page_info, and page_size values specified in the query")
+    total_count: Int @doc(description: "The total count of customer orders")
+    delivery_date: String @doc(description: "The delivery date")
+    promise_created_at: String @doc(description: "The Promise created at")
+    promise_expires_at: String @doc(description: "The Promise expires at")
+    status_code: String @doc(description: "The order status_code")
+    order_channel: String @doc(description: "The order order_channel")
+}
+
+type CustomerOrder @doc(description: "Contains details about each of the customer's orders") {
+    id: ID! @doc(description: "The unique ID for a `CustomerOrder` object")
+    order_date: String! @doc(description: "The date the order was placed")
+    status: String! @doc(description: "The current status of the order")
+    number: String! @doc(description: "The order number")
+    items: [OrderItemInterface] @doc(description: "An array containing the items purchased in this order") @resolver(class: "Magento\\SalesGraphQl\\Model\\Resolver\\OrderItems")
+    total: OrderTotal @doc(description: "Contains details about the calculated totals for this order") @resolver(class: "Embitel\\SalesGraphQl\\Model\\Resolver\\OrderTotal")
+    invoices: [Invoice]! @doc(description: "A list of invoices for the order") @resolver(class: "Magento\\SalesGraphQl\\Model\\Resolver\\Invoices")
+    shipments: [OrderShipment] @doc(description: "A list of shipments for the order") @resolver(class: "Magento\\SalesGraphQl\\Model\\Resolver\\Shipments")
+    credit_memos: [CreditMemo] @doc(description: "A list of credit memos") @resolver(class: "Magento\\SalesGraphQl\\Model\\Resolver\\CreditMemos")
+    payment_methods: [OrderPaymentMethod] @doc(description: "Payment details for the order")
+    shipping_address: OrderAddress @doc(description: "The shipping address for the order")
+    billing_address: OrderAddress @doc(description: "The billing address for the order")
+    carrier: String @doc(description: "The shipping carrier for the order delivery") @resolver(class: "Magento\\SalesGraphQl\\Model\\Resolver\\CustomerOrders\\Carrier")
+    shipping_method: String @doc(description: "The delivery method for the order")
+    comments: [SalesCommentItem] @doc(description: "Comments about the order")
+    increment_id: String @deprecated(reason: "Use the id attribute instead")
+    order_number: String! @deprecated(reason: "Use the number attribute instead")
+    created_at: String @deprecated(reason: "Use the order_date attribute instead")
+    grand_total: Float  @deprecated(reason: "Use the totals.grand_total attribute instead")
+    no_items: Int @doc(description: "The total no of items")
+    invoice_url: String @doc(description: "The URL to download invoice")
+    promise_created_at: String @doc(description: "The Promise created at")
+    promise_expires_at: String @doc(description: "The Promise expires at")
+    status_code: String @doc(description: "The order status_code")
+    order_channel: String @doc(description: "The order order_channel")
+}
+input CustomerOrderFilterInput {
+    status: String @doc(description: "The order status")
+}
+
+type OrderTotal @doc(description: "Contains details about the sales total amounts used to calculate the final price") {
+    subtotal: Money! @doc(description: "The subtotal of the order, excluding shipping, discounts, and taxes")
+    subtotal_incl_tax: Money! @doc(description: "The subtotal of the order, including shipping, discounts, and taxes")
+    subtotal_excl_tax: Money! @doc(description: "The subtotal of the order, excluding shipping, discounts, and taxes")
+    discounts: [Discount] @doc(description: "The applied discounts to the order")
+    total_tax: Money! @doc(description: "The amount of tax applied to the order")
+    taxes: [TaxItem] @doc(description: "The order tax details")
+    grand_total: Money! @doc(description: "The final total amount, including shipping, discounts, and taxes")
+    base_grand_total: Money! @doc(description: "The final base grand total amount in the base currency")
+    total_shipping: Money! @doc(description: "The shipping amount for the order")
+    shipping_handling: ShippingHandling @doc(description: "Contains details about the shipping and handling costs for the order")
+    total_mrp: [TotalMrp] @doc(description:"Total MRP values ") @resolver(class: "\\Embitel\\SalesGraphQl\\Model\\Resolver\\MRPTotals")
+    mrp_discounts: [MrpDiscounts] @doc(description:"Applied MRP discounts") @resolver(class: "\\Embitel\\SalesGraphQl\\Model\\Resolver\\MRPDiscounts")
+    total_discounts: [TotalDiscounts] @doc(description:"Total discounts") @resolver(class: "\\Embitel\\SalesGraphQl\\Model\\Resolver\\TotalDiscounts")
+}
+
+type TotalMrp @doc(description:"Defines an individual discount. A discount can be applied to the cart as a whole or to an item.") {
+    amount: Money! @doc(description:"The total MRP amount")
+}
+
+type MrpDiscounts @doc(description:"Defines an individual discount. A discount can be applied to the cart as a whole or to an item.") {
+    amount: Money! @doc(description:"The amount of the discount")
+}
+
+type TotalDiscounts @doc(description:"Total discount to the cart as a whole item.") {
+    amount: Money! @doc(description:"The amount of the total discount")
+}

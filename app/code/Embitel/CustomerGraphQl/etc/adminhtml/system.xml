@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="ebo_customer_export" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Ebo Customer</label>
+            <tab>embitel</tab>
+            <resource>Ibo_CustomerGraphQl::configuration</resource>
+            <group id="settings" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Settings</label>
+                <field id="is_enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="reciever_email" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Receiver Email</label>
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Schedule Expression</label>
+                    <comment>*/5 * * * * it should be in this format. this will every 5 minutes.</comment>
+                </field>
+            </group>
+            <group id="insurance" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Customer Insurance Details</label>
+                <field id="is_enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="reciever_email" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Receiver Email</label>
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Schedule Expression</label>
+                    <comment>*/5 * * * * it should be in this format. this will every 5 minutes.</comment>
+                </field>
+                <field id="record_in_hours" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Record in Hours</label>
+                    <comment>How many hours data needs to be sent.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

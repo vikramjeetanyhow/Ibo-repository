@@ -1,0 +1,24 @@
+# Home page graphql for fetching banner collection.
+type Query {
+    getHomeBanners (
+        display_zone: FilterTypeInput @doc(description: "Display Zone of banner like LOCAL, REGIONAL, NATIONAL."),
+        customer_group_id: String @doc(description: "Customer group id like B2B, B2C, B2P etc .")
+    ):HomeBanners @doc(description: "Get banner slider.") @resolver(class: "Embitel\\HomepageGraphQl\\Model\\Resolver\\HomeBanners")
+}
+
+type HomeBanners @doc(description: "The Banners object is the top-level object returned in a banner.") {
+    total_count: Int @doc(description: "The number of banners returned.")
+    items: [BannerItems] @doc(description: "An array of banners.")
+}
+
+type BannerItems {
+    title: String @doc(description: "Banner Title")
+    mobile_image: String @doc(description: "Mobile Image Url")
+    desktop_image: String @doc(description: "Desktop Image Url")
+    banner_type: String @doc(description: "Banner type eg category / product")
+    banner_cat_ids: String @doc(description: "Banner Category ids")
+    banner_id: String @doc(description: "Banner Id")
+    category_codes: String @doc(description: "IBO category ID") @resolver(class: "Embitel\\HomepageGraphQl\\Model\\Resolver\\CategoryIboIdResolver")
+    mobile_image_custom: String @doc(description: "Mobile Image Url")
+    desktop_image_custom: String @doc(description: "Desktop Image Url")
+}

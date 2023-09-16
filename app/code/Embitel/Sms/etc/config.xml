@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mobile_otp>
+        	<settings>
+        		<otp_format>num</otp_format>        		
+        		<otp_length>4</otp_length>
+        		<otp_message><![CDATA[{{var otp_code}} is your OTP code.]]></otp_message>
+        		<otp_expired>300</otp_expired>
+        		<otp_resend>30</otp_resend>
+        		<otp_max_resending_times>5</otp_max_resending_times>
+        		<otp_resend_block_time>600</otp_resend_block_time>       		
+                <invalid_otp>5</invalid_otp>              
+        	</settings>        	
+        </mobile_otp>
+    </default>
+</config>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/** Embitel TaxMaster xml
+ * @category  Embitel
+ * @package   Embitel_TaxMaster
+ * @author    Embitel
+ */
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Embitel_TaxMaster" setup_version="2.0.0">
+    </module>
+</config>

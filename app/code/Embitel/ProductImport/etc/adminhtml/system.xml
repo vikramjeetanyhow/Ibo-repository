@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="ebo" translate="label" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="0">
+            <class>separator-top</class>
+            <label>EBO Product Import</label>
+            <tab>embitel</tab>
+            <resource>Embitel_ProductImport::ebo_config</resource>
+            <group id="ebo_config" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>EBO Config</label>
+                <field id="cron_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="ebo_save_file_days" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Save Files, Days</label>                    
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Ebo Import History Cleanup Cron</label>
+                    <comment>0 0 * * * it should be in this format. this will run every night at midnight.</comment>
+                </field>
+                <field id="productimport_log_active" translate="label" type="select" sortOrder="102" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Log Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="publish_fields" translate="label" type="textarea" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Validate Publish Attributes While Product Create/Update</label>
+                    <comment>Add comma seperated attributes.</comment>
+                </field>
+            </group>
+            <group id="ebo_product_title" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>EBO Product Title Regenerate</label>
+                <field id="cron_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Time</label>
+                    <comment>0 0 * * * it should be in this format. this will run every night at midnight.</comment>
+                </field>
+                <field id="full_cron_status" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Complete Products Title Update Cron Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="full_cron_expression" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Complete Products Title Update Cron Time</label>
+                    <comment>0 0 * * * it should be in this format. this will run every night at midnight.</comment>
+                </field>
+                <field id="log_active" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Log Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title_from_category" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Create Title From Category</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="ebo_product_import" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>EBO Product Import Cron</label>
+                <field id="cron_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Time</label>
+                    <comment>0 0 * * * it should be in this format. this will run every night at midnight.</comment>
+                </field>
+                <field id="log_active" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Log Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="ebo_product_create" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>EBO Product Import</label>
+                <field id="ebo_grading_default_value" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>EBO Grading Values</label>
+                    <comment>Add comma seperated multiple values</comment>
+                </field>
+                <field id="replenishability_default_value" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Replenish Ability Store Values</label>
+                    <comment>Add comma seperated multiple values</comment>
+                </field>
+                <field id="current_available_stores" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Current Available Stores</label>
+                    <comment>Add comma seperated multiple values</comment>
+                </field>
+            </group>
+            <group id="ebo_product_publish" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>EBO Product Publish Cron</label>
+                <field id="cron_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Time</label>
+                    <comment>Example: 0 0 * * * (Run once a day at midnight).</comment>
+                </field>
+                <field id="cron_updated_hours" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Include SKUs Updated in Last Number of Hours</label>                    
+                </field>
+                <field id="cron_filter" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Filter Products</label>
+                    <source_model>Embitel\ProductImport\Model\Product\Attribute\Source\IsPublish</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="unpublish_lower_mrp" translate="label" type="select" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Unpublish Products If Selling Prices Higher than MRP</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="log_active" translate="label" type="select" sortOrder="32" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Log Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="send_consolidated_report" translate="label" type="select" sortOrder="35" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Send Consolidated Report</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="consolidated_report_cron" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Consolidated Report Cron Time</label>
+                    <comment>Example: 0 0 * * * (Run once a day at midnight).</comment>
+                </field>
+                <field id="consolidated_report_hours" translate="label" type="text" sortOrder="45" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Include SKUs Updated in Last Number of Hours</label>                    
+                </field>
+                <field id="consolidated_report_email" translate="label" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Send Consolidated Report To</label>
+                    <comment>Comma seperated email address list.</comment>
+                </field>
+                <field id="reset_publish_flag" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Reset Product Publish Flag While Price Update</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="ebo_product_enable" translate="label" type="text" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>EBO Product Enable Cron</label>
+                <field id="cron_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Time</label>
+                    <comment>Example: 0 0 * * * (Run once a day at midnight).</comment>
+                </field>
+                <field id="cron_updated_hours" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Include SKUs Updated in Last Number of Hours</label>                    
+                </field>
+                <field id="cron_filter_by_status" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Filter Products By Status</label>
+                    <source_model>Embitel\ProductImport\Model\Product\Attribute\Source\Status</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="disable_lower_mrp" translate="label" type="select" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Disable Products If Selling Prices Higher than MRP</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="log_active" translate="label" type="select" sortOrder="32" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Log Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="send_consolidated_report" translate="label" type="select" sortOrder="35" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Send Consolidated Report</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="consolidated_report_cron" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Consolidated Report Cron Time</label>
+                    <comment>Example: 0 0 * * * (Run once a day at midnight).</comment>
+                </field>
+                <field id="consolidated_report_hours" translate="label" type="text" sortOrder="45" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Include SKUs Updated in Last Number of Hours</label>                    
+                </field>
+                <field id="consolidated_report_email" translate="label" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Send Consolidated Report To</label>
+                    <comment>Comma seperated email address list.</comment>
+                </field>
+                <field id="reset_status_flag" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Reset Product Status Flag While Price Update</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="ebo_watermark" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>EBO Product Watermark Settings</label>
+                <field id="image_watermark_service_url" type="text" sortOrder="10" showInWebsite="0" showInStore="0" showInDefault="1" translate="label">
+                    <label>Water Mark Base Url</label>
+                </field>
+                <field id="image_watermark_upload_endpoint" type="text" sortOrder="10" showInWebsite="0" showInStore="0" showInDefault="1" translate="label">
+                    <label>Water Mark Upload Url</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

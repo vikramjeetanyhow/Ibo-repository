@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="catalog_category_save_after">
+        <observer name="ibo_navigation_category_sync" instance="Embitel\Catalog\Observer\CategorySaveAfter"/>
+    </event>
+    <event name="catalog_category_prepare_save">
+        <observer name="event_product_sku_map" instance="Embitel\Catalog\Observer\CategoryPrepareSaveObserver"/>
+    </event>
+  </config>

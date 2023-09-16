@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <!--   category hero slider primary table-->
+    <table name="category_hero_slider_primary" resource="default" engine="innodb" comment="Category Hero Slider Primary">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" identity="true" nullable="false" comment="Id"/>
+        <column xsi:type="varchar" name="identifier" nullable="false" comment="Identifier"/>
+        <column xsi:type="varchar" name="type" nullable="false" comment="Banner Type"/>        
+        <column xsi:type="int" name="status" padding="11" nullable="false" comment="Status"/>        
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+    <!--  category hero slider secondary table-->
+
+    <table name="category_hero_slider_secondary" resource="default" engine="innodb" comment="Category Hero Slider Secondary">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" identity="true" nullable="false" comment="Id"/>
+        <column xsi:type="int" name="slider_id" padding="10" unsigned="true" nullable="false" comment="Slider Id"/>
+        <column xsi:type="varchar" name="banner_name" nullable="false" comment="Banner Name"/>
+        <column xsi:type="varchar" name="title" nullable="false" comment="Title"/>        
+        <column xsi:type="varchar" name="label" nullable="false" comment="Label"/>  
+        <column xsi:type="varchar" name="link" nullable="false" comment="Link" disabled="true"/>
+        <column xsi:type="varchar" name="web_link" nullable="false" comment="Web Deep Link"/>
+        <column xsi:type="varchar" name="app_link" nullable="false" comment="App Deep Link"/>
+        <column xsi:type="int" name="status" padding="11" nullable="false" comment="Status"/>
+        <column xsi:type="int" name="sort_order" padding="11" nullable="false" comment="Sort Order"/>
+        <column xsi:type="varchar" name="small_image" nullable="false" comment="Small Image"/>        
+        <column xsi:type="varchar" name="large_image" nullable="false" comment="Large Image"/>        
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="CATEGORY_HERO_SLIDER_SECONDARY_SLIDER_ID_CATEGORY_HERO_SLIDER_PRIMARY_ID"
+        table="category_hero_slider_secondary" column="slider_id" referenceTable="category_hero_slider_primary" referenceColumn="id"
+        onDelete="CASCADE"/>
+    </table>
+
+</schema>

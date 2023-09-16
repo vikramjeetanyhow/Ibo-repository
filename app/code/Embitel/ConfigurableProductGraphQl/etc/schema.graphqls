@@ -1,0 +1,8 @@
+type ConfigurableProduct implements ProductInterface, PhysicalProductInterface, CustomizableProductInterface @doc(description: "ConfigurableProduct defines basic features of a configurable product and its simple product variants") {
+    product_by_esin(esin:String!): EsinSelection @doc(description: "Metadata for the specified configurable options selection by Isin/Esin number") @resolver(class: "Embitel\\ConfigurableProductGraphQl\\Model\\Resolver\\EsinMetadata")
+}
+
+type EsinSelection @doc(description: "Metadata corresponding to Esin.") {
+   variant: SimpleProduct @resolver(class: "Magento\\ConfigurableProductGraphQl\\Model\\Resolver\\Variant\\Variant") @doc(description: "Variant represented by the specified configurable options selection. It is expected to be null, until selections are made for each configurable option.")
+   attributes: [ConfigurableOptionAvailableForSelection!] @doc(description: "Configurable options available for further selection based on current selection.")
+}

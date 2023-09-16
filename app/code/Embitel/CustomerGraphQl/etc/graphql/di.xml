@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\CustomerGraphQl\Model\Resolver\CreateCustomer"
+                type="Embitel\CustomerGraphQl\Model\Resolver\CreateCustomer"/>
+    <preference for="Magento\CustomerGraphQl\Model\Customer\Address\ExtractCustomerAddressData"
+                type="Embitel\CustomerGraphQl\Model\Customer\Address\ExtractCustomerAddressData"/>
+    <!-- Validate input customer data -->
+    <type name="Embitel\CustomerGraphQl\Model\Customer\ValidateEboCustomerData">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="validateApprovalStatus" xsi:type="object">Embitel\CustomerGraphQl\Model\Customer\ValidateEboCustomerData\ValidateApprovalStatus</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- MDVA-33975_2.4.1.patch applied -->
+    <type name="Magento\GraphQl\Model\Query\ContextFactory">
+        <arguments>
+            <argument name="contextParametersProcessors" xsi:type="array">
+                <item name="add_customer_group_to_context" xsi:type="object">Embitel\CustomerGraphQl\Model\Context\AddCustomerGroupToContext</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Magento\CustomerGraphQl\Model\Resolver\CustomerAddresses"
+                type="Embitel\CustomerGraphQl\Model\Resolver\CustomerAddresses"/>
+    <preference for="Magento\CustomerGraphQl\Model\Resolver\CreateCustomerAddress"
+                type="Embitel\CustomerGraphQl\Model\Resolver\CreateCustomerAddress"/>
+    <preference for="Magento\CustomerGraphQl\Model\Resolver\UpdateCustomerAddress"
+                type="Embitel\CustomerGraphQl\Model\Resolver\UpdateCustomerAddress"/>
+    <preference for="Magento\CustomerGraphQl\Model\Customer\ExtractCustomerData"
+                type="Embitel\CustomerGraphQl\Model\Customer\ExtractCustomerData"/>
+    <preference for="Magento\GraphQl\Controller\GraphQl" type="Embitel\CustomerGraphQl\Controller\GraphQl" />
+    <preference for="Magento\Integration\Model\CustomerTokenService" type="Embitel\CustomerGraphQl\Model\CustomerTokenService" />
+    <preference for="Magento\CustomerGraphQl\Model\Customer\UpdateCustomerAccount"
+                type="Embitel\CustomerGraphQl\Model\Customer\UpdateCustomerAccount"/>
+    <preference for="Magento\CustomerGraphQl\Model\Context\AddCustomerGroupToContext"
+                type="Embitel\CustomerGraphQl\Model\Context\AddCustomerGroupToContext"/>
+    <preference for="Magento\CustomerGraphQl\Model\Resolver\RevokeCustomerToken"
+                type="Embitel\CustomerGraphQl\Model\Resolver\RevokeCustomerToken"/>
+</config>

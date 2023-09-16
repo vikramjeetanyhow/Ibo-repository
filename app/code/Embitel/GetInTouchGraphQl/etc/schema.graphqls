@@ -1,0 +1,8 @@
+type Mutation {
+    contactUsPost(customer_name: String!, email: String!, contactus_message: String!): contactUsResponse @resolver(class: "\\Embitel\\GetInTouchGraphQl\\Model\\Resolver\\GetInTouchItem") @doc(description:"Get in touch")
+}
+
+type contactUsResponse {
+    status: String @doc(description: "Status of the entry.")
+    message: String @doc(description: "Message return from the model.")
+}

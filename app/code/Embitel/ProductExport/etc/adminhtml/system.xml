@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="eboexport" translate="label" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>EBO Product Export</label>
+            <tab>embitel</tab>
+            <resource>Embitel_ProductExport::ebo_config</resource>
+            <group id="ebo_config" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>EBO Config</label>
+                 <field id="core_attributes" translate="label" type="textarea" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Product Export Core Attributes</label>
+                    <comment>Comma seperated core attribute list.</comment>
+                </field>
+                <field id="cron_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Run Time</label>
+                    <comment>0 0 * * * it should be in this format. this will run every night at midnight.</comment>
+                </field>
+                <field id="failure_hit_limit" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Failure Hit Limit</label>
+                    <comment>Hit limit for failure scenario.</comment>
+                </field>
+                <field id="log_status" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Log Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="attr_export" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Attribute wise export</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="full_export" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Full Dump export</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="full_dump_page_size" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Full Dump Page Size</label>
+                    <comment>Reduce Page Size to use less memory for php</comment>
+                </field>
+                <field id="cron_export_file_count" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Export File Count</label>
+                    <comment>Reduce Export File Count If Required</comment>
+                </field>
+            </group>
+            <group id="ebo_report_config" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Product Stocks Report Settings</label>
+                <field id="cron_status" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Report Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="receiver_emails" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Receiver Email Id's</label>
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cron Expression</label>
+                    <comment>0 4 * * * it should be in this format. this will run every night at midnight.</comment>
+                </field>
+                <field id="log_status" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Log Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="ebo_customer_report_config" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Customer Report Settings</label>
+                <field id="cron_status" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Report Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="receiver_emails" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Receiver Email Id's</label>
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cron Expression</label>
+                    <comment>0 4 * * * it should be in this format. this will run every night at midnight.</comment>
+                </field>
+                <field id="log_status" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Log Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="ebo_customer_report_config_additional" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Additional Customer Report Settings</label>
+                <field id="cron_status" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Report Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="receiver_emails" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Receiver Email Id's</label>
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cron Expression</label>
+                    <comment>0 4 * * * it should be in this format. this will run every night at midnight.</comment>
+                </field>
+                <field id="log_status" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Log Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="ebo_custom_script" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Custom Script Settings</label>
+                <field id="cron_status" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cron Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cron Expression</label>
+                    <comment>0/15 * * * * it should be in this format. this will run every night at midnight.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

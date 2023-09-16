@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <advanced_pricing>
+            <settings>
+                <is_enable>0</is_enable>
+                <reciever_email> </reciever_email>
+                <cron_settings>0 4 * * *</cron_settings>
+            </settings>
+        </advanced_pricing>
+    </default>
+</config>

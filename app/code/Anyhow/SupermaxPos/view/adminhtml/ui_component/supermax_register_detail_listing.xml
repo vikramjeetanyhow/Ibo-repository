@@ -1,0 +1,141 @@
+<!-- 
+    /**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */
+
+ -->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">supermax_register_detail_listing.supermax_register_detail_listing_data_source</item>
+            <item name="deps" xsi:type="string">supermax_register_detail_listing.supermax_register_detail_listing_data_source</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="array">
+                <item name="name" xsi:type="string">back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">supermax/register/index</item>
+                <item name="sortOrder" xsi:type="number">10</item>
+            </item>
+            <item name="export" xsi:type="string">Anyhow\SupermaxPos\Block\Adminhtml\RegisterExport</item>
+            <!-- <item name="export" xsi:type="array">
+                <item name="name" xsi:type="string">export</item>
+                <item name="label" xsi:type="string" translate="true">Export Register Details</item>
+                <item name="class" xsi:type="string">Anyhow\SupermaxPos\Block\Adminhtml\RegisterExport</item>
+                <item name="url" xsi:type="string">supermax/register/exportdetaildata</item>
+                <item name="sortOrder" xsi:type="number">20</item>
+            </item> -->
+        </item>
+        <item name="spinner" xsi:type="string">register_detail_columns</item>
+    </argument>
+	<dataSource name="supermax_register_detail_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">supermax_register_detail_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">pos_register_transaction_detail_id</argument>
+            <argument name="requestFieldName" xsi:type="string">pos_register_id</argument>
+			<argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="filter_url_params" xsi:type="array"> 
+                        <item name="pos_register_id" xsi:type="boolean">1</item>
+                    </item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">pos_register_transaction_detail_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+	<listingToolbar name="listing_top">
+		<bookmark name="bookmarks"/>
+		<columnsControls name="columns_controls" />
+		<filterSearch name="fulltext"/>
+		<filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+        </filters>
+		<paging name="listing_paging"/>
+    </listingToolbar>
+	<columns name="register_detail_columns">
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>pos_register_transaction_detail_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>55</resizeDefaultWidth>
+            </settings>
+        </selectionsColumn>
+        <column name="pos_register_transaction_detail_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="date_added">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Date Added</label>
+            </settings>
+        </column>
+        <column name="code">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Transaction Method</label>
+            </settings>
+        </column>
+        <column name="title">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Title</label>
+            </settings>
+        </column>
+        <column name="description">
+            <settings>
+                <!-- <filter>text</filter> -->
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Description</label>
+            </settings>
+        </column>
+        <column name="amount" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\RegisterDetailAmount">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Amount</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

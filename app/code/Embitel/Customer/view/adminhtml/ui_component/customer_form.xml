@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="buttons" xsi:type="array">
+            <item name="save" xsi:type="string">Embitel\Customer\Block\Adminhtml\NullButton</item>
+            <item name="save_and_continue" xsi:type="string">Embitel\Customer\Block\Adminhtml\NullButton</item>
+        </item>
+    </argument>
+</form>

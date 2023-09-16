@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="create_auto_register" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Auto Registration</label>
+            <tab>embitel</tab>
+            <resource>Embitel_Quote::configuration</resource>
+            <group id="auto_register" translate="label tooltip" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Settings</label>
+                 <field id="auto_register_status" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="0" >
+                    <label>Enable Auto Register</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+            </group>
+        </section>
+        <section id="ebo_customer_export" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="moengage_cron" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Moengage Cron</label>
+                <field id="is_enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="url" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>API URL</label>
+                </field>
+                <field id="api_key" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>API Key</label>
+                </field>
+                <field id="api_auth" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>API Auth</label>
+                </field>
+                <!--IBO offline-->
+                 <field id="offline_api_url" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Offline API URL</label>
+                </field>
+                <field id="offline_api_key" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Offline API Key</label>
+                </field>
+                <field id="offline_api_auth" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Offline API Auth</label>
+                </field>
+                <!--end IBO offline-->
+                <field id="cron_expression" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Schedule Expression</label>
+                    <comment>*/5 * * * * it should be in this format. this will every 5 minutes.</comment>
+                </field>
+                <field id="record_in_hours" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Record in Hours</label>
+                    <comment>How many hours data needs to be sent.</comment>
+                </field>
+                <field id="order_cron_expression" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Order Cron Schedule Expression</label>
+                    <comment>*/5 * * * * it should be in this format. this will every 5 minutes.</comment>
+                </field>
+                <field id="order_record_in_hours" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Order Record in Hours</label>
+                    <comment>How many hours data needs to be sent.</comment>
+                </field>
+            </group>
+        </section>
+
+        <section id="ibo_wallet" translate="label" type="text" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>IBO Wallet</label>
+            <tab>embitel</tab>
+            <resource>Embitel_Customer::configuration</resource>
+            <group id="ibo_wallet_api" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>IBO Wallet Configurations</label>
+                <field id="is_enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="wallet_token_api" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Token Creat API</label>
+                </field>
+                <field id="wallet_create_api" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Wallet Create API</label>
+                </field>
+                <field id="wallet_retry_attempt" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Max Wallet Create Attempt</label>
+                </field>
+                <field id="wallet_x_auth_token" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>X Auth Token</label>
+                </field>
+                <field id="is_cron_enable" translate="label" type="select" sortOrder="31" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cron Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cron_ibo_wallet_create" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Wallet Create Cron Schedule Expression </label>
+                    <comment>*/5 * * * * it should be in this format. this will every 5 minutes.</comment>
+                </field>
+            </group>
+        </section>
+
+    </system>
+</config>

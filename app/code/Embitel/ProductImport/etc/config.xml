@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+<default>
+    <ebo>
+        <ebo_config>
+            <ebo_save_file_days>7</ebo_save_file_days>
+            <cron_expression>0 0 * * *</cron_expression>
+        </ebo_config>
+        <ebo_product_title>
+            <cron_status>0</cron_status>
+            <cron_expression>0 * * * *</cron_expression>
+            <log_active>1</log_active>
+        </ebo_product_title>
+        <ebo_product_publish>
+            <cron_status>0</cron_status>
+            <cron_expression>*/30 * * * *</cron_expression>
+            <cron_updated_hours>1</cron_updated_hours>
+            <cron_filter></cron_filter>
+            <unpublish_lower_mrp>1</unpublish_lower_mrp>
+            <log_active>1</log_active>
+            <send_consolidated_report>1</send_consolidated_report>
+            <consolidated_report_cron>0 0 * * *</consolidated_report_cron>
+            <consolidated_report_hours>24</consolidated_report_hours>
+        </ebo_product_publish>
+        <ebo_product_enable>
+            <cron_status>0</cron_status>
+            <cron_expression>*/30 * * * *</cron_expression>
+            <cron_updated_hours>1</cron_updated_hours>
+            <cron_filter_by_status></cron_filter_by_status>
+            <disable_lower_mrp>1</disable_lower_mrp>
+            <log_active>1</log_active>
+            <send_consolidated_report>1</send_consolidated_report>
+            <consolidated_report_cron>0 0 * * *</consolidated_report_cron>
+            <consolidated_report_hours>24</consolidated_report_hours>
+        </ebo_product_enable>
+        <ebo_watermark>
+            <image_watermark_service_url>url</image_watermark_service_url>
+            <image_watermark_upload_endpoint>url</image_watermark_upload_endpoint>
+        </ebo_watermark>
+    </ebo>
+</default>
+</config>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">iboorders_oms_repush_grid.iboorders_oms_repush_grid_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <deps>
+            <dep>iboorders_oms_repush_grid.iboorders_oms_repush_grid_data_source</dep>
+        </deps>
+        <spinner>iboorders_oms_repush_grid_columns</spinner>
+    </settings>
+    <dataSource name="iboorders_oms_repush_grid_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">ibo_order_repush_history_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="Embitel\OrderStatus\Ui\DataProvider\OrderRepushDataProvider" name="iboorders_oms_repush_grid_data_source">
+            <settings>
+                <requestFieldName>ibo_order_repush_history_id</requestFieldName>
+                <primaryFieldName>ibo_order_repush_history_id</primaryFieldName>                      
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="iboorders_oms_repush_grid_columns">
+        <column name="ibo_order_repush_history_id">
+            <settings>
+                <sortable>false</sortable>
+                <label translate="true">History ID</label>
+            </settings>
+        </column>
+        <column name="admin_id">
+            <settings>
+                <sortable>false</sortable>
+                <label translate="true">Admin ID</label>
+            </settings>
+        </column>
+        <column name="admin_name">
+            <settings>
+                <sortable>false</sortable>
+                <label translate="true">Admin Name</label>
+            </settings>
+        </column>
+          <column name="admin_email">
+            <settings>
+                <sortable>false</sortable>
+                <label translate="true">Admin Email</label>
+            </settings>
+        </column>
+        <column name="order_numbers">
+            <settings>
+                <sortable>false</sortable>
+                <label translate="true">Order Numbers</label>
+            </settings>
+        </column>
+        <column name="date_added">
+            <settings>
+                <sortable>false</sortable>
+                <label translate="true">Date Added</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <!-- Create 'ah_supermax_pos_register' Table -->
+    <table name="ah_supermax_pos_register" resource="default" engine="innodb" comment="Supermax Pos Register Table">        
+        <column xsi:type="int" name="pos_register_id" padding="11" unsigned="true" nullable="false" identity="true" comment="Pos Register Id"/> 
+        <column xsi:type="varchar" name="name" length="100" nullable="false"  comment="Pos Register Name"/>
+        <column xsi:type="int" name="pos_user_id" padding="11" nullable="false" comment="Pos User Id"/>
+        <column xsi:type="int" name="status" padding="11" nullable="false" comment="Register Status"/>
+        <column xsi:type="int" name="reconciliation_status" padding="11" nullable="false" comment="Reconciliation Status"/>
+        <column xsi:type="varchar" name="close_note" length="255" nullable="true" comment="Pos Register Close Note"/>
+        <column xsi:type="decimal" name="head_cashier_cash_total" scale="4" precision="10" nullable="false" comment="Head Cashier Cash Total"/>
+        <column xsi:type="decimal" name="head_cashier_card_total" scale="4" precision="10" nullable="false" comment="Head Cashier Card Total"/>
+        <column xsi:type="decimal" name="head_cashier_custom_total" scale="4" precision="10" nullable="false" comment="Head Cashier Custom Total"/>
+        <column xsi:type="decimal" name="head_cashier_offline_total" scale="4" precision="10" nullable="false" comment="Head Cashier Offline Total"/>
+        <column xsi:type="decimal" name="head_cashier_wallet_total" scale="4" precision="10" nullable="false" comment="head_cashier_wallet_total"/>
+        <column xsi:type="decimal" name="head_cashier_emi_total" scale="4" precision="10" nullable="false" comment="Head Cashier EMI Total"/>
+        <column xsi:type="decimal" name="head_cashier_bank_deposit_total" scale="4" precision="10" nullable="false" comment="Head Cashier Bank Deposit Total"/>
+        <column xsi:type="decimal" name="head_cashier_pay_later_total" scale="4" precision="10" nullable="false" comment="Head Cashier Pay Later Total"/>
+        <column xsi:type="varchar" name="head_cashier_close_note" length="255" nullable="true" default="0" comment="Head Cashier Close Note"/>
+        <column xsi:type="datetime" name="date_open" comment="Date Open"/>
+        <column xsi:type="datetime" name="date_close" comment="Date Close"/>   
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="pos_register_id"/>
+        </constraint>              
+    </table>
+    <!-- Create 'ah_supermax_pos_terminals' Table -->
+    <table name="ah_supermax_pos_terminals" resource="default" engine="innodb" comment="Supermax Pos Terminal Table">        
+        <column xsi:type="int" name="pos_terminal_id" padding="11" unsigned="true" nullable="false" identity="true" comment="Pos Terminal Id"/> 
+        <column xsi:type="int" name="pos_outlet_id" padding="11" nullable="false" comment="Pos Outlet Id"/>        
+        <column xsi:type="varchar" name="title" length="255" nullable="false"  comment="Pos Terminal Title"/>
+        <column xsi:type="varchar" name="edc_type" length="100" nullable="false"  comment="EDC Device Type"/>
+        <column xsi:type="varchar" name="code" length="255" nullable="false"  comment="Pos Code"/>
+        <column xsi:type="varchar" name="edc_serial_no" length="255" nullable="false"  comment="EDC Serial Number"/>
+        <column xsi:type="varchar" name="pos_serial_no" length="255" nullable="false"  comment="POS Serial Number"/>
+        <column xsi:type="varchar" name="ezetap_app_key" length="255" nullable="false" comment="Ezetap App Key"/>
+        <column xsi:type="varchar" name="ezetap_username" length="255" nullable="false"  comment="Ezetap Username"/>
+        <column xsi:type="varchar" name="ezetap_device_id" length="255" nullable="false"  comment="Ezetap Device Id"/>
+        <column xsi:type="varchar" name="pinelabs_device_id" length="255" nullable="false"  comment="Pinelabs Device Id"/>
+        <column xsi:type="varchar" name="pinelabs_merchant_pos_code" length="255" nullable="false" comment="Pinelabs Merchant Pos Code"/>
+        <column xsi:type="varchar" name="pinelabs_allowed_mops" length="255" nullable="false"  comment="Pinelabs Allowed Mops"/>
+        <column xsi:type="int" name="status" padding="11" nullable="false" comment="Terminal Status"/>
+        <column xsi:type="int" name="receipt_thermal_status" padding="11" nullable="false" comment="Receipt Thermal"/>                 
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="pos_terminal_id"/>
+        </constraint>  
+    </table>            
+    <!-- Create 'ah_supermax_pos_outlet' Table -->
+    <table name="ah_supermax_pos_outlet" resource="default" engine="innodb" comment="Supermax Pos Outlet Table">        
+        <column xsi:type="int" name="pos_outlet_id" padding="11" unsigned="true" nullable="false" identity="true" comment="Pos Outlet Id"/> 
+        <column xsi:type="varchar" name="outlet_name" length="100" nullable="false"  comment="Outlet Name"/>
+        <column xsi:type="varchar" name="email" length="100"  nullable="false" comment="Email"/>
+        <column xsi:type="int" name="status" padding="11" nullable="false" comment="Status"/>
+        <column xsi:type="int" name="outlet_address_type" padding="11" nullable="false" comment="Outlet Address Type"/>
+        <column xsi:type="varchar" name="source_code" length="100" nullable="false" comment="Source Code"/>
+        <column xsi:type="int" name="pos_receipt_id" padding="11" nullable="false" comment="Pos Receipt Id"/>
+        <column xsi:type="varchar" name="product_assignment_basis" length="100" nullable="false" comment="Product Assignment Basis"/>
+        <column xsi:type="varchar" name="inventory_node" length="255" nullable="false" comment="Inventory Node"/>
+        <column xsi:type="varchar" name="store_wh_node" length="255" nullable="false" comment="Store WH Node"/>
+        <column xsi:type="varchar" name="ezetap_app_key" length="255" nullable="false" comment="Ezetap App Key" disabled="true"/>
+        <column xsi:type="varchar" name="store_id" length="255" nullable="false" comment="Store Id"/>
+        <column xsi:type="varchar" name="allowed_ips" length="500" nullable="false" comment="Allowed IPs"/>
+        <column xsi:type="int" name="receipt_thermal_status" padding="11" nullable="false" comment="Receipt Thermal"/>
+        <column xsi:type="int" name="online_payment_popup_status" padding="11" nullable="false" comment="Online Payment Popup Status"/>
+        <column xsi:type="varchar" name="display_payments" length="255" nullable="false" comment="Display Payment"/>
+        <column xsi:type="int" name="multi_lot_status" padding="11" nullable="false" comment="Multi-Lot / Multi-MRP Handling Status"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="pos_outlet_id"/>
+        </constraint>          
+    </table>
+    <!-- Create 'ah_supermax_pos_user_login_history' Table -->
+    <table name="ah_supermax_pos_user_login_history" resource="default" engine="innodb" comment="Supermax Pos User Login History Table">        
+        <column xsi:type="int" name="pos_user_login_id" padding="11" unsigned="true" nullable="false" identity="true" comment="Pos User Login Id"/> 
+        <column xsi:type="int" name="pos_user_id" padding="11" nullable="false" comment="POS User Id"/>
+        <column xsi:type="int" name="pos_terminal_id" padding="11" nullable="false" comment="POS Terminal Id"/>
+        <column xsi:type="int" name="status" padding="11" nullable="false" comment="Status"/>
+        <column xsi:type="int" name="is_forced" padding="11" nullable="true" comment="Status"/>
+        <column xsi:type="datetime" name="login_time" comment="Login Time"/>
+        <column xsi:type="datetime" name="logout_time" comment="Logout Time"/>   
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="pos_user_login_id"/>
+        </constraint>          
+    </table>
+    <!-- Create 'ah_supermax_pos_orders' Table -->
+    <table name="ah_supermax_pos_orders" resource="default" engine="innodb" comment="Supermax Pos Orders Table">        
+        <column xsi:type="int" name="pos_order_id" padding="11" unsigned="true" nullable="false" identity="true" comment="Pos Order Id"/> 
+        <column xsi:type="int" name="order_id" padding="11" nullable="false" comment="Order Id"/>
+        <column xsi:type="int" name="pos_user_id" padding="11" nullable="false" comment="POS User Id"/>
+        <column xsi:type="int" name="pos_outlet_id" padding="11" nullable="false" comment="POS Outlet Id"/>
+        <column xsi:type="int" name="pos_terminal_id" padding="11" nullable="false" comment="POS Terminal Id"/>
+        <column xsi:type="varchar" name="barcode" length="255" nullable="false" comment="Barcode"/>
+        <column xsi:type="varchar" name="payment_code" length="255" nullable="false" comment="Payment Code"/>
+        <column xsi:type="varchar" name="payment_method" length="255" nullable="false" comment="Payment Mathod"/>
+        <column xsi:type="varchar" name="payment_intent_id" length="255" nullable="false" comment="Payment Intent Id"/>
+        <column xsi:type="varchar" name="device_type" length="100" nullable="false" default="pos" comment="Device Type"/>
+        <column xsi:type="varchar" name="payment_device_mode" length="100" nullable="true" comment="Payment Device Mode"/>
+        <column xsi:type="int" name="sales_associate_1" padding="11" nullable="true" default="0" comment="Sales Associate 1"/>
+        <column xsi:type="int" name="sales_associate_2" padding="11" nullable="true" default="0" comment="Sales Associate 2"/>
+        <column xsi:type="text" name="payment_data" nullable="false" comment="Payment Data"/>
+        <column xsi:type="text" name="additional_data" nullable="false" comment="Additional Data"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="pos_order_id"/>
+        </constraint>  
+         <index referenceId="POS_OUTLET_ID" indexType="btree">
+            <column name="pos_outlet_id"/>
+        </index>
+        <index referenceId="POS_USER_ID" indexType="btree">
+            <column name="pos_user_id"/>
+        </index>  
+        <index referenceId="POS_TERMINAL_ID" indexType="btree">
+            <column name="pos_terminal_id"/>
+        </index>         
+    </table>
+
+     <table name="ah_supermax_pos_report" resource="default" engine="innodb" comment="Supermax Pos Report Table">        
+        <column xsi:type="int" name="pos_report_id" padding="11" unsigned="true" nullable="false" identity="true" comment="Pos Report Id"/> 
+        <column xsi:type="int" name="pos_register_id" padding="11" nullable="false" comment="POS Register Id"/>
+        <column xsi:type="int" name="pos_user_id" padding="11" nullable="false" comment="POS User Id"/>
+        <column xsi:type="varchar" name="pos_outlet_id" length="255" nullable="false" comment="POS Outlet Id"/>
+        <column xsi:type="int" name="pos_approver_id" padding="11" nullable="false" comment="POS Approver Id"/>
+        <column xsi:type="varchar" name="period" length="255" nullable="false" comment="Period"/>
+        <column xsi:type="varchar" name="from" length="255" nullable="false" comment="From Date"/>
+        <column xsi:type="varchar" name="to" length="255" nullable="false" comment="To Date"/>
+        <column xsi:type="varchar" name="type" length="100" nullable="false" comment="Type"/>
+        <column xsi:type="varchar" name="status" length="255" nullable="true" comment="Status"/>
+        <column xsi:type="varchar" name="payment_method" length="100" nullable="false" comment="Payment Method"/>
+        <column xsi:type="varchar" name="override_permission" length="100" nullable="false" comment="Override Permission"/>
+        <column xsi:type="varchar" name="filter" length="100" nullable="false" comment="Filter"/>
+        <column xsi:type="varchar" name="new_old" length="100" nullable="false" comment="New Old Report"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="pos_report_id"/>
+        </constraint>          
+    </table>
+
+    <!-- Create 'ah_supermax_pos_receipt_store' Table -->
+    <table name="ah_supermax_pos_receipt_store" resource="default" engine="innodb" comment="Supermax Pos Receipt Store Data Table">        
+        <column xsi:type="int" name="id" padding="11" unsigned="true" nullable="false" identity="true" comment="Id"/> 
+        <column xsi:type="int" name="receipt_id" padding="11" nullable="false" comment="Pos Receipt Id"/>
+        <column xsi:type="int" name="store_id" padding="11" nullable="false" comment="Store Id"/>
+        <column xsi:type="varchar" name="title" length="100" nullable="false" comment="Receipt Title"/>
+        <column xsi:type="text" name="header_details" nullable="false" comment="Receipt Header Details"/>
+        <column xsi:type="text" name="footer_details" nullable="false" comment="Receipt Footer Details"/>
+        <column xsi:type="varchar" name="seller_bank_info" length="255" nullable="false" comment="Seller Bank Details"/>
+        <column xsi:type="text" name="disclaimer" nullable="false" comment="Disclaimer"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>          
+    </table>
+
+    <!-- Create 'ah_supermax_pos_payment_pinelabs' Table -->
+    <table name="ah_supermax_pos_payment_pinelabs" resource="default" engine="innodb" comment="Supermax Pos Pinelabs Payment Table">        
+        <column xsi:type="int" name="pos_pinelabs_payment_id" padding="11" unsigned="true" nullable="false" identity="true" comment="Pos Pinelabs Payment ID"/> 
+        <column xsi:type="int" name="request_id" padding="11" nullable="false" comment="Request ID"/>
+        <column xsi:type="int" name="pos_outlet_id" padding="11" nullable="false" comment="Pos Outlet ID"/>
+        <column xsi:type="int" name="pos_user_id" padding="11" nullable="false" comment="Pos User ID"/>
+        <column xsi:type="int" name="order_id" padding="11" nullable="false" comment="Order ID"/>
+        <column xsi:type="text" name="status_check_info" nullable="false" comment="Check Transaction Status Response"/>
+        <column xsi:type="text" name="cancel_info" nullable="false" comment="Transaction Cancel Response"/>
+        <column xsi:type="datetime" name="date_added" comment="Date Added"/>
+        <column xsi:type="datetime" name="date_modified" comment="Date Modified"/>  
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="pos_pinelabs_payment_id"/>
+        </constraint>          
+    </table>
+
+    <!-- Update quote_item -->
+    <table name="quote_item">
+        <column xsi:type="text" name="lot_info" nullable="true" comment="lot_info"/>
+    </table>
+    <!-- Update sales_order_item -->
+    <table name="sales_order_item">
+        <column xsi:type="text" name="lot_info" nullable="true" comment="lot_info"/>
+    </table>
+
+    <!-- Create 'ah_supermax_pos_outlet_address' Table -->
+    <table name="ah_supermax_pos_outlet_address" resource="default" engine="innodb" comment="Supermax Pos Outlet Address Details Table">
+        <column xsi:type="int" name="pos_outlet_address_id" padding="11" nullable="false" identity="true" comment="Outlet Address Id"/>
+        <column xsi:type="int" name="parent_outlet_id" padding="11" nullable="false" comment="Outlet Id"/>
+        <column xsi:type="varchar" name="firstname" length="100" nullable="false" comment="First Name"/>
+        <column xsi:type="varchar" name="lastname" length="100" nullable="false" comment="Last Name"/>
+        <column xsi:type="varchar" name="company" length="225" nullable="true" comment="Company"/>
+        <column xsi:type="varchar" name="street" length="255" nullable="false" comment="Street"/>
+        <column xsi:type="varchar" name="city" length="100" nullable="false" comment="City"/>
+        <column xsi:type="varchar" name="country_id" length="100" nullable="false" comment="Country Id"/>
+        <column xsi:type="varchar" name="region" length="100" nullable="true" comment="region"/>
+        <column xsi:type="varchar" name="region_id" length="11" nullable="true" comment="region_id"/>
+        <column xsi:type="varchar" name="postcode" length="100" nullable="false" comment="Postcode"/>
+        <column xsi:type="varchar" name="telephone" length="100" nullable="true" comment="Telephone"/>
+        <column xsi:type="varchar" name="pan_no" length="20" nullable="true" comment="Outlet PAN No"/>
+        <column xsi:type="varchar" name="gstin" length="200" nullable="true" comment="Outlet GSTIN"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="pos_outlet_address_id"/>
+        </constraint>
+    </table>
+
+    <!-- Create 'ah_supermax_pos_payment_detail' Table -->
+    <table name="ah_supermax_pos_payment_detail" resource="default" engine="innodb" comment="Supermax Pos Payment Details Table">
+        <column xsi:type="int" name="pos_payment_id" padding="11" nullable="false" identity="true" comment="Pos Payment Id"/>
+        <column xsi:type="int" name="pos_order_id" padding="11" nullable="false" comment="Pos Order Id"/>
+        <column xsi:type="varchar" name="payment_method" length="255" nullable="false" comment="Payment Method"/>
+        <column xsi:type="varchar" name="payment_code" length="255" nullable="false" comment="Payment Code"/>
+        <column xsi:type="int" name="amount" padding="11" nullable="false" comment="Amount"/>
+        <column xsi:type="varchar" name="payment_intent_id" length="255" nullable="true" comment="Payment Intent Id"/>
+        <column xsi:type="varchar" name="amount_formatted" length="11" nullable="true" comment="Amount Formatted"/>
+        <column xsi:type="int" name="cash_paid" padding="11" nullable="true" comment="Cash Paid"/>
+        <column xsi:type="int" name="cash_change" padding="11" nullable="true" comment="Cash Change"/>        
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="pos_payment_id"/>
+        </constraint>
+    </table>
+
+    <!-- Create 'ah_supermax_pos_quote' Table -->
+    <table name="ah_supermax_pos_quote" resource="default" engine="innodb" comment="Supermax Pos Quote Table">
+        <column xsi:type="int" name="pos_quote_id" padding="11" nullable="false" identity="true" comment="Pos Quote Id"/>
+        <column xsi:type="int" name="quote_id" padding="11" nullable="false" comment="Quote Id"/>
+        <column xsi:type="int" name="pos_outlet_id" padding="11" nullable="false" comment="Pos Outlet Id"/>
+        <column xsi:type="int" name="pos_user_id" padding="11" nullable="false" comment="Pos User Id"/>
+        <column xsi:type="varchar" name="type" length="100" nullable="false" comment="Type"/> 
+        <column xsi:type="varchar" name="comment" length="255" nullable="false" comment="Comment"/> 
+        <column xsi:type="int" name="status" padding="11" nullable="false" comment="Status"/>
+        <column xsi:type="int" name="hold_time" padding="11" nullable="false" comment="Hold Time in Minutes"/>
+        <column xsi:type="text" name="additional_data" nullable="true" comment="Additional Data"/>
+        <column xsi:type="datetime" name="date_added" comment="Date Added"/>
+        <column xsi:type="datetime" name="date_modified" comment="Date Modified"/>       
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="pos_quote_id"/>
+        </constraint>
+        <index referenceId="MAGENTO_QUOTE_ID" indexType="btree">
+            <column name="quote_id"/>
+        </index>
+        <index referenceId="POS_OUTLET_ID" indexType="btree">
+            <column name="pos_outlet_id"/>
+        </index>
+        <index referenceId="POS_USER_ID" indexType="btree">
+            <column name="pos_user_id"/>
+        </index>
+    </table>
+
+    <!-- Create 'ah_supermax_pos_price_reductions' Table -->
+    <table name="ah_supermax_pos_price_reductions" resource="default" engine="innodb" comment="Supermax Pos Price Reduction Table">
+        <column xsi:type="int" name="pos_price_reduction_id" padding="11" nullable="false" identity="true" comment="Price Reduction ID"/>
+        <column xsi:type="varchar" name="title" length="255" nullable="false" comment="Price Reduction Title"/>
+        <column xsi:type="varchar" name="max_capacity" length="255" nullable="false" comment="Maximum Capacity"/>        
+        <column xsi:type="int" name="override_type" padding="11" nullable="false" default="1" comment="Override Type"/>
+        <column xsi:type="int" name="status" padding="11" nullable="false" comment="status"/>        
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="pos_price_reduction_id"/>
+        </constraint>
+    </table>
+
+    <!-- Create 'ah_supermax_pos_user_override_details' Table -->
+    <table name="ah_supermax_pos_user_override_details" resource="default" engine="innodb" comment="Supermax Pos Price Reduction Table">
+        <column xsi:type="int" name="pos_user_override_detail_id" padding="11" nullable="false" identity="true" comment="Pos User Override Detail ID"/>
+        <column xsi:type="int" name="parent_pos_user_override_id" padding="11" nullable="false" comment="Pos User Override ID"/>
+        <column xsi:type="int" name="approver_id" padding="11" nullable="false" comment="Pos Approver ID"/>        
+        <column xsi:type="int" name="product_id" padding="11" nullable="false" default="1" comment="Product ID"/>
+        <column xsi:type="varchar" name="sku" length="255" nullable="false" default="1" comment="Product SKU"/>
+        <column xsi:type="varchar" name="name" length="255" nullable="false" default="1" comment="Product Name"/>
+        <column xsi:type="int" name="pos_price_reduction_id" padding="11" nullable="false" comment="Price Override ID"/> 
+        <column xsi:type="varchar" name="price_reduction_title" length="255" nullable="false" default="1" comment="Price Override Title"/>
+        <column xsi:type="decimal" name="original_price" scale="2" precision="10" nullable="false" comment="Product Original Price"/>
+        <column xsi:type="decimal" name="overrided_price" scale="2" precision="10" nullable="false" comment="Product Overrided Price"/>
+        <column xsi:type="decimal" name="discount" scale="2" precision="10" nullable="false" comment="Discount"/>
+        <column xsi:type="varchar" name="discount_type" length="255" nullable="false" default="1" comment="Discount Type"/>
+        <column xsi:type="varchar" name="permission_type" length="255" nullable="false" default="1" comment="Permission Type"/>
+        <column xsi:type="decimal" name="overrided_delivery_price" scale="2" precision="10" nullable="false" comment="Delivery Overrided Price"/>
+        <column xsi:type="decimal" name="original_delivery_price" scale="2" precision="10" nullable="false" comment="Delivery Original Price"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="pos_user_override_detail_id"/>            
+        </constraint>
+    </table>
+
+    <!-- Create 'ah_supermax_pos_user' Table -->
+    <table name="ah_supermax_pos_user" resource="default" engine="innodb" comment="Supermax Pos User Table">        
+        <column xsi:type="int" name="pos_user_id" padding="11" unsigned="true" nullable="false" identity="true" comment="Pos User Id"/> 
+        <column xsi:type="varchar" name="username" length="255" nullable="false"  comment="User Name"/>
+        <column xsi:type="varchar" name="password" length="255"  nullable="false" comment="Password"/>
+        <column xsi:type="varchar" name="firstname" length="255"  nullable="false" comment="Firstname"/>
+        <column xsi:type="varchar" name="lastname" length="255"  nullable="false" comment="Lastname"/>
+        <column xsi:type="varchar" name="email" length="255"  nullable="false" comment="Email"/>
+        <column xsi:type="varchar" name="phone" length="255"  nullable="false" comment="Phone"/>
+        <column xsi:type="int" name="status" padding="11" nullable="false" comment="Status"/>
+        <column xsi:type="int" name="pos_outlet_id" padding="11" nullable="false" comment="Pos Outlet Id"/>
+        <column xsi:type="int" name="store_view_id" padding="11" nullable="false" comment="Store View Id"/>
+        <column xsi:type="int" name="pos_user_role_id" padding="11" nullable="false" comment="Pos User Role Id"/>
+        <column xsi:type="datetime" name="password_reset_date" comment="Password Reset Date"/>  
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="pos_user_id"/>
+        </constraint>       
+        <index referenceId="POS_OUTLET_ID" indexType="btree">
+            <column name="pos_outlet_id"/>
+        </index>
+        <index referenceId="POS_USER_ROLE_ID" indexType="btree">
+            <column name="pos_user_role_id"/>
+        </index>   
+    </table>
+    <!-- Create 'ah_supermax_pos_customer' Table -->
+    <table name="ah_supermax_pos_customer" resource="default" engine="innodb" comment="Supermax Pos Customer Table">        
+        <column xsi:type="int" name="pos_customer_id" padding="11" unsigned="true" nullable="false" identity="true" comment="Pos Customer Id"/> 
+        <column xsi:type="int" name="customer_id" padding="11" nullable="false" comment="Customer Id"/>
+        <column xsi:type="int" name="pos_user_id" padding="11" nullable="false" comment="Pos User Id"/>
+        <column xsi:type="int" name="pos_outlet_id" padding="11" nullable="false" comment="Pos Outlet Id"/>
+        <column xsi:type="varchar" name="customer_referral_title" length="255" nullable="true" comment="Customer referral Title"/>        
+        <column xsi:type="varchar" name="customer_referral_Phone" length="200" nullable="true" comment="Customer referral Phone"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="pos_customer_id"/>
+        </constraint>          
+    </table>
+
+    <!-- Create 'ah_supermax_pos_customer_referral' Table -->
+    <table name="ah_supermax_pos_customer_referral" resource="default" engine="innodb" comment="Supermax Pos Customer Referral Table">        
+        <column xsi:type="int" name="pos_referral_id" padding="11" unsigned="true" nullable="false" identity="true" comment="Pos Customer Referral ID"/> 
+        <column xsi:type="varchar" name="referral_title" length="100" nullable="false" comment="Customer Referral Title"/>        
+        <!-- <column xsi:type="varchar" name="referral_code" length="255" nullable="false" comment="Customer Referral Code"/> -->
+        <column xsi:type="int" name="status" padding="11" nullable="false" comment="Status"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="pos_referral_id"/>
+        </constraint>          
+    </table>
+
+    <table name="ah_supermax_old_sales_order" resource="default" engine="innodb" comment="Supermax Pos Customer Referral Table">        
+        <column xsi:type="int" name="id" padding="11" unsigned="true" nullable="false" identity="true" comment="ID"/> 
+        <column xsi:type="varchar" name="show_by" length="100" nullable="false" comment="Month"/> 
+        <column xsi:type="varchar" name="outlet_id" length="100" nullable="false" comment="Old Outlet Id"/> 
+        <column xsi:type="varchar" name="complete_path" length="100" nullable="false" comment=" Old Sales Report"/> 
+                 
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>          
+    </table>
+</schema>

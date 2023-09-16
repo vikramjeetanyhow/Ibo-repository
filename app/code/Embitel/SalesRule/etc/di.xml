@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+  <preference for="Magento\SalesRule\Model\Utility" type="Embitel\SalesRule\Model\Utility"/>
+  <!-- MDVA-33975_2.4.1.patch applied -->
+  <preference for="Magento\SalesRule\Model\Validator" type="Embitel\SalesRule\Model\Validator"/>
+  <preference for="Magento\SalesRule\Model\Rule\Condition\Product\Subselect" type="Embitel\SalesRule\Model\Rule\Condition\Product\SubselectExtended"/>
+  <preference for="Magento\SalesRule\Model\Rule\Action\Discount\ByPercent" type="Embitel\SalesRule\Model\Rule\Action\Discount\ByPercent"/>
+  <type name="Embitel\SalesRule\Model\Rule\Condition\ChannelInfo">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="form_name" xsi:type="string">sales_rule_form</item>
+            </argument>
+        </arguments>
+</type>
+    <type name="Embitel\SalesRule\Model\Rule\Condition\PromotionalReferral">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="form_name" xsi:type="string">sales_rule_form</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Magento\SalesRule\Controller\Adminhtml\Promo\Quote\Save" type="Embitel\SalesRule\Model\Promo\Quote\Save"/>
+    <!-- MDVA-40401.patch applied -->
+    <type name="\Magento\Quote\Model\QuoteManagement">
+        <plugin name="coupon_uses_increment_plugin" disabled="true" />
+        <plugin name="coupon_uses_increment_plugin_patch" type="Embitel\SalesRule\Plugin\CouponUsagesIncrement" sortOrder="20"/>
+    </type>
+</config>

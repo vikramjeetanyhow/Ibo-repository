@@ -1,0 +1,19 @@
+<config>
+    <group id="ebo_exports">
+        <job name="ebo_product_export" instance="Embitel\ProductExport\Cron\ProductExport" method="execute">
+            <config_path>eboexport/ebo_config/cron_expression</config_path>
+        </job>
+        <job name="ebo_product_export_report" instance="Embitel\ProductExport\Cron\ProductExport" method="reportExecute">
+            <config_path>eboexport/ebo_report_config/cron_expression</config_path>
+        </job>
+        <job name="ebo_customer_export_report" instance="Embitel\ProductExport\Cron\ProductExport" method="customerReportExecute">
+            <config_path>eboexport/ebo_customer_report_config/cron_expression</config_path>
+        </job>
+        <job name="ebo_customer_export_report_additional" instance="Embitel\ProductExport\Cron\ProductExport" method="customerReportAdditionalExecute">
+            <config_path>eboexport/ebo_customer_report_config_additional/cron_expression</config_path>
+        </job>
+        <job name="ebo_custom_script" instance="Embitel\ProductExport\Cron\ProductExport" method="scriptExecute">
+            <config_path>eboexport/ebo_custom_script/cron_expression</config_path>
+        </job>
+    </group>
+</config>

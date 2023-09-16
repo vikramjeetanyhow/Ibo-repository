@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   IBO
+ * @package    Ibo_ProductUpdate
+ * @author     hitendra.badiani@embitel.com
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ibo_ProductUpdate::import" title="IBO Subclass Import" module="Ibo_ProductUpdate" sortOrder="100" parent="Magento_Backend::system_convert" action="ibo_productupdate/import" resource="Ibo_ProductUpdate::import"/>
+        <add id="Ibo_ProductUpdate::dimension" title="IBO Package Dimension Import" module="Ibo_ProductUpdate" sortOrder="100" parent="Magento_Backend::system_convert" action="ibo_productupdate/dimension" resource="Ibo_ProductUpdate::dimension"/>
+    </menu>
+</config>

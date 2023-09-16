@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\GraphQl\Model\Query\ContextFactory">
+        <arguments>
+            <argument name="contextParametersProcessors" xsi:type="array">
+                <item name="add_price_zone_to_context" xsi:type="object">Ibo\RegionalPricing\Model\Context\AddPriceZoneToContext</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\GraphQl\Controller\HttpRequestProcessor">
+        <arguments>
+            <argument name="graphQlHeaders" xsi:type="array">
+                <item name="Price-Zone" xsi:type="object">Ibo\RegionalPricing\Controller\HttpHeaderProcessor\PriceZoneProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

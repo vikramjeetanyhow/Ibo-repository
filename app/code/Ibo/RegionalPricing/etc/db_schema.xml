@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="catalog_product_entity_tier_price">
+       <column xsi:type="varchar" name="customer_zone" nullable="true" length="255" comment="comment" />
+       <column xsi:type="varchar" name="is_defined_price" nullable="false" length="255" default="DEFINED" comment="comment" />
+       <constraint xsi:type="unique" referenceId="UNQ_E8AB433B9ACB00343ABB312AD2FAB087" disabled="1">
+            <column name="entity_id"/>
+            <column name="all_groups"/>
+            <column name="customer_group_id"/>
+            <column name="qty"/>
+            <column name="website_id"/>
+        </constraint>
+       <constraint xsi:type="unique" referenceId="TIER_PRICE_CUSTOMER_ZONE">
+       		<column name="entity_id"/>
+            <column name="all_groups"/>
+            <column name="customer_group_id"/>
+            <column name="qty"/>
+            <column name="website_id"/>
+            <column name="customer_zone"/>
+        </constraint>
+    </table>
+</schema>

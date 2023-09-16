@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+	    <banner_cate>
+	        <cat_config>
+	        	<banner_count>5</banner_count>
+	        </cat_config>
+	    </banner_cate>    
+	</default>
+</config>

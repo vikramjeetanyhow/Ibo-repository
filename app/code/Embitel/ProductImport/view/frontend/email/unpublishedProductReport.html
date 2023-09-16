@@ -1,0 +1,15 @@
+<!--@subject {{trans "Unpublished Product Report"}} @-->
+
+{{template config_path="design/email/header_template"}}
+<table style="float:left; margin-right: 10px" class="fue-abc-items">
+    <tr>
+        <td>
+            <div>
+                <div class="greeting">Hi,</div>
+                {{trans "Please find the attached consolidated report for the unpublished products in last "}} {{var hours}} {{trans " hours."}}
+                <p>{{trans "Regards"}}</p>
+            </div>
+        </td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}

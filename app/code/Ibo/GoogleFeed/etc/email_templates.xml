@@ -1,0 +1,17 @@
+<config
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="google_feed_generation"
+              label="Google Feed Generation Report"
+              file="google_feed_generation.html"
+              type="html"
+              module="Ibo_GoogleFeed"
+              area="frontend"
+    />
+    <template id="offerid_csv_generation"
+              label="Offer-id CSV Generation Report"
+              file="offerid_csv_generation.html"
+              type="html"
+              module="Ibo_GoogleFeed"
+              area="frontend"
+    />
+</config>

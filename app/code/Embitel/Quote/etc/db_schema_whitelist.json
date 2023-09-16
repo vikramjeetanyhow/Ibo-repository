@@ -1,0 +1,13 @@
+{
+    "quote_item": {
+        "column": {
+            "ebo_inventory_flag": true
+        }
+    },    
+    "quote": {
+        "column": {
+            "promise_id": true,
+            "promise_options": true
+        }
+    }
+}

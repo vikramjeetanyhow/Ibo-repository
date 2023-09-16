@@ -1,0 +1,29 @@
+{
+    "oodo_priceimport": {
+        "column": {
+            "price_id": true,
+            "offer_id": true,
+            "price_group": true,
+            "price_type": true,
+            "customer_zone": true,
+            "min_quantity": true,
+            "price_without_gst": true,
+            "created_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "oodo_price_import": {
+        "column": {
+            "price_id": true,
+            "offer_id": true,
+            "base_price_data": true,
+            "tier_prices_data": true,
+            "created_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

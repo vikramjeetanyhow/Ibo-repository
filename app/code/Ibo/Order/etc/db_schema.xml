@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+   <table name="sales_order_partner" resource="sales" engine="innodb" comment="Sales Order push 3rd party partner">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="parent_id" unsigned="true" nullable="true" identity="false"
+                comment="Parent ID"/>
+        <column xsi:type="varchar" name="partner_type" nullable="true" length="255" comment="Order info to partner"/>
+        <column xsi:type="int" name="status_flag" unsigned="false" nullable="true" identity="false"
+                comment="Order push status flag"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="SALES_ORDER_PARTNER_PARENT_ID_SALES_ORDER_ENTITY_ID"
+                    table="sales_order_partner" column="parent_id" referenceTable="sales_order"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <index referenceId="SALES_ORDER_PARTNER_PARENT_ID" indexType="btree">
+            <column name="parent_id"/>
+        </index>
+        <index referenceId="SALES_ORDER_PARTNER_PARTNER_TYPE_STATUS_FLAG" indexType="btree">
+            <column name="partner_type"/>
+            <column name="status_flag"/>
+        </index>
+    </table>
+   
+</schema>

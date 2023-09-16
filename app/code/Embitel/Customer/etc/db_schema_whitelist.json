@@ -1,0 +1,9 @@
+{
+    "customer_entity": {
+        "column": {
+            "mobilenumber": true,
+            "sales_rep_name": true,
+            "sales_rep_number": true
+        }
+    }
+}

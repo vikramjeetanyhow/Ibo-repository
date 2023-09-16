@@ -1,0 +1,28 @@
+{
+    "embitel_banner": {
+        "column": {
+            "banner_id": true,
+            "banner_type": true,
+            "customer_group": true,
+            "cat_ids": true,
+            "products_sku": true,
+            "title": true,
+            "mobile_image": true,
+            "desktop_image": true,
+            "from_date_time": true,
+            "to_date_time": true,
+            "created_at": true,
+            "banner_position": true,
+            "status": true,
+            "attribute_ids": true,
+            "display_zone": true
+        },
+        "index": {
+            "EMBITEL_BANNER_BANNER_ID": true,
+            "EMBITEL_BANNER_BANNER_POSITION": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

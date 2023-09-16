@@ -1,0 +1,16 @@
+type Query
+{
+    PostCodeGraphql (
+        pincode: String @doc(description: "pincode")
+         state: String @doc(description: "state Type")
+         city: String @doc(description: "city name")
+         region_id: String @doc(description: "region Id")
+    ): PostCodeGraphqlOutput @resolver(class: "Embitel\\PostCode\\Model\\Resolver\\PostCodeGraphql") @doc(description:"Custom Module Datapassing")
+}
+type PostCodeGraphqlOutput
+{
+    pincode: String
+    state: String
+    city: String
+    region_id: String
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="pincode" resource="default" engine="innodb" comment="Pincode Table">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="pincode" nullable="false" comment="Pincode"/>
+        <column xsi:type="varchar" name="statename" nullable="false" length='64' comment="State Name"/>
+        <column xsi:type="varchar" name="city" nullable="false" length='64' comment="City"/>
+        <column xsi:type="varchar" name="districtname" nullable="false" length='64' comment="District Name"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="INDEX_PINCODE" indexType="btree">
+            <column name="pincode"/>
+        </index>
+    </table>
+</schema>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Embitel\OodoPriceImport\Api\Data\OodoPriceInterface" type="Embitel\OodoPriceImport\Model\OodoPrice" />
+    <preference for="Embitel\OodoPriceImport\Api\Data\OodoPriceDataInterface" type="Embitel\OodoPriceImport\Model\OodoPriceData" />
+    <preference for="Embitel\OodoPriceImport\Api\PriceRepositoryInterface" type="Embitel\OodoPriceImport\Model\PriceRepository" />
+</config>

@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+	<group id="full_fillment_order">
+		<job instance="Embitel\OrderStatus\Cron\OrderProcess" method="execute" name="Embitel_OrderStatus_cron">
+			<schedule>* * * * *</schedule>
+		</job>
+	</group>
+    <group id="default">
+        <job name="embitel_cancel_fail_orders" instance="Embitel\OrderStatus\Cron\UpdateOrderStatus" method="execute" >
+            <config_path>Order_success_status/order_cancel_cron/cron_expression</config_path>
+        </job>
+    </group>
+    <group id="sales_order_report">
+        <job instance="Embitel\OrderStatus\Cron\OrderReport" method="execute" name="Embitel_OrderReport_cron">
+            <config_path>email_notification/order_report_cron/cron_expression</config_path>
+        </job>
+    </group>
+</config>

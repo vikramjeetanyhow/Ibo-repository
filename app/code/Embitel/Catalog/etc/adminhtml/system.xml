@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="cate" translate="label" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="0">
+            <class>separator-top</class>
+            <label>Category Tree Update</label>
+            <tab>embitel</tab>
+            <resource>Embitel_Catalog::cat_config</resource>
+            <group id="cat_config" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Category Tree Cron Config</label>
+                <field id="cron_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>                
+                <field id="cron_expression" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Schedule Expression</label>
+                    <comment>0 0 * * * it should be in this format. this will run every night at midnight.</comment>
+                </field>
+                <field id="catupdate_log_active" translate="label" type="select" sortOrder="102" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Log Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="exclude_cagegory" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Select Exclude Category</label>                    
+                    <source_model>Embitel\Catalog\Model\Config\Source\Category</source_model>
+                </field>
+            </group>
+            <group id="ibo_cat_config" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>IBO Catalog Service</label>
+                <field id="generate_token_api" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Generate Token API</label>
+                </field>
+                <field id="x_auth_token" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>x-auth-token</label>
+                </field>
+                <field id="create_merch_category_api" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Create Merchandising Category API</label>
+                </field>                
+                <field id="create_category_api" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Create Category API</label>
+                </field>                
+                <field id="update_publish_status_api" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Update Category Publish Status API</label>
+                </field>
+                <field id="create_brand_api" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Create Brand API</label>
+                </field>                
+                <field id="update_brand_publish_status_api" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Update Brand Publish Status API</label>
+                </field>
+                <field id="top_category_api" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Top Category API</label>
+                </field>                
+                <field id="top_brands_api" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Brand Category</label>
+                </field>
+                <field id="x_channel_id" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>x-channel-id</label>
+                </field>
+                <field id="cron_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Sync Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>                
+                <field id="cat_sync_log_active" translate="label" type="select" sortOrder="102" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Log Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+        <section id="media" translate="label" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="0">
+            <class>separator-top</class>
+            <label>Catalog Image Resize</label>
+            <tab>embitel</tab>
+            <resource>Embitel_Catalog::prod_image</resource>
+            <group id="prod_image" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Product Image Resize </label>
+                <field id="resize" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Disable Resize </label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

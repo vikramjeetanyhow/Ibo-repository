@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="quote_item">
+        <column xsi:type="smallint" name="ebo_inventory_flag" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Is available for delivery"/>
+    </table>
+    <table name="quote">
+        <column xsi:type="varchar" name="promise_id" nullable="true" comment="Fullfillment promise id"/>
+        <column xsi:type="text" name="promise_options" nullable="true" comment="Fullfillment promise options"/>
+        <column xsi:type="text" name="delivery_group" nullable="true" comment="Fullfillment delivery group"/>
+        <column xsi:type="varchar" name="postal_code" nullable="true" comment="Customer given postal code in app"/>
+        <column xsi:type="varchar" name="promise_created_at" nullable="true" comment="Promise created date"/>
+        <column xsi:type="varchar" name="promise_expires_at" nullable="true" comment="Promise expires at"/>
+        <column xsi:type="varchar" name="channel" nullable="true" default="online" comment="Quote created channel(online/store)"/>
+        <column xsi:type="varchar" name="channel_info" nullable="true" comment="Quote created channel info(device specific source)"/>
+        <column xsi:type="timestamp" name="shipping_update_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        <column xsi:type="timestamp" name="shipping_received_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Received At"/>
+        <column xsi:type="varchar" name="promise_shipping_amount" nullable="false" default="0" comment="Shipping cost from promise"/>
+        <column xsi:type="text" name="additional_data" nullable="true" comment="Additional Data"/>
+    </table>
+    <table name="quote_address">
+        <column xsi:type="varchar" name="landmark" nullable="true" comment="landmark "/>
+    </table>
+    <table name="sales_order_address">
+        <column xsi:type="varchar" name="landmark" nullable="true" comment="landmark"/>
+    </table>
+    <table name="sales_order">
+        <column xsi:type="varchar" name="promise_id" nullable="true" comment="promise id"/>
+        <column xsi:type="text" name="promise_options" nullable="true" comment="promise options"/>
+        <column xsi:type="smallint" name="oms_status_flag" unsigned="false" nullable="false" identity="false"
+          default="0" comment="After Place order status"/>
+        <column xsi:type="smallint" name="moengage_status_flag" unsigned="false" nullable="false" identity="false"
+          default="0" comment="After Place order status"/>
+          <column xsi:type="text" name="delivery_group" nullable="true" comment="Fullfillment delivery group"/>
+          <column xsi:type="varchar" name="promise_created_at" nullable="true" comment="Promise created date"/>
+          <column xsi:type="varchar" name="promise_expires_at" nullable="true" comment="Promise expires at"/>
+          <column xsi:type="smallint" name="tax_incl_in_promo" unsigned="false" nullable="false" identity="false"
+          default="0" comment="Promotion including tax"/>
+          <column xsi:type="smallint" name="tax_incl_in_item" unsigned="false" nullable="false" identity="false"
+          default="0" comment="product including tax"/>
+          <column xsi:type="varchar" name="order_channel" nullable="false" comment="Order Channel" default="ONLINE" />
+          <column xsi:type="varchar" name="order_channel_info" nullable="false" comment="Order Channel Info" default="AND" />
+          <column xsi:type="varchar" name="executive_id" nullable="true" comment="Executive id"/>
+        <column xsi:type="text" name="additional_data" nullable="true" comment="Additional Data"/>
+    </table>
+
+</schema>

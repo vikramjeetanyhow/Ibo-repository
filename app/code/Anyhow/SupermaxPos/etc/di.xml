@@ -1,0 +1,668 @@
+<?xml version="1.0"?>
+
+<!-- 
+/**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */
+ -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+  
+    <preference for="Anyhow\SupermaxPos\Api\CrosPosInterface" type="Anyhow\SupermaxPos\Model\CrosPos"/>
+
+    <!-- For Supermax POS Login API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\LoginInterface" type="Anyhow\SupermaxPos\Model\Supermax\Login" />
+        
+    <!-- For Supermax POS Connection API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\ConnectionInterface" type="Anyhow\SupermaxPos\Model\Supermax\Connection" />
+        
+    <!-- For Supermax POS Configuration API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\ConfigurationInterface" type="Anyhow\SupermaxPos\Model\Supermax\Configuration" />
+        
+    <!-- For Supermax POS All Products API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\AllProductsInterface" type="Anyhow\SupermaxPos\Model\Supermax\Data\AllProducts" />
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\Data\ProductInterface" type="Anyhow\SupermaxPos\Model\Supermax\Product" />
+        
+    <!-- For Supermax POS Tax API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\TaxInterface" type="Anyhow\SupermaxPos\Model\Supermax\Tax" />
+
+    <!-- For Supermax POS Country API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\CountryInterface" type="Anyhow\SupermaxPos\Model\Supermax\Country" />
+
+    <!-- For Supermax POS User API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\UserInterface" type="Anyhow\SupermaxPos\Model\Supermax\User" />
+
+    <!-- For Supermax POS Currency API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\CurrencyInterface" type="Anyhow\SupermaxPos\Model\Supermax\Currency" />
+
+    <!-- For Supermax POS Customer API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\AllCustomersInterface" type="Anyhow\SupermaxPos\Model\Supermax\AllCustomers" />
+
+    <!-- For Supermax POS Customer Address API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\CustomerAddressInterface" type="Anyhow\SupermaxPos\Model\Supermax\CustomerAddress" />
+
+    <!-- For Supermax POS All Order Status API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\AllOrderStatusInterface" type="Anyhow\SupermaxPos\Model\Supermax\AllOrderStatus" />
+
+    <!-- For Supermax POS All Categories API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\AllCategoriesInterface" type="Anyhow\SupermaxPos\Model\Supermax\AllCategories" />
+
+    <!-- For Supermax POS All Popular Products API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\AllPopularProductsInterface" type="Anyhow\SupermaxPos\Model\Supermax\AllPopularProducts" />
+
+    <!-- For Supermax POS Create Customer API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\CreateCustomerInterface" type="Anyhow\SupermaxPos\Model\Supermax\CreateCustomer" />
+
+    <!-- For Supermax POS Create Customer Address API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\CreateCustomerAddressInterface" type="Anyhow\SupermaxPos\Model\Supermax\CreateCustomerAddress" />
+
+    <!-- For Supermax POS Create Order API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\CreateOrderInterface" type="Anyhow\SupermaxPos\Model\Supermax\CreateOrder" />
+
+    <!-- For Supermax POS Get Order API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\GetOrdersInterface" type="Anyhow\SupermaxPos\Model\Supermax\GetOrders" />
+    
+    <!-- For Supermax POS Delete Connection API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\DeleteConnectionInterface" type="Anyhow\SupermaxPos\Model\Supermax\DeleteConnection" />
+
+    <!-- For Supermax POS Product Connection Update API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\ProductConnectionUpdateInterface" type="Anyhow\SupermaxPos\Model\Supermax\ProductConnectionUpdate" />
+
+    <!-- For Supermax POS Create Register API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\CreateRegisterInterface" type="Anyhow\SupermaxPos\Model\Supermax\CreateRegister" />
+
+    <!-- For Supermax POS Get Register API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\GetRegisterInterface" type="Anyhow\SupermaxPos\Model\Supermax\GetRegister" />
+
+    <!-- For Supermax POS Get Register API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\CloseRegisterInterface" type="Anyhow\SupermaxPos\Model\Supermax\CloseRegister" />
+
+    <!-- For Supermax POS Get Register API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\GetLastCloseRegisterInterface" type="Anyhow\SupermaxPos\Model\Supermax\GetLastCloseRegister" />
+
+    <!-- For Supermax POS Cash Management API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\CashManagementInterface" type="Anyhow\SupermaxPos\Model\Supermax\CashManagement" />
+
+    <!-- For Supermax POS Get Reports API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\GetReportInterface" type="Anyhow\SupermaxPos\Model\Supermax\GetReport" />
+
+    <!-- For Supermax POS Get All Registers API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\GetAllRegisterInterface" type="Anyhow\SupermaxPos\Model\Supermax\GetAllRegister" />
+
+    <!-- For Coupon API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\CouponInterface" type="Anyhow\SupermaxPos\Model\Supermax\Coupon" />
+
+    <!-- For Send Order Receipt in Email API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\MailOrderReceiptInterface" type="Anyhow\SupermaxPos\Model\Supermax\MailOrderReceipt" />
+
+    <!-- For Send Order Email API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\MailOrderInterface" type="Anyhow\SupermaxPos\Model\Supermax\MailOrder" />
+    
+    <!-- For Supermax POS Customer API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\AllCustomerGroupsInterface" type="Anyhow\SupermaxPos\Model\Supermax\AllCustomerGroups" />
+  
+    <!-- For Send Email API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\EmailInterface" type="Anyhow\SupermaxPos\Model\Supermax\Email" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\OverridePermissionInterface" type="Anyhow\SupermaxPos\Model\Supermax\OverridePermission" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\ResetUserPasswordInterface" type="Anyhow\SupermaxPos\Model\Supermax\ResetUserPassword" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\PriceReductionsInterface" type="Anyhow\SupermaxPos\Model\Supermax\PriceReductions" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\StartEdcPaymentInterface" type="Anyhow\SupermaxPos\Model\Supermax\StartEdcPayment" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\GetEdcPaymentStatusInterface" type="Anyhow\SupermaxPos\Model\Supermax\GetEdcPaymentStatus" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\CancelEdcPaymentInterface" type="Anyhow\SupermaxPos\Model\Supermax\CancelEdcPayment" />
+
+    <!-- Create Quote API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\CreateQuoteInterface" type="Anyhow\SupermaxPos\Model\Supermax\CreateQuote" />
+
+    <!-- Update Quote API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\UpdateQuoteInterface" type="Anyhow\SupermaxPos\Model\Supermax\UpdateQuote" />
+
+    <!-- Delete Quote API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\DeleteQuoteInterface" type="Anyhow\SupermaxPos\Model\Supermax\DeleteQuote" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\FulfillmentInterface" type="Anyhow\SupermaxPos\Model\Supermax\Fulfillment" />
+    
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\PostPromiseInterface" type="Anyhow\SupermaxPos\Model\Supermax\PostPromise" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\PromiseSelectionInterface" type="Anyhow\SupermaxPos\Model\Supermax\PromiseSelection" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\ReservationInterface" type="Anyhow\SupermaxPos\Model\Supermax\Reservation" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\ServiceabilityInterface" type="Anyhow\SupermaxPos\Model\Supermax\Serviceability" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\GetAtpInterface" type="Anyhow\SupermaxPos\Model\Supermax\GetAtp" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\OrderFulfillmentInterface" type="Anyhow\SupermaxPos\Model\Supermax\OrderFulFillment" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\PaymentIntentInterface" type="Anyhow\SupermaxPos\Model\Supermax\PaymentIntent" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\PaymentIntentBkInterface" type="Anyhow\SupermaxPos\Model\Supermax\PaymentIntentBk" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\PrintInvoiceInterface" type="Anyhow\SupermaxPos\Model\Supermax\PrintInvoice" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\PincodeAddressInterface" type="Anyhow\SupermaxPos\Model\Supermax\PincodeAddress" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\GenerateOtpInterface" type="Anyhow\SupermaxPos\Model\Supermax\GenerateOtp" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\ValidateOtpInterface" type="Anyhow\SupermaxPos\Model\Supermax\ValidateOtp" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\GetTerminalsInterface" type="Anyhow\SupermaxPos\Model\Supermax\GetTerminals" />
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\LogoutInterface" type="Anyhow\SupermaxPos\Model\Supermax\Logout" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\StartPinelabsPaymentInterface" type="Anyhow\SupermaxPos\Model\Supermax\StartPinelabsPayment" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\GetPinelabsPaymentStatusInterface" type="Anyhow\SupermaxPos\Model\Supermax\GetPinelabsPaymentStatus" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\CancelPinelabsPaymentInterface" type="Anyhow\SupermaxPos\Model\Supermax\CancelPinelabsPayment" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\MigratePaymentInterface" type="Anyhow\SupermaxPos\Model\Supermax\MigratePayment" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\HoldQuoteInterface" type="Anyhow\SupermaxPos\Model\Supermax\HoldQuote" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\FetchQuoteInterface" type="Anyhow\SupermaxPos\Model\Supermax\FetchQuote" />
+
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\ValidateCashierInterface" type="Anyhow\SupermaxPos\Model\Supermax\ValidateCashier" />
+
+    <!-- For Supermax POS Create Customer Referral API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\CustomerReferralInterface" type="Anyhow\SupermaxPos\Model\Supermax\CustomerReferral" />
+
+    <!-- for supermax session -->
+    <type name="Anyhow\SupermaxPos\Model\Session">
+        <arguments>
+            <argument name="storage" xsi:type="object">Anyhow\SupermaxPos\Model\Session\Storage</argument>
+        </arguments>
+    </type>
+
+    <!-- For Supermax POS Customer Connection Update API  -->
+    <preference for="Anyhow\SupermaxPos\Api\Supermax\CustomerConnectionUpdateInterface" type="Anyhow\SupermaxPos\Model\Supermax\CustomerConnectionUpdate" />
+
+    <type name="Magento\Webapi\Controller\Rest">
+        <plugin name="set_cros_header" type="Anyhow\SupermaxPos\Plugin\SetCrosHeaderPlugin" />
+    </type>
+
+    <type name="Magento\Framework\Webapi\Rest\Request">
+        <plugin name="cros_rest_requests" type="Anyhow\SupermaxPos\Plugin\CrosRequestsOptionPlugin" />
+    </type>
+
+    <type name="Magento\Webapi\Controller\Rest\Router">
+        <plugin name="cros_rest_request" type="Anyhow\SupermaxPos\Plugin\CrosRestRequestPlugin" />
+    </type>
+
+    <preference for="Anyhow\SupermaxPos\Api\Data\OutletInterface" type="Anyhow\SupermaxPos\Model\SupermaxPosOutlet" />
+	<preference for="Anyhow\SupermaxPos\Api\OutletRepositoryInterface" type="Anyhow\SupermaxPos\Model\OutletRepository" />
+
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_outlet_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxPosOutlet\Grid\Collection</item> 
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxPosOutlet\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ah_supermax_pos_outlet</argument>
+            <argument name="eventPrefix" xsi:type="string">outlet_collection</argument>
+            <argument name="eventObject" xsi:type="string">outlet_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxPosOutlet</argument>
+        </arguments>
+    </type>
+
+
+    <!-- for cashier role management -->
+    <preference for="Anyhow\SupermaxPos\Api\Data\CashierRoleInterface" type="Anyhow\SupermaxPos\Model\SupermaxUserRole" />
+	<preference for="Anyhow\SupermaxPos\Api\CashierRoleRepositoryInterface" type="Anyhow\SupermaxPos\Model\CashierRoleRepository" />
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_cashier_role_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxUserRole\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxUserRole\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ah_supermax_pos_user_role</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxUserRole</argument>
+            <argument name="eventPrefix" xsi:type="string">cashier_role_collection</argument>
+            <argument name="eventObject" xsi:type="string">cashier_role_collection</argument>
+        </arguments>
+    </type>
+
+    <!-- for cashier management -->
+
+    <preference for="Anyhow\SupermaxPos\Api\Data\CashierInterface" type="Anyhow\SupermaxPos\Model\SupermaxUser" />
+	<preference for="Anyhow\SupermaxPos\Api\CashierRepositoryInterface" type="Anyhow\SupermaxPos\Model\CashierRepository" />
+    
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_cashier_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxUser\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+   
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Anyhow\SupermaxPos\Api\Data\CashierInterface" xsi:type="string">Anyhow\SupermaxPos\Api\CashiertRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxUser\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ah_supermax_pos_user</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxUser</argument>
+            <argument name="eventPrefix" xsi:type="string">cashier_collection</argument>
+            <argument name="eventObject" xsi:type="string">cashier_collection</argument>
+        </arguments>
+    </type>
+
+    
+    
+
+    <!-- for price reduction management -->
+    <preference for="Anyhow\SupermaxPos\Api\Data\PriceReductionInterface" type="Anyhow\SupermaxPos\Model\SupermaxPriceReduction" />
+	<preference for="Anyhow\SupermaxPos\Api\PriceReductionRepositoryInterface" type="Anyhow\SupermaxPos\Model\PriceReductionRepository" />
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_price_reduction_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxPriceReduction\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxPriceReduction\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ah_supermax_pos_price_reductions</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxPriceReduction</argument>
+            <argument name="eventPrefix" xsi:type="string">price_reduction_collection</argument>
+            <argument name="eventObject" xsi:type="string">price_reduction_collection</argument>
+        </arguments>
+    </type>
+    <!-- Terminal Release -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_terminal_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxTerminal\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxTerminal\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ah_supermax_pos_user_login_history</argument>
+            <argument name="eventPrefix" xsi:type="string">pos_terminal_collection</argument>
+            <argument name="eventObject" xsi:type="string">pos_terminal_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxTerminal</argument>
+        </arguments>
+    </type>
+     <!-- for pos terminals management -->
+    <preference for="Anyhow\SupermaxPos\Api\Data\PosTerminalInterface" type="Anyhow\SupermaxPos\Model\SupermaxPosTerminal" />
+	<preference for="Anyhow\SupermaxPos\Api\PosTerminalRepositoryInterface" type="Anyhow\SupermaxPos\Model\PosTerminalRepository" />
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_pos_terminal_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxPosTerminal\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxPosTerminal\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ah_supermax_pos_terminals</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxPosTerminal</argument>
+            <argument name="eventPrefix" xsi:type="string">pos_terminal_collection</argument>
+            <argument name="eventObject" xsi:type="string">pos_terminal_collection</argument>
+        </arguments>
+    </type>
+
+    <!-- for Receipt management -->
+
+    <preference for="Anyhow\SupermaxPos\Api\Data\ReceiptInterface" type="Anyhow\SupermaxPos\Model\SupermaxReceipt" />
+	<preference for="Anyhow\SupermaxPos\Api\ReceiptRepositoryInterface" type="Anyhow\SupermaxPos\Model\ReceiptRepository" />
+    <!-- <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_receipt_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxReceipt\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Anyhow\SupermaxPos\Api\Data\ReceiptInterface" xsi:type="string">Anyhow\SupermaxPos\Api\ReceipttRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxReceipt\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ah_supermax_pos_receipt</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxReceipt</argument>
+            <argument name="eventPrefix" xsi:type="string">receipt_collection</argument>
+            <argument name="eventObject" xsi:type="string">receipt_collection</argument>
+        </arguments>
+    </virtualType> -->
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_receipt_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxReceipt\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxReceipt\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ah_supermax_pos_receipt</argument>
+            <argument name="eventPrefix" xsi:type="string">Anyhow_SupermaxPos_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">supermax_receipt_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxReceipt</argument>
+        </arguments>
+    </type>
+
+    <!-- Image Uploader -->
+    <virtualType name="ReceiptUploader" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">supermax/receipt/tmp/image</argument>
+            <argument name="basePath" xsi:type="string">supermax/receipt/image</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Anyhow\SupermaxPos\Controller\Adminhtml\Receipt\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">ReceiptUploader</argument>
+        </arguments>
+    </type>
+
+    <!-- <virtualType name="pospayment" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="const">Anyhow\SupermaxPos\Model\PaymentMethod::CODE</argument>
+        </arguments>
+    </virtualType> -->
+
+
+
+    <!-- for Register management -->
+
+    <preference for="Anyhow\SupermaxPos\Api\Data\RegisterInterface" type="Anyhow\SupermaxPos\Model\SupermaxRegister" />
+	<preference for="Anyhow\SupermaxPos\Api\RegisterRepositoryInterface" type="Anyhow\SupermaxPos\Model\RegisterRepository" />
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_register_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxRegister\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxRegister\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ah_supermax_pos_register</argument>
+            <argument name="eventPrefix" xsi:type="string">Anyhow_SupermaxPos_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">supermax_register_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxRegister</argument>
+        </arguments>
+    </type>
+
+<!-- For Register Details -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_register_detail_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxRegisterTransactionDetail\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxRegisterTransactionDetail\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ah_supermax_pos_register_transaction_detail</argument>
+            <argument name="eventPrefix" xsi:type="string">Anyhow_SupermaxPos_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">supermax_register_detail_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxRegisterTransactionDetail</argument>
+        </arguments>
+    </type>
+
+    <!-- For Sales Reports -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_report_sales_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxSalesOrders\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxSalesOrders\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order</argument>
+            <argument name="eventPrefix" xsi:type="string">Anyhow_SupermaxPos_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">supermax_sales_orders_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxSalesOrders</argument>
+        </arguments>
+    </type>
+
+    <!-- For Old Sales Reports -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_report_oldsales_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxOldSalesOrders\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxOldSalesOrders\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ah_supermax_old_sales_order</argument>
+            <argument name="eventPrefix" xsi:type="string">old_sales_report</argument>
+            <argument name="eventObject" xsi:type="string">old_sales_report</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxOldSalesOrders</argument>
+        </arguments>
+    </type>
+
+    
+    <!-- For Sales Details Reports -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_report_sales_details_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxSalesDetails\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxSalesDetails\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order</argument>
+            <argument name="eventPrefix" xsi:type="string">Anyhow_SupermaxPos_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">supermax_sales_orders_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxSalesDetails</argument>
+        </arguments>
+    </type>
+
+    <!-- For Sales Summary Reports -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_report_sales_summary_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxSalesSummary\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxSalesSummary\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order</argument>
+            <argument name="eventPrefix" xsi:type="string">Anyhow_SupermaxPos_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">supermax_sales_summary_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxSalesSummary</argument>
+        </arguments>
+    </type>
+
+    <!-- For Inventory Reports -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_report_inventory_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxInventory\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxInventory\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order_item</argument>
+            <argument name="eventPrefix" xsi:type="string">Anyhow_SupermaxPos_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">supermax_inventory_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxInventory</argument>
+        </arguments>
+    </type>
+    
+    <!-- For Customer Reports -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_report_customer_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxReportCustomer\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxReportCustomer\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ah_supermax_pos_customer</argument>
+            <argument name="eventPrefix" xsi:type="string">Anyhow_SupermaxPos_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">supermax_customer_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxInventory</argument>
+        </arguments>
+    </type>
+
+    <!-- For Tax Reports -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_report_tax_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxReportTax\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxReportTax\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order_tax</argument>
+            <argument name="eventPrefix" xsi:type="string">Anyhow_SupermaxPos_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">supermax_customer_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxReportTax</argument>
+        </arguments>
+    </type>
+
+    <!-- For Customer Referral Reports -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_report_customer_referral_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxCustomerReferral\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxCustomerReferral\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ah_supermax_pos_customer</argument>
+            <argument name="eventPrefix" xsi:type="string">Anyhow_SupermaxPos_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">supermax_customer_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxCustomerReferral</argument>
+        </arguments>
+    </type>
+
+<!-- For Outlet Assigned Product Listing -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="outlet_assigned_product_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxProduct\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxProduct\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">catalog_product_entity</argument>
+            <argument name="eventPrefix" xsi:type="string">Anyhow_SupermaxPos_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">supermax_product_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxProduct</argument>
+        </arguments>
+    </type>
+    <!-- For Supermax Pos Orders -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_order_grid_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxOrders\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxOrders\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ah_supermax_pos_orders</argument>
+            <argument name="eventPrefix" xsi:type="string">Anyhow_SupermaxPos_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">supermax_orders_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxOrders</argument>
+        </arguments>
+    </type>
+
+    <!-- Override email template block file to add Supermax Pos email variables -->
+    <type name="Magento\Email\Block\Adminhtml\Template\Edit\Form">
+        <plugin name="anyhow_supermaxpos_email" type="Anyhow\SupermaxPos\Block\Adminhtml\Template\Edit\Form" sortOrder="10" />
+    </type>
+
+    <!-- Plugin for escaping email special charactes for Email API -->
+    <type name="Magento\Email\Model\Template">
+        <plugin name="mail_subject" type="Anyhow\SupermaxPos\Model\Template" sortOrder="100" />
+    </type>
+
+    <!-- For Overrides Reports -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_report_overrides_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxOverrides\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxOverrides\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ah_supermax_pos_user_overrides</argument>
+            <argument name="eventPrefix" xsi:type="string">Anyhow_SupermaxPos_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">supermax_overrides_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxOverrides</argument>
+        </arguments>
+    </type>
+
+     <!-- For Head Cashier Reconcile Reports -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_report_headreconcile_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxHeadreconcile\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxHeadreconcile\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ah_supermax_pos_register</argument>
+            <argument name="eventPrefix" xsi:type="string">Anyhow_SupermaxPos_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">supermax_reconcile_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxHeadreconcile</argument>
+        </arguments>
+    </type>
+
+     <!-- For Head Cashier Reconcile Summary Reports -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_report_headcashier_summary_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxHeadreconcileSummary\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxHeadreconcileSummary\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ah_supermax_pos_register</argument>
+            <argument name="eventPrefix" xsi:type="string">Anyhow_SupermaxPos_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">supermax_reconcile_summary_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxHeadreconcileSummary</argument>
+        </arguments>
+    </type>
+
+    <type name="Anyhow\SupermaxPos\Model\Supermax\CreateOrder">
+        <plugin name="ah_supermax_quote_to_order_conversion" type="Anyhow\SupermaxPos\Model\Supermax\ConvertQuote"/>
+    </type>
+</config>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="ibo_home_category" resource="default" engine="innodb" comment="Home page data">        
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="Id"/> 
+        <column xsi:type="int" name="category_id" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Category ID"/>        
+        <column xsi:type="varchar" name="customer_group" nullable="true" length="64" comment="Customer Group"/>
+        <column xsi:type="varchar" name="display_zone" nullable="true" length="64" comment="Display Zone"/>
+        <column xsi:type="varchar" name="type" nullable="true" default="NULL" length="15" comment="Type"/>
+        <column xsi:type="text" name="attribute_ids" nullable="true" comment="Attribute Ids"/>
+        <column xsi:type="timestamp" name="from_date" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="From Date"/>
+        <column xsi:type="timestamp" name="to_date" on_update="false" comment="To Date"/>              
+        <column xsi:type="timestamp" name="created_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="IBO_HOME_PAGE_ID" indexType="btree">
+            <column name="id"/>
+        </index>
+        <index referenceId="IBO_HOME_PAGE_CATEGORY_ID" indexType="btree">
+            <column name="category_id"/>
+        </index>
+    </table>
+    <table name="ibo_home_bestdeal" resource="default" engine="innodb" comment="Home page bestdeal data">        
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="Id"/> 
+        <column xsi:type="varchar" name="sku" nullable="true" length="64" comment="Product SKU"/>        
+        <column xsi:type="varchar" name="customer_group" nullable="true" length="64" comment="Customer Group"/>        
+        <column xsi:type="timestamp" name="from_date" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="From Date"/>
+        <column xsi:type="timestamp" name="to_date" on_update="false" comment="To Date"/>             
+        <column xsi:type="timestamp" name="created_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="IBO_HOME_PAGE_ID" indexType="btree">
+            <column name="id"/>
+        </index>
+        <index referenceId="IBO_HOME_PAGE_SKU" indexType="btree">
+            <column name="sku"/>
+        </index>
+    </table>
+</schema>

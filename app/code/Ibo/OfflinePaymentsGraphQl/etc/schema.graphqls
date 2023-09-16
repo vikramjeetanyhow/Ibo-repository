@@ -1,0 +1,10 @@
+type Query {
+    fetchPaymentOfflineAccountDetails: FetchPaymentOfflineAccountDetails @doc(description: "Return a list of customer offline account details") @resolver(class: "\\Ibo\\OfflinePaymentsGraphQl\\Model\\Resolver\\FetchPaymentOfflineAccountDetails") @cache(cacheable: false)
+}
+
+type FetchPaymentOfflineAccountDetails @resolver(class: "\\Ibo\\OfflinePaymentsGraphQl\\Model\\Resolver\\FetchPaymentOfflineAccountDetails") {
+    enable_offline_payment: Boolean!
+    virtual_customer_account: String! @doc(description: "Virtual bank details of the customer")
+    virtual_account_ifsc: String! @doc(description: "Virtual Bank IFSC code")
+    virtual_account_bank: String @doc(description: "Virtual Bank Name")
+}

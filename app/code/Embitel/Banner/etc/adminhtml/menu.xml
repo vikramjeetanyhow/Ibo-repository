@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   Embitel
+ * @package    Embitel_Banner
+ * @author     hitendra.badiani@embitel.com 
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Backend/etc/menu.xsd">
+    <menu>
+        <add id="embitel_banner::core" title="Home Page Content" module="Embitel_Banner" sortOrder="90" resource="Embitel_Banner::banner" parent="Magento_Backend::content"/>
+        <add id="embitel_banner::test" title="Banner Slider" module="Embitel_Banner" sortOrder="10" parent="embitel_banner::core" action="embitel_banner/items/" resource="Embitel_Banner::items"/>
+    </menu>
+</config>

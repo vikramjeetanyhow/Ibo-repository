@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">   
+    <preference for="Magento\Company\Plugin\Customer\Model\ResourceModel\Grid\CollectionPlugin" type="Embitel\CustomerGraphQl\Plugin\Customer\Model\ResourceModel\Grid\CollectionPlugin" />
+    <preference for="Magento\Customer\Model\Address\Validator\General" type="Embitel\CustomerAddress\Model\Address\Validator\General" />             
+</config>

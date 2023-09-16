@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <!-- Create 'ibo_oms_orders_repush_history' Table -->
+    <table name="ibo_oms_orders_repush_history" resource="default" engine="innodb" comment="Oms orders repush History Table">        
+        <column xsi:type="int" name="ibo_order_repush_history_id" padding="11" unsigned="true" nullable="false" identity="true" comment="History Id"/> 
+        <column xsi:type="int" name="admin_id" padding="11" nullable="false" comment="Admin Id"/>
+        <column xsi:type="varchar" name="order_numbers" length="255" nullable="true" comment="Order Numbers"/>
+        <column xsi:type="datetime" name="date_added" comment="Date Added"/>  
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="ibo_order_repush_history_id"/>
+        </constraint>              
+    </table>
+</schema>

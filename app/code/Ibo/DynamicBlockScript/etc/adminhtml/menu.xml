@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ibo_DynamicBlockScript::blockscript"
+             title="Static Block Script"
+             module="Ibo_DynamicBlockScript"
+             sortOrder="50"
+             action="dynamicblockscript/blockscript"
+             resource="Ibo_DynamicBlockScript::blockscript"
+             parent="Magento_Backend::content_elements"/>
+        
+    </menu>
+</config>

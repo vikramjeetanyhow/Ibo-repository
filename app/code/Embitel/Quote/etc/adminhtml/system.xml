@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>       
+        <section id="promise_engine" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Promise Engine API Data</label>
+            <tab>embitel</tab>
+            <resource>Embitel_Quote::configuration</resource>
+            <group id="promise_engine_settings" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Settings</label>   
+                <field id="promise_engine_client_id" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Client Id</label>
+                </field>
+                <field id="promise_engine_host_url" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Promise Engine Host URL</label>
+                </field> 
+                 <field id="promise_engine_api_url" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Promise Engine API URL</label>
+                </field>                                                
+                 <field id="cart_promise_engine_api_url" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cart/PDP Promise Engine API URL</label>
+                </field>
+                <field id="promise_engine_order_status" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Full Fillment order API URL</label>
+                </field> 
+                <field id="promise_engine_pincode_service_check" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Pincode Service Promise Engine Check URL</label>
+                </field>                  
+                <field id="promise_engine_payment_api_url" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Payment Intent API URL</label>
+                </field>                   
+                <field id="promise_engine_payment_token" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Payment Intent API Token</label>
+                </field>                                         
+                 <field id="promise_engine_status" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="0" >
+                    <label>Enable Promise Engine</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="promise_delivery_together" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="0" >
+                    <label>Promise Delivery Together</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                                
+            </group>
+        </section>
+        <section id="regional_selection" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Regional Selection For Cart</label>
+            <tab>embitel</tab>
+            <resource>Embitel_Quote::configuration</resource>
+            <group id="settings" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Settings</label>
+                <field id="host_url" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Logistic Postcode Host URL</label>
+                </field> 
+                <field id="client_id" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Client Id</label>
+                </field>
+                <field id="trace_id" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Trace Id</label>
+                </field>
+               
+                <field id="status" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="0" >
+                    <label>Enable Regional Selection</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

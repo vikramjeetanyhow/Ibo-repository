@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Indexer/etc/indexer.xsd">
+    <indexer id="customer_grid">
+        <fieldset name="customer">
+        	<field name="mobilenumber" xsi:type="searchable" dataType="varchar"/>
+        	<field name="sales_rep_name" xsi:type="searchable" dataType="varchar"/>
+        	<field name="sales_rep_number" xsi:type="searchable" dataType="varchar"/>
+        </fieldset>
+    </indexer>
+</config>

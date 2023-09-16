@@ -1,0 +1,144 @@
+<!-- 
+    /**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */
+
+ -->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">supermax_price_reduction_listing.supermax_price_reduction_listing_data_source</item>
+            <item name="deps" xsi:type="string">supermax_price_reduction_listing.supermax_price_reduction_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">price_reduction_columns</item>
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Add Price Override</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">*/*/new</item>
+            </item>
+        </item>
+    </argument>
+	<dataSource name="supermax_price_reduction_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">supermax_price_reduction_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">pos_price_reduction_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+			<argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">pos_price_reduction_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+	<listingToolbar name="listing_top">
+		<bookmark name="bookmarks"/>
+		<columnsControls name="columns_controls" />
+		<filterSearch name="fulltext"/>
+		<filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+        </filters>
+		<!-- <massaction name="listing_massaction">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected items?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="supermax/pricereduction/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Mass Delete</label>
+                </settings>
+            </action>
+        </massaction> -->
+		<paging name="listing_paging"/>
+    </listingToolbar>
+	<columns name="price_reduction_columns">
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>pos_price_reduction_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>55</resizeDefaultWidth>
+            </settings>
+        </selectionsColumn>
+        <column name="pos_price_reduction_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="title">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Title</label>
+            </settings>
+        </column>
+        <column name="max_capacity" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\MaximumCapacityAmount">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Maximum Capacity</label>
+            </settings>
+        </column>
+        <column name="status" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Magento\Config\Model\Config\Source\Enabledisable"/>
+                <filter>select</filter>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <column name="override_type" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Anyhow\SupermaxPos\Model\Config\Source\OverrideType"/>
+                <filter>select</filter>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+                <dataType>select</dataType>
+                <label translate="true">Override Type</label>
+            </settings>
+        </column>
+		<actionsColumn name="actions" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\PriceReductionActions">
+            <settings>
+                <indexField>pos_price_reduction_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

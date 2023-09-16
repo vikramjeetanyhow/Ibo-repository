@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="embitel_facade_product_sync" instance="Embitel\Facade\Cron\ProductSyncCron" method="execute" >
+            <config_path>facade/general/cron_expression</config_path>
+        </job>
+        <job name="embitel_odoo_product_sync" instance="Embitel\Facade\Cron\ProductSyncOdooCron" method="execute" >
+            <config_path>oodo_sync/general/cron_expression</config_path>
+        </job>
+    </group>
+    <group id="catalog_sync_group">
+        <job name="embitel_catalog_service_product_sync" instance="Embitel\Facade\Cron\ProductSyncCatalogServiceCron" method="execute" >
+            <config_path>catalog_service/general/cron_expression</config_path>
+        </job>
+    </group>
+</config>

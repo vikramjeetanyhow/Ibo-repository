@@ -1,0 +1,17 @@
+type Mutation {
+	updateOrderStatus(input: updateOrderStatusInput) : updateOrderStatusOutput @resolver(class: "Ibo\\Hdfc\\Model\\Resolver\\updateOrderStatus")
+} 
+
+input updateOrderStatusInput {
+    order_id : String @doc(description: "Order ID")
+    order_status : String @doc(description: "Order Status")
+    order_status_history : String @doc(description: "Order Status History")
+    payment_method : String @doc(description: "Payment Method")
+    payment_type : String @doc(description: "Payment Type")
+    additional_information : String @doc(description: "Payment Additional information")
+    payment_info : String @doc(description: "Payment info")
+} 
+type updateOrderStatusOutput @doc(description: "update order status update.") {
+   order_id : String @doc(description: "Order ID")
+   order_status : String @doc(description: "Order Status")
+}

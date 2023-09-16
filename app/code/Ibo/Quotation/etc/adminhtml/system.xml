@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="ibo_quotation" translate="label" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="0">
+            <class>separator-top</class>
+            <label>Quotation</label>
+            <tab>embitel</tab>
+            <resource>Ibo_Quotation::config</resource>
+            <group id="config" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Configuration</label>
+                <field id="status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="log_enable" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Log Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+
+            <group id="sp_config" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Customer Pricelist(SP) Configuration</label>
+                <field id="pricegroup" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Price Group</label>
+                    <comment>Default B2C</comment>
+                </field>
+                <field id="price_type" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Price Type</label>
+                    <comment>Default fixed</comment>
+                </field>
+                <field id="min_quantity" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Minimum Quantity</label>
+                </field>
+                <field id="reason_for_pricing" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Reason For Pricing</label>
+                </field>
+                <field id="priority" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Priority</label>
+                </field>
+                <field id="pct_mrp" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>PCT MRP</label>
+                </field>
+                <field id="end_date" translate="label" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>End Date</label>
+                </field>
+            </group>
+
+            <group id="cp_config" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Vendor Pricelist(CP) Configuration</label>
+                <field id="vendor_lead_time" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Vendor Lead Time</label>
+                    <comment>In Days</comment>
+                </field>
+                <field id="vendor_product_mrp" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Vendor Product Mrp</label>
+                </field>
+                <field id="vendor_list_price" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Vendor List Price</label>
+                </field>
+                <field id="vendor_tot_price_type" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Vendor TOT Price Type</label>
+                </field>
+                <field id="vendor_tot_margin_pct" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Vendor TOT Margin PCT</label>
+                </field>
+                <field id="vendor_moq" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Vendor MOQ</label>
+                </field>
+                <field id="vendor_purchase_mode" translate="label" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Vendor Purchase Mode</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="embitel" translate="label" sortOrder="101" class="embitel-config">
+            <label>IBO EXTENSIONS</label>
+        </tab>   
+        <section id="mobile_otp" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>SMS Notification</label>
+            <tab>embitel</tab>
+            <resource>Embitel_Sms::configuration</resource>
+            <group id="settings" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            	<label>Performance Notification Settings</label>
+            	<field id="enable_performance" translate="label tooltip" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Performance Testing</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Turn it to yes only when doing performance testing on staging else live transaction may impact</comment>
+                </field>
+                <field id="master_otp" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Master Otp</label>
+                    <frontend_class>required-entry validate-number</frontend_class>
+                    <comment>This Master OTP will be generated for all the mobile numbers</comment>
+                </field>
+                <field id="mobile_numbers" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Mobile numbers</label>
+                    <comment>Magic OTP will be restricted to these Mobile numbers only, enter values as +91xxxx/ +91xxxx (in case of multiple please enter comma separated values like +91xxx,+91xxxx,+91xxxx</comment>
+                </field>
+                <field id="otp_log_active" translate="label" type="select" sortOrder="102" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Log Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="otp_configuration" translate="label" showInDefault="1" showInWebsite="1" sortOrder="20" showInStore="1">
+                <label>OTP Configuration</label>  
+                <field id="otp_format" translate="label comment" type="select" sortOrder="520" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>OTP Format</label>
+                    <source_model>Embitel\Sms\Model\Config\Source\CodeFormat</source_model>
+                    <config_path>mobile_otp/settings/otp_format</config_path>
+                </field>              
+                <field id="otp_length" translate="label comment" type="text" sortOrder="530" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>OTP Length</label>
+                    <frontend_class>required-entry validate-number</frontend_class>
+                    <config_path>mobile_otp/settings/otp_length</config_path>
+                </field>
+                <field id="otp_message" translate="label comment" type="textarea" sortOrder="540" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>OTP message</label>
+                    <frontend_class>required-entry</frontend_class>
+                    <config_path>mobile_otp/settings/otp_message</config_path>
+                    <comment><![CDATA[Use {{var otp_code}} to add the otp code to sms message.]]></comment>
+                </field>
+                <field id="otp_expired" translate="label comment" type="text" sortOrder="550" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>OTP expired after (seconds)</label>
+                    <frontend_class>required-entry validate-number</frontend_class>
+                    <config_path>mobile_otp/settings/otp_expired</config_path>
+                    <comment>After the OTP is sent, it will be expired after this period time</comment>
+                </field>
+                <field id="otp_resend" translate="label comment" type="text" sortOrder="550" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Allow customer resends OTP after (seconds)</label>
+                    <frontend_class>required-entry validate-number</frontend_class>
+                    <config_path>mobile_otp/settings/otp_resend</config_path>
+                    <comment>If customer don't get OTP he can resend the sms after this period time.</comment>
+                </field>
+                <field id="otp_max_resending_times" translate="label comment" type="text" sortOrder="550" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Max times of resending OTP</label>
+                    <frontend_class>required-entry validate-number</frontend_class>
+                    <config_path>mobile_otp/settings/otp_max_resending_times</config_path>
+                    <comment>The number of times you allow customer to resend OTP.</comment>
+                </field>
+                <field id="otp_resend_block_time" translate="label comment" type="text" sortOrder="550" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>OTP block times (seconds)</label>
+                    <frontend_class>required-entry validate-number</frontend_class>
+                    <config_path>mobile_otp/settings/otp_resend_block_time</config_path>
+                    <comment>After the number resend OTP greater than max time of resending OTP, Customer will be blocked in this period time for sending OTP.</comment>
+                </field>
+                <field id="invalid_otp" translate="label comment" type="text" sortOrder="550" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>OTP invalid counts</label>
+                    <frontend_class>required-entry validate-number</frontend_class>
+                    <config_path>mobile_otp/settings/invalid_otp</config_path>
+                    <comment>Invalid Otp Counts after surpassing customer will be blocked for specific time period</comment>
+                </field>             
+            </group>
+        </section>
+    </system>
+</config>

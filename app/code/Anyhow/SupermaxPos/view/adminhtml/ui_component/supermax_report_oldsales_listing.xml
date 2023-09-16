@@ -1,0 +1,120 @@
+<!-- 
+/**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">supermax_report_oldsales_listing.supermax_report_oldsales_listing_data_source</item>
+            <item name="deps" xsi:type="string">supermax_report_oldsales_listing.supermax_report_oldsales_listing_data_source</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="export" xsi:type="array">
+                <item name="name" xsi:type="string">export</item>
+                <item name="label" xsi:type="string" translate="true">Export Old Sales Report</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">supermax/report/salesexport</item>
+                <item name="sortOrder" xsi:type="number">30</item>
+            </item>
+        </item>
+        <item name="spinner" xsi:type="string">report_sales_columns</item>
+    </argument>
+    <dataSource name="supermax_report_oldsales_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">supermax_report_oldsales_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+		<bookmark name="bookmarks"/>
+		<columnsControls name="columns_controls" />
+		<!-- <filterSearch name="fulltext"/> -->
+		<filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+           
+        </filters>
+		<massaction name="listing_massaction">
+           
+            <action name="release_foreced_logout">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to forced logout the selected items?</message>
+                        <title translate="true">Forced Logout items</title>
+                    </confirm>
+                    <url path="supermax/terminal/massreleaselogout"/>
+                    <type>release_foreced_logout</type>
+                    <label translate="true">Mass Release</label>
+                </settings>
+            </action>
+        </massaction>
+		<paging name="listing_paging"/>
+    </listingToolbar>
+    
+
+    <columns name="report_sales_columns">
+        <column name="id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        
+        <column name="outlet_id" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <dataType>select</dataType>
+                <options class="Anyhow\SupermaxPos\Model\StoreList"/>
+                <filter>select</filter>
+                <label translate="true">Assigned Store</label>
+            </settings>
+        </column>
+        <column name="show_by" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <dataType>select</dataType>
+                <options class="Anyhow\SupermaxPos\Model\MonthList"/>
+                <filter>select</filter>
+                <label translate="true">Month</label>
+            </settings>
+        </column>
+        
+        <actionsColumn name="actions" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\SalesOldReportActions">
+            <settings>
+                <indexField>id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
+        
+    </columns>
+</listing>

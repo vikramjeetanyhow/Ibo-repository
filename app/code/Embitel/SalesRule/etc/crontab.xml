@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="sales_rule_report">
+        <job instance="Embitel\SalesRule\Cron\ActivePromotionDetails" method="execute" name="Embitel_SalesRule_Report_cron">
+            <config_path>email_notification/sales_rule_cron/sales_rule_report_cron_expression</config_path>
+        </job>
+    </group>
+    <group id="coupon_status">
+        <job instance="Embitel\SalesRule\Cron\CouponRuleStatusChange" method="execute" name="Embitel_SalesRule_Status_cron">
+            <config_path>email_notification/sales_rule_cron_status/sales_rule_status_update_expression</config_path>
+        </job>
+    </group>
+    <group id="inactive_cart_rule_cron">
+        <job name="inactive_cart_rule_cron" instance="Embitel\SalesRule\Cron\InactiveCartRule" method="execute">
+           <config_path>inactive_cart_rule_cron/sales_rule_cron_status/inactive_cart_rule_cron_time</config_path>
+        </job>
+    </group>
+</config>

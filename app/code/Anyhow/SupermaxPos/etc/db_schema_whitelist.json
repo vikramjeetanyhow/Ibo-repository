@@ -1,0 +1,309 @@
+{
+    "ah_supermax_pos_register": {
+        "column": {
+            "pos_register_id": true,
+            "name": true,
+            "pos_user_id": true,
+            "status": true,
+            "reconciliation_status": true,
+            "close_note": true,
+            "head_cashier_cash_total": true,
+            "head_cashier_card_total": true,
+            "head_cashier_custom_total": true,
+            "head_cashier_close_note": true,
+            "date_open": true,
+            "date_close": true,
+            "head_cashier_offline_total": true,
+            "head_cashier_wallet_total": true,
+            "head_cashier_emi_total": true,
+            "head_cashier_bank_deposit_total": true,
+            "head_cashier_pay_later_total": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "ah_supermax_pos_terminals": {
+        "column": {
+            "pos_terminal_id": true,
+            "pos_outlet_id": true,
+            "title": true,
+            "code": true,
+            "edc_serial_no": true,
+            "pos_serial_no": true,
+            "ezetap_username": true,
+            "ezetap_device_id": true,
+            "status": true,
+            "edc_type": true,
+            "pinelabs_device_id": true,
+            "pinelabs_merchant_pos_code": true,
+            "pinelabs_allowed_mops": true,
+            "receipt_thermal_status": true,
+            "ezetap_app_key": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "ah_supermax_pos_outlet": {
+        "column": {
+            "pos_outlet_id": true,
+            "outlet_name": true,
+            "email": true,
+            "status": true,
+            "outlet_address_type": true,
+            "source_code": true,
+            "pos_receipt_id": true,
+            "product_assignment_basis": true,
+            "inventory_node": true,
+            "ezetap_app_key": true,
+            "store_id": true,
+            "allowed_ips": true,
+            "receipt_thermal_status": true,
+            "online_payment_popup_status": true,
+            "display_payments": true,
+            "multi_lot_status": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "ah_supermax_pos_user_login_history": {
+        "column": {
+            "pos_user_login_id": true,
+            "pos_user_id": true,
+            "pos_terminal_id": true,
+            "status": true,
+            "is_forced": true,
+            "login_time": true,
+            "logout_time": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "ah_supermax_pos_orders": {
+        "column": {
+            "pos_order_id": true,
+            "order_id": true,
+            "pos_user_id": true,
+            "pos_outlet_id": true,
+            "barcode": true,
+            "payment_code": true,
+            "payment_method": true,
+            "payment_intent_id": true,
+            "payment_data": true,
+            "pos_terminal_id": true,
+            "device_type": true,
+            "sales_associate_1": true,
+            "sales_associate_2": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        },
+        "index": {
+            "AH_SUPERMAX_POS_ORDERS_POS_OUTLET_ID": true,
+            "AH_SUPERMAX_POS_ORDERS_POS_USER_ID": true,
+            "AH_SUPERMAX_POS_ORDERS_POS_TERMINAL_ID": true
+        }
+    },
+    "ah_supermax_pos_report": {
+        "column": {
+            "pos_report_id": true,
+            "pos_register_id": true,
+            "pos_user_id": true,
+            "pos_outlet_id": true,
+            "pos_approver_id": true,
+            "period": true,
+            "from": true,
+            "to": true,
+            "type": true,
+            "payment_method": true,
+            "override_permission": true,
+            "filter": true,
+            "new_old": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "ah_supermax_pos_receipt_store": {
+        "column": {
+            "id": true,
+            "receipt_id": true,
+            "store_id": true,
+            "title": true,
+            "header_details": true,
+            "footer_details": true,
+            "seller_bank_info": true,
+            "disclaimer": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "quote_item": {
+        "column": {
+            "lot_info": true
+        }
+    },
+    "sales_order_item": {
+        "column": {
+            "lot_info": true
+        }
+    },
+    "ah_supermax_pos_payment_pinelabs": {
+        "column": {
+            "pos_pinelabs_payment_id": true,
+            "request_id": true,
+            "pos_outlet_id": true,
+            "pos_user_id": true,
+            "order_id": true,
+            "status_check_info": true,
+            "cancel_info": true,
+            "date_added": true,
+            "date_modified": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "ah_supermax_pos_outlet_address": {
+        "column": {
+            "pos_outlet_address_id": true,
+            "parent_outlet_id": true,
+            "firstname": true,
+            "lastname": true,
+            "company": true,
+            "street": true,
+            "city": true,
+            "country_id": true,
+            "region": true,
+            "region_id": true,
+            "postcode": true,
+            "telephone": true,
+            "pan_no": true,
+            "gstin": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "ah_supermax_pos_payment_detail": {
+        "column": {
+            "pos_payment_id": true,
+            "pos_order_id": true,
+            "payment_method": true,
+            "payment_code": true,
+            "amount": true,
+            "payment_intent_id": true,
+            "amount_formatted": true,
+            "cash_paid": true,
+            "cash_change": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "ah_supermax_pos_quote": {
+        "column": {
+            "pos_quote_id": true,
+            "quote_id": true,
+            "pos_outlet_id": true,
+            "pos_user_id": true,
+            "type": true,
+            "comment": true,
+            "status": true,
+            "date_added": true,
+            "date_modified": true
+        },
+        "index": {
+            "AH_SUPERMAX_POS_QUOTE_QUOTE_ID": true,
+            "AH_SUPERMAX_POS_QUOTE_POS_OUTLET_ID": true,
+            "AH_SUPERMAX_POS_QUOTE_POS_USER_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "ah_supermax_pos_price_reductions": {
+        "column": {
+            "pos_price_reduction_id": true,
+            "title": true,
+            "max_capacity": true,
+            "override_type": true,
+            "status": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "ah_supermax_pos_user_override_details": {
+        "column": {
+            "pos_user_override_detail_id": true,
+            "parent_pos_user_override_id": true,
+            "approver_id": true,
+            "product_id": true,
+            "sku": true,
+            "name": true,
+            "pos_price_reduction_id": true,
+            "price_reduction_title": true,
+            "original_price": true,
+            "overrided_price": true,
+            "discount": true,
+            "discount_type": true,
+            "permission_type": true,
+            "overrided_delivery_price": true,
+            "original_delivery_price": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "ah_supermax_pos_user": {
+        "column": {
+            "pos_user_id": true,
+            "username": true,
+            "password": true,
+            "firstname": true,
+            "lastname": true,
+            "email": true,
+            "phone": true,
+            "status": true,
+            "pos_outlet_id": true,
+            "store_view_id": true,
+            "pos_user_role_id": true,
+            "password_reset_date": true
+        },
+        "index": {
+            "AH_SUPERMAX_POS_USER_POS_OUTLET_ID": true,
+            "AH_SUPERMAX_POS_USER_POS_USER_ROLE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "ah_supermax_pos_customer": {
+        "column": {
+            "pos_customer_id": true,
+            "customer_id": true,
+            "pos_user_id": true,
+            "pos_outlet_id": true,
+            "customer_referral_title": true,
+            "customer_referral_Phone": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "ah_supermax_pos_customer_referral": {
+        "column": {
+            "pos_referral_id": true,
+            "referral_title": true,
+            "status": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

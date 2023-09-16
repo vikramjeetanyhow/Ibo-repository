@@ -1,0 +1,827 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */ 
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <!-- Tab Anyhow Supermax Pos -->
+        <tab id="anyhow_supermax_pos" translate="label" sortOrder="10">
+            <label>IBO Pos</label>
+        </tab>
+        <!-- Section Configuration -->
+        <section id="ah_supermax_pos_configuration" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Configuration</label>
+            <tab>anyhow_supermax_pos</tab>
+            <resource>Anyhow_SupermaxPos::ah_configuration</resource>
+            <!-- Group Basic Configuration -->
+            <group id="ah_supermax_pos_basic_configutaion" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>Basic Configuration</label>
+                <!-- Field Status -->
+                <field id="ah_supermax_pos_status" translate="label" type="select" sortOrder="1" showInDefault="10" showInWebsite="0" showInStore="1">
+                    <label>Status</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Status.</comment>
+                </field>
+                <!-- Field product-image enable/disable -->
+                <!-- <field id="ah_supermax_pos_product_image_enable_disable" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Button status on online payment popup</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Button status on online payment popup</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_status">1</field>
+                    </depends>
+                </field> -->
+                <!-- Field customer group enable/disable -->
+                <field id="ah_supermax_pos_customer_group_enable_disable" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Do you want to show the customer group?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>This allows the POS user/cashier to select the customer group on the POS customer registration form.</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_status">1</field>
+                    </depends>
+                </field> 
+                <!-- Field customer group enable/disable -->
+                <field id="ah_supermax_pos_default_customer_group" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Default customer group</label>
+                    <source_model>Anyhow\SupermaxPos\Model\Config\Source\AllCustomerGroups</source_model>
+                    <comment>Set the default customer group for POS customer.</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_status">1</field>
+                    </depends>
+                </field>
+                <field id="ah_supermax_pos_invoice_buttons_timer" translate="label" type="text" sortOrder="45" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Invoice Buttons Enable Time</label>
+                    <comment>Set the time(In Seconds) for enabling the invoice buttons.</comment>
+                </field>
+                <!-- Field show-order-tax-summary enable/disable -->
+                <field id="ah_supermax_pos_show_order_tax_summary" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Display Full Tax Summary</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Display Full Tax Summary</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_status">1</field>
+                    </depends>
+                </field>
+                <!-- <field id="ah_supermax_pos_cash_payment_enable_disable" translate="label" type="select" sortOrder="52" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Enable Cash Payment</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable Cash Payment</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_status">1</field>
+                    </depends>
+                </field> -->
+                <!-- <field id="ah_supermax_pos_pod_payment_enable_disable" translate="label" type="select" sortOrder="54" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Enable POD Payment</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable POD Payment</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_status">1</field>
+                    </depends>
+                </field> -->
+                <!-- <field id="ah_supermax_pos_offline_payment_enable_disable" translate="label" type="select" sortOrder="55" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Enable Offline Payment</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable Offline Payment</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_status">1</field>
+                    </depends>
+                </field> -->
+                <!-- <field id="ah_supermax_pos_online_payment_enable_disable" translate="label" type="select" sortOrder="56" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Enable Online Payment</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable Online Payment</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_status">1</field>
+                    </depends>
+                </field> -->
+                <!-- <field id="ah_supermax_pos_split_payment_enable_disable" translate="label" type="select" sortOrder="57" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Enable Split Payment</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable Split Payment</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_status">1</field>
+                    </depends>
+                </field> -->
+                <!-- <field id="ah_supermax_pos_bank_deposite_payment_enable_disable" translate="label" type="select" sortOrder="58" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Enable Bank Deposit Payment</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable Bank Deposit Payment</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_status">1</field>
+                    </depends>
+                </field> -->
+                <!-- <field id="ah_supermax_pos_pay_later_payment_enable_disable" translate="label" type="select" sortOrder="59" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Enable Pay Later Payment</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable Pay Later Payment</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_status">1</field>
+                    </depends>
+                </field> -->
+                <!-- <field id="ah_supermax_pos_ezetap_username" translate="label" type="text" sortOrder="57" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Ezetap Username</label>
+                    <comment>Ezetap Username</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_status">1</field>
+                    </depends>
+                </field>-->
+                <!-- Cash payment order status -->
+                <field id="ah_supermax_pos_cash_payment_order_status" translate="label comment" sortOrder="70" type="select" showInDefault="1" showInWebsite="0" showInStore="1">
+                        <label>Cash payment order status</label>
+                        <comment>Cash payment order status.</comment>
+                        <source_model>Anyhow\SupermaxPos\Model\Config\Source\AllOrderStatus</source_model>
+                        <depends>
+                            <field id="ah_supermax_pos_status">1</field>
+                        </depends>
+                </field>
+                <!-- Pod Payment order status -->
+                <!-- <field id="ah_supermax_pos_pod_payment_order_status" translate="label comment" sortOrder="80" type="select" showInDefault="1" showInWebsite="0" showInStore="1">
+                        <label>Pod payment order status</label>
+                        <comment>Pod payment order status.</comment>
+                        <source_model>Anyhow\SupermaxPos\Model\Config\Source\AllOrderStatus</source_model>
+                        <depends>
+                            <field id="ah_supermax_pos_status">1</field>
+                        </depends>
+                </field> -->
+                <!-- Pod Payment order status -->
+                <field id="ah_supermax_pos_offline_payment_order_status" translate="label comment" sortOrder="80" type="select" showInDefault="1" showInWebsite="0" showInStore="1">
+                        <label>Offline payment order status</label>
+                        <comment>Offline payment order status.</comment>
+                        <source_model>Anyhow\SupermaxPos\Model\Config\Source\AllOrderStatus</source_model>
+                        <depends>
+                            <field id="ah_supermax_pos_status">1</field>
+                        </depends>
+                </field>
+                <field id="ah_supermax_pos_online_payment_order_status" translate="label comment" sortOrder="90" type="select" showInDefault="1" showInWebsite="0" showInStore="1">
+                        <label>Online payment order status</label>
+                        <comment>Online payment order status.</comment>
+                        <source_model>Anyhow\SupermaxPos\Model\Config\Source\AllOrderStatus</source_model>
+                        <depends>
+                            <field id="ah_supermax_pos_status">1</field>
+                        </depends>
+                </field>
+                <field id="ah_supermax_pos_split_payment_order_status" translate="label comment" sortOrder="91" type="select" showInDefault="1" showInWebsite="0" showInStore="1">
+                        <label>Split payment order status</label>
+                        <comment>Split payment order status.</comment>
+                        <source_model>Anyhow\SupermaxPos\Model\Config\Source\AllOrderStatus</source_model>
+                        <depends>
+                            <field id="ah_supermax_pos_status">1</field>
+                        </depends>
+                </field>
+                <field id="ah_supermax_pos_bank_deposite_payment_order_status" translate="label comment" sortOrder="92" type="select" showInDefault="1" showInWebsite="0" showInStore="1">
+                        <label>Bank Deposit payment order status</label>
+                        <comment>Bank Deposit payment order status.</comment>
+                        <source_model>Anyhow\SupermaxPos\Model\Config\Source\AllOrderStatus</source_model>
+                        <depends>
+                            <field id="ah_supermax_pos_status">1</field>
+                        </depends>
+                </field>
+                <field id="ah_supermax_pos_pay_later_payment_order_status" translate="label comment" sortOrder="93" type="select" showInDefault="1" showInWebsite="0" showInStore="1">
+                        <label>Pay Later payment order status</label>
+                        <comment>Pay Later payment order status.</comment>
+                        <source_model>Anyhow\SupermaxPos\Model\Config\Source\AllOrderStatus</source_model>
+                        <depends>
+                            <field id="ah_supermax_pos_status">1</field>
+                        </depends>
+                </field>
+                <field id="ah_supermax_pos_order_receipt_email_status" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Order And Receipt E-Mail Status</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Order And Receipt E-Mail Status</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_status">1</field>
+                    </depends>
+                </field>
+
+                <field id="ah_supermax_pos_update_fetch_quote_status" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Update/Fatch Quote Status</label>
+                    <source_model>Anyhow\SupermaxPos\Model\Config\Source\FetchQuoteStatus</source_model>
+                    <comment>Update/Fatch Quote Status</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_status">1</field>
+                    </depends>
+                </field>
+
+                <field id="ah_supermax_pos_cnc_delivery_mode_status" translate="label" type="select" sortOrder="111" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Show Delivery Mode Buttons on CNC DO</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Show Delivery Mode Buttons on CNC DO</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_status">1</field>
+                    </depends>
+                </field>
+                <field id="ah_supermax_pos_dwh_delivery_mode_status" translate="label" type="select" sortOrder="112" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Show Delivery Mode Buttons on DWH DO</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Show Delivery Mode Buttons on DWH DO</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_status">1</field>
+                    </depends>
+                </field>
+
+                <field id="ah_supermax_pos_ibo_account_holder_name" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>IBO Account Holder Name</label>
+                    <comment>IBO Account Holder Name</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_status">1</field>
+                    </depends>
+                </field>
+
+                <field id="ah_supermax_pos_hold_cart_status" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Hold Cart By Quote</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Hold Cart By Quote</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_status">1</field>
+                    </depends>
+                </field>
+
+                <field id="ah_supermax_pos_ibo_shipping_charge_brekup" translate="label" type="textarea" sortOrder="124" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Shipping Charge Breakup</label>
+                    <comment>Shipping Charge Breakup</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_status">1</field>
+                    </depends>
+                </field>
+                
+            </group>
+
+            <!-- Group Product Configuration -->
+            <group id="ah_supermax_pos_product_configutaion" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>Product Configuration</label>
+                <!-- Field No. of Products visible on POS home screen -->
+                <field id="ah_supermax_pos_no_of_products_visible" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>No. of Products visible on POS home screen</label>
+                    <comment>Mention the number of products you want to see on POS home screen. Default: 50</comment>
+                </field>
+                <!-- Field No. of visible popular products -->
+                <field id="ah_supermax_pos_no_of_visible_popular_products" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>No. of visible popular products</label>
+                    <comment>Mention the number of most popular products you want to see in POS. Default: 20</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_configuration/ah_supermax_pos_basic_configutaion/ah_supermax_pos_status">1</field>
+                    </depends>
+                </field>
+                <depends>
+                    <field id="ah_supermax_pos_configuration/ah_supermax_pos_basic_configutaion/ah_supermax_pos_status">1</field>
+                </depends>
+            </group>
+
+            <!-- Group Barcode Configuration -->
+            <group id="ah_supermax_pos_barcode_configutaion" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>Barcode Configuration</label>
+                <!-- Field Barcode Prefix -->
+                <field id="ah_supermax_pos_barcode_prefix" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Barcode Prefix</label>
+                    <comment>Set barcode prefix. This works only if productID is selected in barcode generated</comment>
+                </field>
+                <!-- Field Generate Barcoded With -->
+                <field id="ah_supermax_pos_generateb_barcoded_with" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Generate Barcoded With</label>
+                    <comment>Please make sure if you are choosing SKU or UPC for generating barcode, these should be unique for all the products otherwise, a barcode can be replaced in the case of duplicate SKU/UPC. No two products should have the same SKU/UPC</comment>
+                    <source_model>Anyhow\SupermaxPos\Model\Config\Source\AllProductCode</source_model>
+                </field>
+                <depends>
+                    <field id="ah_supermax_pos_configuration/ah_supermax_pos_basic_configutaion/ah_supermax_pos_status">1</field>
+                </depends>
+            </group>
+
+            <!-- Group IBO Multi-Lot Configuration -->
+            <group id="ah_supermax_pos_multi_lot_configutaion" translate="label" type="text" sortOrder="55" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>IBO Multi-MRP and Multi-Lot Configuration</label>
+                <!-- <field id="ah_supermax_pos_mulit_lot_status" translate="label" type="select" sortOrder="10" showInDefault="10" showInWebsite="0" showInStore="1">
+                    <label>Multi-Lot / Multi-MRP Handling Status</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Multi-Lot / Multi-MRP Handling Status.</comment>
+                </field> -->
+                <field id="ah_supermax_pos_multi_mrp_info_api_url" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Get Product Multi Mrp API Url</label>
+                </field>
+                <field id="ah_supermax_pos_multi_lot_info_api_url" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Get Product Lot Info API Url</label>
+                </field>
+                <depends>
+                    <field id="ah_supermax_pos_configuration/ah_supermax_pos_basic_configutaion/ah_supermax_pos_status">1</field>
+                </depends>
+            </group>
+
+            <!-- Group IBO Sales Associates Configuration -->
+            <group id="ah_supermax_pos_sales_associate_configutaion" translate="label" type="text" sortOrder="56" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>IBO Sales Associates Configuration</label>
+                <field id="ah_supermax_pos_sales_associate_status" translate="label" type="select" sortOrder="10" showInDefault="10" showInWebsite="0" showInStore="1">
+                    <label>Sales Associates Status</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Sales Associates Status.</comment>
+                </field>
+                 <field id="ah_supermax_pos_get_sales_associates_api" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Get Sales Associates API URL</label>
+                </field>
+                <depends>
+                    <field id="ah_supermax_pos_configuration/ah_supermax_pos_basic_configutaion/ah_supermax_pos_status">1</field>
+                </depends>
+            </group>
+
+            <!-- Group IBO API engine -->
+            <group id="ah_supermax_pos_ibo_api_engine" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>Ibo API Engine Configuration</label>
+                <field id="ah_supermax_pos_bff_product_search_api_status" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>BFF Product Search API Status</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="ah_supermax_pos_product_search_api_url" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Product Search API Url</label>
+                </field>
+                <field id="ah_supermax_pos_getatp_api_url" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Get Atp API Url</label>
+                </field>
+                <field id="ah_supermax_pos_check_serviceability_api_url" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Check Serviceability API Url</label>
+                </field>
+                 <field id="ah_supermax_pos_invoice_base_url" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Invoice Base Url</label>
+                </field>
+                <field id="ah_supermax_pos_invoice_api_url" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Invoice API Url</label>
+                </field>
+                <field id="ah_supermax_pos_pincode_address_api_url" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Address By Pincode API Url</label>
+                </field>
+                <field id="ah_supermax_pos_price_zone_api_url" translate="label" type="text" sortOrder="55" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Price Zone By Pincode API Url</label>
+                </field>
+                <field id="ah_supermax_pos_generate_otp_api_url" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Generate OTP API Url</label>
+                </field>
+                <field id="ah_supermax_pos_validate_otp_api_url" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Validate OTP API Url</label>
+                </field>
+                <field id="ah_supermax_pos_product_search_by_desc_api_url" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Product Search By Description API</label>
+                </field>
+                <field id="ah_supermax_pos_verify_gst_address_api_url" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Verify GST Address API URL</label>
+                </field>
+                <field id="ah_supermax_pos_attach_gst_address_api_url" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Attach GST Address API URL</label>
+                </field>
+                <!-- <field id="ah_supermax_pos_search_product_api_url" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Search Product API Url</label>
+                </field>
+                <field id="ah_supermax_pos_product_view_api_url" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Product View API Url</label>
+                </field> -->
+                <depends>
+                    <field id="ah_supermax_pos_configuration/ah_supermax_pos_basic_configutaion/ah_supermax_pos_status">1</field>
+                </depends>
+            </group>
+
+            <!-- Group EDC API engine -->
+            <group id="ah_supermax_pos_ibo_edc_api_engine" translate="label" type="text" sortOrder="61" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>Ibo EDC API Engine Configuration</label>
+                <field id="ah_supermax_pos_ezetap_emi_min_amount" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Min Amount For Ezetap EMI</label>
+                </field>
+                <field id="ah_supermax_pos_start_ezetap_api_url" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Start Ezetap API Url</label>
+                </field>
+                <field id="ah_supermax_pos_get_ezetap_status_api_url" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Get Ezetap Transaction Status API Url</label>
+                </field>
+                 <field id="ah_supermax_pos_cancel_ezetap_api_url" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cancel Ezetap Transaction API Url</label>
+                </field>
+                <field id="ah_supermax_pos_pinelabs_marchant_id" translate="label" type="text" sortOrder="32" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Pinelabs Merchant Id</label>
+                </field>
+                <field id="ah_supermax_pos_pinelabs_security_token" translate="label" type="text" sortOrder="34" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Pinelabs Security Token</label>
+                </field>
+                <field id="ah_supermax_pos_pinelabs_emi_code" translate="label" type="text" sortOrder="36" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Pinelabs EMI MOP Code</label>
+                </field>
+                <field id="ah_supermax_pos_pinelabs_emi_min_amount" translate="label" type="text" sortOrder="38" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Min Amount For Pinelabs EMI</label>
+                </field>
+                <field id="ah_supermax_pos_start_pinelabs_api_url" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Start Pinelabs API Url</label>
+                </field>
+                <field id="ah_supermax_pos_get_pinelabs_status_api_url" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Get Pinelabs Transaction Status API Url</label>
+                </field>
+                 <field id="ah_supermax_pos_cancel_pinelabs_api_url" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cancel Pinelabs Transaction API Url</label>
+                </field>
+                <depends>
+                    <field id="ah_supermax_pos_configuration/ah_supermax_pos_basic_configutaion/ah_supermax_pos_status">1</field>
+                </depends>
+            </group>
+            <!-- Old Sales Report -->
+            <group id="oldsales" translate="label" type="text" sortOrder="62" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>Old Sales Report</label>
+                <field id="report" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Old Sales Report Cron</label>
+                </field>
+                
+            </group>
+            <!-- Group Wallet API engine -->
+            <group id="ah_supermax_pos_ibo_wallet_api_engine" translate="label" type="text" sortOrder="62" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>Ibo Wallet API Engine Configuration</label>
+                <field id="ah_supermax_pos_wallet_balance_api_url" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Get Wallet Balance API Url</label>
+                </field>
+                <field id="ah_supermax_pos_wallet_register_api_url" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Wallet Register API Url</label>
+                </field>
+                <field id="ah_supermax_pos_wallet_authenticate_api_url" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Wallet Authenticate API Url</label>
+                </field>
+                <field id="ah_supermax_pos_wallet_charge_api_url" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Wallet Charge API Url</label>
+                </field>
+                <field id="ah_supermax_pos_wallet_rollback_api_url" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Wallet Rollback API Url</label>
+                </field>
+                <depends>
+                    <field id="ah_supermax_pos_configuration/ah_supermax_pos_basic_configutaion/ah_supermax_pos_status">1</field>
+                </depends>
+            </group>
+
+            <!-- Group Quotation Configuration -->
+            <group id="ah_supermax_pos_ibo_quotation" translate="label" type="text" sortOrder="64" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>Ibo Quotation Configuration</label>
+                <field id="ah_supermax_pos_get_quotation_api_url" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Get Quotation API Url</label>
+                </field>
+                <field id="ah_supermax_pos_quotation_expire_time" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Quotation Expire Time (In Minutes)</label>
+                    <comment>Quotation will be expired after the provided time (In Minutes)</comment>
+                </field>
+                <field id="ah_supermax_pos_quotation_create_promise_api" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Create Promise API URL for Quotation</label>
+                </field>
+                <depends>
+                    <field id="ah_supermax_pos_configuration/ah_supermax_pos_basic_configutaion/ah_supermax_pos_status">1</field>
+                </depends>
+            </group>
+
+            <!-- Group IBO Payment engine -->
+            <group id="ah_supermax_pos_ibo_payment_engine" translate="label" type="text" sortOrder="62" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>Ibo Payment Engine Configuration</label>
+                <field id="ah_supermax_pos_create_payment_intent_api" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Create Payment Intent API Url</label>
+                </field>
+                <field id="ah_supermax_pos_ibo_psp_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>IBO Psp Id</label>
+                </field>
+                <field id="ah_supermax_pos_ibo_wallet_psp_id" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>IBO Wallet Psp Id</label>
+                </field>
+                <field id="ah_supermax_pos_ibo_offline_psp_id" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>IBO Offline Psp Id</label>
+                </field>
+                <field id="ah_supermax_pos_sara_loan_psp_id" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Saraloan Psp Id</label>
+                </field>
+                <field id="ah_supermax_pos_bharat_pe_psp_id" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Bharat Pe Psp Id</label>
+                </field>
+                <field id="ah_supermax_pos_pinelabs_icici_psp_id" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Pinelabs ICICI Bank Psp Id</label>
+                </field>
+                <field id="ah_supermax_pos_pinelabs_axis_psp_id" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Pinelabs Axis Bank Psp Id</label>
+                </field>
+                <field id="ah_supermax_pos_ezetap_hdfc_psp_id" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Ezetap HDFC Bank Psp Id</label>
+                </field>
+                <field id="ah_supermax_pos_ezetap_axis_psp_id" translate="label" type="text" sortOrder="75" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Ezetap Axis Bank Psp Id</label>
+                </field>
+                <field id="ah_supermax_pos_cash_payment_option_id" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cash Payment Option Id</label>
+                </field>
+                <field id="ah_supermax_pos_offline_payment_option_id" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Offline Payment Option Id</label>
+                </field>
+                <field id="ah_supermax_pos_wallet_payment_option_id" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Wallet Payment Option Id</label>
+                </field>
+                <field id="ah_supermax_pos_bank_deposit_payment_option_id" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Bank Deposit Payment Option Id</label>
+                </field>
+                <field id="ah_supermax_pos_sara_loan_payment_option_id" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>SARA LOAN Payment Option Id</label>
+                </field>
+                <field id="ah_supermax_pos_bharat_pe_payment_option_id" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>BHARAT PE Payment Option Id</label>
+                </field>
+                <field id="ah_supermax_pos_card_payment_option_id" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Card Payment Option Id</label>
+                </field>
+                <field id="ah_supermax_pos_emi_payment_option_id" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>EMI Payment Option Id</label>
+                </field>
+                <field id="ah_supermax_pos_upi_payment_option_id" translate="label" type="text" sortOrder="160" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>UPI Payment Option Id</label>
+                </field>
+                <field id="ah_supermax_pos_credit_card_payment_option_id" translate="label" type="text" sortOrder="170" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Credit Card Payment Option Id</label>
+                </field>
+                <field id="ah_supermax_pos_debit_card_payment_option_id" translate="label" type="text" sortOrder="180" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Debit Card Payment Option Id</label>
+                </field>
+                <field id="ah_supermax_pos_net_banking_payment_option_id" translate="label" type="text" sortOrder="190" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Net Banking Payment Option Id</label>
+                </field>
+                <depends>
+                    <field id="ah_supermax_pos_configuration/ah_supermax_pos_basic_configutaion/ah_supermax_pos_status">1</field>
+                </depends>
+            </group>
+
+            <!-- Group Email Configuration -->
+            <group id="ah_supermax_pos_email_configutaion" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>Email Configuration</label>
+              
+                <field id="ah_supermax_pos_email_time_interval" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Email Time Interval</label>
+                    <comment>Set time interval (in milliseconds) at which email sending will be processed at POS terminal. Default time interval will be 1000 milliseconds</comment>
+                </field>
+               
+                <field id="ah_supermax_pos_cashier_template_for_cashier_login" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Cashier Email Template For Cashier Login</label>
+                    <comment>Select the Email Template which will be used while sending “Cashier Login Email” to Cashier</comment>
+                    <source_model>Anyhow\SupermaxPos\Model\Config\Source\AllEmailTemplates</source_model>
+                </field>
+
+                <field id="ah_supermax_pos_admin_template_for_cashier_login" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Admin Email Template For Cashier Login</label>
+                    <comment>Select the Email Template which will be used while sending  “Cashier Login Email” to Admin</comment>
+                    <source_model>Anyhow\SupermaxPos\Model\Config\Source\AllEmailTemplates</source_model>
+                </field>
+                
+                <field id="ah_supermax_pos_cashier_template_for_cashier_logout" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Cashier Email Template For Cashier Logout</label>
+                    <comment>Select the Email Template which will be used while sending “Cashier Logout Email” to Cashier</comment>
+                    <source_model>Anyhow\SupermaxPos\Model\Config\Source\AllEmailTemplates</source_model>
+                </field>
+
+                <field id="ah_supermax_pos_admin_template_for_cashier_logout" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Admin Email Template For Cashier Logout</label>
+                    <comment>Select the Email Template which will be used while sending “Cashier Logout Email” to Admin</comment>
+                    <source_model>Anyhow\SupermaxPos\Model\Config\Source\AllEmailTemplates</source_model>
+                </field>
+
+                <field id="ah_supermax_pos_cashier_template_for_terminal_reset" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Cashier Email Template For Terminal Reset</label>
+                    <comment>Select the Email Template which will be used while sending “Terminal Reset Email” to Cashier</comment>
+                    <source_model>Anyhow\SupermaxPos\Model\Config\Source\AllEmailTemplates</source_model>
+                </field>
+
+                <field id="ah_supermax_pos_admin_template_for_terminal_reset" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Admin Email Template For Terminal Reset</label>
+                    <comment>Select the Email Template which will be used while sending “Terminal Reset Email” to Admin</comment>
+                    <source_model>Anyhow\SupermaxPos\Model\Config\Source\AllEmailTemplates</source_model>
+                </field>
+
+                <field id="ah_supermax_pos_admin_template_for_custom_product_add" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Admin Email Template For Custom Product Add</label>
+                    <comment>Select the Email Template which will be used while sending “Custom Product Add Email” to Admin</comment>
+                    <source_model>Anyhow\SupermaxPos\Model\Config\Source\AllEmailTemplates</source_model>
+                </field>
+
+                <field id="ah_supermax_pos_admin_template_for_hold_cart" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Admin Email Template For Hold Cart</label>
+                    <comment>Select the Email Template which will be used while sending “Hold Cart Email” to Admin</comment>
+                    <source_model>Anyhow\SupermaxPos\Model\Config\Source\AllEmailTemplates</source_model>
+                </field>
+                <depends>
+                    <field id="ah_supermax_pos_configuration/ah_supermax_pos_basic_configutaion/ah_supermax_pos_status">1</field>
+                </depends>
+            </group>
+
+            <!-- Group Receipt Configuration -->
+            <group id="ah_supermax_pos_receipt_configutaion" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>Receipt Configuration</label>
+                
+                <field id="ah_supermax_pos_categories_condition" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label> Category ID</label>
+                    <comment>Enter multiple Category ID with “,” for which check in condition. </comment>
+                </field>
+                
+                <field id="ah_supermax_pos_terms_and_Conditions_one" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Terms and Conditions one</label>
+                    <comment>Terms and Conditions</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_configuration/ah_supermax_pos_basic_configutaion/ah_supermax_pos_status">1</field>
+                    </depends>
+                </field> 
+                
+                <field id="ah_supermax_pos_terms_and_Conditions_two" translate="label" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Terms and Conditions two</label>
+                    <comment>Terms and Conditions for L1 category</comment>
+                    <depends>
+                        <field id="ah_supermax_pos_configuration/ah_supermax_pos_basic_configutaion/ah_supermax_pos_status">1</field>
+                    </depends>
+                </field>    
+              
+            </group>
+        </section>
+        <section id="ah_supermax_pos_customer_domain_configuration" translate="label" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Customer Domain Configuration</label>
+            <tab>anyhow_supermax_pos</tab>
+            <resource>Anyhow_SupermaxPos::ah_configuration</resource>
+            <group id="ah_supermax_pos_customer_domain_configuration" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Customer Domain Configuration</label>
+                <field id="ah_supermax_pos_customer_register_api_url" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Customer Registration API Url</label>
+                </field>
+                <depends>
+                    <field id="ah_supermax_pos_configuration/ah_supermax_pos_basic_configutaion/ah_supermax_pos_status">1</field>
+                </depends>
+            </group>
+        </section>
+        <section id="ah_supermax_pos_barcode_printing_configuration" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Product Label Printing</label>
+            <tab>anyhow_supermax_pos</tab>
+            <resource>Anyhow_SupermaxPos::ah_configuration</resource>
+
+            <!-- Group Barcode Label Printing Configuration -->
+            <group id="ah_supermax_pos_barcode_label_printing_configutaion" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Basic Configuration</label>
+                
+                <field id="ah_supermax_pos_barcode_label_size_unit" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Barcode Label Sticker Size Unit</label>
+                    <comment>Set the barcode label sticker size unit in which you will set the width and height of the label sticker below. Mostly mm is used for sticker size</comment>
+                    <source_model>Anyhow\SupermaxPos\Model\Config\Source\AllSizeUnits</source_model>
+                </field>
+
+                <field id="ah_supermax_pos_barcode_label_width" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Barcode Label Sticker Width</label>
+                    <comment>Barcode Label Sticker Width</comment>
+                </field>
+
+                <field id="ah_supermax_pos_barcode_label_height" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Barcode Label Sticker Height</label>
+                    <comment>Barcode Label Sticker Height</comment>
+                </field>
+                <field id="ah_supermax_pos_barcode_label_margin_top" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Barcode Label Sticker Margin Top (in px)</label>
+                    <comment>Set margin top of the contents which will be in label sticker. Default:0px</comment>
+                </field>
+
+                <field id="ah_supermax_pos_barcode_label_margin_right" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Barcode Label Sticker Margin Right (in px)</label>
+                    <comment>Set margin right of the contents which will be in label sticker. Default:0px</comment>
+                </field>
+
+                <field id="ah_supermax_pos_barcode_label_margin_bottom" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Barcode Label Sticker Margin Bottom (in px)</label>
+                    <comment>Set margin bottom of the contents which will be in label sticker. Default:0px</comment>
+                </field>
+
+                <field id="ah_supermax_pos_barcode_label_margin_left" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Barcode Label Sticker Margin Left (in px)</label>
+                    <comment>Set margin left of the contents which will be in label sticker. Default:0px</comment>
+                </field>
+
+                <field id="ah_supermax_pos_barcode_print_code_font_size" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Barcode Print Code Font Size (in px)</label>
+                    <comment>Barcode character code font size (in px)</comment>
+                </field>
+
+                 <field id="ah_supermax_pos_barcode_print_content_font_size" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Barcode Print Content Font Size (in px)</label>
+                    <comment>Barcode sticker content font size (in px)</comment>
+                </field>
+
+                 <field id="ah_supermax_pos_barcode_label_price_currency" translate="label" type="select" sortOrder="160" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Barcode Label Sticker Price Currency</label>
+                    <comment>Set currency which will be used to convert and format the product price and print in label sticker</comment>
+                    <source_model>Anyhow\SupermaxPos\Model\Config\Source\AllowedCurrency</source_model>
+                </field>
+                <depends>
+                    <field id="ah_supermax_pos_configuration/ah_supermax_pos_basic_configutaion/ah_supermax_pos_status">1</field>
+                </depends>
+            </group>
+
+             <!-- Group Barcode Label Product Settings -->
+            <group id="ah_supermax_pos_barcode_label_product_settings" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Product Settings</label>
+
+                <field id="ah_supermax_pos_barcode_product_name_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Display Product Name</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Display Product Name in Barcode Label Sticker</comment>
+                </field>
+                <field id="ah_supermax_pos_barcode_product_name_sortorder" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Product Name Sort Order</label>
+                    <comment>Product Name Sort Order</comment>
+                </field>
+                <field id="ah_supermax_pos_barcode_product_price_status" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Display Product Price</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Display Product Price in Barcode Label Sticker</comment>
+                </field>
+                <field id="ah_supermax_pos_barcode_product_price_sortorder" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Product Price Sort Order</label>
+                    <comment>Product Price Sort Order</comment>
+                </field>
+
+                <field id="ah_supermax_pos_barcode_image_status" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Display Barcode Image</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Display Barcode Image</comment>
+                </field>
+                <field id="ah_supermax_pos_barcode_image_sortorder" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Barcode Image Sort Order</label>
+                    <comment>Barcode Image Sort Order</comment>
+                </field>
+                <field id="ah_supermax_pos_barcode_print_image_width" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Barcode Image Width (in px)</label>
+                    <comment>Barcode Image Width (in px). Please Leave Blank for width:auto</comment>
+                </field>
+
+                 <field id="ah_supermax_pos_barcode_print_image_height" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Barcode Image Height (in px)</label>
+                    <comment>Barcode Image Height (in px). Please Leave Blank for height:auto</comment>
+                </field>
+            </group>
+
+            <!-- Group Barcode Label Header Logo Settings -->
+            <group id="ah_supermax_pos_barcode_label_logo_settings" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Header Logo Settings</label>
+
+                <field id="ah_supermax_pos_barcode_logo_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Display Header Logo</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Display Header Logo in Barcode Label Sticker</comment>
+                </field>
+
+                <field id="ah_supermax_pos_barcode_logo_sortorder" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Header Logo Sort Order</label>
+                    <comment>Header Logo Sort Order</comment>
+                </field>
+
+                <field id="ah_supermax_pos_barcode_label_Header_logo" translate="label" type="Magento\Config\Block\System\Config\Form\Field\Image" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Header Logo</label>
+                    <comment>This logo / image will be shown in barcode label sticker header as company logo</comment>
+                    <backend_model>Anyhow\SupermaxPos\Model\Config\Backend\Image</backend_model>
+                    <base_url type="media" scope_info="1">supermax/barcode/logo</base_url>
+                    <upload_dir scope_info="0">supermax/barcode/logo</upload_dir>
+                </field>
+
+                <field id="ah_supermax_pos_barcode_label_Header_logo_width" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Header Logo Width (in px)</label>
+                    <comment>Barcode Label Sticker Header Logo Width (in px). Please Leave Blank for width:auto</comment>
+                </field>
+
+                 <field id="ah_supermax_pos_barcode_label_Header_logo_height" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Header Logo Height (in px)</label>
+                    <comment>Barcode Label Sticker Header Logo Height (in px). Please Leave Blank for height:auto</comment>
+                </field>
+            </group>
+
+            <!-- Group Barcode Label Attribute Settings -->
+            <group id="ah_supermax_pos_barcode_label_attribute_settings" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Custom Attribute Settings</label>
+
+                <field id="ah_supermax_pos_barcode_product_attribute_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Display Custom Attributes</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Display Product Custom Attributes in Barcode Label Sticker</comment>
+                </field>
+
+                <field id="ah_supermax_pos_barcode_product_attributes_sortorder" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Custom Attributes Sort Order</label>
+                    <comment>Custom Attributes Sort Order</comment>
+                </field>
+                
+                <field id="ah_supermax_pos_barcode_product_custom_attributes" translate="label" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Select Custom Attributes</label>
+                    <comment>Allow the product attributes as content will be printed on barcode label sticker</comment>
+                    <source_model>Anyhow\SupermaxPos\Model\Config\Source\ContentAllow</source_model>
+                </field>
+            </group>
+        
+        </section>
+
+        <section id="payment">
+                <group id="pospayment" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Supermax POS Payment</label>
+                    <field id="title" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Title</label>
+                    </field>
+                </group>
+        </section>
+    </system>
+</config>

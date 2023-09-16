@@ -1,0 +1,16 @@
+<!--@subject {{trans "MRP Publish Status"}} @-->
+
+{{template config_path="design/email/header_template"}}
+<table style="float:left; margin-right: 10px" class="fue-abc-items">
+    <tr>
+        <td>
+            <div>
+                <div class="greeting">Hi,</div>
+                {{trans "MRP changeover has resulted in  Ebo price > MRP and hence SKU "}} {{var sku}} {{trans " is unpublished from the app."}}
+                <p>{{trans "Please correct the Selling price so that SKU becomes active again on the app."}}</p>
+                <p>{{trans "Regards"}}</p>
+            </div>
+        </td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}

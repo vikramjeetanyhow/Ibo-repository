@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="sel_specification" translate="label" sortOrder="600" showInDefault="1" showInWebsite="1" showInStore="0">
+            <class>separator-top</class>
+            <label>SEL Specifications</label>
+            <tab>embitel</tab>
+            <resource>Ibo_SelSpecification::setting</resource>
+            <group id="setting" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Setting</label>
+                <field id="cron_status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Cron Time</label>
+                    <comment>0 0 * * * it should be in this format. this will run every night at midnight.</comment>
+                </field>
+                <field id="default_sel_rule" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Default SEL Rule</label>
+                    <comment>Please add comma seperated attribute codes.</comment>
+                </field>
+                <field id="products_updated_hours" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Product Updated In Last Hours</label>
+                    <comment>Default is 2 hours.</comment>
+                </field>
+                <field id="batch_size" translate="label" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Batch Size</label>
+                    <comment>If it's empty then it will consider all products.</comment>
+                </field>
+                <field id="log_active" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Log Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

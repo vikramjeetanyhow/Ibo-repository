@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="additionalFieldsProviderForElasticsearch" type="Magento\AdvancedSearch\Model\Adapter\DataMapper\AdditionalFieldsProvider">
+        <arguments>
+            <argument name="fieldsProviders" xsi:type="array">               
+                <item name="parentSku" xsi:type="object">Ibo\CatalogSearch\Model\Adapter\BatchDataMapper\ParentSkuDataProvider
+                </item>
+                <item name="ibo_tier_price" xsi:type="object">Ibo\CatalogSearch\Model\Adapter\BatchDataMapper\TierPriceFieldsProvider
+                </item>
+                <item name="ibo_courier_type" xsi:type="object">Ibo\CatalogSearch\Model\Adapter\BatchDataMapper\CourierTypeFieldsProvider</item>
+                <item name="ibo_stock_status" xsi:type="object">Ibo\CatalogSearch\Model\Adapter\BatchDataMapper\StockStatusProvider</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <preference for="Magento\CatalogSearch\Model\Indexer\Fulltext" type="Ibo\CatalogSearch\Model\Indexer\Fulltext" />  
+    <!-- Increased Query depth from 20 to 30 -->
+    <!-- Increased Query complexity from 300 to 500 -->
+    <type name="Magento\Framework\GraphQl\Query\QueryComplexityLimiter">
+        <arguments>
+            <argument name="queryDepth" xsi:type="number">30</argument>
+            <argument name="queryComplexity" xsi:type="number">500</argument>
+        </arguments>
+    </type> 
+</config>

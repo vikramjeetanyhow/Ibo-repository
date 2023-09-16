@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<?php
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
+$data = $this->getRequest()->getParams();
+$quantity = $data['quantity'];
+$productId = $data['entity_id'];
+$product = $objectManager->create('Magento\Catalog\Model\Product')->load($productId);
+$scopeConfig = $objectManager->get('Magento\Framework\App\Config\ScopeConfigInterface');
+$storeManager = $objectManager->get('Magento\Store\Model\StoreManagerInterface');
+$helper = $objectManager->get('Anyhow\SupermaxPos\Helper\Data');
+$baseCurrencyCode = $storeManager->getStore()->getCurrentCurrencyCode();
+$barcodeMediaPath = $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA).'/supermax/barcode/products/';
+$headerLogoMediaPath = $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA).'/supermax/barcode/logo/';
+
+$pos_barcode_print_label_size_unit = $scopeConfig->getValue('ah_supermax_pos_configuration/ah_supermax_pos_barcode_label_printing_configutaion/ah_supermax_pos_barcode_label_size_unit');
+$pos_barcode_print_label_width = $scopeConfig->getValue('ah_supermax_pos_configuration/ah_supermax_pos_barcode_label_printing_configutaion/ah_supermax_pos_barcode_label_width');
+$pos_barcode_print_label_height = $scopeConfig->getValue('ah_supermax_pos_configuration/ah_supermax_pos_barcode_label_printing_configutaion/ah_supermax_pos_barcode_label_height');
+$pos_barcode_print_label_margin_top = $scopeConfig->getValue('ah_supermax_pos_configuration/ah_supermax_pos_barcode_label_printing_configutaion/ah_supermax_pos_barcode_label_margin_top');
+$pos_barcode_print_label_margin_right = $scopeConfig->getValue('ah_supermax_pos_configuration/ah_supermax_pos_barcode_label_printing_configutaion/ah_supermax_pos_barcode_label_margin_right');
+$pos_barcode_print_label_margin_bottom = $scopeConfig->getValue('ah_supermax_pos_configuration/ah_supermax_pos_barcode_label_printing_configutaion/ah_supermax_pos_barcode_label_margin_bottom');
+$pos_barcode_print_label_margin_left = $scopeConfig->getValue('ah_supermax_pos_configuration/ah_supermax_pos_barcode_label_printing_configutaion/ah_supermax_pos_barcode_label_margin_left');
+$pos_barcode_print_label_header_logo_width = $scopeConfig->getValue('ah_supermax_pos_configuration/ah_supermax_pos_barcode_label_printing_configutaion/ah_supermax_pos_barcode_label_Header_logo_width');
+$pos_barcode_print_label_header_logo_height = $scopeConfig->getValue('ah_supermax_pos_configuration/ah_supermax_pos_barcode_label_printing_configutaion/ah_supermax_pos_barcode_label_Header_logo_height');
+$pos_barcode_print_label_number_font_size = $scopeConfig->getValue('ah_supermax_pos_configuration/ah_supermax_pos_barcode_label_printing_configutaion/ah_supermax_pos_barcode_print_code_font_size');
+$pos_barcode_print_label_image_width = $scopeConfig->getValue('ah_supermax_pos_configuration/ah_supermax_pos_barcode_label_printing_configutaion/ah_supermax_pos_barcode_print_image_width');
+$pos_barcode_print_label_image_height = $scopeConfig->getValue('ah_supermax_pos_configuration/ah_supermax_pos_barcode_label_printing_configutaion/ah_supermax_pos_barcode_print_image_height');
+$pos_barcode_print_label_content_font_size = $scopeConfig->getValue('ah_supermax_pos_configuration/ah_supermax_pos_barcode_label_printing_configutaion/ah_supermax_pos_barcode_print_content_font_size');
+$pos_barcode_print_label_header_logo = $scopeConfig->getValue('ah_supermax_pos_configuration/ah_supermax_pos_barcode_label_printing_configutaion/ah_supermax_pos_barcode_label_Header_logo');
+$pos_barcode_print_label_content_allow = explode(',', $scopeConfig->getValue('ah_supermax_pos_configuration/ah_supermax_pos_barcode_label_printing_configutaion/ah_supermax_pos_barcode_print_content_allow'));
+$pos_barcode_print_label_currency_code = $scopeConfig->getValue('ah_supermax_pos_configuration/ah_supermax_pos_barcode_label_printing_configutaion/ah_supermax_pos_barcode_label_price_currency');
+
+$currencySymbol = $objectManager->get('Magento\Framework\Locale\CurrencyInterface')->getCurrency($pos_barcode_print_label_currency_code)->getSymbol();
+
+?>
+<html>
+<head>
+<meta charset="UTF-8" />
+<style>
+    .barcode-box {
+        display: inline-block !important; 
+        margin: 10px 10px !important; 
+    }
+
+    @media print {
+        body { 
+            margin: 0 !important; 
+        }
+
+        @page {
+            size: <?php echo $pos_barcode_print_label_width . $pos_barcode_print_label_size_unit; ?> <?php echo $pos_barcode_print_label_height . $pos_barcode_print_label_size_unit; ?> !important;
+            margin: 0 !important;
+        }
+
+        .barcode-box {
+            display: block !important;
+            page-break-after:always !important;
+            page-break-before:always !important;
+            margin-top: <?php echo $pos_barcode_print_label_margin_top.'px'; ?> !important;
+            margin-right: <?php echo $pos_barcode_print_label_margin_right.'px'; ?> !important;
+            margin-bottom: <?php echo $pos_barcode_print_label_margin_bottom.'px'; ?> !important;
+            margin-left: <?php echo $pos_barcode_print_label_margin_left.'px'; ?> !important;
+        }
+
+        .header-logo {
+            text-align: center !important;
+        }
+
+        .header-logo img {
+            margin: 0px !important;
+            padding: 0px !important;
+            width: <?php echo $pos_barcode_print_label_header_logo_width.'px'; ?> !important;
+            height: <?php echo $pos_barcode_print_label_header_logo_height.'px'; ?> !important;
+        }
+
+        .img {
+            /* text-align: center; */
+            font-size: <?php echo $pos_barcode_print_label_number_font_size.'px'; ?> !important;
+        }
+
+        .img img {
+            vertical-align: middle;
+            margin-bottom: 1px;
+            width: <?php echo $pos_barcode_print_label_image_width.'px'; ?> !important;
+            height: <?php echo $pos_barcode_print_label_image_height.'px'; ?> !important;
+        }
+
+        .content {
+            margin-bottom: 1px;
+            font-size: <?php echo $pos_barcode_print_label_content_font_size.'px'; ?> !important;
+        }
+
+        .content label {
+            font-weight: 600 !important;
+        }
+    }
+</style>
+</head>
+<body>
+    <?php //foreach ($products as $key => $product) {?>
+        <?php for ($i = 1; $i <= $quantity ; $i++) { ?>
+            <div class="barcode-box">
+                <?php if ($pos_barcode_print_label_header_logo && !empty($pos_barcode_print_label_content_allow) && in_array('logo', $pos_barcode_print_label_content_allow)) { ?>
+                <div class="header-logo">
+                    <img src="<?php echo $headerLogoMediaPath.$pos_barcode_print_label_header_logo; ?>" alt="logo">
+                </div>
+                <?php } ?>
+                <?php if (!empty($pos_barcode_print_label_content_allow)) {?>
+                <div class="content">
+                    <?php if (in_array('name', $pos_barcode_print_label_content_allow) && $product->getName()) { ?>
+                        <div><label><?php echo 'Name'; ?>: </label><?php echo $product->getName(); ?></div>
+                    <?php } ?>
+                    <?php if (in_array('sku', $pos_barcode_print_label_content_allow) && $product->getSku()) { ?>
+                        <div><label><?php echo 'Sku'; ?>: </label><?php echo $product->getSku(); ?></div>
+                    <?php } ?>
+                    <?php if (in_array('price', $pos_barcode_print_label_content_allow)) { ?>
+                        <div>
+                            <label><?php echo 'Price'; ?>: </label>
+                            <?php if ($product->getSpecialPrice()) { ?>
+                                <span><?php echo $currencySymbol.(float)$helper->convert($product->getSpecialPrice(),$baseCurrencyCode, $pos_barcode_print_label_currency_code); ?></span>
+                            <?php } else { ?>
+                                <?php echo $currencySymbol.(float)$helper->convert($product->getPrice(),$baseCurrencyCode, $pos_barcode_print_label_currency_code); ?>
+                            <?php } ?>
+                        </div>
+                    <?php } ?>
+                </div>
+                <?php } ?>
+                <div class="img">
+                    <div><img src="<?php echo $barcodeMediaPath.$product->getBarcode().'.jpg'; ?>"></div>
+                    <label><?php echo $product->getBarcode(); ?></label>
+                </div>
+            </div>
+        <?php } ?>
+    <?php  //} ?>
+    <script>
+    require([
+        "jquery",
+        'Magento_Ui/js/modal/alert',
+        "jquery/ui",
+        ], function($){
+            $(document).ready(function() {
+                    window.print();
+            });
+        });
+    </script>
+</body>
+</html>

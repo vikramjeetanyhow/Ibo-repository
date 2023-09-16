@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+
+<!-- 
+/**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */
+ -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl> 
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Anyhow_SupermaxPos::ah_supermaxpos" title="Supemax Pos Module" sortOrder="51">
+					<!-- <resource id="Anyhow_SupermaxPos::ah_orders" title="Supermax Orders" sortOrder="25"/> -->
+					<resource id="Anyhow_SupermaxPos::ah_pos" title="Supermax Management" sortOrder="30">
+						<resource id="Anyhow_SupermaxPos::ah_products" title="Supermax Products" sortOrder="10"/>
+						<resource id="Anyhow_SupermaxPos::ah_cashiers_roles" title="Supermax Employees Roles" sortOrder="20">
+							<resource id="Anyhow_SupermaxPos::cashier_role_edit" title="Edit Employee Role" translate="title" sortOrder="5" />
+							<resource id="Anyhow_SupermaxPos::cashier_role_save" title="Save Employee Role" translate="title" sortOrder="10" />
+							<resource id="Anyhow_SupermaxPos::cashier_role_delete" title="Delete Employee Role" translate="title" sortOrder="20" />
+						</resource>
+						<resource id="Anyhow_SupermaxPos::ah_cashiers" title="Supermax Employees" sortOrder="30">
+							<resource id="Anyhow_SupermaxPos::cashier_edit" title="Edit Employee" translate="title" sortOrder="5" />
+							<resource id="Anyhow_SupermaxPos::cashier_save" title="Save Employee" translate="title" sortOrder="10" />
+							<resource id="Anyhow_SupermaxPos::cashier_delete" title="Delete Employee" translate="title" sortOrder="20" />
+							<resource id="Anyhow_SupermaxPos::cashier_foreced_logout" title="Forced Logout Employee" translate="title" sortOrder="30" />
+						</resource>
+						<resource id="Anyhow_SupermaxPos::ah_price_reductions" title="Supermax Price Overrides" sortOrder="35">
+							<resource id="Anyhow_SupermaxPos::price_reduction_edit" title="Edit Price Override" translate="title" sortOrder="5" />
+							<resource id="Anyhow_SupermaxPos::price_reduction_save" title="Save Price Override" translate="title" sortOrder="10" />
+							<resource id="Anyhow_SupermaxPos::price_reduction_delete" title="Delete Price Override" translate="title" sortOrder="20" />
+						</resource>
+						<resource id="Anyhow_SupermaxPos::ah_receipts" title="Supermax Receipts" sortOrder="40">
+							<resource id="Anyhow_SupermaxPos::receipt_edit" title="Edit Receipt" translate="title" sortOrder="5" />
+							<resource id="Anyhow_SupermaxPos::receipt_save" title="Save Receipt" translate="title" sortOrder="10" />
+							<resource id="Anyhow_SupermaxPos::receipt_delete" title="Delete Receipt" translate="title" sortOrder="20" />
+						</resource>
+						<resource id="Anyhow_SupermaxPos::ah_outlets" title="Supermax Stores" sortOrder="50">
+							<resource id="Anyhow_SupermaxPos::outlet_edit" title="Edit Store" translate="title" sortOrder="5" />
+							<resource id="Anyhow_SupermaxPos::outlet_save" title="Save Store" translate="title" sortOrder="10" />
+							<resource id="Anyhow_SupermaxPos::outlet_delete" title="Delete Store" translate="title" sortOrder="20" />
+						</resource>
+						<resource id="Anyhow_SupermaxPos::ah_pos_terminals" title="Supermax POS Terminals" sortOrder="60">
+							<resource id="Anyhow_SupermaxPos::pos_terminal_edit" title="Edit POS Terminal" translate="title" sortOrder="5" />
+							<resource id="Anyhow_SupermaxPos::pos_terminal_save" title="Save POS Terminal" translate="title" sortOrder="10" />
+							<resource id="Anyhow_SupermaxPos::pos_terminal_delete" title="Delete POS Terminal" translate="title" sortOrder="20" />
+						</resource>
+						<!-- <resource id="Anyhow_SupermaxPos::ah_registers" title="Supermax Registers" sortOrder="60"/> -->
+					</resource>
+
+					<resource id="Anyhow_SupermaxPos::ah_reports" title="Supermax Reports Management" sortOrder="40">
+						<resource id="Anyhow_SupermaxPos::ah_sales_reports" title="Supermax Sales Reports" sortOrder="10"/>
+						<resource id="Anyhow_SupermaxPos::ah_inventory_reports" title="Supermax Inventory Reports" sortOrder="20"/>
+						<resource id="Anyhow_SupermaxPos::ah_customer_reports" title="Supermax Customer Reports" sortOrder="30"/>
+						<resource id="Anyhow_SupermaxPos::ah_tax_reports" title="Supermax Tax Reports" sortOrder="40"/>
+						<resource id="Anyhow_SupermaxPos::ah_overrides_reports" title="Supermax Overrides Reports" sortOrder="50"/>
+						<resource id="Anyhow_SupermaxPos::ah_headreconcile_reports" title="Head Cahier Reconcile Report" sortOrder="60"/>
+						<resource id="Anyhow_SupermaxPos::ah_customerreferral_reports" title="Supermax Customer Referral" sortOrder="60"/>
+					</resource>
+					<resource id="Anyhow_SupermaxPos::ah_supermax_sales" title="Supermax Sales" sortOrder="45">
+						<resource id="Anyhow_SupermaxPos::ah_orders" title="Supermax Sales Orders" sortOrder="10"/>
+					</resource>
+					<resource id="Anyhow_SupermaxPos::ah_supermax_cash_register" title="Supermax Cash Register" sortOrder="50">
+						<resource id="Anyhow_SupermaxPos::ah_registers" title="Supermax Registers Management" sortOrder="10"/>
+					</resource>
+				</resource>
+				
+				<resource id="Magento_Backend::stores">
+					<resource id="Magento_Backend::stores_settings">
+						<resource id="Magento_Config::config">
+							<resource id="Anyhow_SupermaxPos::ah_configuration" title="Supermax Configuration" sortOrder="10"/>
+							<resource id="Anyhow_SupermaxPos::ah_configuration_save" title="Supermax Configuration Save" sortOrder="20"/>
+						</resource>
+					</resource>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

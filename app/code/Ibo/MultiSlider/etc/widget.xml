@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget class="Ibo\MultiSlider\Block\HeroSliderWidget" id="ibo_banners">
+        <label>Category HeroSlider Widget</label>
+        <description>This widget is responsible for rendering the sliders.</description>
+        <parameters>
+            <parameter name="header_title" xsi:type="text" required="false" sort_order="1">
+                <label translate="true">Header Title</label>
+            </parameter> 
+            <parameter name="customer_group" xsi:type="multiselect" required="true" visible="true" sort_order="3" source_model="Ibo\MultiSlider\Model\Source\Group">
+                <label translate="true">Select Customer Group</label>
+            </parameter>           
+            <parameter name="banner_identifier" xsi:type="select" visible="true"
+                       source_model="Ibo\MultiSlider\Model\Source\SliderLists" sort_order="2">
+                <label>Category HeroSlider Lists</label>
+            </parameter>
+            <parameter name="max_limit" xsi:type="text" required="false" sort_order="4">
+                <label translate="true">Max Limit</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

@@ -1,0 +1,16 @@
+{
+    "sales_order_partner": {
+        "column": {
+            "entity_id": true,
+            "parent_id": true,
+            "moengage_status_flag": true,
+            "ir_status_flg": true
+        },
+        "index": {
+            "SALES_ORDER_PARTNER_PARENT_ID": true
+        },
+        "constraint": {
+            "SALES_ORDER_PARTNER_PARENT_ID_SALES_ORDER_ENTITY_ID": true
+        }
+    }
+}

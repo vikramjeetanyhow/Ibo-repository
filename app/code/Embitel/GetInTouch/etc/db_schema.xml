@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">    
+    <table name="ebo_contactus_master" resource="default" engine="innodb"
+           comment="EBO Contact Us Master">
+        <column xsi:type="int" name="id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="ID"/>
+        <column xsi:type="varchar" name="customer_name" nullable="false" length="255" comment="Customer Name" />
+        <column xsi:type="varchar" name="email" nullable="false" length="255" comment="Customer Email" />
+        <column xsi:type="text" name="contactus_message" nullable="true" comment="Contact Us Message" />
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="EBO_CONTACTUS_MASTER_CUSTOMER_NAME_EMAIL" indexType="fulltext">
+            <column name="customer_name"/>
+            <column name="email"/>
+        </index>
+    </table>
+</schema>

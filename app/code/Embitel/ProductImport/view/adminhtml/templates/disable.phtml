@@ -1,0 +1,63 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Embitel\ProductImport\Block\Adminhtml\Disable\Index */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+?>
+<div class="productimport-export-tax-rates">
+    <div class="import-tax-rates">
+        <?php if ($block->getUseContainer()):?>
+        <form id="disable-form"
+              class="admin__fieldset"
+              action="<?= $block->escapeUrl($block->getUrl('productimport/disable/post')) ?>"
+              method="post"
+              enctype="multipart/form-data">
+        <?php endif; ?>
+            <?= $block->getBlockHtml('formkey') ?>
+            <div class="fieldset admin__field">
+                <label for="productdisable_file" class="admin__field-label">
+                    <span><?= $block->escapeHtml(__('Product CSV')) ?></span>
+                </label>
+                <div class="admin__field-control">
+                    <input type="file"
+                           id="productdisable_file"
+                           name="productdisable_file"
+                           class="input-file required-entry"/>
+                    <?= $block->getButtonHtml(__('Import'), '', 'import-submit') ?>
+                </div>
+            </div>
+        <?php if ($block->getUseContainer()):?>
+        </form>
+        <?php endif; ?>
+        <?php $scriptString = <<<script
+
+    require(['jquery', 'Magento_Ui/js/modal/alert', "mage/mage", "loadingPopup", 'mage/translate'],
+        function(jQuery, uiAlert){
+
+    jQuery('#disable-form').mage('form').mage('validation');
+    (function ($) {
+        $('.import-submit').click(function(){
+            if($(':input[name="productdisable_file"]').val()) {
+                $('body').loadingPopup({
+                    timeout: false
+                });
+
+                $(this.form).submit();
+            } else {
+                uiAlert({
+                    content: $.mage.__('Please select a file to import!')
+                });
+            }
+        });
+    })(jQuery);
+
+});
+
+script;
+        ?>
+        <?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
+    </div>
+</div>

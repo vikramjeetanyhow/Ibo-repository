@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+	<group id="ebo_tax_rate_update">
+		<job instance="Embitel\TaxMaster\Cron\UpdateTax" method="execute" name="ebo_tax_rate_update">
+			<config_path>tax_master/cron_settings/cron_expression</config_path>
+		</job>
+	</group>
+    <group id="ebo_tax_rate_sync">
+        <job instance="Embitel\TaxMaster\Cron\SyncTax" method="execute" name="ebo_tax_rate_sync">
+            <config_path>tax_master/sync_cron_settings/cron_expression</config_path>
+        </job>
+    </group>
+</config>

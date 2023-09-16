@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\CustomerImportExport\Model\Import\Customer" type="Embitel\Customer\Model\Import\Customer" />
+    <preference for="Magento\Customer\Model\Validator\Name" type="Embitel\Customer\Model\Validator\Name" />
+    <preference for="Embitel\Customer\Api\CustomerDetailsInterface" type="Embitel\Customer\Model\CustomerDetails"/>
+    <preference for="Magento\Customer\Block\Adminhtml\Group\Edit\Form" type="Embitel\Customer\Block\Adminhtml\Group\Edit\Form"/>
+    <preference for="Magento\Customer\Controller\Adminhtml\Group\Save" type="Embitel\Customer\Controller\Adminhtml\Group\Save"/>
+    <preference for="Embitel\Customer\Api\UpdateReferrerInterface" type="Embitel\Customer\Model\Service\UpdateReferrer"/>
+    <preference for="Embitel\Customer\Api\GetCustomerTokenInterface" type="Embitel\Customer\Model\GetCustomerToken" />
+</config>

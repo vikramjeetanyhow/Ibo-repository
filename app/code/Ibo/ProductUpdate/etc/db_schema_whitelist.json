@@ -1,0 +1,16 @@
+{
+    "ibo_exclude_subclass": {
+        "column": {
+            "id": true,
+            "subclass_id": true,
+            "subclass_name": true
+        },
+        "index": {
+            "IBO_EXCLUDE_SUBCLASS_ID": true,
+            "IBO_EXCLUDE_SUBCLASS_SUBCLASS_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

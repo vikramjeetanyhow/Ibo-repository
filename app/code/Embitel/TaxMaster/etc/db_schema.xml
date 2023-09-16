@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="embitel_tax_master" resource="default" engine="innodb" comment="Tax Master">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="Id"/>
+        <column xsi:type="varchar" name="tax_class_id" nullable="true" comment="Tax Class Id"/>
+        <column xsi:type="varchar" name="hsn_code" nullable="true" comment="HSN Code"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="HSN_CODE_UNIQUE_ID">
+            <column name="hsn_code"/>
+        </constraint>
+    </table>
+</schema>

@@ -1,0 +1,52 @@
+{
+    "ebo_import_history": {
+        "column": {
+            "history_id": true,
+            "user_id": true,
+            "success_filename": true,
+            "odoo_filename": true,
+            "failure_filename": true,
+            "created_at": true            
+        },
+        "index": {
+            "EBO_IMPORT_SUCCESS_FILENAME": true,
+            "EBO_IMPORT_ODOO_FILENAME": true,
+            "EBO_IMPORT_FAILURE_FILENAME": true
+        },
+        "constraint": {
+            "PRIMARY": true            
+        }
+    },
+    "ebo_publish_history": {
+        "column": {
+            "history_id": true,
+            "user_id": true,
+            "success_filename": true,
+            "failure_filename": true,
+            "created_at": true            
+        },
+        "index": {
+            "EBO_PUBLISH_SUCCESS_FILENAME": true,
+            "EBO_PUBLISH_FAILURE_FILENAME": true
+        },
+        "constraint": {
+            "PRIMARY": true            
+        }
+    },
+    "ebo_disable_history": {
+        "column": {
+            "history_id": true,
+            "user_id": true,
+            "success_filename": true,
+            "failure_filename": true,
+            "created_at": true            
+        },
+        "index": {
+            "EBO_DISABLE_SUCCESS_FILENAME": true,
+            "EBO_DISABLE_FAILURE_FILENAME": true
+        },
+        "constraint": {
+            "PRIMARY": true            
+        }
+    }
+}

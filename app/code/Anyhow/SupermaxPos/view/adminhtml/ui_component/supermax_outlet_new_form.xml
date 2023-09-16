@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    /**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */
+
+ -->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">supermax_outlet_new_form.supermax_outlet_new_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Store Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save_and_continue" class="Anyhow\SupermaxPos\Block\Adminhtml\Outlet\Edit\SaveAndContinueButton"/>
+            <button name="save" class="Anyhow\SupermaxPos\Block\Adminhtml\Outlet\Edit\SaveButton"/>
+            <button name="reset" class="Anyhow\SupermaxPos\Block\Adminhtml\Outlet\Edit\ResetButton"/>
+            <button name="delete" class="Anyhow\SupermaxPos\Block\Adminhtml\Outlet\Edit\DeleteButton"/>
+            <button name="back" class="Anyhow\SupermaxPos\Block\Adminhtml\Outlet\Edit\BackButton"/>
+        </buttons>
+        <namespace>supermax_outlet_new_form</namespace>
+        <dataScope>data</dataScope>
+        <!-- <layout>
+            <navContainerName>left</navContainerName>
+            <type>tabs</type>
+        </layout> -->
+        <deps>
+            <dep>supermax_outlet_new_form.supermax_outlet_new_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="supermax_outlet_new_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="supermax/outlet/save"/>
+        </settings>
+        <dataProvider class="Anyhow\SupermaxPos\Model\Outlet\DataProvider" name="supermax_outlet_new_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>pos_outlet_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+        <label/>
+            <!-- <label translate="true">Outlet Information</label> -->
+        </settings>
+        <field name="pos_outlet_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Outlet</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>pos_outlet_id</dataScope>
+            </settings>
+        </field>
+        <field name="status" sortOrder="10" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Outlet</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <!-- <dataType>boolean</dataType> -->
+                <label translate="true">Status</label>
+                <dataScope>status</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="store_id" sortOrder="15" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Outlet</item>
+                    <item name="disabled" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Store Id</label>
+                <dataScope>store_id</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="outlet_name" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Outlet</item>
+                    <item name="disabled" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Store Name</label>
+                <dataScope>outlet_name</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="email" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Outlet</item>
+                    <item name="disabled" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Email</label>
+                <dataScope>email</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="inventory_node" sortOrder="22" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Outlet</item>
+                    <item name="disabled" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Inventory Node</label>
+                <dataScope>inventory_node</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="store_wh_node" sortOrder="25" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Outlet</item>
+                    <item name="disabled" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Store WH Node</label>
+                <dataScope>store_wh_node</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="allowed_ips" sortOrder="26" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Outlet</item>
+                    <item name="disabled" xsi:type="boolean">false</item>
+                    <item name="notice" xsi:type="string" translate="true">Enter multiple IPs separated with “,” or “;” or “/” for which supermax POS terminal will work.</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">POS IP address</label>
+                <dataScope>allowed_ips</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="source_code" sortOrder="30" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Anyhow\SupermaxPos\Model\Outlet\Attribute\Source\SourceOptions</item>
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Outlet</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Source</label>
+                <dataScope>source_code</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="pos_receipt_id" sortOrder="35" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Anyhow\SupermaxPos\Model\Outlet\Attribute\ReceiptOptions</item>
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Outlet</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Assign Receipt</label>
+                <dataScope>pos_receipt_id</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <!-- <field name="ezetap_app_key" sortOrder="36" formElement="input">
+            <argument name="data" xsi:type="array">
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Ezetap App Key</label>
+                <dataScope>ezetap_app_key</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field> -->
+        <field name="outlet_address_type" sortOrder="45" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <!-- <item name="options" xsi:type="object">Anyhow\SupermaxPos\Model\Outlet\Attribute\Address\CustomerAddressOptions</item> -->
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Outlet</item>
+                    <item name="component" xsi:type="string">Anyhow_SupermaxPos/js/form/element/options</item>
+                    <!-- <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item> -->
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Set Store Address</label>
+                <dataScope>outlet_address_type</dataScope>
+                <!-- <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation> -->
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="firstname" sortOrder="50" formElement="input">
+            <argument name="data" xsi:type="array">
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">First Name</label>
+                <dataScope>firstname</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="lastname" sortOrder="55" formElement="input">
+            <argument name="data" xsi:type="array">
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Last Name</label>
+                <dataScope>lastname</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="company" sortOrder="60" formElement="input">
+            <argument name="data" xsi:type="array">
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Company</label>
+                <dataScope>company</dataScope>
+            </settings>
+        </field>
+        <field name="pan_no" sortOrder="60" formElement="input">
+            <argument name="data" xsi:type="array">
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">PAN</label>
+                <dataScope>pan_no</dataScope>
+            </settings>
+        </field>
+        <field name="gstin" sortOrder="60" formElement="input">
+            <argument name="data" xsi:type="array">
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">GSTIN</label>
+                <dataScope>gstin</dataScope>
+            </settings>
+        </field>
+        <field name="telephone" sortOrder="65" formElement="input">
+            <argument name="data" xsi:type="array">
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Telephone</label>
+                <dataScope>telephone</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="street" sortOrder="70" formElement="input">
+            <argument name="data" xsi:type="array">
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Street</label>
+                <dataScope>street</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="city" sortOrder="90" formElement="input">
+            <argument name="data" xsi:type="array">
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">City</label>
+                <dataScope>city</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="postcode" sortOrder="100" formElement="input">
+            <argument name="data" xsi:type="array">
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">PostCode</label>
+                <dataScope>postcode</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="country_id" sortOrder="110" formElement="select">
+            <argument name="data" xsi:type="array">
+            <item name="options" xsi:type="object">Magento\Directory\Model\Config\Source\Country</item>
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/country</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Country</label>
+                <dataScope>country_id</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="region_id" sortOrder="120" formElement="select">
+            <argument name="data" xsi:type="array">
+            <item name="options" xsi:type="object">Magento\Directory\Model\ResourceModel\Region\Collection</item>
+                <item name="config" xsi:type="array">
+                <item name="visible" xsi:type="boolean">false</item>
+                    <item name="filterBy" xsi:type="array">
+                        <item name ="target" xsi:type="string">${ $.provider }:${ $.parentScope }.country_id</item>
+                        <item name ="field" xsi:type="string">country_id</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">State</label>
+                <dataScope>region_id</dataScope>
+            </settings>
+        </field>
+        <field name="receipt_thermal_status" sortOrder="130" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Enabledisable</item>
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Outlet</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Receipt Thermal</label>
+                <dataScope>receipt_thermal_status</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="online_payment_popup_status" sortOrder="140" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Enabledisable</item>
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Outlet</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Button status on online payment popup</label>
+                <dataScope>online_payment_popup_status</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>        
+        <field name="display_payments" sortOrder="150" formElement="multiselect">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Anyhow\SupermaxPos\Model\Cashier\Attribute\Outlets\DisplayPayments</item>
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Enable Payments</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Enable Payments</label>
+                <dataScope>display_payments</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="multi_lot_status" sortOrder="160" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Enabledisable</item>
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Outlet</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Multi-Lot / Multi-MRP Handling Status</label>
+                <dataScope>multi_lot_status</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+    </fieldset>
+</form>

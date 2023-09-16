@@ -1,0 +1,22 @@
+{
+    "name": "ibo/module-coremedia",
+    "description": "IBO Core Media Service",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Hitendra Badiani",
+            "email": "hitendra.badiani@embitel.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ibo\\CoreMedia\\": ""
+        }
+    }
+}

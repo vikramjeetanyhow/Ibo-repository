@@ -1,0 +1,10 @@
+<config
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+<template id="active_promotion_report"
+          label="Promotion Report"
+          file="active_promotion_report.html"
+          type="html"
+          module="Embitel_SalesRule"
+          area="frontend"
+/>
+</config>

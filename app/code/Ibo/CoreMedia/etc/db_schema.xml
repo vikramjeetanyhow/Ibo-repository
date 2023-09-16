@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">   
+    <table name="catalog_service_product_push" resource="default" engine="innodb"
+           comment="EBO Catalog service product push">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="product_id" padding="5" unsigned="false" nullable="false" identity="false"
+                comment="Product ID"/>
+        <column xsi:type="varchar" name="product_sku" nullable="true" length="64" comment="SKU"/>
+        <column xsi:type="smallint" name="status_flag" padding="5" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Status Flag"/> 
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="PRODUCT_UNIQUE_ID">
+       		<column name="product_id"/>
+        </constraint>
+        <index referenceId="CATALOG_SERVICE_PRODUCT_PUSH_PRODUCT_SKU" indexType="btree">
+            <column name="product_sku"/>
+        </index>  
+    </table>
+</schema>

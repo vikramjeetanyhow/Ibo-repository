@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">   
+    <table name="catalog_eav_attribute" resource="default" engine="innodb">
+        <column xsi:type="smallint" name="is_required_for_publish" unsigned="true" nullable="false"
+                identity="false" default="0" comment="Values Required for Publish"/>
+        <column xsi:type="int" name="used_in_product_specs" nullable="true" default="0" comment="Used in Product Specifications"/>
+        <column xsi:type="varchar" name="product_specs_position" nullable="true" default="0" length="10" comment="Product Specifications Position"/>
+        <column xsi:type="varchar" name="attribute_type" nullable="true" length="50" comment="Attribute Type"/>
+        <column xsi:type="text" name="attribute_category_ids" nullable="true" comment="Attribute Filter Category"/>
+    </table>
+    <table name="catalog_product_entity" resource="default" engine="innodb">
+        <column xsi:type="datetime" name="sel_updated_at" comment="SEL updated datetime"/>
+        <index referenceId="SEL_UPDATED_AT" indexType="btree">
+            <column name="sel_updated_at"/>
+        </index>
+    </table>
+</schema>

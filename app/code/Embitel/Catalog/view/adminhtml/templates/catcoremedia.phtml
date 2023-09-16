@@ -1,0 +1,17 @@
+<?php
+ $category = $block->getCategory();
+ $baseUrl = $block->getCoreMediaUrl();
+?>
+<div>
+     <ul>
+    <?php if($category->getBaseImageCustom()) { ?>        
+        <li style="display:inline-block; padding:10px; "><div><span><?php echo __("Primary Image : ");?></span></div> <image src="<?php echo $baseUrl.$category->getBaseImageCustom() ?>" width="150" height="150" /></li>
+    <?php } ?> 
+    <?php if($category->getPrimaryBannerImageCustom()) { ?>        
+        <li style="display:inline-block; padding:10px; "><div><span><?php echo __("Primary Banner Image : ");?></span></div><image src="<?php echo $baseUrl.$category->getPrimaryBannerImageCustom() ?>" width="150" height="150" /></li>
+    <?php } ?>
+    <?php if($category->getSecondaryBannerImageCustom()) { ?>        
+        <li style="display:inline-block; padding:10px; "><div><span><?php echo __("Secondary Banner Image : ");?></span></div> <image src="<?php echo $baseUrl.$category->getSecondaryBannerImageCustom() ?>" width="150" height="150" /></li>
+    <?php } ?>
+     </ul>
+</div> 

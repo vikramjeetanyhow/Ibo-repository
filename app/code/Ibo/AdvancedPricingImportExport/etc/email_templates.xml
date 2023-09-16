@@ -1,0 +1,10 @@
+<config
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="advanced_pricing"
+              label="Advanced Pricing Report"
+              file="advanced_pricing.html"
+              type="html"
+              module="Ibo_AdvancedPricingImportExport"
+              area="frontend"
+    />
+</config>

@@ -1,0 +1,16 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="mrpPriceUpdate"
+              label="Mrp Price Update"
+              file="mrpPriceUpdate.html"
+              type="html"
+              module="Ibo_MrpUpdate"
+              area="frontend"
+    />
+    <template id="mrpPriceReport"
+              label="Mrp Price Report"
+              file="mrpPriceReport.html"
+              type="html"
+              module="Ibo_MrpUpdate"
+              area="frontend"
+    />
+</config>

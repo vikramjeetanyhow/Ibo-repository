@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">ibo_heroslider_form.ibo_heroslider_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Edit Hero Banner</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="Ibo\MultiSlider\Block\Adminhtml\HeroSlider\Edit\BackButton"/>
+            <button name="delete" class="Ibo\MultiSlider\Block\Adminhtml\HeroSlider\Edit\DeleteButton"/>
+            <button name="save" class="Ibo\MultiSlider\Block\Adminhtml\HeroSlider\Edit\SaveButton"/>
+            <button name="save_and_continue" class="Ibo\MultiSlider\Block\Adminhtml\HeroSlider\Edit\SaveAndContinueButton"/>
+        </buttons>
+        <namespace>ibo_heroslider_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>ibo_heroslider_form.ibo_heroslider_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="ibo_heroslider_form_data_source" component="Magento_Ui/js/form/provider">
+        <settings>
+            <submitUrl path="multislider/heroslider/saveslider"/>
+        </settings>
+        <dataProvider class="Ibo\MultiSlider\Model\Data\HeroSliderData\DataProvider" name="ibo_heroslider_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <fieldset name="image_information">
+        <settings>
+            <collapsible>false</collapsible>
+            <label translate="true">Slider Information</label>
+        </settings>
+
+        <field name="status" sortOrder="0"
+               component="Magento_Ui/js/form/element/single-checkbox-toggle-notice" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="notices" xsi:type="array">
+                        <item name="0" xsi:type="string" translate="true">Disabled</item>
+                        <item name="1" xsi:type="string" translate="true">Enabled</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataScope>status</dataScope>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>        
+        <field name="id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">multislider</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>id</dataScope>
+            </settings>
+        </field>
+        <!--To add title-->
+        <field name="identifier" sortOrder="2" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">multislider</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Identifier</label>
+                <dataScope>identifier</dataScope>
+            </settings>
+        </field>      
+        <field name="type" sortOrder="3" formElement="select">
+                    <settings>
+                        <notice>Banner Slider Type.</notice>
+                        <validation>
+                            <rule name="required-entry" xsi:type="boolean">true</rule>
+                        </validation>
+                        <dataType>text</dataType>
+                        <label translate="true">Banner Type</label>
+                        <dataScope>type</dataScope>
+                    </settings>
+                    <formElements>
+                        <select>
+                            <settings>
+                                <options>
+                                    <option name="banner" xsi:type="array">
+                                        <item name="value" xsi:type="string">master_banner</item>
+                                        <item name="label" xsi:type="string">master_banner</item>
+                                    </option> 
+                                    <option name="banner_carousel" xsi:type="array">
+                                        <item name="value" xsi:type="string">master_banner_carousel</item>
+                                        <item name="label" xsi:type="string">master_banner_carousel</item>
+                                    </option>                                   
+                                    <option name="kiosk_large_slider" xsi:type="array">
+                                        <item name="value" xsi:type="string">kiosk_large_slider</item>
+                                        <item name="label" xsi:type="string">kiosk_large_slider</item>
+                                    </option>
+                                    <option name="kiosk_medium_slider" xsi:type="array">
+                                        <item name="value" xsi:type="string">kiosk_medium_slider</item>
+                                        <item name="label" xsi:type="string">kiosk_medium_slider</item>
+                                    </option>
+                                    <option name="kiosk_small_slider" xsi:type="array">
+                                        <item name="value" xsi:type="string">kiosk_small_slider</item>
+                                        <item name="label" xsi:type="string">kiosk_small_slider</item>
+                                    </option>                                    
+                                    <option name="quad_cards" xsi:type="array">
+                                        <item name="value" xsi:type="string">quad_cards</item>
+                                        <item name="label" xsi:type="string">quad_cards</item>
+                                    </option>
+                                    <option name="adlayout_banner" xsi:type="array">
+                                        <item name="value" xsi:type="string">adlayout_banner</item>
+                                        <item name="label" xsi:type="string">adlayout_banner</item>
+                                    </option>
+                                </options>
+                                <caption translate="true">-- Please Select --</caption>
+                            </settings>
+                        </select>
+                    </formElements>
+                </field>
+    </fieldset>
+    <fieldset name="dynamic_rows_fieldset">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Manage Banners</item>
+                <item name="sortOrder" xsi:type="number">31</item>
+            </item>
+        </argument>
+        <settings>
+            <label translate="true">Slider Information</label>
+        </settings>
+        <dynamicRows name="dynamic_rows_slider_information" sortOrder="9999"
+                     component="Magento_Ui/js/dynamic-rows/dynamic-rows"
+                     template="ui/dynamic-rows/templates/default">
+        <settings>
+            <recordTemplate>record</recordTemplate>
+            <dndConfig>
+                <param name="enabled" xsi:type="boolean">false</param>
+            </dndConfig>
+            <deleteValue>true</deleteValue>
+            <addButton>true</addButton>
+            <addButtonLabel>Add New Banner</addButtonLabel>
+            <additionalClasses>
+                <class name="admin__field-wide">false</class>
+            </additionalClasses>
+            <scopeLabel>[GLOBAL]</scopeLabel>
+            <label translate="true">Banner Information</label>
+            <visible>true</visible>
+            <componentType>dynamicRows</componentType>
+            <dataScope>data.ibo_heroslider_form</dataScope>
+        </settings>
+        <container name="record" component="Magento_Ui/js/dynamic-rows/record">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="isTemplate" xsi:type="boolean">true</item>
+                <item name="is_collection" xsi:type="boolean">true</item>
+                <item name="componentType" xsi:type="string">container</item>
+            </item>
+        </argument>
+
+        <field name="json" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">multislider</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <visible>false</visible>
+                <dataScope>json</dataScope>
+            </settings>
+        </field>
+
+        <!--To add the title in the banner-->
+        <field name="title_row" sortOrder="0" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">multislider</item>
+                </item>
+            </argument>
+            <settings>
+                <additionalClasses>
+                    <class name="title-row-class">true</class>
+                </additionalClasses>
+                <dataType>text</dataType>
+                <label translate="true">Title</label>
+                <dataScope>title_row</dataScope>
+            </settings>
+        </field>
+
+        <!--To add status-->
+        <field name="status_row" sortOrder="1"
+                   component="Magento_Ui/js/form/element/single-checkbox-toggle-notice" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">0</item>
+                        <item name="notices" xsi:type="array">
+                            <item name="0" xsi:type="string" translate="true">Disabled</item>
+                            <item name="1" xsi:type="string" translate="true">Enabled</item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataScope>status_row</dataScope>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Enable</label>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+        </field>
+
+        <field name="position" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">multislider</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <visible>false</visible>
+                <dataScope>position</dataScope>
+            </settings>
+        </field>
+
+        <!--To add a new slider-->
+        <button name="popup_modal_button" sortOrder="3"
+        component="Ibo_MultiSlider/js/form/element/ModalBtn">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="actions" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="targetName" xsi:type="string">
+                                    ibo_heroslider_form.ibo_heroslider_form.dynamic_rows_fieldset.popup_modal</item>
+                                <item name="actionName" xsi:type="string">openModal</item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <title translate="true">Settings</title>
+                </settings>
+            </button>
+
+        <!--Delete Button for the slider-->
+        <actionDelete template="Magento_Backend/dynamic-rows/cells/action-delete" sortOrder="999">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="sortOrder" xsi:type="string">999</item>
+                    </item>
+                </argument>
+                <settings>
+                    <label translate="true">Delete Slider</label>
+                    <componentType>actionDelete</componentType>
+                    <dataType>text</dataType>
+                    <additionalClasses>
+                        <class name="data-grid-actions-cell">true</class>
+                    </additionalClasses>
+                </settings>
+            </actionDelete>
+
+        </container>
+        </dynamicRows>
+
+        <modal name="popup_modal">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Ibo_MultiSlider/js/form/element/SaveSliderBtn</item>
+                    <item name="onCancel" xsi:type="string">actionCancel</item>
+                    <item name="options" xsi:type="array">
+                        <item name="type" xsi:type="string">popup</item>
+                        <item name="buttons" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="text" xsi:type="string">Cancel</item>
+                                <item name="class" xsi:type="string">action-secondary</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="string">actionCancel</item>
+                                </item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="text" xsi:type="string">Save Banner</item>
+                                <item name="class" xsi:type="string">action-primary-save-slider</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="string">actionDone</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+            <fieldset name="general">
+                <settings>
+                    <label translate="true">Image Information</label>
+                </settings>
+                <field name="title" sortOrder="1" formElement="input">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="source" xsi:type="string">multislider</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <validation>
+                            <rule name="required-entry" xsi:type="boolean">true</rule>
+                        </validation>
+                        <dataType>text</dataType>
+                        <label translate="true">Title</label>
+                        <dataScope>title</dataScope>
+                    </settings>
+                </field>
+                <field name="banner_name" sortOrder="1" formElement="input">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="source" xsi:type="string">multislider</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <validation>
+                            <rule name="required-entry" xsi:type="boolean">true</rule>
+                        </validation>
+                        <dataType>text</dataType>
+                        <label translate="true">Banner Name</label>
+                        <dataScope>banner_name</dataScope>
+                    </settings>
+                </field>
+                <field name="label" sortOrder="1" formElement="input">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="source" xsi:type="string">multislider</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <validation>
+                            <rule name="required-entry" xsi:type="boolean">true</rule>
+                        </validation>
+                        <dataType>text</dataType>
+                        <label translate="true">Label</label>
+                        <dataScope>label</dataScope>
+                    </settings>
+                </field>            
+                
+                <field name="id" formElement="input">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="source" xsi:type="string">multislider</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <dataType>text</dataType>
+                        <visible>false</visible>
+                        <dataScope>id</dataScope>
+                    </settings>
+                </field>
+
+                <!--To add the sort order-->
+                <field name="sort_order" sortOrder="9" formElement="input">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="source" xsi:type="string">multislider</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <validation>
+                            <rule name="validate-number" xsi:type="boolean">true</rule>
+                            <rule name="required-entry" xsi:type="boolean">false</rule>
+                        </validation>
+                        <dataType>text</dataType>
+                        <label translate="true">Sort Order</label>
+                        <dataScope>sort_order</dataScope>
+                    </settings>
+                </field>
+                <!--To add web deep link for the image-->
+                <field name="web_link" sortOrder="10" formElement="input">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="source" xsi:type="string">multislider</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <validation>
+                            <rule name="required-entry" xsi:type="boolean">true</rule>
+                        </validation>
+                        <dataType>text</dataType>
+                        <label translate="true">Web Deep Link</label>
+                        <dataScope>web_link</dataScope>
+                    </settings>
+                </field>
+                <!--To add app deep link for the image-->
+                <field name="app_link" sortOrder="10" formElement="input">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="source" xsi:type="string">multislider</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <validation>
+                            <rule name="required-entry" xsi:type="boolean">true</rule>
+                        </validation>
+                        <dataType>text</dataType>
+                        <label translate="true">App Deep Link</label>
+                        <dataScope>app_link</dataScope>
+                    </settings>
+                </field>                  
+            </fieldset>
+            <!-- To upload the slider images in the form-->
+            <fieldset name= "upload">
+                <settings>
+                    <label translate="true">Upload Images</label>
+                </settings>
+                <field name="small_image" sortOrder="12" formElement="imageUploader">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="source" xsi:type="string">small_image</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <label translate="true">Small Image</label>
+                        <dataType>string</dataType>
+                        <elementTmpl>ui/form/element/uploader/image</elementTmpl>
+                        <visible>true</visible>
+                        <validation>
+                            <rule xsi:type="boolean" name="required-entry">false</rule>
+                        </validation>
+                    </settings>
+                    <formElements>
+                        <imageUploader>
+                            <settings>
+                                <uploaderConfig>
+                                    <param xsi:type="string" name="url">multislider/heroslider/upload</param>
+                                </uploaderConfig>
+                                <previewTmpl>Ibo_MultiSlider/image-preview</previewTmpl>
+                            </settings>
+                        </imageUploader>
+                    </formElements>
+                </field>                
+                <field name="large_image" sortOrder="14" formElement="imageUploader">
+                    <settings>
+                        <label translate="true">Large Image</label>
+                        <visible>true</visible>
+                        <validation>
+                            <rule name="required-entry" xsi:type="boolean">false</rule>
+                        </validation>
+                    </settings>
+                    <formElements>
+                        <imageUploader>
+                            <settings>
+                                <uploaderConfig>
+                                    <param xsi:type="string" name="url">multislider/heroslider/upload</param>
+                                </uploaderConfig>
+                                <previewTmpl>Ibo_MultiSlider/image-preview</previewTmpl>
+                            </settings>
+                        </imageUploader>
+                    </formElements>
+                </field>                
+            </fieldset>
+        </modal>
+    </fieldset>
+</form>

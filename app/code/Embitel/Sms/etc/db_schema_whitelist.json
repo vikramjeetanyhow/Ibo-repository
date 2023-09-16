@@ -1,0 +1,24 @@
+{
+    "embitel_mobile_otp": {
+        "column": {
+            "mobile_id": true,
+            "customer_mobile_number": true,
+            "otp": true,
+            "created_date_time": true,
+            "expire_date_time": true,
+            "verification_flag": true,
+            "verification_status": true,
+            "resend_count": true,
+            "last_resend": true
+        },
+        "index": {
+            "EMBITEL_SMS_OTP_MOBILE_ID": true,
+            "EMBITEL_SMS_OTP_CUSTOMER_MOBILE_NUMBER": true,
+            "EMBITEL_SMS_OTP_VERIFICATION_STATUS": true,
+            "EMBITEL_SMS_OTP_VERIFICATION_FLAG": true
+        },
+        "constraint": {
+            "PRIMARY": true            
+        }
+    }
+}

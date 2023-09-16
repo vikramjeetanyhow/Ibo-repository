@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="update_mrp_from_magento_to_oodo">
+        <observer name="update_mrp_to_oodo" instance="Ibo\MrpUpdate\Observer\UpdateMrpToOodo" />
+    </event>
+</config>

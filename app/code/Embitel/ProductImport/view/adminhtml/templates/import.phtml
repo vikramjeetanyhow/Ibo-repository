@@ -1,0 +1,72 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Embitel\ProductImport\Block\Adminhtml\Import\Index */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+?>
+<div class="productimport-export-tax-rates">
+    <div class="import-tax-rates">
+        <?php if ($block->getUseContainer()):?>
+        <form id="import-form"
+              class="admin__fieldset"
+              action="<?= $block->escapeUrl($block->getUrl('productimport/import/post')) ?>"
+              method="post"
+              enctype="multipart/form-data">
+        <?php endif; ?>
+            <?= $block->getBlockHtml('formkey') ?>
+            <div class="fieldset admin__field">
+                <label for="productimport_file" class="admin__field-label">
+                    <span><?= $block->escapeHtml(__('Product CSV')) ?></span>
+                </label>
+                <div class="admin__field-control">
+                    <input type="checkbox"
+                           id="is_bulk_upload"
+                           name="is_bulk_upload"
+                           class="checkbox"/>
+                    <label for="is_bulk_upload" class="admin__field-label">
+                        <span>Is Bulk Upload</span>
+                    </label>
+                </div>
+                <div class="admin__field-control">
+                    <input type="file"
+                           id="productimport_file"
+                           name="productimport_file"
+                           class="input-file required-entry"/>
+                    <?= $block->getButtonHtml(__('Import'), '', 'import-submit') ?>
+                </div>
+            </div>
+        <?php if ($block->getUseContainer()):?>
+        </form>
+        <?php endif; ?>
+        <?php $scriptString = <<<script
+
+    require(['jquery', 'Magento_Ui/js/modal/alert', "mage/mage", "loadingPopup", 'mage/translate'],
+        function(jQuery, uiAlert){
+
+    jQuery('#import-form').mage('form').mage('validation');
+    (function ($) {
+        $('.import-submit').click(function(){
+            if($(':input[name="productimport_file"]').val()) {
+                $('body').loadingPopup({
+                    timeout: false
+                });
+
+                $(this.form).submit();
+            } else {
+                uiAlert({
+                    content: $.mage.__('Please select a file to import!')
+                });
+            }
+        });
+    })(jQuery);
+
+});
+
+script;
+        ?>
+        <?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
+    </div>
+</div>

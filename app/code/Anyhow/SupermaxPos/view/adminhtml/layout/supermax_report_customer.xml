@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!-- 
+    /**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */
+
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<update handle="styles"/>
+<body>
+    <referenceContainer name="content">
+     <block name="anyhow.customer.form" class="Anyhow\SupermaxPos\Block\Adminhtml\CustomerForm" template="Anyhow_SupermaxPos::customerform.phtml"/>
+        
+        <uiComponent name="supermax_report_customer_listing"/>
+    </referenceContainer>
+</body>
+</page>

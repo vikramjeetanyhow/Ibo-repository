@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   Embitel
+ * @package    Embitel_Banner
+ * @author     hitendra.badiani@embitel.com 
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Embitel_Banner" setup_version="1.0.1">
+        <sequence>
+            <module name="Ibo_CoreMedia"/>
+        </sequence>
+    </module>
+</config>

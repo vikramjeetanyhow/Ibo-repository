@@ -1,0 +1,37 @@
+{
+    "ibo_home_category": {
+        "column": {
+            "id": true,
+            "category_id": true,
+            "customer_group": true,
+            "type": true,
+            "from_date": true,
+            "to_date": true,
+            "created_at": true
+        },
+        "index": {
+            "IBO_HOME_CATEGORY_ID": true,
+            "IBO_HOME_CATEGORY_CATEGORY_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "ibo_home_bestdeal": {
+        "column": {
+            "id": true,
+            "sku": true,
+            "customer_group": true,
+            "from_date": true,
+            "to_date": true,
+            "created_at": true
+        },
+        "index": {
+            "IBO_HOME_BESTDEAL_ID": true,
+            "IBO_HOME_BESTDEAL_SKU": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

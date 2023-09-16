@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--preference for="Magento\CatalogGraphQl\Model\Resolver\Category\SortFields" type="Embitel\CatalogGraphQl\Model\Resolver\Category\SortFields" /-->
+    <type name="Embitel\CatalogGraphQl\Plugin\Search\Request\ConfigReader">
+        <arguments>
+            <argument name="exactMatchAttributes" xsi:type="array">
+                <item name="sku" xsi:type="string">sku</item>
+            </argument>
+        </arguments>
+    </type>
+   <preference for="Magento\CatalogGraphQl\Plugin\Search\Request\ConfigReader" type="Embitel\CatalogGraphQl\Plugin\Search\Request\ConfigReader" />
+</config>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <eboexport>
+            <ebo_config>
+                <cron_status>0</cron_status>
+                <failure_hit_limit>3</failure_hit_limit>
+                <cron_expression>* * * * *</cron_expression>
+                <full_dump_page_size>5000</full_dump_page_size>
+                <log_status>0</log_status>
+                <cron_export_file_count>1</cron_export_file_count>
+            </ebo_config>
+            <ebo_report_config>
+                <cron_status>0</cron_status>
+                <is_receiver_emails> </is_receiver_emails>
+                <cron_expression>0 4 * * *</cron_expression>
+                <log_status>0</log_status>
+            </ebo_report_config>
+            <ebo_customer_report_config>
+                <cron_status>0</cron_status>
+                <is_receiver_emails> </is_receiver_emails>
+                <cron_expression>0 4 * * *</cron_expression>
+                <log_status>0</log_status>
+            </ebo_customer_report_config>
+            <ebo_customer_report_config_additional>
+                <cron_status>0</cron_status>
+                <is_receiver_emails> </is_receiver_emails>
+                <cron_expression>0 4 * * *</cron_expression>
+                <log_status>0</log_status>
+            </ebo_customer_report_config_additional>
+            <ebo_custom_script>
+                <cron_status>0</cron_status>
+                <cron_expression>0/15 * * * *</cron_expression>
+            </ebo_custom_script>
+        </eboexport>
+    </default>
+</config>

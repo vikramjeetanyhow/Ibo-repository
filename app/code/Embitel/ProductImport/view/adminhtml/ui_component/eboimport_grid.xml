@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<listing
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">eboimport_grid.eboimport_grid_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <deps>
+            <dep>eboimport_grid.eboimport_grid_data_source</dep>
+        </deps>
+        <spinner>eboimport_grid_columns</spinner>
+    </settings>
+    <dataSource name="eboimport_grid_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">history_id</param>
+                <param name="indexField" xsi:type="string">success_filename</param>
+                <param name="indexField" xsi:type="string">odoo_filename</param>
+                <param name="indexField" xsi:type="string">failure_filename</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="Embitel\ProductImport\Ui\DataProvider\ExportFileDataProvider" name="eboimport_grid_data_source">
+            <settings>
+                <requestFieldName>history_id</requestFieldName>
+                <primaryFieldName>history_id</primaryFieldName>                      
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="eboimport_grid_columns">
+        <column name="history_id">
+            <settings>
+                <sortable>false</sortable>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+
+        <column name="is_bulk_upload" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <dataType>select</dataType>
+                <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                <sortable>false</sortable>
+                <label translate="true">Bulk Upload Request</label>
+            </settings>
+        </column>
+        <column name="bulk_upload_status">
+            <settings>
+                <sortable>false</sortable>
+                <label translate="true">Bulk Upload Status</label>
+            </settings>
+        </column>
+        <column name="upload_file_name">
+            <settings>
+                <sortable>false</sortable>
+                <label translate="true">Bulk Upload File Name</label>
+            </settings>
+        </column>
+
+        <column name="success_filename">
+            <settings>
+                <sortable>false</sortable>
+                <label translate="true">Success File Name</label>
+            </settings>
+        </column>
+        <column name="odoo_filename">
+            <settings>
+                <sortable>false</sortable>
+                <label translate="true">Odoo File Name</label>
+            </settings>
+        </column>
+        <column name="failure_filename">
+            <settings>
+                <sortable>false</sortable>
+                <label translate="true">Failure File Name</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Embitel\ProductImport\Ui\Component\Columns\ExportGridActions">
+            <settings>
+                <indexField>history_id</indexField>                
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

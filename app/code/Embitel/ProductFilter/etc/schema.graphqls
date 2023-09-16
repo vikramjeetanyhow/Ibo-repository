@@ -1,0 +1,19 @@
+type Aggregation {
+    is_selected: Boolean @doc(description: "Request variable name for filter query.")
+    condition_type : String @doc(description: "Attribute condition type operator.")
+}
+
+interface AggregationOptionInterface {
+    is_selected: Boolean @doc(description: "Request variable name for filter query.")
+    swatch_data: SwatchData @doc(description: "Data required to render swatch filter item")
+    category_code: String @doc(description: "Request variable name for filter query.")
+}
+
+type SortField {
+    is_selected: Boolean @doc(description: "Request variable for is selected flag.")
+}
+
+type SwatchData {
+    type: String @doc(description: "Type of swatch filter item: 1 - text, 2 - image")
+    value: String @doc(description: "Value for swatch item (text or image link)")
+}

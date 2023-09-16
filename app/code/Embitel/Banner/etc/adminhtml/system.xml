@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="banner_cate" translate="label" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="0">
+            <class>separator-top</class>
+            <label>Banner Parent Category</label>
+            <tab>embitel</tab>
+            <resource>Embitel_Banner::banner_cate_config</resource>
+            <group id="cat_config" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="banner_parent_cagegory" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Select Banner Parent Category</label>                    
+                    <source_model>Embitel\Banner\Model\Categorylist</source_model>
+                </field>
+                <field id="banner_count" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Banner Count</label>                    
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

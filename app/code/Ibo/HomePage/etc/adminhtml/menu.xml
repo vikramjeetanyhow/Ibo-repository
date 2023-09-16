@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">    <menu>
+        <add id="ibo_homepage::topcategory" title="Top Category/Brands" module="Ibo_HomePage" sortOrder="11" parent="embitel_banner::core" action="ibo_homepage/topcategory" resource="Ibo_Homepage::topcategory"/>
+        <add id="ibo_homepage::bestdeal" title="Import Bestdeal Products" module="Ibo_HomePage" sortOrder="12" parent="embitel_banner::core" action="ibo_homepage/import" resource="Ibo_Homepage::bestdeal"/>
+    </menu>
+</config>

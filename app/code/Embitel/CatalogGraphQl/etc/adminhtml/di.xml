@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Block\Adminhtml\Product\Attribute\Edit\Tab\Front">
+        <plugin name="embitel_cataloggraphql_attribute_edit_form" type="Embitel\CatalogGraphQl\Plugin\Block\Adminhtml\Product\Attribute\Edit\Tab\Front" sortOrder="1"/>
+    </type>
+    <type name="Magento\Catalog\Model\ResourceModel\Eav\Attribute">
+        <plugin name="embitel_cataloggraphql_attribute_save_before" type="Embitel\CatalogGraphQl\Plugin\Model\ResourceModel\Eav\AttributeBeforePlugin" sortOrder="1"/>
+    </type>
+</config>

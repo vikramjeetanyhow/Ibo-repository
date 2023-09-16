@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="salesrule" resource="default" engine="innodb" comment="Salesrule">
+    <column xsi:type="text" name="terms_cond" nullable="true" comment="Terms and Conditions"/>
+    <column xsi:type="varchar" name="coupon_use_in" nullable="true" default="all" comment="Coupon to use in"/>
+    <column xsi:type="int" name="max_percent_amount" nullable="true" default="0" comment="Maximum percentage discount amount"/>
+    <column xsi:type="text" name="referrer_mobile_number" nullable="true" comment="Referrer's mobile number to use the coupon"/>
+    <column xsi:type="boolean" name="is_referrer_coupon" nullable="true" comment="Is referrer coupon"/>
+    <column xsi:type="boolean" name="is_show_coupon" nullable="true" comment="Is Visible in frontend"/>
+    <column xsi:type="boolean" name="is_show_coupon_pdp" nullable="true" default="true" comment="Is Visible in PDP"/>
+  </table>
+    <table name="quote" resource="default" engine="innodb" comment="Quote table">
+        <column xsi:type="smallint" name="is_professional_referral_applied" unsigned="false" nullable="true" identity="false"
+                default="0" comment="Is professional referral applied"/>
+        <column xsi:type="varchar" name="professional_number" nullable="true" comment="Applied coupon code or professional number"/>
+        <index referenceId="QUOTE_IS_PROFESSIONAL_REFERRAL" indexType="btree">
+            <column name="is_professional_referral_applied"/>
+        </index>
+        <index referenceId="QUOTE_PROFESSIONAL_NUMBER" indexType="btree">
+            <column name="professional_number"/>
+        </index>
+    </table>
+    <table name="sales_order" resource="default" engine="innodb" comment="Quote table">
+        <column xsi:type="smallint" name="is_professional_referral_applied" unsigned="false" nullable="true" identity="false"
+                default="0" comment="Is professional referral applied"/>
+        <column xsi:type="varchar" name="professional_number" nullable="true" comment="Applied coupon code or professional number"/>
+        <index referenceId="SALES_ORDER_IS_PROFESSIONAL_REFERRAL" indexType="btree">
+            <column name="is_professional_referral_applied"/>
+        </index>
+        <index referenceId="SALES_ORDER_PROFESSIONAL_NUMBER" indexType="btree">
+            <column name="professional_number"/>
+        </index>
+    </table>
+</schema>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ibo_MultiSlider::multislider"
+             title="Category Hero Slider"
+             module="Ibo_MultiSlider"
+             sortOrder="10"
+             resource="Ibo_MultiSlider::multislider"
+             parent="Magento_Backend::content"/>
+        <!--HeroSlider-->
+        <add id="Ibo_MultiSlider::heroslider"
+             title="Hero Slider"
+             translate= "title"
+             module="Ibo_MultiSlider"
+             sortOrder="1"
+             action="multislider/heroslider"
+             resource="Ibo_MultiSlider::heroslider"
+             parent="Ibo_MultiSlider::multislider"/>
+        <!--HeroSlider Configurations-->
+        <add id="Ibo_MultiSlider::configurations"
+             title="Configurations"
+             translate= "title"
+             module="Ibo_MultiSlider"
+             sortOrder="1"
+             action="admin/system_config/edit/section/image"
+             resource="Ibo_MultiSlider::heroslider"
+             parent="Ibo_MultiSlider::multislider"/>
+    </menu>
+</config>

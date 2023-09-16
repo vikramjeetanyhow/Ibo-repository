@@ -1,0 +1,24 @@
+type Mutation {
+ generateOtp  (mobilenumber: String!, resend:  Boolean, otpfor: String!): OtpOutput @resolver(class: "\\Embitel\\Sms\\Model\\Resolver\\GenerateOtp") @doc(description:"Generate OTP for Customer Mobile")
+ verifyOtp  (mobilenumber: String!, otp:  String!, otpfor: String!, guest_quote_id: String): VerifyOutput @resolver(class: "\\Embitel\\Sms\\Model\\Resolver\\VerifyOtp") @doc(description:"verify  OTP for Customer Mobile") 
+}
+
+type OtpOutput @doc(description: "Otp output for customer") {
+    success: Boolean @doc(description: "Otp generated or not")
+    msg: String @doc(description: "message for generated OTP")
+    can_resend_after: Int @doc(description: "seconds after OTP can be resent")
+}
+
+type VerifyOutput @doc(description: "Otp query output for customer") {
+    is_customer: Boolean @doc(description: "returns if Customer is existing in our database or not")
+    msg: String @doc(description: "message for customer")
+    token: String @doc(description: "The customer token") 
+    firstname: String @doc(description: "The customer firstname") 
+    lastname: String @doc(description: "The customer lastname") 
+    email: String @doc(description: "The customer email") 
+    mobilenumber: String @doc(description: "The customer mobilenumber") 
+    profile_picture: String @doc(description: "The customer profile picture")
+    campaign_id: Int @doc(description: "customer campaign id")
+}
+
+

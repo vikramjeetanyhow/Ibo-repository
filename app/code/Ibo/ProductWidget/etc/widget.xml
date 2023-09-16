@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget class="Ibo\ProductWidget\Block\Widget\ProductWidget" id="featured_product_widget">
+        <label>Product Widget Auto</label>
+        <description>Product Widget Auto</description>
+        <parameters>            
+            <parameter name="display_type" xsi:type="select" required="true" visible="true" sort_order="1" source_model="Ibo\ProductWidget\Model\Source\Type">
+                <label translate="true">Select Display Type</label>
+            </parameter>
+            <parameter name="customer_group" xsi:type="multiselect" required="true" visible="true" sort_order="1" source_model="Ibo\ProductWidget\Model\Source\Group">
+                <label translate="true">Select Customer Group</label>
+            </parameter>
+            <parameter name="header_title" xsi:type="text" required="false" sort_order="2">
+                <label translate="true">Header Title</label>
+            </parameter>
+            <parameter name="app_link" xsi:type="text" required="true" sort_order="3">
+                <label translate="true">App Deep Link</label>
+            </parameter>
+            <parameter name="web_link" xsi:type="text" required="true" sort_order="4">
+                <label translate="true">Web Deep Link</label>
+            </parameter>
+            <parameter name="products_count" xsi:type="text" required="true" sort_order="5">
+                <label translate="true">Number of Products to Display</label>
+            </parameter>          
+        </parameters>
+    </widget>
+    <widget class="Ibo\ProductWidget\Block\Widget\ProductWidgetManual" id="featured_product_widget_manual">
+        <label>Product Widget Manual</label>
+        <description>Product Widget Manual</description>
+        <parameters>            
+            <parameter name="display_type" xsi:type="select" required="true" visible="true" sort_order="1" source_model="Ibo\ProductWidget\Model\Source\Type">
+                <label translate="true">Select Display Type</label>
+            </parameter>
+            <parameter name="customer_group" xsi:type="multiselect" required="true" visible="true" sort_order="1" source_model="Ibo\ProductWidget\Model\Source\Group">
+                <label translate="true">Select Customer Group</label>
+            </parameter>
+            <parameter name="header_title" xsi:type="text" required="false" sort_order="2">
+                <label translate="true">Header Title</label>
+            </parameter>
+            <parameter name="app_link" xsi:type="text" required="true" sort_order="3">
+                <label translate="true">App Deep Link</label>
+            </parameter>
+            <parameter name="web_link" xsi:type="text" required="true" sort_order="4">
+                <label translate="true">Web Deep Link</label>
+            </parameter>
+            <parameter name="products_count" xsi:type="text" required="true" sort_order="5">
+                <label translate="true">Number of Products to Display</label>
+            </parameter>          
+        </parameters>
+    </widget>
+</widgets>

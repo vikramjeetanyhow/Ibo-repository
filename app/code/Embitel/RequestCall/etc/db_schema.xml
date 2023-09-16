@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">    
+    <table name="ebo_request_call_master" resource="default" engine="innodb"
+           comment="EBO Request Call Master">
+        <column xsi:type="int" name="id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="ID"/>
+        <column xsi:type="varchar" name="mobile_number" nullable="false" length="255" comment="Mobile Number" />
+        <column xsi:type="timestamp" name="created_date" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_date" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Update Time"/>
+        <column xsi:type="int" name="no_of_request" padding="10" nullable="false" identity="false"
+                default="0" comment="Total Request by User"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="EBO_REQUEST_CALL_MASTER_MOBILE_NUMBER" indexType="fulltext">
+            <column name="mobile_number"/>
+        </index>
+    </table>
+</schema>

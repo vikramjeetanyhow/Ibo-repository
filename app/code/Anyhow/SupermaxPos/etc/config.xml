@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<!-- 
+/**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+   <default>
+
+       <ahSupermaxPosConfiguration>
+            <!-- basic configuration -->
+            <ah_supermax_pos_basic_configutaion>
+                <ah_supermax_pos_status>0</ah_supermax_pos_status>
+                <ah_supermax_pos_product_image_enable_disable>0</ah_supermax_pos_product_image_enable_disable> 
+            </ah_supermax_pos_basic_configutaion> 
+            <!-- product configuration -->
+            <ah_supermax_pos_product_configutaion> 
+                <ah_supermax_pos_no_of_products_visible>30</ah_supermax_pos_no_of_products_visible> 
+                <ah_supermax_pos_no_of_visible_popular_products>20</ah_supermax_pos_no_of_visible_popular_products> 
+            </ah_supermax_pos_product_configutaion> 
+            <!-- barcode configuration -->
+            <ah_supermax_pos_barcode_configutaion> 
+                <ah_supermax_pos_barcode_prefix>Supermax</ah_supermax_pos_barcode_prefix> 
+                <ah_supermax_pos_generateb_barcoded_with>productId</ah_supermax_pos_generateb_barcoded_with> 
+            </ah_supermax_pos_barcode_configutaion> 
+        </ahSupermaxPosConfiguration>
+        <payment>
+            <pospayment>
+                <model>Anyhow\SupermaxPos\Model\PaymentMethod</model>
+                <title>Supermax POS Payment</title>
+            </pospayment>
+        </payment>
+   </default>
+</config>

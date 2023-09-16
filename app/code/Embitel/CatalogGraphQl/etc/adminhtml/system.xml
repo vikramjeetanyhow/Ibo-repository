@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="promises" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0">
+            <class>separator-top</class>
+            <label> Promise Block </label>
+            <tab>embitel</tab>
+            <resource>Embitel_Catalog::configuration</resource>
+            <group id="easy_returns" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Easy Returns</label>
+                <field id="title" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Title</label>
+                </field>
+                <field id="content" translate="label" type="textarea" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Content</label>
+                </field>
+                <field id="image_url" translate="label" type="image" sortOrder="6" showInDefault="1" showInWebsite="1" >
+                    <label>Upload Image</label>
+                    <comment>Please upload only JPG, JPEG or PNG format.</comment>
+                    <backend_model>Embitel\CatalogGraphQl\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system" scope_info="1">promises_images</upload_dir>
+                    <base_url type="media" scope_info="1">promises_images</base_url>
+                </field>
+            </group>
+            <group id="non_returns" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Non Returnable</label>
+                <field id="title" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Title</label>
+                </field>
+                <field id="content" translate="label" type="textarea" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Content</label>
+                </field>
+                <field id="image_url" translate="label" type="image" sortOrder="6" showInDefault="1" showInWebsite="1" >
+                    <label>Upload Image</label>
+                    <comment>Please upload only JPG, JPEG or PNG format.</comment>
+                    <backend_model>Embitel\CatalogGraphQl\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system" scope_info="1">promises_images</upload_dir>
+                    <base_url type="media" scope_info="1">promises_images</base_url>
+                </field>
+            </group>
+            <group id="fulfillment" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Ful-Fillment Method</label>
+                <field id="title" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Title</label>
+                </field>
+                <field id="content" translate="label" type="textarea" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Content</label>
+                </field>
+                <field id="image_url" translate="label" type="Magento\Config\Block\System\Config\Form\Field\Image" sortOrder="6" showInDefault="1" showInWebsite="1" >
+                    <label>Upload Image</label>
+                    <comment>Please upload only JPG, JPEG or PNG format.</comment>
+                    <backend_model>Embitel\CatalogGraphQl\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system" scope_info="1">promises_images</upload_dir>
+                    <base_url type="media" scope_info="1">promises_images</base_url>
+                </field>
+            </group>
+            <group id="pod_eligible" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>POD Eligible</label>
+                <field id="title" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Title</label>
+                </field>
+                <field id="content" translate="label" type="textarea" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Content</label>
+                </field>
+                <field id="image_url" translate="label" type="image" sortOrder="6" showInDefault="1" showInWebsite="1" >
+                    <label>Upload Image</label>
+                    <comment>Please upload only JPG, JPEG or PNG format.</comment>
+                    <backend_model>Embitel\CatalogGraphQl\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system" scope_info="1">promises_images</upload_dir>
+                    <base_url type="media" scope_info="1">promises_images</base_url>
+                </field>
+            </group>
+            <group id="pod_non_eligible" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>POD Non Eligible</label>
+                <field id="title" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Title</label>
+                </field>
+                <field id="content" translate="label" type="textarea" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Content</label>
+                </field>
+                <field id="image_url" translate="label" type="image" sortOrder="6" showInDefault="1" showInWebsite="1" >
+                    <label>Upload Image</label>
+                    <comment>Please upload only JPG, JPEG or PNG format.</comment>
+                    <backend_model>Embitel\CatalogGraphQl\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system" scope_info="1">promises_images</upload_dir>
+                    <base_url type="media" scope_info="1">promises_images</base_url>
+                </field>
+            </group>
+        </section>
+        <section id="sel_label_setting" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0">
+            <class>separator-top</class>
+            <label> SEL Label Updates </label>
+            <tab>embitel</tab>
+            <resource>Embitel_Catalog::configuration</resource>
+            <group id="product_sel_dates" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>General</label>
+                <field id="sel_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>SEL updates Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="product_attributes" translate="label" type="textarea" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Product Attributes</label>
+                    <comment>Please provide product attribute codes with comma separated.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

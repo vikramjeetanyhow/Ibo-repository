@@ -1,0 +1,17 @@
+<config
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+<template id="stocks_report"
+          label="Stocks Report"
+          file="stocks_report.html"
+          type="html"
+          module="Embitel_ProductExport"
+          area="frontend"
+/>
+    <template id="customer_report"
+              label="Customer Report"
+              file="customer_report.html"
+              type="html"
+              module="Embitel_ProductExport"
+              area="frontend"
+    />
+</config>

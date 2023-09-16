@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    /**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */
+
+ -->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">supermax_receipt_form.receipt_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Receipt Data</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save_and_continue" class="Anyhow\SupermaxPos\Block\Adminhtml\Receipt\Edit\SaveAndContinueButton"/>
+            <button name="save" class="Anyhow\SupermaxPos\Block\Adminhtml\Receipt\Edit\SaveButton"/>
+            <button name="reset" class="Anyhow\SupermaxPos\Block\Adminhtml\Receipt\Edit\ResetButton"/>
+            <button name="delete" class="Anyhow\SupermaxPos\Block\Adminhtml\Receipt\Edit\DeleteButton"/>
+            <button name="back" class="Anyhow\SupermaxPos\Block\Adminhtml\Receipt\Edit\BackButton"/>
+        </buttons>
+        <namespace>supermax_receipt_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>supermax_receipt_form.receipt_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="receipt_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="supermax/receipt/save"/>
+        </settings>
+        <dataProvider class="Anyhow\SupermaxPos\Model\Receipt\DataProvider" name="receipt_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>pos_receipt_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label/>
+        </settings>
+        <field name="pos_receipt_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Receipt</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>pos_receipt_id</dataScope>
+            </settings>
+        </field>
+        
+        <field name="store_id" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Anyhow\SupermaxPos\Model\StoreId</item>
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Receipt</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <settings>
+                <dataScope>store_id</dataScope>
+            </settings>
+        </field>
+        <field name="title" sortOrder="40" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Title</label>
+                <dataScope>title</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <scopeLabel>[STORE VIEW]</scopeLabel>
+            </settings>
+        </field>
+        <field name="header_logo" sortOrder="45" formElement="imageUploader">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="source" xsi:type="string">Receipt</item>
+                    <item name="previewTmpl" xsi:type="string">Anyhow_SupermaxPos/image-preview</item>
+                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                    <item name="dataScope" xsi:type="string">header_logo</item>
+                    <item name="uploaderConfig" xsi:type="array">										
+                        <item name="url" xsi:type="url" path="supermax/receipt/upload"/>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Header Logo</label>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+            </settings>
+        </field>
+        <field name="width" sortOrder="50" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Receipt</item>
+                    <item name="notice" xsi:type="string" translate="true">This width has to be set for your printer. For A4, it is 595px, for 80mm, it is 300px and for 58mm, it is 220 px. These size may vary as per the printer brand. Default it will be set for A4 (in Pixels).</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Receipt Width (printer size)</label>
+                <dataScope>width</dataScope>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+            </settings>
+        </field>
+        <field name="barcode_width" sortOrder="60" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Receipt</item>
+                    <item name="notice" xsi:type="string" translate="true">This width has to be set for your printer. Basically this width must be set respective to receipt width. If you want barcode image to take full width of the receipt then use same receipt width for this. Default it will take full width of receipt (in Pixels).</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Receipt Barcode Width (printer size)</label>
+                <dataScope>barcode_width</dataScope>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+            </settings>
+        </field>
+        <field name="font_size" sortOrder="63" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Receipt</item>
+                    <item name="notice" xsi:type="string" translate="true">Default font size on the receipt will be 14px.</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Receipt font size</label>
+                <dataScope>font_size</dataScope>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+            </settings>
+        </field>
+        <field name="header_details" sortOrder="65" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="rows" xsi:type="number">15</item>
+                    <item name="source" xsi:type="string">Receipt</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Header details for receipt</label>
+                <dataScope>header_details</dataScope>
+                <scopeLabel>[STORE VIEW]</scopeLabel>
+            </settings>
+        </field>
+        <field name="footer_details" sortOrder="70" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="rows" xsi:type="number">15</item>
+                    <item name="source" xsi:type="string">Receipt</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Footer details for receipt</label>
+                <dataScope>footer_details</dataScope>
+                <scopeLabel>[STORE VIEW]</scopeLabel>
+            </settings>
+        </field>
+        <field name="seller_bank_info" sortOrder="70" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="rows" xsi:type="number">10</item>
+                    <item name="source" xsi:type="string">Receipt</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Bank Details for receipt</label>
+                <dataScope>seller_bank_info</dataScope>
+                <scopeLabel>[STORE VIEW]</scopeLabel>
+            </settings>
+        </field>
+        <field name="disclaimer" sortOrder="80" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="rows" xsi:type="number">10</item>
+                    <item name="source" xsi:type="string">Receipt</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Disclaimer</label>
+                <dataScope>disclaimer</dataScope>
+                <scopeLabel>[STORE VIEW]</scopeLabel>
+            </settings>
+        </field>
+    </fieldset>
+</form>

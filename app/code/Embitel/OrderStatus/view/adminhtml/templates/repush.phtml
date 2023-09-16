@@ -1,0 +1,48 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Embitel\OrderStatus\Block\Adminhtml\Repush\Index */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+?>
+<div class="productimport-export-tax-rates">
+    <div class="import-tax-rates">
+        <form id="orders-repush-form" class="admin__fieldset" action="<?= $block->escapeUrl($block->getUrl('iboorders/oms/repush')) ?>" method="post" enctype="multipart/form-data">
+            <?= $block->getBlockHtml('formkey') ?>
+            <div class="fieldset admin__field _required">
+                <label for="order_numbers" class="admin__field-label">
+                    <span><?= $block->escapeHtml(__('Order Numbers')) ?></span>
+                </label>
+                <div class="admin__field-control">
+                    <textarea id="order_numbers" name="order_numbers" rows="5" cols="80" placeholder='Please Enter comma(,) separated order numbers here. (Ex:-xxxxxxxxxxx,xxxxxxxxxxx)' required></textarea>
+                </div>
+                <div class="admin__field-control" style="text-align:right;">
+                    <?= $block->getButtonHtml(__('Repush'), '', 'repush-submit') ?>
+                </div>
+            </div>
+        </form>
+        <?php $scriptString = <<<script
+            require(['jquery', 'Magento_Ui/js/modal/alert', "mage/mage", "loadingPopup", 'mage/translate'],
+            function(jQuery, uiAlert) {
+                jQuery('#orders-repush-form').mage('form').mage('validation');
+                (function ($) {
+                    $('.repush-submit').click(function(){
+                        if($(':input[name="order_numbers"]').val()) {
+                            $('body').loadingPopup({
+                                timeout: false
+                            });
+                            $(this.form).submit();
+                        } else {
+                            uiAlert({
+                                content: $.mage.__('Please enter the order numbers!')
+                            });
+                        }
+                    });
+                })(jQuery);
+            });
+        script;?>
+        <?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="ibo_blockscript_listing_data_source" xsi:type="string">Ibo\DynamicBlockScript\Model\ResourceModel\DynamicBlockScript\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Ibo\DynamicBlockScript\Model\ResourceModel\DynamicBlockScript\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">static_block_script</argument>
+            <argument name="resourceModel" xsi:type="string">Ibo\DynamicBlockScript\Model\ResourceModel\BlockResourceModel</argument>
+        </arguments>
+    </virtualType>
+</config>

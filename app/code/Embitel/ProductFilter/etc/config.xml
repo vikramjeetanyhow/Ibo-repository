@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+	    <excludeattribute>
+	        <att_config>
+	        	<exclude_attributes>category_id,price,brand_Id</exclude_attributes>
+	        </att_config>
+	    </excludeattribute>    
+	</default>
+</config>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <listingToolbar name="listing_top">
+         <filters name="listing_filters">
+            <filterSelect name="customer_type" provider="${ $.parentName }" component="Magento_Ui/js/form/element/ui-select" template="ui/grid/filters/elements/ui-select">
+                <settings>
+                    <options class="Embitel\CustomerGraphQl\Model\Customer\Source\CustomerType"/>
+                    <caption translate="true">Select...</caption>
+                    <label translate="true">Customer Type</label>
+                    <dataScope>customer_type</dataScope>
+                    <imports>
+                        <link name="visible">componentType = column, index = ${ $.index }:visible</link>
+                    </imports>
+                </settings>
+            </filterSelect>
+        </filters>
+    </listingToolbar>
+    <columns name="customer_columns" class="Magento\Customer\Ui\Component\Listing\Columns">
+        <column name="customer_type">
+            <settings>
+                <filter>filterSelect</filter>
+                <options class="Embitel\CustomerGraphQl\Model\Customer\Source\CustomerType"/>
+                <dataType>select</dataType>
+                <sortable>false</sortable>
+                <label translate="true">Customer Type</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

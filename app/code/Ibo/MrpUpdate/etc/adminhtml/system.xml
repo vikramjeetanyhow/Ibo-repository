@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="mrpprice_update" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Mrp Price Update</label>
+            <tab>embitel</tab>
+            <resource>Ibo_MrpUpdate::configuration</resource>
+            <group id="settings" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Settings</label>
+                <field id="is_enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="reciever_email" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Receiver Email</label>
+                </field>
+                <field id="authorization" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Authorization</label>
+                    <comment>Set Header Authorization</comment>
+                </field>
+                <field id="url" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>API Url</label>
+                    <comment>Oodo Rest Url for update MRP</comment>
+                </field>
+                <field id="send_consolidated_report" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Send Consolidated Report</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="consolidated_report_cron" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Consolidated Report Cron Time</label>
+                    <comment>Example: 0 0 * * * (Run once a day at midnight).</comment>
+                </field>
+                <field id="consolidated_report_hours" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Include SKUs Updated in Last Number of Hours</label>                    
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

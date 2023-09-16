@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/customer/customer-details/:customer_id" method="GET">
+        <service class="Embitel\Customer\Api\CustomerDetailsInterface" method="getCustomerById"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route method="POST" url="/V1/customer/update/referrer/">
+        <service class="Embitel\Customer\Api\UpdateReferrerInterface" method="update"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route>
+    <route method="POST" url="/V1/customer/get_token/">
+        <service class="Embitel\Customer\Api\GetCustomerTokenInterface" method="getCustomerToken"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route>
+</routes>

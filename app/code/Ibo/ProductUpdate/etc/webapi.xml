@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/products/updateProduct" method="POST">
+        <service class="Ibo\ProductUpdate\Api\ProductUpdateManagementInterface" method="updateProduct"/>
+        <resources>
+            <resource ref="Magento_Catalog::catalog"/>
+        </resources>
+    </route>
+    <route url="/V1/products/updateProductAttributes" method="POST">
+        <service class="Ibo\ProductUpdate\Api\ProductEanManagementInterface" method="updateProductAttributes"/>
+        <resources>
+            <resource ref="Magento_Catalog::catalog"/>
+        </resources>
+    </route>
+</routes>

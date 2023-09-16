@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Sitemap\Model\Sitemap" type="Ibo\Sitemap\Model\Sitemap" />
+    <preference for="Magento\Sitemap\Model\ResourceModel\Catalog\Category" type="Ibo\Sitemap\Model\ResourceModel\Catalog\Category" />
+    <preference for="Magento\Sitemap\Model\ResourceModel\Catalog\Product" type="Ibo\Sitemap\Model\ResourceModel\Catalog\Product" />
+    <preference for="Ibo\Sitemap\Api\CategoryRepositoryInterface" type="Ibo\Sitemap\Model\CategoryRepository" />
+    <!-- <preference for="Magento\Sitemap\Model\ItemProvider\Category" type="Ibo\Sitemap\Model\ItemProvider\Category" /> -->
+    <type name="Magento\Sitemap\Model\ItemProvider\Composite">
+        <arguments>
+            <argument name="itemProviders" xsi:type="array">
+                <item name="categoryProvider" xsi:type="object">Ibo\Sitemap\Model\ItemProvider\Category</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Ibo\Sitemap\Model\ItemProvider\Category">
+        <arguments>
+            <argument name="configReader" xsi:type="object">Ibo\Sitemap\Model\ItemProvider\CategoryConfigReader</argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\OfflineShipping\Model\Carrier\Flatrate"
+                type="Embitel\Quote\Model\Carrier\Flatrate"/>
+    <type name="Magento\Quote\Model\ShippingAddressManagement">
+        <plugin disabled="false" name="Embitel_Quote_Plugin_Magento_Quote_Model_ShippingAddressManagement" sortOrder="10" type="Embitel\Quote\Plugin\Magento\Quote\Model\ShippingAddressManagement"/>
+  </type>
+  <type name="Magento\Quote\Model\BillingAddressManagement">
+        <plugin disabled="false" name="Embitel_Quote_Plugin_Magento_Quote_Model_BillingAddressManagement" sortOrder="10" type="Embitel\Quote\Plugin\Magento\Quote\Model\BillingAddressManagement"/>
+  </type>
+  <type name="Magento\Quote\Api\CartRepositoryInterface">
+      <plugin name="custom_quote_repository" type="Embitel\Quote\Plugin\CartRepositoryPlugin"/>
+  </type>
+  <type name="Magento\QuoteGraphQl\Model\Resolver\UpdateCartItems">
+    <plugin name="set-gift-wrapping-id-resolver" type="Magento\GiftWrappingGraphQl\Plugin\Mutation\SetGiftWrappingId" disabled="true"/>
+  </type>
+  <preference for="Magento\Quote\Model\Quote\Address\Total\Grand" type="Embitel\Quote\Model\Quote\Address\Total\Grand" />
+  <type name='Magento\Quote\Model\PaymentMethodManagement'>
+    <arguments>
+      <argument name='zeroTotalValidator' xsi:type='object'>Embitel\Quote\Model\Payment\Checks\ZeroTotal</argument>
+    </arguments>
+  </type>
+  <preference for="Magento\Quote\Observer\Frontend\Quote\Address\CollectTotalsObserver" type="Embitel\Quote\Observer\Frontend\Quote\Address\CollectTotalsObserver" />
+  <preference for="Magento\Quote\Model\QuoteIdToMaskedQuoteId" type="Embitel\Quote\Model\QuoteIdToMaskedQuoteId"/>
+  <preference for="Magento\Quote\Model\ResourceModel\Quote" type="Embitel\Quote\Model\ResourceModel\Quote"/>
+  <preference for="Magento\Quote\Model\ResourceModel\Quote\QuoteIdMask" type="Embitel\Quote\Model\ResourceModel\Quote\QuoteIdMask"/>
+  <preference for="Magento\Quote\Model\CouponManagement" type="Embitel\Quote\Model\CouponManagement"/> 
+  <type name='Magento\Quote\Model\Quote\Item\ToOrderItem'>
+      <plugin name='AddOrderItemPlugin' type='Embitel\Quote\Plugin\Model\Quote\Item\ToOrderItem' sortOrder='99'/>
+  </type>
+  <!--  MDVA-37288_v2.patch applied -->
+  <type name="Magento\Catalog\Api\TierPriceStorageInterface">
+      <plugin name="update_quote_items_after_tier_prices_update" type="Embitel\Quote\Model\Product\Plugin\UpdateQuote"/>
+  </type>
+</config>
