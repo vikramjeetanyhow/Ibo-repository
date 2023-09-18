@@ -4,7 +4,6 @@
     <preference for="Magento\Sitemap\Model\ResourceModel\Catalog\Category" type="Ibo\Sitemap\Model\ResourceModel\Catalog\Category" />
     <preference for="Magento\Sitemap\Model\ResourceModel\Catalog\Product" type="Ibo\Sitemap\Model\ResourceModel\Catalog\Product" />
     <preference for="Ibo\Sitemap\Api\CategoryRepositoryInterface" type="Ibo\Sitemap\Model\CategoryRepository" />
-    <!-- <preference for="Magento\Sitemap\Model\ItemProvider\Category" type="Ibo\Sitemap\Model\ItemProvider\Category" /> -->
     <type name="Magento\Sitemap\Model\ItemProvider\Composite">
         <arguments>
             <argument name="itemProviders" xsi:type="array">

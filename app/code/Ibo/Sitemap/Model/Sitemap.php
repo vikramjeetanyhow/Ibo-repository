@@ -291,6 +291,90 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
         $this->_init(SitemapResource::class);
     }
 
+        /**
+     * Generate XML file
+     *
+     * @see http://www.sitemaps.org/protocol.html
+     *
+     * @return $this
+     */
+    public function generateXml()
+    {
+        $this->_initSitemapItems();
+
+        $sitemapIntiate = $this->_sitemapItems;
+
+        /**
+         * @see Static store url's added 
+         */
+        $StoreStaticUrls = array(
+            array(
+            'url'=>'/store/ibo-wholesale-sarjapur-road-bengaluru/ST002',
+            'getUpdatedAt'=>'2022-11-03T06:25:11+00:00',
+            'changeFrequency'=>'monthly',
+            'priority'=>'0.95'
+        ));
+
+        $getItems = array_merge($sitemapIntiate,$StoreStaticUrls);
+
+        /** @var $item SitemapItemInterface */
+        foreach ($getItems as $item) {
+
+            if(gettype($item)=='object'){
+                $xml = $this->_getSitemapRow(
+                    $item->getUrl(),
+                    $item->getUpdatedAt(),
+                    $item->getChangeFrequency(),
+                    $item->getPriority(),
+                    $item->getImages()
+              );
+
+            }else{
+
+                $xml = $this->_getSitemapRow(
+                    $item['url'],
+                    $item['getUpdatedAt'],
+                    $item['changeFrequency'],
+                    $item['priority']
+                );
+
+            }
+
+
+            if ($this->_isSplitRequired($xml) && $this->_sitemapIncrement > 0) {
+                $this->_finalizeSitemap();
+            }
+
+            if (!$this->_fileSize) {
+                $this->_createSitemap();
+            }
+
+            $this->_writeSitemapRow($xml);
+            // Increase counters
+            $this->_lineCount++;
+            $this->_fileSize += strlen($xml);
+        }
+
+        $this->_finalizeSitemap();
+
+        if ($this->_sitemapIncrement == 1) {
+            // In case when only one increment file was created use it as default sitemap
+            $sitemapPath = $this->getSitemapPath() !== null ? rtrim($this->getSitemapPath(), '/') : '';
+            $path = $sitemapPath . '/' . $this->_getCurrentSitemapFilename($this->_sitemapIncrement);
+            $destination = $sitemapPath . '/' . $this->getSitemapFilename();
+
+            $this->_directory->renameFile($path, $destination);
+        } else {
+            // Otherwise create index file with list of generated sitemaps
+            $this->_createSitemapIndex();
+        }
+
+        $this->setSitemapTime($this->_dateModel->gmtDate('Y-m-d H:i:s'));
+        $this->save();
+
+        return $this;
+    }
+
  
     /**
      * Get sitemap row
