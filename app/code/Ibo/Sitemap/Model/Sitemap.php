@@ -309,13 +309,32 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
          */
         $StoreStaticUrls = array(
             array(
-            'url'=>'/store/ibo-wholesale-sarjapur-road-bengaluru/ST002',
-            'getUpdatedAt'=>'2022-11-03T06:25:11+00:00',
+            'url'=>'store/ibo-wholesale-sarjapur-road-bengaluru/ST002',
+            'getUpdatedAt'=>'2023-04-12T10:36:43+00:00',
             'changeFrequency'=>'monthly',
             'priority'=>'0.95'
-        ));
+            ),
+            array(
+                'url'=>'store/ibo-wholesale-omr-padur-chennai/ST003',
+                'getUpdatedAt'=>'2023-04-12T10:36:43+00:00',
+                'changeFrequency'=>'monthly',
+                'priority'=>'0.95'
+            ),
+            array(
+            'url'=>'store/ibo-wholesale-ranigunj-hyderabad/ST004',
+            'getUpdatedAt'=>'2023-04-12T10:36:43+00:00',
+            'changeFrequency'=>'monthly',
+            'priority'=>'0.95'
+            ),
+            array(
+                'url'=>'store/ibo-wholesale-bg-road-bengaluru/ST006',
+                'getUpdatedAt'=>'2023-04-12T10:36:43+00:00',
+                'changeFrequency'=>'monthly',
+                'priority'=>'0.95'
+            )
+        );
 
-        $getItems = array_merge($sitemapIntiate,$StoreStaticUrls);
+        $getItems = array_merge($StoreStaticUrls,$sitemapIntiate);
 
         /** @var $item SitemapItemInterface */
         foreach ($getItems as $item) {
@@ -403,6 +422,7 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
             'sitemap/website_url_selection/web_url',
             $storeScope
         ); 
+
         $logger->info('----');
 
         if($websiteUrl !='')
