@@ -82,7 +82,10 @@ class Category extends \Magento\Sitemap\Model\ItemProvider\Category
 
                     case 4:
                         $priorityNew = $this->configReader->getPrioritylevel3($storeId);
-                    break;  
+                    break; 
+
+                    default:
+                        $priorityNew = $this->configReader->getPriority($storeId);
 
                 }
 

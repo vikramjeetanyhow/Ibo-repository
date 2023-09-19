@@ -19,10 +19,19 @@
                 </field>
             </group>
             <group id="navigation_brand" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Sitemap Navigation Id</label>
+                <label>Brand Sitemap</label>
                 <field id="brand_root_id" translate="label comment" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Brand Navigation Root Id </label>
+                    <label>Brand Id </label>
                     <comment>number</comment>
+                </field>
+                <field id="changefreqbrand" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Frequency for Brand only</label>
+                    <source_model>Magento\Sitemap\Model\Config\Source\Frequency</source_model>
+                </field>
+                <field id="prioritybrand" translate="label comment" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Priority of Category Brand</label>
+                    <backend_model>Magento\Sitemap\Model\Config\Backend\Priority</backend_model>
+                    <comment>Valid values range from 0.0 to 1.0.</comment>
                 </field>
             </group>
             <group id="category" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -31,27 +40,18 @@
                     <label>Frequency for All</label>
                     <source_model>Magento\Sitemap\Model\Config\Source\Frequency</source_model>
                 </field>
-                <field id="changefreqbrand" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Frequency for Brand only</label>
-                    <source_model>Magento\Sitemap\Model\Config\Source\Frequency</source_model>
-                </field>
-                <field id="prioritybrand" translate="label comment" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Priority Category Brand</label>
-                    <backend_model>Magento\Sitemap\Model\Config\Backend\Priority</backend_model>
-                    <comment>Valid values range from 0.0 to 1.0.</comment>
-                </field>
                 <field id="priority" translate="label comment" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Priority Category Level 1</label>
+                    <label>Priority of Category L1</label>
                     <backend_model>Magento\Sitemap\Model\Config\Backend\Priority</backend_model>
                     <comment>Valid values range from 0.0 to 1.0.</comment>
                 </field>
                 <field id="prioritylevel2" translate="label comment" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Priority Category Level 2</label>
+                    <label>Priority of Category L2</label>
                     <backend_model>Magento\Sitemap\Model\Config\Backend\Priority</backend_model>
                     <comment>Valid values range from 0.0 to 1.0.</comment>
                 </field>
                 <field id="prioritylevel3" translate="label comment" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Priority Category Level 3</label>
+                    <label>Priority of Category L3</label>
                     <backend_model>Magento\Sitemap\Model\Config\Backend\Priority</backend_model>
                     <comment>Valid values range from 0.0 to 1.0.</comment>
                 </field>

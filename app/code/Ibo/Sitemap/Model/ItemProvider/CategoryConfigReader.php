@@ -16,11 +16,11 @@ class CategoryConfigReader implements ConfigReaderInterface
      * Xpath config settings
      */
     const XML_PATH_CHANGE_FREQUENCY = 'sitemap/category/changefreq';
-    const XML_PATH_CHANGE_FREQUENCY_BRAND = 'sitemap/category/changefreqbrand';
+    const XML_PATH_CHANGE_FREQUENCY_BRAND = 'sitemap/navigation_brand/changefreqbrand';
     const XML_PATH_PRIORITY = 'sitemap/category/priority';
     const XML_PATH_PRIORITY_level2 = 'sitemap/category/prioritylevel2';
     const XML_PATH_PRIORITY_level3 = 'sitemap/category/prioritylevel3';
-    const XML_PATH_PRIORITYBRANONLY = 'sitemap/category/prioritybrand';
+    const XML_PATH_PRIORITYBRANONLY = 'sitemap/navigation_brand/prioritybrand';
     /**#@-*/
 
     /**

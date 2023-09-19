@@ -169,30 +169,29 @@ class Category extends \Magento\Sitemap\Model\ResourceModel\Catalog\Category
         $category = new \Magento\Framework\DataObject();
         $category->setId($categoryRow[$this->getIdFieldName()]);
         $categoryRoot = $this->_categoryFactory->create()->load($categoryRow[$this->getIdFieldName()]);
-        if ($categoryRoot->getParentId() == $this->scopeConfig->getValue('sitemap/navigation_brand/brand_root_id')){
-            if (empty($categoryRow['url'])) {
-                $urlKey = $this->getCategoryUrlKey($category->getId());
-                $category->setUrl($urlKey.'/b/'.$categoryRow[$this->getIdFieldName()]);
-            } else {
-                $categoryUrl = $categoryRow['url'];
-                $exp = explode('.html', $categoryUrl);
-               
-                $expUrl = explode('/', $exp[0]);
-                $category->setUrl(end($expUrl).'/b/'.$categoryRow[$this->getIdFieldName()]);
-            }
-
-        }else {
-            if (empty($categoryRow['url'])) {
-                $urlKey = $this->getCategoryUrlKey($category->getId());
-                $category->setUrl($urlKey.'/c/'.$categoryRow[$this->getIdFieldName()]);
-            } else {
-                $categoryUrl = $categoryRow['url'];
-                $exp = explode('.html', $categoryUrl);
         
-                $expUrl = explode('/', $exp[0]);
-                $category->setUrl(end($expUrl).'/c/'.$categoryRow[$this->getIdFieldName()]);
-            }
+        $category = new \Magento\Framework\DataObject();
+        $category->setId($categoryRow[$this->getIdFieldName()]);
+        $categoryRoot = $this->_categoryFactory->create()->load($categoryRow[$this->getIdFieldName()]);
+
+        if ($categoryRoot->getParentId() == $this->scopeConfig->getValue('sitemap/navigation_brand/brand_root_id')){
+            $categorieSetUrlsRowEmpty = '/b/'.$categoryRoot->getData('ibo_brand_id');
+            $categorieSetUrls = '/b/'.$categoryRoot->getData('ibo_brand_id');
+        }else{
+            $categorieSetUrlsRowEmpty = '/c/'.$categoryRow[$this->getIdFieldName()];
+            $categorieSetUrls = '/c/'.$categoryRow[$this->getIdFieldName()];
         }
+
+        if (empty($categoryRow['url'])) {
+            $urlKey = $this->getCategoryUrlKey($category->getId());
+            $category->setUrl($urlKey.$categorieSetUrlsRowEmpty);
+        } else {
+            $categoryUrl = $categoryRow['url'];
+            $exp = explode('.html', $categoryUrl);
+            $expUrl = explode('/', $exp[0]);
+            $category->setUrl(end($expUrl).$categorieSetUrls);
+        }
+
         $category->setUpdatedAt($categoryRow['updated_at']); 
 
         return $category;
