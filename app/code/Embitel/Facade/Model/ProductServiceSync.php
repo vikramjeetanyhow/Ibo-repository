@@ -454,13 +454,16 @@ class ProductServiceSync extends AbstractModel implements MerchandiseInterface
         
             try{
                 
-                foreach($sku as $key => $skuVal){
-                    $this->prepareAndSendData($skuVal); 
+                if(count($sku) > 0){
+                    foreach($sku as $key => $skuVal){
+                        $this->prepareAndSendData($skuVal); 
+                    }
+                }else{
+                    throw new Exception("Product Sku's Array should not be blank");
                 }
             
-            }
-            catch (Exception $e) {
-                echo "There is some error2: " . $e->getMessage();
+            }catch (Exception $e) {
+                echo "There is some error: " . $e->getMessage();
             }
     }
 

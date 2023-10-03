@@ -12,6 +12,7 @@ use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Catalog\Api\Data\CategorySearchResultsInterface;
 use Magento\Framework\Api\Search\FilterGroupBuilder;
 use Magento\Framework\Api\FilterBuilder;
+use Embitel\Catalog\Model\MerchandisingCategoryManagement;
 
 /**
  * Handles the category tree.
@@ -70,6 +71,7 @@ class CategoryManagement implements \Embitel\Catalog\Api\CategoryManagementInter
         \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $categoriesFactory,
         \Magento\Catalog\Model\CategoryFactory $categoryFactory, 
         \Magento\Framework\Webapi\Rest\Request $request,
+        MerchandisingCategoryManagement $MerchandisingCategoryManagement,
         FilterGroupBuilder $filterGroupBuilder,
         FilterBuilder $filterBuilder,
         CategoryListInterface $categoryList,
@@ -81,6 +83,7 @@ class CategoryManagement implements \Embitel\Catalog\Api\CategoryManagementInter
         $this->categoriesFactory = $categoriesFactory;
         $this->categoryFactory = $categoryFactory;
         $this->categoryList = $categoryList;
+        $this->_merchandisingCategoryManagement = $MerchandisingCategoryManagement;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->filterGroupBuilder = $filterGroupBuilder;
         $this->filterBuilder = $filterBuilder; 
@@ -237,5 +240,34 @@ class CategoryManagement implements \Embitel\Catalog\Api\CategoryManagementInter
         /** @var \Magento\Catalog\Model\ResourceModel\Category\Collection $categories */
         $categories->addAttributeToFilter('parent_id', ['gt' => 0]);
         return $categories->getSize();
+    }
+
+    /**
+     * @get categories postman data
+     */
+    public function getMerchandiseCategoriesIds($ibo_category_ids){
+
+      
+        try{
+
+            if(count($ibo_category_ids) > 0){
+
+                $collection = $this->categoriesFactory->create()
+                ->addAttributeToFilter('category_id',array($ibo_category_ids))
+                ->addAttributeToFilter('category_type','MERCHANDISING');
+               // echo $collection->getData()[0]['entity_id'];
+               //print_r($collection->getData()[0]);
+
+                foreach($collection->getData() as $iboId){
+                    echo $iboId['entity_id'];
+                    //$this->_merchandisingCategoryManagement->syncMerchandisingCat($categorId);
+                }
+            }else{
+                throw new Exception("Categories Array should not be blank");
+            }
+
+        }catch(Exception $e) {
+            echo "There is some error: " . $e->getMessage();
+        }
     }
 }

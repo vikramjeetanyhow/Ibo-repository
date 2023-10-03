@@ -11,5 +11,11 @@
         <resources>
             <resource ref="Magento_Catalog::products"/>
         </resources>
-    </route>   
+    </route>
+    <route url="/V1/sync/merchandising-categories-api" method="POST">
+        <service class="Embitel\Catalog\Api\CategoryManagementInterface" method="getMerchandiseCategoriesIds"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>    
 </routes>

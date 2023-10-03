@@ -29,4 +29,12 @@ interface CategoryManagementInterface
      * @return int
      */
     public function getCount();
+
+  /**
+     * Retrieve all the categories ids
+     *
+     * @param mixed $ibo_category_ids
+     * @return string
+     */
+    public function getMerchandiseCategoriesIds($ibo_category_ids);
 }
