@@ -23,8 +23,9 @@ use Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory as P
 use Magento\Eav\Model\ResourceModel\Entity\Attribute\Group\CollectionFactory as AttributeGroupCollection;
 use Magento\Framework\Stdlib\DateTime;
 use Magento\Store\Model\StoreManagerInterface;
+use Embitel\Facade\Api\MerchandiseInterface;
 
-class ProductServiceSync extends AbstractModel
+class ProductServiceSync extends AbstractModel implements MerchandiseInterface
 {
     /**
      * @var CollectionFactory
@@ -266,6 +267,8 @@ class ProductServiceSync extends AbstractModel
     public function prepareAndSendData($productId)
     {
         try {
+
+            echo $productId; 
             $product = $this->productRepository->getById($productId);
             $this->facadeHelper->addLog('Product Data Entered :');
 
@@ -441,6 +444,24 @@ class ProductServiceSync extends AbstractModel
         } catch (Exception $e) {
             echo "There is some error: " . $e->getMessage();
         }
+    }
+
+    /**
+     * GET product sku's
+     *@return string[]
+     */
+    public function getMerchandiseProductsSku($sku){
+        
+            try{
+                
+                foreach($sku as $key => $skuVal){
+                    $this->prepareAndSendData($skuVal); 
+                }
+            
+            }
+            catch (Exception $e) {
+                echo "There is some error2: " . $e->getMessage();
+            }
     }
 
     private function getPerUnitPriceDivisor($product) {
