@@ -17,4 +17,20 @@
         </arguments>
     </virtualType>
     <preference for="Magento\MediaStorage\Service\ImageResize" type="Embitel\Catalog\Service\ImageResize" />
+     <type name="Magento\CatalogInventory\Model\Indexer\Stock\Action\Full">
+        <arguments>
+            <argument name="batchRowsCount" xsi:type="array">
+                <item name="default" xsi:type="number">5000</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Catalog\Model\ResourceModel\Product\Indexer\Price\BatchSizeCalculator">
+        <arguments>
+            <argument name="batchRowsCount" xsi:type="array">
+                <item name="default" xsi:type="number">1200</item>
+                <item name="simple" xsi:type="number">5000</item>
+                <item name="configurable" xsi:type="number">20000000</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

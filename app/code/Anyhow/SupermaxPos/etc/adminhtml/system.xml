@@ -644,6 +644,9 @@
                 <field id="ah_supermax_pos_customer_register_api_url" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Customer Registration API Url</label>
                 </field>
+                <field id="ah_supermax_pos_customer_get_api_url" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Customer Search API Url</label>
+                </field>
                 <depends>
                     <field id="ah_supermax_pos_configuration/ah_supermax_pos_basic_configutaion/ah_supermax_pos_status">1</field>
                 </depends>

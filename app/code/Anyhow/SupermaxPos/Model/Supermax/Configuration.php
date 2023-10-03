@@ -191,7 +191,8 @@ class Configuration implements \Anyhow\SupermaxPos\Api\Supermax\ConfigurationInt
                         "ah_terms_and_Conditions_two" => $this->helper->getConfig("ah_supermax_pos_configuration/ah_supermax_pos_receipt_configutaion/ah_supermax_pos_terms_and_Conditions_two", $storeId),
                         "pos_payment_data" => $paymentConfig,
                         "customer_domain" => array(
-                            "customer_register_api_url" => $this->helper->getConfig("ah_supermax_pos_customer_domain_configuration/ah_supermax_pos_customer_domain_configuration/ah_supermax_pos_customer_register_api_url", $storeId)
+                            "customer_register_api_url" => $this->helper->getConfig("ah_supermax_pos_customer_domain_configuration/ah_supermax_pos_customer_domain_configuration/ah_supermax_pos_customer_register_api_url", $storeId),
+                            "customer_get_api_url" => $this->helper->getConfig("ah_supermax_pos_customer_domain_configuration/ah_supermax_pos_customer_domain_configuration/ah_supermax_pos_customer_get_api_url", $storeId)
                         ),
                         "serviceability_api_url" => $this->helper->getConfig("ah_supermax_pos_configuration/ah_supermax_pos_ibo_api_engine/ah_supermax_pos_check_serviceability_api_url", $storeId),
                         "pos_verify_gst_address_api_url" => $this->helper->getConfig("ah_supermax_pos_configuration/ah_supermax_pos_ibo_api_engine/ah_supermax_pos_verify_gst_address_api_url", $storeId),

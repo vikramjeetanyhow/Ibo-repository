@@ -52,6 +52,9 @@ class CustomerAddress implements \Anyhow\SupermaxPos\Api\Supermax\CustomerAddres
                                 $customerAddress[] = $address->toarray();
                             }
 
+                            $defaultBillingAddressId = (int)$customerObj->getDefaultBilling();
+                            $defaultShippingAddressId = (int)$customerObj->getDefaultShipping();
+
                             foreach( $customerAddress as $customerAddres ) {
                                 $addresses[] = array(
                                     'address_id' => (int)$customerAddres['entity_id'],
@@ -66,7 +69,9 @@ class CustomerAddress implements \Anyhow\SupermaxPos\Api\Supermax\CustomerAddres
                                     'country_name' => html_entity_decode($this->country->load($customerAddres['country_id'])->getName()),
                                     'postcode' => html_entity_decode($customerAddres['postcode']),
                                     'landmark' => $this->getCustomerLandmark($customerAddres['entity_id']),
-                                    'telephone' => html_entity_decode($customerAddres['telephone'])
+                                    'telephone' => html_entity_decode($customerAddres['telephone']),
+                                    'default_billing' => ($defaultBillingAddressId == $customerAddres['entity_id']) ? true : false,
+                                    'default_shipping' => ($defaultShippingAddressId == $customerAddres['entity_id']) ? true : false,
                                 );
                             }
                         }

@@ -163,15 +163,12 @@ class ConvertQuote extends \Magento\Quote\Model\QuoteManagement
         $addresses = [];
         $quote->reserveOrderId();
         if ($quote->isVirtual()) {
-            $this->helper->addDebuggingLogData("---- Before: quote is virtual for quote ID: " . $quote->getId());
             $this->dataObjectHelper->mergeDataObjects(
                 \Magento\Sales\Api\Data\OrderInterface::class,
                 $order,
                 $this->quoteAddressToOrder->convert($quote->getBillingAddress(), $orderData)
             );
-            $this->helper->addDebuggingLogData("---- After: quote is virtual for quote ID: " . $quote->getId());
         } else {
-            $this->helper->addDebuggingLogData("---- Before: quote is not virtual for quote ID: " . $quote->getId());
             $this->dataObjectHelper->mergeDataObjects(
                 \Magento\Sales\Api\Data\OrderInterface::class,
                 $order,
@@ -222,8 +219,6 @@ class ConvertQuote extends \Magento\Quote\Model\QuoteManagement
             ]
         );
 
-        $this->helper->addDebuggingLogData("---- After: quote is not virtual for quote ID: " . $quote->getId());
-
         try {
             $order->setIncrementId($orderData['increment_id']);
             $order->setOrderChannelInfo($orderData['order_channel_info']);
@@ -257,13 +252,12 @@ class ConvertQuote extends \Magento\Quote\Model\QuoteManagement
     }
 
     private function updateQuoteData($orderData, $quote) {
-        $this->helper->addDebuggingLogData("---- Before: update quote address quote ID: " . $quote->getId());
         // Update quote payment method.
         $quotePaymentMethod = ($orderData['payment_method']['code'] == 'BANK-DEPOSIT') ? 'offlinepayment' : 'prepaid';
         $quote->setPaymentMethod($quotePaymentMethod);
         $quote->getPayment()->importData(['method' => $quotePaymentMethod]);
         $quote->setInventoryProcessed(false);
-        $this->helper->addDebuggingLogData("---- Before: update quote billing address quote ID: " . $quote->getId());
+
         // Update Quote Billing Address.
         $quote->getBillingAddress()->setFirstname($orderData['payment_address']['firstname']);
         $quote->getBillingAddress()->setLastname($orderData['payment_address']['lastname']);
@@ -274,7 +268,7 @@ class ConvertQuote extends \Magento\Quote\Model\QuoteManagement
         $quote->getBillingAddress()->setTelephone($orderData['payment_address']['telephone']);
         $quote->getBillingAddress()->setCountryId($orderData['payment_address']['country_id']);
         $quote->getBillingAddress()->setRegionId($orderData['payment_address']['region_id']);
-        $this->helper->addDebuggingLogData("---- Before: update quote shipping address quote ID: " . $quote->getId());
+        
         // Update Quote Shipping Address.
         $quote->getShippingAddress()->setFirstname($orderData['shipping_address']['firstname']);
         $quote->getShippingAddress()->setLastname($orderData['shipping_address']['lastname']);
@@ -286,8 +280,6 @@ class ConvertQuote extends \Magento\Quote\Model\QuoteManagement
         $quote->getShippingAddress()->setCountryId($orderData['shipping_address']['country_id']);
         $quote->getShippingAddress()->setRegionId($orderData['shipping_address']['region_id']);
         $quote->save();
-
-        $this->helper->addDebuggingLogData("---- After: update quote shipping address quote ID: " . $quote->getId());
 
         // Update Shipping charges in quote.
         $grandTotal = $orderData['order_grand_total'];
