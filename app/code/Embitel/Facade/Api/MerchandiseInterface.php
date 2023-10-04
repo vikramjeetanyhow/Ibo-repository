@@ -7,8 +7,8 @@ interface MerchandiseInterface {
 
     /**
      * GET for Post api Data product 
-     * @param string[] $sku
+     * @param string[] $offer_ids
      * @return array
      */
-    public function getMerchandiseProductsSku($sku);
+    public function getMerchandiseProductsSku($offer_ids);
 }

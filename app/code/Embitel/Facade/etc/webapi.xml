@@ -3,7 +3,7 @@
     <route method="POST" url="/V1/sync/merchandising-products-api/">
         <service class="Embitel\Facade\Api\MerchandiseInterface" method="getMerchandiseProductsSku"/>
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="self"/>
         </resources>
     </route>
 </routes>

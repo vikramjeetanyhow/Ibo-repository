@@ -246,21 +246,17 @@ class CategoryManagement implements \Embitel\Catalog\Api\CategoryManagementInter
      * @get categories postman data
      */
     public function getMerchandiseCategoriesIds($ibo_category_ids){
-
       
         try{
 
             if(count($ibo_category_ids) > 0){
 
                 $collection = $this->categoriesFactory->create()
-                ->addAttributeToFilter('category_id',array($ibo_category_ids))
-                ->addAttributeToFilter('category_type','MERCHANDISING');
-               // echo $collection->getData()[0]['entity_id'];
-               //print_r($collection->getData()[0]);
+                    ->addAttributeToFilter('category_id',array($ibo_category_ids))
+                    ->addAttributeToFilter('category_type','MERCHANDISING');
 
                 foreach($collection->getData() as $iboId){
-                    echo $iboId['entity_id'];
-                    //$this->_merchandisingCategoryManagement->syncMerchandisingCat($categorId);
+                    $this->_merchandisingCategoryManagement->syncMerchandisingCat($iboId['entity_id']);
                 }
             }else{
                 throw new Exception("Categories Array should not be blank");

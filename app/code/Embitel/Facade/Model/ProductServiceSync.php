@@ -267,8 +267,7 @@ class ProductServiceSync extends AbstractModel implements MerchandiseInterface
     public function prepareAndSendData($productId)
     {
         try {
-
-            echo $productId; 
+ 
             $product = $this->productRepository->getById($productId);
             $this->facadeHelper->addLog('Product Data Entered :');
 
@@ -447,16 +446,20 @@ class ProductServiceSync extends AbstractModel implements MerchandiseInterface
     }
 
     /**
-     * GET product sku's
+     * GET product sku's as offer id
      *@return string[]
      */
-    public function getMerchandiseProductsSku($sku){
+    public function getMerchandiseProductsSku($offer_ids){
         
             try{
                 
-                if(count($sku) > 0){
-                    foreach($sku as $key => $skuVal){
-                        $this->prepareAndSendData($skuVal); 
+                if(count($offer_ids) > 0){
+
+                    $collection = $this->productCollection->create()
+                        ->addAttributeToFilter('sku',array($offer_ids));
+                    
+                    foreach($collection->getData() as $skuVal){
+                        $this->prepareAndSendData($skuVal['entity_id']); 
                     }
                 }else{
                     throw new Exception("Product Sku's Array should not be blank");

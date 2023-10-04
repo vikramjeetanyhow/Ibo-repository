@@ -15,7 +15,7 @@
     <route url="/V1/sync/merchandising-categories-api" method="POST">
         <service class="Embitel\Catalog\Api\CategoryManagementInterface" method="getMerchandiseCategoriesIds"/>
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="self"/>
         </resources>
     </route>    
 </routes>
