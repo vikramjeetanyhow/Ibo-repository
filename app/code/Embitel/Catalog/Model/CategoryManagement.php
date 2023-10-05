@@ -246,7 +246,9 @@ class CategoryManagement implements \Embitel\Catalog\Api\CategoryManagementInter
      * @get categories postman data
      */
     public function getMerchandiseCategoriesIds($ibo_category_ids){
-      
+        
+        $responce = ['success'=>false];
+
         try{
 
             if(count($ibo_category_ids) > 0){
@@ -258,6 +260,9 @@ class CategoryManagement implements \Embitel\Catalog\Api\CategoryManagementInter
                 foreach($collection->getData() as $iboId){
                     $this->_merchandisingCategoryManagement->syncMerchandisingCat($iboId['entity_id']);
                 }
+
+                $responce = ['success'=>true,'message'=>'IBO categories syncing procees has been completed for ibo categories id::'.implode(',',$ibo_category_ids)];
+
             }else{
                 throw new Exception("Categories Array should not be blank");
             }
@@ -265,5 +270,7 @@ class CategoryManagement implements \Embitel\Catalog\Api\CategoryManagementInter
         }catch(Exception $e) {
             echo "There is some error: " . $e->getMessage();
         }
+
+        return json_encode($responce);
     }
 }

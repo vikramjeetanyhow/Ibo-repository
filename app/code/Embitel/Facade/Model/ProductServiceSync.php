@@ -450,7 +450,9 @@ class ProductServiceSync extends AbstractModel implements MerchandiseInterface
      *@return string[]
      */
     public function getMerchandiseProductsSku($offer_ids){
-        
+
+        $response = ['success' => false];
+
             try{
                 
                 if(count($offer_ids) > 0){
@@ -461,6 +463,9 @@ class ProductServiceSync extends AbstractModel implements MerchandiseInterface
                     foreach($collection->getData() as $skuVal){
                         $this->prepareAndSendData($skuVal['entity_id']); 
                     }
+
+                    $response = ['success'=>true, 'message'=>'product catalog sycing procees has been completed for all the given offer id::'.implode(',',$offer_ids)];
+
                 }else{
                     throw new Exception("Product Sku's Array should not be blank");
                 }
@@ -468,6 +473,8 @@ class ProductServiceSync extends AbstractModel implements MerchandiseInterface
             }catch (Exception $e) {
                 echo "There is some error: " . $e->getMessage();
             }
+
+            return  json_encode($response);
     }
 
     private function getPerUnitPriceDivisor($product) {
