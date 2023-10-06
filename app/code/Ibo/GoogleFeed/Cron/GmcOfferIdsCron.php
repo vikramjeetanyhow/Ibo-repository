@@ -114,10 +114,11 @@ class GmcOfferIdsCron
                 'type_id',
                 'availability_zone',
                 'ibo_category_id']
-            )->addAttributeToFilter(
-                'ibo_category_id',
-                array($this->getIboCategoriesId())
-            )->addAttributeToFilter(
+            );
+            if(count($this->getIboCategoriesId())>0){
+                $collection->addAttributeToFilter('ibo_category_id',array($this->getIboCategoriesId()));
+            }
+            $collection->addAttributeToFilter(
                 'status',
                 \Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED
             )->addAttributeToFilter(

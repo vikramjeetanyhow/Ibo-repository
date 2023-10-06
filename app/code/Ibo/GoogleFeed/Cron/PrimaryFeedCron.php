@@ -133,8 +133,10 @@ class PrimaryFeedCron
         ."custom label 4"."\t"."gtin"."\n";
         $stream->write($header);
 
-        $collection = $this->productCollection->addAttributeToSelect('*')
-            ->addAttributeToFilter('ibo_category_id',array($this->getIboCategoriesId()));
+        $collection = $this->productCollection->addAttributeToSelect('*');
+        if(count($this->getIboCategoriesId())>0){
+            $collection->addAttributeToFilter('ibo_category_id',array($this->getIboCategoriesId()));
+        }
         $collection = $collection->addAttributeToFilter(
             'status',
             \Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED
