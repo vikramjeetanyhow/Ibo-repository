@@ -55,6 +55,12 @@ class SupplimentaryFeedCron
         return $status;
     }
 
+    public function getIboCategoriesId(){
+        $boCatIds =  $this->_scopeConfig->getValue("ibo_google_feed/google_feed_settings/primary_feeder_ibo_category_id");
+        
+        return explode(",",$boCatIds);
+    }
+
     /**
      * Sync products to Facade.
      */
@@ -73,8 +79,9 @@ class SupplimentaryFeedCron
             $stream->write($header);
 
             $collection = $this->productCollection->addAttributeToSelect(
-                ['sku','allowed_channels','price','mrp','status','type_id','is_published']
-            );
+                ['sku','allowed_channels','price','mrp','status','type_id','is_published','ibo_category_id']
+            )->addAttributeToFilter('ibo_category_id',array($this->getIboCategoriesId()));
+
             $collection = $collection->addAttributeToFilter(
                 'status',
                 \Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED

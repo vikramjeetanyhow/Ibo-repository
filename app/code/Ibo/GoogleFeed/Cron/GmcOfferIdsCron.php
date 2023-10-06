@@ -84,6 +84,12 @@ class GmcOfferIdsCron
         return $status;
     }
 
+    public function getIboCategoriesId(){
+        $boCatIds =  $this->_scopeConfig->getValue("ibo_google_feed/google_feed_settings/primary_feeder_ibo_category_id");
+        
+        return explode(",",$boCatIds);
+    }
+
     /**
      * Sync products to Facade.
      */
@@ -106,7 +112,11 @@ class GmcOfferIdsCron
                 'price',
                 'status',
                 'type_id',
-                'availability_zone']
+                'availability_zone',
+                'ibo_category_id']
+            )->addAttributeToFilter(
+                'ibo_category_id',
+                array($this->getIboCategoriesId())
             )->addAttributeToFilter(
                 'status',
                 \Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED

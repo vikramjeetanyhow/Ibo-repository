@@ -19,6 +19,10 @@
                     <label>Primary Feeder Cron Run Time</label>
                     <comment>0 0 * * * it should be in this format. this will run every night at midnight.</comment>
                 </field>
+                <field id="primary_feeder_ibo_category_id" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Ibo categories Id's </label>
+                    <comment>Add IBO cartegories Id's in comma separated format like 12,33 etc</comment>
+                </field>
                 <field id="secondary_feeder_cron" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Supplimentary Feeder Cron Run Time</label>
                     <comment>0 0 * * * it should be in this format. this will run every night at midnight.</comment>

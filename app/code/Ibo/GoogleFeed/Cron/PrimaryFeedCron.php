@@ -99,12 +99,20 @@ class PrimaryFeedCron
         return $url;
     }
 
+    public function getIboCategoriesId(){
+      $boCatIds =  $this->_scopeConfig->getValue("ibo_google_feed/google_feed_settings/primary_feeder_ibo_category_id");
+      
+      return explode(",",$boCatIds);
+    }
+
     /**
      * Sync products to Facade.
      */
     public function execute()
-    {
-        $feedEnable = $this->isFeedEnabled();
+    {   
+
+
+        $feedEnable = $this->isFeedEnabled();   
         if ($feedEnable !=1) {
             $this->addLog('Google Feed Module is disabled');
             return;
@@ -125,7 +133,8 @@ class PrimaryFeedCron
         ."custom label 4"."\t"."gtin"."\n";
         $stream->write($header);
 
-        $collection = $this->productCollection->addAttributeToSelect('*');
+        $collection = $this->productCollection->addAttributeToSelect('*')
+            ->addAttributeToFilter('ibo_category_id',array($this->getIboCategoriesId()));
         $collection = $collection->addAttributeToFilter(
             'status',
             \Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED
