@@ -102,7 +102,7 @@ class PrimaryFeedCron
     public function getIboCategoriesId(){
       $boCatIds =  $this->_scopeConfig->getValue("ibo_google_feed/google_feed_settings/primary_feeder_ibo_category_id");
       
-      return explode(",",$boCatIds);
+      return $boCatIds;
     }
 
     /**
@@ -110,7 +110,6 @@ class PrimaryFeedCron
      */
     public function execute()
     {   
-
 
         $feedEnable = $this->isFeedEnabled();   
         if ($feedEnable !=1) {
@@ -129,14 +128,17 @@ class PrimaryFeedCron
         $header = "id"."\t"."title"."\t"."description"."\t"."link"."\t"."image link"."\t"
         ."condition"."\t"."availability"."\t"."price"."\t"."sale price"."\t"."uom"."\t"
         ."brand"."\t"."item group id"."\t"."product type"."\t"."custom label 0"."\t"
-        ."custom label 1"."\t"."custom label 2"."\t"."custom label 3"."\t"
+        ."custom label 1"."\t"."custom label 2"."\t"."custom label 3"."\t" 
         ."custom label 4"."\t"."gtin"."\n";
         $stream->write($header);
 
         $collection = $this->productCollection->addAttributeToSelect('*');
-        if(count($this->getIboCategoriesId())>0){
-            $collection->addAttributeToFilter('ibo_category_id',array($this->getIboCategoriesId()));
+        if($this->getIboCategoriesId()!=""){
+            $iboCatIdInArray = explode(',',$this->getIboCategoriesId());
+            $collection->addAttributeToFilter('ibo_category_id',array($iboCatIdInArray));
+            $this->addLog('Google Feed for primaryFeed generated Ibo ids'.$this->getIboCategoriesId());
         }
+ 
         $collection = $collection->addAttributeToFilter(
             'status',
             \Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED

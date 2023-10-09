@@ -58,7 +58,7 @@ class SupplimentaryFeedCron
     public function getIboCategoriesId(){
         $boCatIds =  $this->_scopeConfig->getValue("ibo_google_feed/google_feed_settings/primary_feeder_ibo_category_id");
         
-        return explode(",",$boCatIds);
+        return $boCatIds;
     }
 
     /**
@@ -82,8 +82,10 @@ class SupplimentaryFeedCron
                 ['sku','allowed_channels','price','mrp','status','type_id','is_published','ibo_category_id']
             );
 
-            if(count($this->getIboCategoriesId())>0){
-                $collection->addAttributeToFilter('ibo_category_id',array($this->getIboCategoriesId()));
+            if($this->getIboCategoriesId()!=""){
+                $iboCatIdInArray = explode(',',$this->getIboCategoriesId());
+                $collection->addAttributeToFilter('ibo_category_id',array($iboCatIdInArray));
+                $this->addLog('supplimentaryFeed generated Ibo ids'.$this->getIboCategoriesId());
             }
 
             $collection = $collection->addAttributeToFilter(
