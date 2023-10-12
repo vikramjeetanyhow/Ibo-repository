@@ -80,7 +80,7 @@ class SupplimentaryFeedCron
 
             $collection = $this->productCollection->addAttributeToSelect(
                 ['sku','allowed_channels','price','mrp','status','type_id','is_published','ibo_category_id']
-            );
+            )->addStoreFilter(1);
 
             if($this->getIboCategoriesId()!=""){
                 $iboCatIdInArray = explode(',',$this->getIboCategoriesId());

@@ -114,7 +114,8 @@ class GmcOfferIdsCron
                 'type_id',
                 'availability_zone',
                 'ibo_category_id']
-            );
+            )->addStoreFilter(1);
+            
             if($this->getIboCategoriesId()!=""){
                 $iboCatIdInArray = explode(',',$this->getIboCategoriesId());
                 $collection->addAttributeToFilter('ibo_category_id',array($iboCatIdInArray));

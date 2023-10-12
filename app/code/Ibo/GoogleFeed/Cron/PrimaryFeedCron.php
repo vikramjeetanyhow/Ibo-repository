@@ -132,7 +132,9 @@ class PrimaryFeedCron
         ."custom label 4"."\t"."gtin"."\n";
         $stream->write($header);
 
-        $collection = $this->productCollection->addAttributeToSelect('*');
+
+        $collection = $this->productCollection->addAttributeToSelect('*')
+            ->addStoreFilter(1);
         if($this->getIboCategoriesId()!=""){
             $iboCatIdInArray = explode(',',$this->getIboCategoriesId());
             $collection->addAttributeToFilter('ibo_category_id',array($iboCatIdInArray));
@@ -184,11 +186,13 @@ class PrimaryFeedCron
         //$identifier_exists ='';
         $count = 0;
 
-        foreach ($collection as $productData) {
+        foreach ($collection as $productData) {  
 
             $product = $this->productRepository->get($productData->getSku(), false, null, true);
             if ((trim($productData->getSku()) != '') && (strlen($productData->getSku()) <= 50)) {
                 $offerId = trim($productData->getSku());
+                
+                $this->addLog('sku product tracking : '.$offerId);
             }
 
             if (trim($productData->getName()) != '') {
