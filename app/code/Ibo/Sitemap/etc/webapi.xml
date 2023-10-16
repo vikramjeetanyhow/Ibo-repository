@@ -12,5 +12,17 @@
             <resource ref="self"/>
         </resources>
     </route>
+    <route url="/V1/seo/categories/getbrand" method="GET">
+        <service class="Ibo\Sitemap\Api\CategoryRepositoryInterface" method="getBrand"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route>
+    <route url="/V1/seo/categories/update-brand" method="POST">
+        <service class="Ibo\Sitemap\Api\CategoryRepositoryInterface" method="updateBrand"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route>
     
 </routes>

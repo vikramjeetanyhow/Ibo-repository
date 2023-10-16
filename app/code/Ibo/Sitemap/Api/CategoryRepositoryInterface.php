@@ -28,4 +28,20 @@ interface CategoryRepositoryInterface
      * @return array
      */
     public function update();
+
+        /**
+     * GET API
+     * @api
+     * 
+     * @return array
+     */
+    public function getBrand();
+
+    /**
+     * GET for Post api
+     * @param string $param
+     * 
+     * @return array
+     */
+    public function updateBrand();
 }
