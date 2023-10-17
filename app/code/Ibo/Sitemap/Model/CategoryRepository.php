@@ -4,6 +4,7 @@ namespace Ibo\Sitemap\Model;
 
 use Ibo\Sitemap\Api\CategoryRepositoryInterface;
 use Magento\Framework\DataObject;
+use Magento\Framework\Webapi\Rest\Request;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
@@ -17,7 +18,8 @@ class CategoryRepository implements CategoryRepositoryInterface
         \Magento\Catalog\Api\CategoryManagementInterface $categoryManagement,
         \Anyhow\SupermaxPos\Helper\Data $helper,
         \Magento\Catalog\Model\CategoryFactory $categoryFactory,
-        \Magento\Framework\Event\ManagerInterface $eventManager
+        \Magento\Framework\Event\ManagerInterface $eventManager,
+        Request $request
     ) {
         $this->resourceConnection = $resourceConnection;
         $this->categoryManagement = $categoryManagement;
@@ -25,6 +27,7 @@ class CategoryRepository implements CategoryRepositoryInterface
         $this->categoryFactory = $categoryFactory;
         $this->eventManager = $eventManager;
         $this->categoriesSeoData = [];
+        $this->request = $request;
     }
 
     /**
@@ -67,15 +70,24 @@ class CategoryRepository implements CategoryRepositoryInterface
      * @return array
      */
     public function getBrand(){
+
+        
         $this->addLog("==========================================");
         $this->addLog("Start Brand categories meta-details get process");
-
+        
         $responce = ["success"=>"false"];
         try {
+            $iboCatId = $this->request->getParam('ibo_category_id');
             $rootCategoryId = 1334;
-            $categoryTreeList = $this->getChildCategories($rootCategoryId);
-            if (count($categoryTreeList->getChildrenData()) > 0) {
-                $this->getCategoryBrandList($categoryTreeList->getChildrenData());
+
+            if($iboCatId){
+                $this->getCategoryBrandList_withFilter($iboCatId);
+            }else{
+
+                $categoryTreeList = $this->getChildCategories($rootCategoryId);
+                if (count($categoryTreeList->getChildrenData()) > 0) {
+                    $this->getCategoryBrandList($categoryTreeList->getChildrenData());
+                }
             }
 
             $responce = ["success"=>"true", "categories"=>json_decode(json_encode($this->categoriesSeoData, JSON_INVALID_UTF8_SUBSTITUTE), true)];
@@ -122,6 +134,7 @@ class CategoryRepository implements CategoryRepositoryInterface
                 $this->categoriesSeoData[] = array(
                     "id" => (int)$category->getId(),
                     "parent_id" => $category->getParentId(),
+                    "brand_id" => $category->getData('ibo_brand_id'),
                     "name" => html_entity_decode($category->getName()),
                     "url" => html_entity_decode(strtolower($category->getName()) . "/b/" . $category->getData('ibo_brand_id')),
                     "meta_title" => html_entity_decode($category->getMetaTitle()),
@@ -135,6 +148,33 @@ class CategoryRepository implements CategoryRepositoryInterface
                     $this->getCategoryList($categoryChildTreeList->getChildrenData());
                 }
             }
+        }
+    }
+
+        /**
+     * For brand category List with IBO category filter
+     */
+    private function getCategoryBrandList_withFilter($categoryList) {
+        if(!empty($categoryList)) {
+            
+            $category = $this->categoryFactory->create()->getCollection()
+                 ->addAttributeTofilter('ibo_brand_id',array((int)$categoryList));
+
+            $brandCatId  = $category->getData()[0]['entity_id'];
+            $category = $this->categoryFactory->create()->load($brandCatId);
+            
+            $this->categoriesSeoData[] = array(
+                "id" => (int)$category->getId(),
+                "parent_id" => $category->getParentId(),
+                "brand_id" => $category->getData('ibo_brand_id'),
+                "name" => html_entity_decode($category->getName()),
+                "url" => html_entity_decode(strtolower($category->getName()) . "/b/" . $category->getData('ibo_brand_id')),
+                "meta_title" => html_entity_decode($category->getMetaTitle()),
+                "meta_description" => html_entity_decode($category->getMetaDescription()),
+                "meta_keywords" => html_entity_decode($category->getMetaKeywords())
+                
+            );
+            
         }
     }
 
