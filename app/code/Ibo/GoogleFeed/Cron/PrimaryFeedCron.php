@@ -99,7 +99,7 @@ class PrimaryFeedCron
         return $url;
     }
 
-    public function getIboCategoriesId(){
+    public function getCategoryIds(){
       $boCatIds =  $this->_scopeConfig->getValue("ibo_google_feed/google_feed_settings/primary_feeder_ibo_category_id");
       
       return $boCatIds;
@@ -135,10 +135,10 @@ class PrimaryFeedCron
 
         $collection = $this->productCollection->addAttributeToSelect('*')
             ->addStoreFilter(1);
-        if($this->getIboCategoriesId()!=""){
-            $iboCatIdInArray = explode(',',$this->getIboCategoriesId());
-            $collection->addAttributeToFilter('ibo_category_id',array($iboCatIdInArray));
-            $this->addLog('Google Feed for primaryFeed generated Ibo ids'.$this->getIboCategoriesId());
+        if($this->getCategoryIds()!=""){
+            $iboCatIdInArray = explode(',',$this->getCategoryIds());
+            $collection->addCategoriesFilter(['in' => $iboCatIdInArray]);
+            $this->addLog('Google Feed for primaryFeed generated category ids'.$this->getCategoryIds());
         }
  
         $collection = $collection->addAttributeToFilter(
@@ -161,7 +161,6 @@ class PrimaryFeedCron
                             'product_id=entity_id',
                             'is_in_stock=1'
                         );
-
         $this->addLog('Collection Count : '.count($collection));
         $isGenerated = 0;
         $feedCount = 0;
