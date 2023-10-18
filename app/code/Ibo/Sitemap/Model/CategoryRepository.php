@@ -4,7 +4,8 @@ namespace Ibo\Sitemap\Model;
 
 use Ibo\Sitemap\Api\CategoryRepositoryInterface;
 use Magento\Framework\DataObject;
-use Magento\Framework\Webapi\Rest\Request;
+use Magento\Framework\Webapi\Rest\Request; 
+use Embitel\Catalog\Model\BrandCatalogServicePush;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
@@ -19,6 +20,7 @@ class CategoryRepository implements CategoryRepositoryInterface
         \Anyhow\SupermaxPos\Helper\Data $helper,
         \Magento\Catalog\Model\CategoryFactory $categoryFactory,
         \Magento\Framework\Event\ManagerInterface $eventManager,
+        BrandCatalogServicePush $brandCatalogServicePush,
         Request $request
     ) {
         $this->resourceConnection = $resourceConnection;
@@ -27,6 +29,7 @@ class CategoryRepository implements CategoryRepositoryInterface
         $this->categoryFactory = $categoryFactory;
         $this->eventManager = $eventManager;
         $this->categoriesSeoData = [];
+        $this->brandCatalogServicePush = $brandCatalogServicePush;
         $this->request = $request;
     }
 
@@ -276,18 +279,20 @@ class CategoryRepository implements CategoryRepositoryInterface
                             }
                             $categoryData->save();
                             $this->addLog("End meta-details updation for category ID: " . $category['id']);
-                            $this->addLog("Start meta-details synching to catalog for category ID: " . $category['id']);
-                            $this->eventManager->dispatch('catalog_category_meta_save_after',
+                            $this->addLog("Start meta-details synching to catalog Brand for category ID: " . $category['id']);
+                            //Call sync function IBO brand category ids replaces Event
+                            $this->brandCatalogServicePush->brandPush($categoryData->getData());
+                           /* $this->eventManager->dispatch('catalog_category_meta_save_after',
                                 [
                                     'category' => new DataObject(['id' => $category['id']])
                                 ]
-                            );
-                            $this->addLog("End meta-details synching to catalog for category ID: " . $category['id']);
+                            ); */
+                            $this->addLog("End meta-details synching to catalog Brand for category ID: " . $category['id']);
                         } else {
                             $this->addLog("Category does not exist with the category-ID: " . $category['id']);
                         }
                     } else {
-                        $this->addLog("Category-ID is not present in payload", "");
+                        $this->addLog("Ibo brand Category-ID is not present in payload", "");
                     }
                 }
             } else {
