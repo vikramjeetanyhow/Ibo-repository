@@ -260,6 +260,7 @@ class CategoryRepository implements CategoryRepositoryInterface
             $params = $this->helper->getParams();
             if(isset($params['categories']) && !empty($params['categories'])) {
                 $categoriesToBeUpdated = $params['categories'];
+                $categoryArrayId = [];
                 foreach ($categoriesToBeUpdated as $category) {
                     if(isset($category['id']) && !empty($category['id'])) {
                         $this->addLog("Start meta-details updation for category ID: " . $category['id']);
@@ -281,7 +282,8 @@ class CategoryRepository implements CategoryRepositoryInterface
                             $this->addLog("End meta-details updation for category ID: " . $category['id']);
                             $this->addLog("Start meta-details synching to catalog Brand for category ID: " . $category['id']);
                             //Call sync function IBO brand category ids replaces Event
-                            $this->brandCatalogServicePush->brandPush($categoryData->getData());
+                            $categoryArrayId[] = $category['id'];
+                            //$this->brandCatalogServicePush->pushData($category['id']);
                            /* $this->eventManager->dispatch('catalog_category_meta_save_after',
                                 [
                                     'category' => new DataObject(['id' => $category['id']])
@@ -295,6 +297,9 @@ class CategoryRepository implements CategoryRepositoryInterface
                         $this->addLog("Ibo brand Category-ID is not present in payload", "");
                     }
                 }
+
+                $this->brandCatalogServicePush->pushData($categoryArrayId); 
+                  
             } else {
                 $error = "payload is empty or incorrect";
                 $this->addLog($error);
