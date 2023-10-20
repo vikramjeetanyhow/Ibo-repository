@@ -1,6 +1,6 @@
 <?php
 
-namespace Embitel\Catalog\MOdel;
+namespace Embitel\Catalog\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\HTTP\Client\Curl;
@@ -51,9 +51,9 @@ class BrandCatalogServicePush
         $this->addLog('==============Getting Brand Data started==================');
         $this->getBrandIdCollection();
 
-  
-        if(count($brandId)>1){
-            $category = $this->categoryRepository->get(1334);
+        if(gettype($brandId)== "integer"){
+
+            $category = $this->categoryRepository->get($brandId);
             $subCategories = $category->getChildrenCategories();
             foreach($subCategories as $subCategory) {
               //  $brandId ='';
@@ -67,7 +67,6 @@ class BrandCatalogServicePush
                         $brandIboId = isset($brandCatId['ibo_brand_id']) ? $brandCatId['ibo_brand_id'] : '';
                     }
                 
-                
                     $returnData = $this->brandPush($brandCatId);
                     if($returnData['msg'] == 'success') {
                         $subCategory->setIboBrandId($returnData['brand_id']);
@@ -78,22 +77,38 @@ class BrandCatalogServicePush
                         }
                     }           
             }
-
         }else{
+            $brandIdsInArrays = $brandId;
+            foreach($brandIdsInArrays as $brandIds){
+                $storeId = 0;
+                $category = $this->categoryRepository->get($brandIds,$storeId);
+                $brandCatId = $category->getData();
 
-            $category = $this->categoryRepository->get(current($brandId));
-            $brandCatId = $category->getData();
-            $brandIboId = $category->getData('ibo_brand_id') ? $category->getData('ibo_brand_id') : '';
-            $returnData = $this->brandPush($brandCatId);
-            if($returnData['msg'] == 'success') {
-                $category->setIboBrandId($returnData['brand_id']);
-                $category->save();
-                $this->addLog('==============Update category ibo brand id done==================');
-                if($brandIboId == '') {
-                    $this->addLog('BrandID Created for catId'.$categoryId);
+                $subcategoryId = (int)$brandCatId['entity_id'];
+                $catoryData = $this->categoryFactory->create()->load($subcategoryId);
+
+                if(!empty($brandCatId)) {
+                    $brandCatId = $brandCatId;
+                    $brandIboId = isset($brandCatId['ibo_brand_id']) ? $brandCatId['ibo_brand_id'] : '';
+                }
+                
+                $catoryData->setMetaTitle($brandCatId['meta_title']);
+                $catoryData->setMetaDescription($brandCatId['meta_description']);
+                $catoryData->setMetaKeywords($brandCatId['meta_keywords']);
+                $catoryData->save();
+
+                $returnData = $this->brandPush($brandCatId);
+                if($returnData['msg'] == 'success') {
+                    $category->setIboBrandId($returnData['brand_id']);
+                    $category->save();
+                    $this->addLog('==============Update category ibo brand id done==================');
+                    if($brandIboId == '') {
+                        $this->addLog('BrandID Created for catId'.$subcategoryId);
+                    }
                 }
             }
         }
+
     }
 
     public function brandPush($brandName)
