@@ -93,7 +93,7 @@ class CategoryRepository implements CategoryRepositoryInterface
                 }
             }
 
-            $responce = ["success"=>"true", "categories"=>json_decode(json_encode($this->categoriesSeoData, JSON_INVALID_UTF8_SUBSTITUTE), true)];
+            $responce = ["success"=>"true", "brands"=>json_decode(json_encode($this->categoriesSeoData, JSON_INVALID_UTF8_SUBSTITUTE), true)];
             $this->addLog("success");
         } catch (\Exception $e) {
             $error = $e->getMessage();
