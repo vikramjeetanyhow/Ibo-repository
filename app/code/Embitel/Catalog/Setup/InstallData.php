@@ -67,6 +67,10 @@ class InstallData implements InstallDataInterface
             "category_type" => [
                 "label" => "Category Type",
                 "source" => "Embitel\Catalog\Model\Category\Attribute\Source\CategoryType"
+            ],
+            "category_type" => [
+                "label" => "Category Fulfillment Class",
+                "source" => "Embitel\Catalog\Model\Category\Attribute\Source\CategoryFulfillmentClass"
             ]
         ];
 

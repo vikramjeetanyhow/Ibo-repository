@@ -110,6 +110,18 @@
                 </item>
             </argument>
         </field>
+        <field name="category_fulfillment_class">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Embitel\Catalog\Model\Category\Attribute\Source\CategoryFulfillmentClass</item>
+                <item name="config" xsi:type="array">
+                    <item name="required" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="number">565</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" translate="true" xsi:type="string">Category Fulfillment Class</item>
+                </item>
+            </argument>
+        </field>
         <field name="is_shopby" sortOrder="35" formElement="checkbox">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">

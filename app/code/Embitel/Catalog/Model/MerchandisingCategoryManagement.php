@@ -157,6 +157,11 @@ class MerchandisingCategoryManagement
          if($this->category->getData('level') != 2){            
          $this->categoryData['parent_category_id'] = (string) $this->category->getData('parent_category_id');
          }
+
+        if($this->category->getData('level') == 4){            
+            $this->categoryData['fulfillment_class'] = (string) $this->category->getData('category_fulfillment_class');
+        }
+        
          $this->categoryData['category_level'] = (int) $this->category->getData('level');
          $this->categoryData['title_name_rule'] = ($this->category->getData('title_name_rule')) ? $this->category->getData('title_name_rule') : '';
          $this->categoryData['product_type'] = 'REGULAR';

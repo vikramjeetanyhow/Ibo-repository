@@ -532,6 +532,27 @@ class UpgradeData implements UpgradeDataInterface
         }
         */
 
+        if ($context->getVersion() && version_compare($context->getVersion(), '1.0.21') < 0) {
+            $attributeCode = 'category_fulfillment_class';
+            $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
+            $eavSetup->removeAttribute(\Magento\Catalog\Model\Category::ENTITY, $attributeCode);
+            $eavSetup->addAttribute(
+                \Magento\Catalog\Model\Category::ENTITY,
+                $attributeCode,
+                [
+                    'type' => 'varchar',
+                    'label' => "Category Fulfillment Class",
+                    'input' => 'select',
+                    'source' => "Embitel\Catalog\Model\Category\Attribute\Source\CategoryFulfillmentClass",
+                    'backend' => 'Magento\Eav\Model\Entity\Attribute\Backend\ArrayBackend',
+                    'required' => false,
+                    'global' => ScopedAttributeInterface::SCOPE_GLOBAL,
+                    'group' => 'Category Attributes',
+                    'used_in_product_listing' => true
+                ]
+            );
+        }
+
         $setup->endSetup();
     }
 }
