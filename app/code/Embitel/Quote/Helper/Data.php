@@ -94,7 +94,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation,
         \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder,
         UpdateCustomerAccount $updateCustomerAccount,
-        \Anyhow\SupermaxPos\Helper\Data $posHelper
+        \Anyhow\SupermaxPos\Helper\Data $posHelper,
+        \Magento\Catalog\Model\CategoryFactory $categoryCollection
+    
     ) {
         $this->_scopeConfig = $scopeConfig;
         $this->productRepository = $productRepository;
@@ -129,6 +131,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->timezone = $timezone;
         $this->updateCustomerAccount = $updateCustomerAccount;
         $this->posHelper = $posHelper;
+        $this->categoryCollection = $categoryCollection;
     }
 
     public function getClientId()
@@ -1385,6 +1388,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                     'values' => [],
                 ],
             ];
+            $isPartialPayment = false;
             $orderType = "CUSTOMER-ORDER";
             if($order_data->getOrderChannel() == 'STORE') {
                 $cart_origin = "STORE";
@@ -1497,6 +1501,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                         'values' => [$salesAssociatePhone]
                     ];
                 }
+
+                $posOrderAdditionalJsonData = $order_data->getAdditionalData();
+                if(!empty($posOrderAdditionalJsonData)) {
+                    $posOrderAdditionalDetails = (array)json_decode($posOrderAdditionalJsonData);
+                    $isPartialPayment = (isset($posOrderAdditionalDetails['is_partial_payment']) && ($posOrderAdditionalDetails['is_partial_payment'] == "true")) ? true : false;
+                }
             }
 
             $this->addLog('Order Channel Value :'.$order_data->getOrderChannel());
@@ -1520,6 +1530,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $municipal = '';
             $dataArray = [];
             $dataArray['fulfilment_order']['order_number'] = $order_data->getIncrementId();
+            $dataArray['fulfilment_order']['is_partial_payment'] = $isPartialPayment;
             $dataArray['fulfilment_order']['version'] = "v1";
             $dataArray['fulfilment_order']['order_type'] = $orderType;
             $dataArray['fulfilment_order']['order_subtype'] = $orderSubtype;
@@ -1735,7 +1746,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                             ];
                     }
                     $order_line_adjustments = $itemCoupn;
-                    
 
                     $tempArray[$itemKey]= [
                         'order_line_number' =>  !empty($deliverGroupLine) ?  $deliverGroupLine[$item->getSku()] : '',
@@ -1743,6 +1753,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                         'store_fulfilment_mode' => !empty($item->getOrderFulfilmentType()) ?  $item->getOrderFulfilmentType() : 'DWH',
                         'cart_line_id' =>  !empty($item->getItemId()) ?  $item->getItemId() : '',
                         'item' =>[
+                        'fulfillment_class' => $this->getProductFulfillmentClass($product),
                         'offer_id' => !empty($item->getSku()) ?  $item->getSku() : '',
                         'esin' => !empty($product->getEsin()) ?  $product->getEsin() : $item->getSku(),
                         'seller_id' =>!empty($product->getSellerId()) ?  $product->getSellerId() : '',
@@ -2286,5 +2297,18 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $salesOrderItemTable = $this->resourceConnection->getTableName('sales_order_item');
         $result = $this->connection->query("SELECT * FROM $salesOrderItemTable WHERE order_id = $orderId GROUP BY sku, product_id HAVING COUNT(*) > 1")->fetchAll();
         return $result;
+    }
+
+    private function getProductFulfillmentClass($product) {
+        $categoryFulfillmentClass = "";
+        $productIboCategoryId = $product->getIboCategoryId();
+        $category = $this->categoryCollection->create()->getCollection()
+                        ->addAttributeTofilter('category_id',array($productIboCategoryId))
+                         ->addAttributeTofilter('category_type',"MERCHANDISING");
+        if (isset($category->getData()[0]['entity_id'])) {
+            $categoryObj = $this->categoryRepository->get($category->getData()[0]['entity_id'], $this->storeManager->getStore()->getId());
+            $categoryFulfillmentClass = !empty($categoryObj->getCategoryFulfillmentClass()) ? $categoryObj->getCategoryFulfillmentClass() : "";
+        }
+        return $categoryFulfillmentClass;
     }
 }

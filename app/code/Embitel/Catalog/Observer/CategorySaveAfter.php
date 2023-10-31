@@ -9,6 +9,7 @@ use Ibo\CoreMedia\Helper\Data;
 use Magento\Catalog\Model\CategoryFactory;
 use Magento\Framework\Session\SessionManagerInterface as CoreSession;
 use Magento\Cms\Model\BlockFactory;
+use Magento\Catalog\Model\CategoryRepository;
 
 class CategorySaveAfter implements \Magento\Framework\Event\ObserverInterface
 {
@@ -35,7 +36,8 @@ class CategorySaveAfter implements \Magento\Framework\Event\ObserverInterface
         CategoryFactory $categoryFactory,
         StoreManagerInterface $storeManager,
         ScopeConfigInterface $scopeConfig,
-        BlockFactory $blockFactory
+        BlockFactory $blockFactory,
+        CategoryRepository $CategoryRepository
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->curl = $curl;
@@ -44,6 +46,7 @@ class CategorySaveAfter implements \Magento\Framework\Event\ObserverInterface
         $this->categoryFactory = $categoryFactory;
         $this->_coreSession = $coreSession;
         $this->blockFactory = $blockFactory;
+        $this->CategoryRepository = $CategoryRepository;
     }
 
     public function execute(\Magento\Framework\Event\Observer $observer)
@@ -70,6 +73,19 @@ class CategorySaveAfter implements \Magento\Framework\Event\ObserverInterface
 
         try{
              $this->category = $this->categoryFactory->create()->load($observer->getEvent()->getCategory()->getId());
+
+            // update category meta data store 1 (frontend)
+            $storeId = 0;
+            $category = $this->CategoryRepository->get($observer->getEvent()->getCategory()->getId(),$storeId);
+            $categoryFrontend = $category->getData();
+
+            $this->category->setMetaTitle($categoryFrontend['meta_title']);
+            $this->category->setMetaDescription($categoryFrontend['meta_description']);
+            $this->category->setMetaKeywords($categoryFrontend['meta_keywords']);
+            $this->category->save();
+            // End update category meta data store 1 (frontend)
+
+
              /*if($this->token == ''){
                 $this->token = $this->getAuthToken();
              }
