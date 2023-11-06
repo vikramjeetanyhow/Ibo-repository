@@ -72,19 +72,7 @@ class CategorySaveAfter implements \Magento\Framework\Event\ObserverInterface
         }
 
         try{
-             $this->category = $this->categoryFactory->create()->load($observer->getEvent()->getCategory()->getId());
-
-            // update category meta data store 1 (frontend)
-            $storeId = 0;
-            $category = $this->CategoryRepository->get($observer->getEvent()->getCategory()->getId(),$storeId);
-            $categoryFrontend = $category->getData();
-
-            $this->category->setMetaTitle($categoryFrontend['meta_title']);
-            $this->category->setMetaDescription($categoryFrontend['meta_description']);
-            $this->category->setMetaKeywords($categoryFrontend['meta_keywords']);
-            $this->category->save();
-            // End update category meta data store 1 (frontend)
-
+             $this->category = $this->categoryFactory->create()->setStoreId(0)->load($observer->getEvent()->getCategory()->getId());
 
              /*if($this->token == ''){
                 $this->token = $this->getAuthToken();

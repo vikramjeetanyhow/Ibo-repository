@@ -108,7 +108,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     private function getCategoryList($categoryList) {
         if(!empty($categoryList)) {
             foreach ($categoryList as $categoryTreeData) {
-                $category = $this->categoryFactory->create()->load($categoryTreeData->getId());
+                $category = $this->categoryFactory->create()->setStoreId(0)->load($categoryTreeData->getId());
                 $this->categoriesSeoData[] = array(
                     "id" => (int)$category->getId(),
                     "parent_id" => $category->getParentId(),
