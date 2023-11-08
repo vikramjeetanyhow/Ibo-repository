@@ -159,7 +159,9 @@ class MerchandisingCategoryManagement
          }
 
         if($this->category->getData('level') == 4){            
-            $this->categoryData['fulfillment_class'] = (string) $this->category->getData('category_fulfillment_class');
+            $this->categoryData['scm_info'] = array(
+                 "fulfilment_class"=>$this->category->getData('category_fulfillment_class')
+            );
         }
         
          $this->categoryData['category_level'] = (int) $this->category->getData('level');
