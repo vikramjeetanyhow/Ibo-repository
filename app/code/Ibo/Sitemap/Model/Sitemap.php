@@ -331,6 +331,30 @@ class Sitemap extends \Magento\Sitemap\Model\Sitemap
                 'getUpdatedAt'=>'2023-04-12T10:36:43+00:00',
                 'changeFrequency'=>'monthly',
                 'priority'=>'0.95'
+            ),
+            array(
+                'url'=>'store/ibo-wholesale-jakur-store-bengaluru/ST009',
+                'getUpdatedAt'=>'2023-04-12T10:36:43+00:00',
+                'changeFrequency'=>'monthly',
+                'priority'=>'0.95'
+            ),
+            array(
+                'url'=>'stores/bengaluru',
+                'getUpdatedAt'=>'2023-04-12T10:36:43+00:00',
+                'changeFrequency'=>'monthly',
+                'priority'=>'0.95'
+            ),
+            array(
+                'url'=>'stores/chennai',
+                'getUpdatedAt'=>'2023-04-12T10:36:43+00:00',
+                'changeFrequency'=>'monthly',
+                'priority'=>'0.95'
+            ),
+            array(
+                'url'=>'stores/hyderabad',
+                'getUpdatedAt'=>'2023-04-12T10:36:43+00:00',
+                'changeFrequency'=>'monthly',
+                'priority'=>'0.95'
             )
         );
 
