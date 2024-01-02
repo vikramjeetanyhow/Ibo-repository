@@ -8,7 +8,9 @@ use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory as CategoryCo
 
 class GetOrderData implements OrderRepositoryInterface {
 
-      /**
+    CONST FRACTION = 10000;
+    
+    /**
     * @var OrderRepositoryInterface
     */
     protected $orderRepository;
@@ -163,6 +165,56 @@ class GetOrderData implements OrderRepositoryInterface {
                 $productDetails = $this->_productFactory->create()->load($ProductId);
                 $productsArry[$key]['offer_id'] = $productSku =  $productDetails->getSku();
                 $productsArry[$key]['ebo_title'] = $productName = $productDetails->getName();
+
+                $quantityUom = $productDetails->getAttributeText('sale_uom');
+                if($orderRepository->getOrderChannel() == 'STORE') {
+                    $quantityUom = $productDetails->getData('sale_uom');
+                }
+                $serviceCategory = ($productDetails->getServiceCategory()) ? $productDetails->getServiceCategory() : "NATIONAL";
+                $rowAmount = $item->getBaseRowTotalInclTax()*self::FRACTION;
+                $unitePrice = $rowAmount/$item->getQtyOrdered();
+                $appliedRule = $item->getAppliedRuleIds();
+                $totalDiscount = 0;
+                if($orderRepository->getDiscountAmount() != null){
+                    $discountAmount = $orderRepository->getDiscountAmount();
+                    $totalDiscount = $discountAmount * self::FRACTION;
+                }
+                $ItemDiscountAmount = 0;
+                if (!empty($appliedRule)) {
+                    $ItemDiscountAmount = $item->getDiscountAmount();
+                    $ItemDiscountAmount = ($ItemDiscountAmount >0)?$ItemDiscountAmount/$item->getQtyOrdered():$ItemDiscountAmount;
+                    $ItemDiscountAmount = number_format($ItemDiscountAmount,4,'.','');
+                    $ItemDiscountAmount = $ItemDiscountAmount*self::FRACTION;
+                }
+
+                $productsArry[$key]['quantity'] = array(
+                    'quantity_number' => !empty((int)$item->getQtyOrdered()) ?  (int)$item->getQtyOrdered() : 0,
+                    'quantity_uom' => !empty($quantityUom) ?  $quantityUom : "",
+                );
+
+                $productsArry[$key]['unit_price'] = array(
+                    'cent_amount' => $unitePrice,
+                    'currency' => "INR",
+                    'fraction' => self::FRACTION,
+                );
+
+                $productsArry[$key]['discount_total'] =  array(
+                    'cent_amount' => !empty($item->getIboMrp()) ? $item->getIboMrp() * self::FRACTION : 0,
+                    'currency' => 'INR',
+                    'fraction' => self::FRACTION
+                );
+
+                $productsArry[$key]['discount_total'] = array(
+                    'cent_amount' => $ItemDiscountAmount,
+                    'currency' => 'INR',
+                    'fraction' => self::FRACTION
+                );
+
+                $productsArry[$key]['grand_total'] = array(
+                    'cent_amount' => $rowAmount,
+                    'currency' => 'INR',
+                    'fraction' => self::FRACTION
+                );
             }
             
 
@@ -180,27 +232,76 @@ class GetOrderData implements OrderRepositoryInterface {
                     array(
                         "do_number"=>$orderPromiseDeliveryGrp[0]['delivery_group_number'],
                         "store_fulfillment_mode"=>$orderPromiseDeliveryGrp[0]['delivery_group_lines'][0]['store_fulfilment_mode'],
-                        "data"=>$productsArry,
-                        "quantity" => $orderPromiseDeliveryGrp[0]['delivery_group_lines'][0]['quantity'],
-                        "unit_price" => $orderPromiseDeliveryGrp[0]['delivery_group_lines'][0]['unit_price']
+                        "data"=>$productsArry
                     )  
                 )
             );
+
+            $totalDiscount=0;
+            if($orderRepository->getDiscountAmount() != null){
+                $discountAmount = $orderRepository->getDiscountAmount() * (-1);
+                $totalDiscount = $discountAmount*self::FRACTION;
+            }
+            
+            $dataArray['totals'] =[
+                [
+                    'type' => "SHIPPING_TOTAL",
+                    'amount' => [
+                      'cent_amount' => $orderRepository->getShippingAmount()*self::FRACTION,
+                      'currency' => "INR",
+                   'fraction' =>  self::FRACTION
+                    ],
+                  ],
+                  [
+                    'type' => "DISCOUNT_TOTAL",
+                    'amount' => [
+                      'cent_amount' =>$totalDiscount,
+                      'currency' => "INR",
+                   'fraction' =>  self::FRACTION
+                    ],
+                  ],
+                  [
+                    'type' => "ITEM_TOTAL",
+                    'amount' => [
+                      'cent_amount' => $orderRepository->getSubtotalInclTax()*self::FRACTION,
+                      'currency' => "INR",
+                   'fraction' =>  self::FRACTION
+                    ],
+                  ],
+                  [
+                    'type' => "TAX_TOTAL",
+                    'amount' => [
+                      'cent_amount' => $orderRepository->getTaxAmount()*self::FRACTION,
+                      'currency' => "INR",
+                   'fraction' =>  self::FRACTION
+                    ],
+                  ],
+                  [
+                    'type' => "GRAND_TOTAL",
+                    'amount' => [
+                      'cent_amount' => $orderRepository->getGrandTotal()*self::FRACTION,
+                      'currency' => "INR",
+                   'fraction' =>  self::FRACTION
+                    ],
+                  ],
+    
+            ];
+
+            $connection = $this->resourceConnection->getConnection();
+            $receiptStoreTable = $this->resourceConnection->getTableName('ah_supermax_pos_receipt_store');
+            $receiptAllStoreData = $connection->query("SELECT * FROM $receiptStoreTable WHERE store_id = 0")->fetchAll();
+            if(!empty($receiptAllStoreData)){
+                $rceiptAllHeaderDetails = $receiptAllStoreData[0]['header_details'];
+            }
 
             $OrderResponceCombine = array(
                 "customer"=>$customer['customer'],
                 "shipping_address"=>$shippingData['shipping_address'],
                 "billing_address"=>$BillingData['billing_address'],
-                "order_details"=>$Orderdetails['order_details']
+                "order_details"=>$Orderdetails['order_details'],
+                "totals"=>$dataArray['totals'],
+                "store_detials"=>$rceiptAllHeaderDetails
             );
-
-
-           // echo $CustomerModel->getSelect();
-          // print_r($orderPromiseDeliveryGrp[0]['delivery_group_lines']);
-            echo json_encode($OrderResponceCombine,true);
-            die;    
-            
-
            
         }catch (\Exception $e) {
             $error = $e->getMessage();
@@ -209,8 +310,8 @@ class GetOrderData implements OrderRepositoryInterface {
 
         $this->addLog("End order data get API");
         $this->addLog("==========================================");
-        // $data = array("error" => !empty($error) ? true : false, "customer"=>$customer, "message" => !empty($error) ? $error : "get Order API Successfully.");
-        // return [$data]; 
+        $data = array("error" => !empty($error) ? true : false, "OrderResponce"=>$OrderResponceCombine, "message" => !empty($error) ? $error : "get Order API Successfully.");
+        return [$data]; 
     }
 
 
