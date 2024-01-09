@@ -76,11 +76,12 @@ class GetOrderData implements OrderRepositoryInterface {
         $this->addLog("Start Get Order data API");
         $error = "";
 
-        try{
+        try {
             $params = $this->helper->getParams();
             $orderModel = $this->orderFactory->create();
             $orderModel_load = $orderModel->loadByIncrementId($params['order_number']);
-            $orderRepository = $this->orderRepository->get($orderModel_load->getId());
+           echo $orderId = $orderModel_load->getId();
+            $orderRepository = $this->orderRepository->get($orderId);
             
             $customerEmail = $orderRepository->getCustomerEmail();
             $customerId = $orderRepository->getCustomerId();
@@ -163,8 +164,6 @@ class GetOrderData implements OrderRepositoryInterface {
                 $ProductId = $item->getProductId();
     
                 $productDetails = $this->_productFactory->create()->load($ProductId);
-                $productsArry[$key]['offer_id'] = $productSku =  $productDetails->getSku();
-                $productsArry[$key]['ebo_title'] = $productName = $productDetails->getName();
 
                 $quantityUom = $productDetails->getAttributeText('sale_uom');
                 if($orderRepository->getOrderChannel() == 'STORE') {
@@ -187,54 +186,65 @@ class GetOrderData implements OrderRepositoryInterface {
                     $ItemDiscountAmount = $ItemDiscountAmount*self::FRACTION;
                 }
 
-                $productsArry[$key]['quantity'] = array(
-                    'quantity_number' => !empty((int)$item->getQtyOrdered()) ?  (int)$item->getQtyOrdered() : 0,
-                    'quantity_uom' => !empty($quantityUom) ?  $quantityUom : "",
-                );
-
-                $productsArry[$key]['unit_price'] = array(
-                    'cent_amount' => $unitePrice,
-                    'currency' => "INR",
-                    'fraction' => self::FRACTION,
-                );
-
-                $productsArry[$key]['discount_total'] =  array(
-                    'cent_amount' => !empty($item->getIboMrp()) ? $item->getIboMrp() * self::FRACTION : 0,
-                    'currency' => 'INR',
-                    'fraction' => self::FRACTION
-                );
-
-                $productsArry[$key]['discount_total'] = array(
-                    'cent_amount' => $ItemDiscountAmount,
-                    'currency' => 'INR',
-                    'fraction' => self::FRACTION
-                );
-
-                $productsArry[$key]['grand_total'] = array(
-                    'cent_amount' => $rowAmount,
-                    'currency' => 'INR',
-                    'fraction' => self::FRACTION
+                $tempArray[$item->getSku()]= array(
+                    'offer_id' => !empty($item->getSku()) ?  $item->getSku() : '',
+                    'ebo_title' => !empty($item->getName()) ?  $item->getName() : '',
+                    'quantity' => array(
+                        'quantity_number' => !empty((int)$item->getQtyOrdered()) ?  (int)$item->getQtyOrdered() : 0,
+                        'quantity_uom' => !empty($quantityUom) ?  $quantityUom : "",
+                    ),
+                    'unit_price' => array(
+                        'cent_amount' => $unitePrice,
+                        'currency' => "INR",
+                        'fraction' => self::FRACTION,
+                    ),
+                    'unit_mrp' => array(
+                        'cent_amount' => !empty($item->getIboMrp()) ? $item->getIboMrp() * self::FRACTION : 0,
+                        'currency' => 'INR',
+                        'fraction' => self::FRACTION
+                    ),
+                    'discount_total' => array(
+                        'cent_amount' => $ItemDiscountAmount,
+                        'currency' => 'INR',
+                        'fraction' => self::FRACTION
+                    ),
+                    'grand_total' => array(
+                        'cent_amount' => $rowAmount,
+                        'currency' => 'INR',
+                        'fraction' => self::FRACTION
+                    )
                 );
             }
             
 
             //get Order details
             $orderPromise = json_decode($orderRepository->getPromiseOptions(),true);
-            $orderPromiseDeliveryGrp = json_decode($orderRepository->getDeliveryGroup(),true);
             $payment = $orderRepository->getPayment();
+            
+            $distributionOrder = array();
+            $deliveryGroup = json_decode($orderRepository->getDelivery_group(), true);
+            if (!(empty($deliveryGroup))) {
+                foreach ($deliveryGroup as $newkey => $delivery) {
+                    $distributionOrder[$newkey] = array(
+                        "do_number" => $delivery["delivery_group_number"],
+                        "store_fulfillment_mode" => ($delivery["promise_options"][0]["delivery_method"] == "CLICK_AND_COLLECT") ? "CNC" : "DWH",
+                    );
+                    foreach($delivery['delivery_group_lines'] as $deliveygroup_line) {
+                        if(array_key_exists($deliveygroup_line['item']['offer_id'], $tempArray)) {
+                            $distributionOrder[$newkey]['items'][] = $tempArray[$deliveygroup_line['item']['offer_id']];
+                        }
+                    }
+                }
+            }
+
             
             $Orderdetails['order_details'] = array(
                 "order_number"=>$orderRepository->getIncrementId(),
                 "order_created_at"=>$orderRepository->getCreatedAt(),
                 "node_id"=>$orderPromise[0]['node_id'],
                 "payment_type"=> $payment->getMethod(),
-                "distribution_order"=> array(
-                    array(
-                        "do_number"=>$orderPromiseDeliveryGrp[0]['delivery_group_number'],
-                        "store_fulfillment_mode"=>$orderPromiseDeliveryGrp[0]['delivery_group_lines'][0]['store_fulfilment_mode'],
-                        "data"=>$productsArry
-                    )  
-                )
+                "distribution_order"=> $distributionOrder,
+                "payment_methods" => ""
             );
 
             $totalDiscount=0;
@@ -288,10 +298,25 @@ class GetOrderData implements OrderRepositoryInterface {
             ];
 
             $connection = $this->resourceConnection->getConnection();
+            $supermaxOrderTable = $this->resourceConnection->getTableName("ah_supermax_pos_orders");
+            $supermaxUserTable = $this->resourceConnection->getTableName("ah_supermax_pos_user");
+            $supermaxOutletTable = $this->resourceConnection->getTableName("ah_supermax_pos_outlet");
+            $receiptTable = $this->resourceConnection->getTableName('ah_supermax_pos_receipt');
             $receiptStoreTable = $this->resourceConnection->getTableName('ah_supermax_pos_receipt_store');
-            $receiptAllStoreData = $connection->query("SELECT * FROM $receiptStoreTable WHERE store_id = 0")->fetchAll();
-            if(!empty($receiptAllStoreData)){
-                $rceiptAllHeaderDetails = $receiptAllStoreData[0]['header_details'];
+            $receiptId = 0;
+            $storeDetails = array();
+            $posOrderData = $connection->query("SELECT CONCAT(su.`firstname`, ' ', su.`lastname`) AS cashier_name, sou.`pos_receipt_id`, so.`payment_method`, so.`pos_user_id` FROM $supermaxOrderTable AS so LEFT JOIN $supermaxUserTable AS su ON(so.`pos_user_id`= su.`pos_user_id`) LEFT JOIN $supermaxOutletTable AS sou ON(so.`pos_outlet_id` = sou.`pos_outlet_id`) WHERE so.`order_id`=$orderId")->fetch();
+            if(!empty($posOrderData)) {
+                $receiptId = (int)$posOrderData['pos_receipt_id'];
+                $storeDetails['cashier'] = array(
+                    "id" => $posOrderData['pos_user_id'],
+                    "name" => $posOrderData['cashier_name']
+                );
+                $Orderdetails['order_details']['payment_methods'] = $posOrderData['payment_method'];
+            }
+            $receiptAllStoreData = $connection->query("SELECT * FROM $receiptStoreTable AS rst WHERE rst.`receipt_id`=$receiptId AND rst.`store_id`=0")->fetch();
+            if(!empty($receiptAllStoreData)) {
+                $storeDetails['cin_number'] = $receiptAllStoreData['header_details'];
             }
 
             $OrderResponceCombine = array(
@@ -300,17 +325,17 @@ class GetOrderData implements OrderRepositoryInterface {
                 "billing_address"=>$BillingData['billing_address'],
                 "order_details"=>$Orderdetails['order_details'],
                 "totals"=>$dataArray['totals'],
-                "store_detials"=>$rceiptAllHeaderDetails
+                "store_details"=>$storeDetails
             );
            
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             $error = $e->getMessage();
             $this->addLog($error);
         }
 
         $this->addLog("End order data get API");
         $this->addLog("==========================================");
-        $data = array("error" => !empty($error) ? true : false, "OrderResponce"=>$OrderResponceCombine, "message" => !empty($error) ? $error : "get Order API Successfully.");
+        $data = array("error" => !empty($error) ? true : false, "OrderResponse"=>!empty($OrderResponceCombine)?$OrderResponceCombine:"", "message" => !empty($error) ? $error : "get Order API Successfully.");
         return [$data]; 
     }
 

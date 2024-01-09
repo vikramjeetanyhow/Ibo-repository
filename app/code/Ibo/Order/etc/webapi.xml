@@ -3,7 +3,7 @@
     <route url="/V1/order/data/get" method="POST">
         <service class="Ibo\Order\Api\OrderRepositoryInterface" method="getOrderData"/>
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="self"/>
         </resources>
     </route>
 </routes>
