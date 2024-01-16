@@ -226,6 +226,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     public function sendStoreStockData($data) {
+
         $this->addLog('======Store Data Request======');
         $this->addLog(print_r($data,true));
         $returnResult = '';
@@ -244,7 +245,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         
 
         try {
-            $this->addLog('Curl Initiated');
+            $this->addLog('Curl Initiated for assortment API disabled');
             $this->curlObj->post($url,$data);
             $result = $this->curlObj->getBody();
             $resultData = json_decode($result, true);

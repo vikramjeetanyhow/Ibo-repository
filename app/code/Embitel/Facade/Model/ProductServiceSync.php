@@ -766,6 +766,11 @@ class ProductServiceSync extends AbstractModel implements MerchandiseInterface
                 $this->facadeHelper->addLog("There is some error in Offer Request"."=======".$e->getMessage());
             }
             // Code to call store catalog push
+
+            /****
+             * stop assortment API and Store catalog push AT the time of product update
+             * 
+             * 
             try {
                 $storeData = $this->prepareDataForStoreCatalogPush($product);
                 $this->facadeHelper->sendStoreStockData($storeData);
@@ -773,6 +778,8 @@ class ProductServiceSync extends AbstractModel implements MerchandiseInterface
             } catch (\Exception $e) {
                 $this->facadeHelper->addLog("There is some error in Store Catalog push Request"."=======".$e->getMessage());
             }
+
+            */
             
             $this->updateProductSyncCount($product->getId(), $product->getSku(),'success');
         }

@@ -106,9 +106,9 @@
                 <field id="product_offer_sync_api" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Product Offers Sync API</label>
                 </field>
-                <field id="store_product_sync_api" translate="label" type="text" sortOrder="28" showInDefault="1" showInWebsite="1" showInStore="0">
+                <!-- <field id="store_product_sync_api" translate="label" type="text" sortOrder="28" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Store Product Sync API</label>
-                </field>
+                </field> -->
                 <field id="batch_size" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Sync Batch Size</label>
                 </field>
