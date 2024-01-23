@@ -37,4 +37,12 @@ interface CategoryManagementInterface
      * @return string
      */
     public function getMerchandiseCategoriesIds($ibo_category_ids);
+
+    /**
+     * magetno root id for brand catalog data push
+     * 
+     * @param int $brandrootCategoryId
+     * @return string
+     */
+    public function getBrandCategoryPushApi();
 }

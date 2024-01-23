@@ -17,5 +17,17 @@
         <resources>
             <resource ref="self"/>
         </resources>
-    </route>    
+    </route>
+    <route url="/V1/ibo-cart/fetch" method="POST">
+        <service class="Embitel\Catalog\Api\IboCartInterface" method="fetchCart"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route> 
+    <route url="/V1/push/brandservice" method="POST">
+        <service class="Embitel\Catalog\Api\CategoryManagementInterface" method="getBrandCategoryPushApi"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route>     
 </routes>

@@ -13,6 +13,7 @@ use Magento\Catalog\Api\Data\CategorySearchResultsInterface;
 use Magento\Framework\Api\Search\FilterGroupBuilder;
 use Magento\Framework\Api\FilterBuilder;
 use Embitel\Catalog\Model\MerchandisingCategoryManagement;
+use Embitel\Catalog\Model\BrandCatalogServicePush;
 
 /**
  * Handles the category tree.
@@ -75,6 +76,7 @@ class CategoryManagement implements \Embitel\Catalog\Api\CategoryManagementInter
         FilterGroupBuilder $filterGroupBuilder,
         FilterBuilder $filterBuilder,
         CategoryListInterface $categoryList,
+        BrandCatalogServicePush $BrandCatalogServicePush,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         SearchCriteriaBuilder $searchCriteriaBuilder
     ) {
@@ -83,6 +85,7 @@ class CategoryManagement implements \Embitel\Catalog\Api\CategoryManagementInter
         $this->categoriesFactory = $categoriesFactory;
         $this->categoryFactory = $categoryFactory;
         $this->categoryList = $categoryList;
+        $this->_brandCatalogServicePush = $BrandCatalogServicePush;
         $this->_merchandisingCategoryManagement = $MerchandisingCategoryManagement;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->filterGroupBuilder = $filterGroupBuilder;
@@ -272,5 +275,32 @@ class CategoryManagement implements \Embitel\Catalog\Api\CategoryManagementInter
         }
 
         return json_encode($responce);
+    }
+
+
+    /**
+     * @post Brand root category Id for push data
+     */
+
+    public function getBrandCategoryPushApi(){
+        
+        
+        $responce = ["success"=>false];
+
+        try{
+
+            $brandRootId = 1334;
+            $this->_brandCatalogServicePush->pushData($brandRootId);
+
+            $responce = [ 
+                "success"=>true,
+                "message"=>"push Brand Category Data has been done"
+            ];
+
+        } catch(\Exception $e){
+            $responce = ["success"=>false, "message"=>$e->getMessage()];   
+        }
+
+        return [$responce]; 
     }
 }

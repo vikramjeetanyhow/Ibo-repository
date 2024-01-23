@@ -9,7 +9,6 @@ use Ibo\CoreMedia\Helper\Data;
 use Magento\Catalog\Model\CategoryFactory;
 use Magento\Framework\Session\SessionManagerInterface as CoreSession;
 use Magento\Cms\Model\BlockFactory;
-use Magento\Catalog\Model\CategoryRepository;
 
 class CategorySaveAfter implements \Magento\Framework\Event\ObserverInterface
 {
@@ -36,8 +35,7 @@ class CategorySaveAfter implements \Magento\Framework\Event\ObserverInterface
         CategoryFactory $categoryFactory,
         StoreManagerInterface $storeManager,
         ScopeConfigInterface $scopeConfig,
-        BlockFactory $blockFactory,
-        CategoryRepository $CategoryRepository
+        BlockFactory $blockFactory
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->curl = $curl;
@@ -46,7 +44,6 @@ class CategorySaveAfter implements \Magento\Framework\Event\ObserverInterface
         $this->categoryFactory = $categoryFactory;
         $this->_coreSession = $coreSession;
         $this->blockFactory = $blockFactory;
-        $this->CategoryRepository = $CategoryRepository;
     }
 
     public function execute(\Magento\Framework\Event\Observer $observer)
