@@ -41,8 +41,8 @@ interface CategoryManagementInterface
     /**
      * magetno root id for brand catalog data push
      * 
-     * @param int $brandrootCategoryId
+     * @param string[] $brandCategoryIds
      * @return string
      */
-    public function getBrandCategoryPushApi();
+    public function getBrandCategoryPushApi($brandCategoryIds);
 }

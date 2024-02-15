@@ -282,15 +282,14 @@ class CategoryManagement implements \Embitel\Catalog\Api\CategoryManagementInter
      * @post Brand root category Id for push data
      */
 
-    public function getBrandCategoryPushApi(){
-        
+    public function getBrandCategoryPushApi($brandCategoryIds){
         
         $responce = ["success"=>false];
 
         try{
 
-            $brandRootId = 1334;
-            $this->_brandCatalogServicePush->pushData($brandRootId);
+            //$brandRootId = 1334;
+            $this->_brandCatalogServicePush->pushData($brandCategoryIds);
 
             $responce = [ 
                 "success"=>true,
