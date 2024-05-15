@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<!-- /**
+* @version [product Version 1.0.0] [Supported Magento Version 2.3.x.x]
+* @category Anyhow Infosystems
+* @package Magento Cxl Pos
+* @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+* @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+* @license https://store.anyhowinfo.com/software-license
+*/ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Anyhow\CxlPos\Api\SourcesInterface" type="Anyhow\CxlPos\Model\Sources"/>
+    <preference for="Anyhow\CxlPos\Api\ProductInterface" type="Anyhow\CxlPos\Model\Product"/>
+    <preference for="Anyhow\CxlPos\Api\StoreInterface" type="Anyhow\CxlPos\Model\Store" />
+    <preference for="Anyhow\CxlPos\Api\CategoryRepositoryInterface" type="Anyhow\CxlPos\Model\CategoryRepository"/>
+    <preference for="Anyhow\CxlPos\Api\CountryStateRepositoryInterface" type="Anyhow\CxlPos\Model\CountryStateRepository"/>
+    <preference for="Anyhow\CxlPos\Api\CartManagementInterface" type="Anyhow\CxlPos\Model\QuoteManagement" />
+</config>

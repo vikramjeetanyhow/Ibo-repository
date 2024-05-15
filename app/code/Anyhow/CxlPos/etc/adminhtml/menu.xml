@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @version [product Version 1.0.0] [Supported Magento Version 2.3.x.x]
+* @category Anyhow Infosystems
+* @package Magento CXL Pos
+* @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+* @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+* @license https://store.anyhowinfo.com/software-license
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Anyhow_CxlPos::ah_cxlpos" title="Anyhow Cxl POS" module="Anyhow_CxlPos" sortOrder="10"  resource="Anyhow_CxlPos::ah_cxlpos"/>
+        <add id="Anyhow_CxlPos::ah_cxlpos_mgmt" title="CXL POS Management" module="Anyhow_CxlPos" sortOrder="10" parent="Anyhow_CxlPos::ah_cxlpos" resource="Anyhow_CxlPos::ah_cxlpos_mgmt"/>
+        <add id="Anyhow_CxlPos::configuration" title="Configuration" module="Anyhow_CxlPos" sortOrder="20" action="adminhtml/system_config/edit/section/anyhowcxlpos" parent="Anyhow_CxlPos::ah_cxlpos" resource="Anyhow_CxlPos::config_anyhowcxlpos"/>
+    </menu>
+</config>
