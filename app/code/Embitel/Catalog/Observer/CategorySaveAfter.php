@@ -243,7 +243,7 @@ class CategorySaveAfter implements \Magento\Framework\Event\ObserverInterface
          $this->categoryData['description'] = (trim(strip_tags($this->category->getData('description')))) ? trim(strip_tags($this->category->getData('description'))) : ' ';
          $this->categoryData['category_level'] = (int) $this->category->getData('level');
          $this->categoryData['service_category'] = ($this->category->getData('service_category')) ? $this->category->getData('service_category') : 'LOCAL';
-         $this->categoryData['is_promotional'] = false;
+         $this->categoryData['is_promotional'] = (string)$this->categoryData['parent_category_id']=="8924"?true:false;
          $this->categoryData['category_type'] = ($this->category->getData('category_type')) ? $this->category->getData('category_type') : '';
          $this->categoryData['allowed_channel'] = "ONLINE";
          $this->categoryData['display_mode'] = ($this->category->getData('display_mode')) ?
