@@ -352,6 +352,18 @@ class ProductPublishHandler
                     $row['error'] = "Skipping row as publish is not set as yes or no.";
                     $this->products['failure'][] = $row;
                     continue;
+                };
+
+                if (isset($row['is_lot_controlled']) && in_array($row['is_lot_controlled'], ["yes", "no"])) {
+                    $row['error'] = "is_lot_controlled is not allowed to update";
+                    $this->products['failure'][] = $row;
+                    continue;
+                }
+
+                if (isset($row['lot_control_parameters']) && in_array($row['lot_control_parameters'], ["MRP", "MRP,batch","batch"])) {
+                    $row['error'] = "lot_control_parameters is not allowed to update";
+                    $this->products['failure'][] = $row;
+                    continue;
                 }
 
                 $product = $this->productFactory->create()->loadByAttribute('sku', $row['sku']);
