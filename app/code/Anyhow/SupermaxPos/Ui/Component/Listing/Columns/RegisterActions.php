@@ -76,34 +76,42 @@ class RegisterActions extends Column
             foreach ($dataSource['data']['items'] as &$item) {
                $name = $this->getData('pos_register_id');
                 $title = $this->getEscaper()->escapeHtml($item['name']);
-                if (isset($item['pos_register_id']) && $item['reconcile_status'] == '1') {
-                    $item[$this->getData('name')] = [
-                        'edits' => [
-                            'href' => $this->urlBuilder->getUrl($this->editUrl, ['pos_register_id' => $item['pos_register_id']]),
-                            'label' => __('Details'),
-                        ],
-                        'edit' => [
-                            'href' => $this->urlBuilder->getUrl(self::CMS_URL_PATH_EDIT, ['pos_register_id' => $item['pos_register_id']]),
-                            'label' => __('Edit'),
-                        ],
-                        'print' => [
-                            'href' => $this->urlBuilder->getUrl(self::CMS_URL_PATH_PRINT, ['pos_register_id' => $item['pos_register_id']]),
-                            'label' => __('Export'),
-                        ],
 
-                    ];
-                } else if (isset($item['pos_register_id'])) {
-                    $item[$this->getData('name')] = [
-                        'edits' => [
-                            'href' => $this->urlBuilder->getUrl($this->editUrl, ['pos_register_id' => $item['pos_register_id']]),
-                            'label' => __('Details'),
-                        ],
-                        'edit' => [
-                            'href' => $this->urlBuilder->getUrl(self::CMS_URL_PATH_EDIT, ['pos_register_id' => $item['pos_register_id']]),
-                            'label' => __('Edit'),
-                        ],
-                    ];
-                }
+                $today = date('Y-m-d H:m:s');
+                $stop_date = date('Y-m-d H:m:s', strtotime($item['date_close']. ' + 1 day'));
+                $closeDate = !empty(strtotime($item['date_close']))?$stop_date:'';
+                $days = !empty(strtotime($item['date_close']))? round((strtotime($closeDate) - strtotime($today)) / 86400):2;
+
+               if(($days<=1) && ($days>=0)){
+                    if (isset($item['pos_register_id']) && $item['reconcile_status'] == '1') {
+                        $item[$this->getData('name')] = [
+                            'edits' => [
+                                'href' => $this->urlBuilder->getUrl($this->editUrl, ['pos_register_id' => $item['pos_register_id']]),
+                                'label' => __('Details'),
+                            ],
+                            'edit' => [
+                                'href' => $this->urlBuilder->getUrl(self::CMS_URL_PATH_EDIT, ['pos_register_id' => $item['pos_register_id']]),
+                                'label' => __('Edit'),
+                            ],
+                            'print' => [
+                                'href' => $this->urlBuilder->getUrl(self::CMS_URL_PATH_PRINT, ['pos_register_id' => $item['pos_register_id']]),
+                                'label' => __('Export'),
+                            ],
+
+                        ];
+                    } else if (isset($item['pos_register_id'])) {
+                        $item[$this->getData('name')] = [
+                            'edits' => [
+                                'href' => $this->urlBuilder->getUrl($this->editUrl, ['pos_register_id' => $item['pos_register_id']]),
+                                'label' =>__('Details'),
+                            ],
+                            'edit' => [
+                                'href' => $this->urlBuilder->getUrl(self::CMS_URL_PATH_EDIT, ['pos_register_id' => $item['pos_register_id']]),
+                                'label' =>  __('Edit'),
+                            ],
+                        ];
+                    }
+             }
             }
         }
 
