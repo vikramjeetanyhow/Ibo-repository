@@ -40,7 +40,7 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
-   <!-- create cart Api -->
+        <!-- create cart Api -->
     <route url="/V1/cxl/pos/create/cartid" method="POST">
         <service class="Anyhow\CxlPos\Api\CartManagementInterface" method="createEmptyCartForCustomer"/>
         <resources>
@@ -49,5 +49,12 @@
         <data>
             <parameter name="customerId" force="true">%customer_id%</parameter>
         </data>
+    </route>
+        <!-- Update Quote API -->
+    <route url="/V1/cxl/pos/updatequote" method="POST">
+        <service class="Anyhow\CxlPos\Api\UpdateQuoteInterface" method="updateQuote"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
     </route>
 </routes>

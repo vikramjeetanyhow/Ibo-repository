@@ -13,5 +13,8 @@
     <preference for="Anyhow\CxlPos\Api\StoreInterface" type="Anyhow\CxlPos\Model\Store" />
     <preference for="Anyhow\CxlPos\Api\CategoryRepositoryInterface" type="Anyhow\CxlPos\Model\CategoryRepository"/>
     <preference for="Anyhow\CxlPos\Api\CountryStateRepositoryInterface" type="Anyhow\CxlPos\Model\CountryStateRepository"/>
+        <!-- create Quote API -->
     <preference for="Anyhow\CxlPos\Api\CartManagementInterface" type="Anyhow\CxlPos\Model\QuoteManagement" />
+        <!-- Update Quote API  -->
+    <preference for="Anyhow\CxlPos\Api\UpdateQuoteInterface" type="Anyhow\CxlPos\Model\UpdateQuote" />
 </config>

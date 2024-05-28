@@ -18,4 +18,18 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
+
+    public function getParams(){
+        $postData = file_get_contents('php://input');
+        $params = json_decode($postData, true);
+        //$params = $this->request->getParams();
+        return $params;
+    }
+
+    public function addDebuggingLogData($data) {
+        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/cxl_pos_debugger.log');
+        $logger = new \Zend\Log\Logger();
+        $logger->addWriter($writer);
+        $logger->info($data);
+    }
 }

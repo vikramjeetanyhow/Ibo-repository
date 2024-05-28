@@ -45,7 +45,7 @@ class QuoteManagement implements \Anyhow\CxlPos\Api\CartManagementInterface
     public function createEmptyCartForCustomer($customerId)
     {
         $result = [];
-
+        $msg = "";
         try {
 
             $storeId = $this->storeManager->getStore()->getStoreId();
@@ -59,13 +59,16 @@ class QuoteManagement implements \Anyhow\CxlPos\Api\CartManagementInterface
                 $maskedHashId = $this->guestCart->createEmptyCart();
                 $result["quote_id"] = $this->maskedQuoteIdToQuoteId->execute($maskedHashId);
             }
-            $error = false;  
+            $error = false; 
+            $msg = "get Quote Id successfully";
         } catch (\Exception $e) {
             $error = true;
+            $msg = $e->getMessage();
         }
 
-        $data = array('error' => $error, 'result' => $result);
-        return json_encode($data);
+        $data = array('error' => $error, 'result' => $result,'message'=>$msg);
+        echo json_encode($data);
+        exit();
     }
 
     
