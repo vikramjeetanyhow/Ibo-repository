@@ -427,6 +427,16 @@ class ProductFieldProcessor extends AbstractModel
             return true;
         }
 
+        if (!isset($data['sku']) OR $data['sku'] == '') {
+            if (isset($data['is_lot_controlled']) && in_array($data['is_lot_controlled'], ["yes"])) {
+                if (isset($data['lot_control_parameters'])) {
+                    $data['error'] = "is_lot_controlled value is false that's why lot_control_parameters is not allowed to update";
+                    $this->products['failure'][] = $data;
+                    return true;
+                }
+            }
+        }
+
         //If attribute set is not added, skip the raw.
         if (!isset($data['attribute_set_code']) || !trim($data['attribute_set_code'])) {
             $data['error'] = "Provide attribute_set_code";

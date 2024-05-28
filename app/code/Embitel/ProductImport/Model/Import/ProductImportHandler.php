@@ -384,10 +384,10 @@ class ProductImportHandler
             foreach ($groupData as $groupRaw) {
                 unset($groupRaw['attribute_set_id']);
                 unset($groupRaw['category_ids']);
-                $groupRaw['error'] = "Duplicate variant values for same unique_group_id";
-                $this->products['failure'][] = $groupRaw;
+                // $groupRaw['error'] = "Duplicate variant values for same unique_group_id";
+                // $this->products['failure'][] = $groupRaw;
             }
-            return true;
+           // return true;
         }
         return false;
     }
@@ -461,6 +461,7 @@ class ProductImportHandler
      */
     protected function importProduct($rawData)
     {
+ 
         /* SKU Rule - Start */
         $sku = $this->genSku();
         $rawData['sku'] = $sku;
@@ -518,6 +519,23 @@ class ProductImportHandler
             $error = [];
             $newAttributes = array_diff_key($rawData, $data);
             foreach ($newAttributes as $newAttributeCode => $newAttributeValue) {
+
+                if ($newAttributeCode == "is_lot_controlled") {
+                    if ($newAttributes['is_lot_controlled'] == "Yes") {
+                        if(isset($newAttributes['lot_control_parameters']) && ($newAttributes['lot_control_parameters']!="MRP")){
+                            $error[] = $newAttributeCode." Only MRP attribute value is allow for lot param";
+                            continue;
+                            unset($newAttributes['lot_control_parameters']);
+                        }
+                    }else{
+                        if(isset($newAttributes['lot_control_parameters'])){
+                            $error[] = "attribute value is not allow for lot param";
+                            continue;
+                            unset($newAttributes['lot_control_parameters']);
+                        } 
+                    }
+                }
+                
                 if (!is_array($newAttributeValue)) {
                     $newAttributeValue = trim($newAttributeValue);
                 }
@@ -535,6 +553,7 @@ class ProductImportHandler
             }
 
             if (empty($error)) {
+
                 $product->addData($data);
                 $product->save();
 
@@ -804,7 +823,7 @@ class ProductImportHandler
      * @param type $raws
      */
     private function updateProducts($raws)
-    {
+    {   
         $requiredToPublishFileds = $this->productFieldProcessor->getPublishAttributes();
         foreach ($raws as $raw) {
             try {
@@ -824,6 +843,16 @@ class ProductImportHandler
                     $raw['error'] = "Product doesn't exist with ".$uniqueColumn.":" . $entityVar;
                     $this->products['failure'][] = $raw;
                     continue;
+                }
+
+                if (!isset($raw['sku']) && $raw["sku"] == '') {
+                    if (isset($raw['is_lot_controlled']) && in_array($raw['is_lot_controlled'], ["yes"])) {
+                        if (isset($raw['lot_control_parameters'])) {
+                            $raw['error'] = "is_lot_controlled value is false that's why lot_control_parameters is not allowed to update";
+                            $this->products['failure'][] = $raw;
+                            continue;
+                        }
+                    }
                 }
 
                 if (isset($raw["is_bom"]) && $raw["is_bom"] == 1) {

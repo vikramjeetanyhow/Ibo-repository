@@ -29,13 +29,15 @@ class ProductSaveBefore implements ObserverInterface
     public function __construct(
         ProductFactory $productFactory,
         ProductResourceFactory $productResourceFactory,
-        \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
+        \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
+        \Magento\Framework\Message\ManagerInterface $messageManager
         
     )
     {
         $this->productFactory = $productFactory;
         $this->productResourceFactory = $productResourceFactory;
         $this->productRepository = $productRepository;
+        $this->_messageManager = $messageManager;
     }
 
     public function execute(\Magento\Framework\Event\Observer $observer)
@@ -49,6 +51,7 @@ class ProductSaveBefore implements ObserverInterface
             $product->setDataChanges(false);
             // Add error message
             $message = __('The attribute "%1" is locked and cannot be edited.', $attribute);
+            $this->_messageManager->addError($message);
             $product->addErrorInfo('catalog', 'error', $message);
         }
 

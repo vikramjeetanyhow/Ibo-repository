@@ -3,9 +3,9 @@
     <event name="catalog_product_save_after">
         <observer name="update_product_two_step_cron_flag" instance="Embitel\ProductImport\Observer\ProductSaveAfter"/>
     </event>
-    <event name="catalog_product_save_before">
+    <!-- <event name="catalog_product_save_before">
         <observer name="save_product_two_before_publish" instance="Embitel\ProductImport\Observer\ProductSaveBefore"/>
-    </event>
+    </event> -->
     <event name="odoo_price_update_after">
         <observer name="product_enable_publish_flag_reset" instance="Embitel\ProductImport\Observer\OodoPriceUpdateAfter"/>
     </event>
