@@ -520,14 +520,33 @@ class ProductImportHandler
             $newAttributes = array_diff_key($rawData, $data);
             foreach ($newAttributes as $newAttributeCode => $newAttributeValue) {
 
+                if ($newAttributeCode == "lot_control_parameters") {
+                    if(!empty($newAttributes['lot_control_parameters'])) {
+                        if(!isset($newAttributes['is_lot_controlled'])) {
+                            $error[] = "is_lot_controlled is missing in csv";
+                            continue;
+                        }
+
+
+                    }else{
+                        $error[] = "lot_control_parameters is missing in csv";
+                        continue;  
+                    }
+                }
+
                 if ($newAttributeCode == "is_lot_controlled") {
                     if ($newAttributes['is_lot_controlled'] == "Yes") {
-                        if(isset($newAttributes['lot_control_parameters']) && ($newAttributes['lot_control_parameters']!="MRP")){
-                            $error[] = $newAttributeCode." Only MRP attribute value is allow for lot param";
-                            continue;
-                            unset($newAttributes['lot_control_parameters']);
+                        if(isset($newAttributes['lot_control_parameters'])){
+                            if(($newAttributes['lot_control_parameters']!="MRP")) {
+                                $error[] = $newAttributeCode." Only MRP attribute value is allow for lot param";
+                                continue;
+                                unset($newAttributes['lot_control_parameters']);
+                            }
+                        } else {
+                            $error[] = "lot_control_parameters is missing in csv";
+                            continue;     
                         }
-                    }else{
+                    } else {
                         if(isset($newAttributes['lot_control_parameters'])){
                             $error[] = "attribute value is not allow for lot param";
                             continue;

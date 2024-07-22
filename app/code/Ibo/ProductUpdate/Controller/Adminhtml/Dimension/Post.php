@@ -276,6 +276,16 @@ class Post extends \Ibo\ProductUpdate\Controller\Adminhtml\Dimension
                         $data = [];
                         $data['courier_type'] = $courierType;
                     }
+
+                    $new_data =  array(
+                        'package_length_in_cm'=> number_format($data['package_length_in_cm'],2),
+                        'package_width_in_cm'=> number_format($data['package_width_in_cm'],2),
+                        'package_height_in_cm'=> number_format($data['package_height_in_cm'],2),
+                        'package_weight_in_kg'=> number_format($data['package_weight_in_kg'],2),
+                        'courier_type'=>$data['courier_type'],
+                        'two_step_publish_cron'=>$data['two_step_publish_cron']
+                    );
+                    $data = $new_data;
                     $this->productAction->updateAttributes($productId, $data, 0);
                     $this->products['updatedProductData'][$productObject->getSku()][] = $data;
                     $this->productPushHelper->updateCatalogServicePushData($productObject->getId());
