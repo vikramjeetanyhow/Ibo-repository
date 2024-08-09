@@ -26,6 +26,14 @@ class Form extends \Magento\Backend\Block\Template
         return $this->getUrl('supermax/report/save');
     }
 
+    public function getAdminUrlMops(){
+        return $this->getUrl('supermax/report/savemops');
+    }
+
+    public function getAdminUrlMosDownload(){
+        return $this->getUrl('supermax/report/salesreport');
+    }
+
     public function getCashierData(){
         $assignedOutletId = $this->helper->assignedOutletIds();
         $assignedOutletIds = is_array($assignedOutletId) ? implode(",",$assignedOutletId) : 0;

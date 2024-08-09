@@ -1,0 +1,89 @@
+<!-- 
+    /**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */
+
+ -->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">supermax_report_headcashier_summary_listing.supermax_report_headcashier_summary_listing_data_source</item>
+            <item name="deps" xsi:type="string">supermax_report_headcashier_summary_listing.supermax_report_headcashier_summary_listing_data_source</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="array">
+                <item name="name" xsi:type="string">back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">supermax/report/headreconcile</item>
+                <item name="sortOrder" xsi:type="number">10</item>
+            </item>
+        </item>
+        <item name="spinner" xsi:type="string">report_reconcile_summary_columns</item>
+    </argument>
+    <dataSource name="supermax_report_headcashier_summary_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">supermax_report_headcashier_summary_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">pos_register_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">pos_register_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+
+    <columns name="report_reconcile_summary_columns">
+        <!-- <selectionsColumn name="ids">
+            <settings>
+                <indexField>pos_register_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>55</resizeDefaultWidth>
+            </settings>
+        </selectionsColumn> -->
+        <column name="code" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\PaymentMethods">
+            <settings>
+                <label translate="true">Payment Method</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="caseexpected" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\ReconcileExpected">
+            <settings>
+                <label translate="true">Cashier Expected</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="casedeclared" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\ReconcileDeclered">
+            <settings>
+                <label translate="true">Cashier Declared</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="headinput" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\ReconcileInput">
+            <settings>
+                <label translate="true">Head Input</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="diffrence" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\ReconcileDiffrence">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Excess/Short</label>
+            </settings>
+        </column>  
+    </columns>
+</listing>

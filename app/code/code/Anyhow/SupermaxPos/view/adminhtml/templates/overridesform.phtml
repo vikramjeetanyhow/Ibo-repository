@@ -1,0 +1,167 @@
+<?php 
+$from = date('Y-m-01');
+$to = date('Y-m-d');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
+$connection = $resource->getConnection();
+$tableName = $resource->getTableName('ah_supermax_pos_report'); 
+$sql = "SELECT * FROM $tableName Where type ='overrides' ";
+$reportData = $connection->query($sql);
+$assignedOutletIds = $objectManager->get('Anyhow\SupermaxPos\Helper\Data')->assignedOutletIds();
+if(!empty($reportData)){
+    foreach($reportData as $report){
+        $to = $report['to'];
+        $from = $report['from'];
+        $posUserId = $report['pos_user_id'];
+        $posApproverId = $report['pos_approver_id'];
+        $posOutletId = json_decode($report['pos_outlet_id']);
+        $posStatus = $report['status'];
+        $posOverridePermission = json_decode($report['override_permission']);
+    }
+}
+?>
+<form action="<?php echo $block->getAdminUrl() ?>" method="post" enctype="multipart/form-data">
+    <input name="form_key" type="hidden" value="<?php echo $block->getFormKey() ?>" />
+    <fieldset class="fieldset admin__fieldset">
+        <div class="admin__field field field-report_type  with-note">
+            <label for="from" class="label admin__field-label"><span>From: </span></label> 
+            <div class="admin__field-control control">
+                <?=
+                    $block->getLayout()->createBlock('Magento\Framework\View\Element\Html\Date')
+                        ->setData([
+                            'name' => 'from',
+                            'id' => 'from',
+                            'value' => $from,
+                            'date_format' => 'Y-M-d',
+                            'image' => $this->getViewFileUrl('Magento_Theme::calendar.png'),
+                            'years_range' => '-120y:c+nn',
+                            // 'max_date' => '-1d',
+                            'change_month' => 'true',
+                            'change_year' => 'true',
+                            'show_on' => 'both',
+                            'first_day' => 1,
+                            'class' => "admin__control-text"
+                        ])
+                        ->toHtml()
+                ?>
+                <!-- <input class="admin__control-text required-entry _required admin__control-text input-text input-date _has-datepicker" type="text" name="from" value="">
+                <button class="ui-datepicker-trigger v-middle" type ="button"><span> Select Date</span></button> -->
+            </div>
+        </div>
+        <div class="admin__field field field-report_type  with-note">
+            <label for="to" class="label admin__field-label"><span>To: </span></label>
+            <div class="admin__field-control control">
+                <?=
+                    $block->getLayout()->createBlock('Magento\Framework\View\Element\Html\Date')
+                        ->setData([
+                            'name' => 'to',
+                            'id' => 'to',
+                            'value' => $to,
+                            'date_format' => 'Y-M-d',
+                            'image' => $this->getViewFileUrl('Magento_Theme::calendar.png'),
+                            'years_range' => '-120y:c+nn',
+                            // 'max_date' => '-1d',
+                            'change_month' => 'true',
+                            'change_year' => 'true',
+                            'show_on' => 'both',
+                            'first_day' => 1,
+                            'class' => "admin__control-text"
+                        ])
+                        ->toHtml()
+                ?>
+                <!-- <input class="admin__control-text required-entry _required admin__control-text input-text input-date _has-datepicker ui-datepicker-trigger v-middle supermax-date" type="date" name="to" value="<?php //echo $to ?>"/> -->
+            </div>
+        </div>
+        <div class="admin__field field field-report_type  with-note">
+            <label for="cashier" class="label admin__field-label"><span>Cashier: </span></label>
+            <div class="admin__field-control control">
+                <select  id="cashier" name ="cashier" class="admin__control-select">
+                    <option value = 0> Select Cashier </option>
+                    <?php foreach ($block->getCashierData() as $cashier) { ?>
+                        <option value="<?php echo $cashier['pos_user_id']; ?>" <?php 
+                            if(isset($posUserId)) {
+                                if($cashier['pos_user_id'] == $posUserId){echo "selected='selected'";}
+                            }?>>
+                            <?php echo $cashier['firstname'].' '.$cashier['lastname'] ?>
+                        </option>
+                    <?php } ?>
+                </select>
+            </div>
+        </div>
+        <div class="admin__field field field-report_type  with-note">
+            <label for="approver" class="label admin__field-label"><span>Approver: </span></label>
+            <div class="admin__field-control control">
+                <select  id="approver" name ="approver" class="admin__control-select">
+                    <option value = 0> Select Approver </option>
+                    <?php foreach ($block->getApproverData() as $approver) { ?>
+                        <option value="<?php echo $approver['pos_user_id']; ?>" <?php 
+                            if(isset($posApproverId)) {
+                                if($approver['pos_user_id'] == $posApproverId){echo "selected='selected'";}
+                            }?>>
+                            <?php echo $approver['firstname'].' '.$approver['lastname'] ?>
+                        </option>
+                    <?php } ?>
+                </select>
+            </div>
+        </div>
+        <div class="admin__field field field-report_type  with-note">
+            <label for="permission" class="label admin__field-label"><span>Override Type: </span></label>
+            <div class="admin__field-control control">
+                <select  id="permission" name ="permission[]" class="select multiselect admin__control-multiselect" multiple>
+                    <!-- <option value = 0> Select Override Type </option> -->
+                    <?php foreach ($block->getPermissionData() as $key => $value) { ?>
+                        <option value="<?php echo $key; ?>" <?php 
+                            if(isset($posOverridePermission)) {
+                                if(in_array($key, $posOverridePermission)){echo "selected='selected'";}
+                            }?>>
+                            <?php echo $value ?>
+                        </option>
+                    <?php } ?>
+                </select>
+            </div>
+        </div>
+        <div class="admin__field field field-report_type  with-note">
+            <label for="outlet" class="label admin__field-label"><span>Store: </span></label>
+            <div class="admin__field-control control">
+            <select id="outlet" name ="outlet[]"  class="select multiselect admin__control-multiselect" multiple>
+            <?php //if((is_array($assignedOutletIds) && count($assignedOutletIds) > 1) || ($assignedOutletIds == 0)) { ?>
+                    <!-- <option value=0> Select Store </option> -->
+                <?php //}
+                if(is_array($assignedOutletIds) || (!is_array($assignedOutletIds) &&$assignedOutletIds == 0)) {?>
+                    <?php foreach ($block->getOutletData() as $outlet) { ?>
+                        <option value="<?php echo $outlet['pos_outlet_id']; ?>" <?php 
+                            if(is_array($assignedOutletIds) && count($assignedOutletIds) == 1 && in_array($outlet['pos_outlet_id'], $assignedOutletIds)) {
+                                {echo "selected='selected'";}
+                            }else if(isset($posOutletId) && (is_array($posOutletId))){
+                                if(in_array($outlet['pos_outlet_id'], $posOutletId)){echo "selected='selected'";}
+                            }?>>
+                            <?php echo $outlet['outlet_name']; ?>
+                        </option>
+                    <?php } ?>
+                <?php } ?>
+            </select>
+            </div>
+        </div>
+        <div class="admin__field field field-report_type  with-note">
+            <label for="status" class="label admin__field-label"><span>Order Status: </span></label>
+            <div class="admin__field-control control">
+                <select id="status" name ="status" class="admin__control-select">
+                    <option value = "0"> Select Order Status </option>
+                    <?php foreach ($block->getStatusData() as $status) { ?>
+                        <option value="<?php echo $status['status']; ?>" <?php 
+                            if(isset($posStatus)){
+                                if($status['status'] == $posStatus){echo "selected='selected'";}
+                            }?>>
+                            <?php echo $status['label']; ?>
+                        </option>
+                    <?php } ?>
+                </select>
+            </div>
+        </div>
+        <div class="admin__field field field-report_type  with-note">
+            <div class="label admin__field-label supermax-button">
+                <input type="submit" value="Show Report" class="action-default scalable task" />
+            </div>
+        </div>
+    </fieldset>
+</form>

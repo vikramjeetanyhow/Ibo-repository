@@ -23,6 +23,13 @@
                 <item name="url" xsi:type="string">supermax/report/salesexport</item>
                 <item name="sortOrder" xsi:type="number">30</item>
             </item>
+            <item name="report" xsi:type="array">
+                <item name="name" xsi:type="string">report</item>
+                <item name="label" xsi:type="string" translate="true">Export Sales Report MOPS</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">supermax/report/salesreport</item>
+                <item name="sortOrder" xsi:type="number">40</item>
+            </item>
         </item>
         <item name="spinner" xsi:type="string">report_sales_columns</item>
     </argument>

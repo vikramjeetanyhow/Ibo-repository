@@ -1,0 +1,172 @@
+<!--@subject Invoice for your {{var data.outlet.outlet_name}} Order #{{var data.orderId}} @-->
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+      #print-section {
+        padding: 5px;
+        margin: 0 auto;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        line-height: unset;
+        color: #040101;
+        font-weight: unset;
+        text-shadow: none;
+    }
+
+    pre {
+        font-family: inherit;
+        margin: 0;
+        color: inherit;
+        word-break: break-all;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="print-section" style="width: {{var data.receipt_width}}; font-size: {{var data.receipt_fontsize}};">
+      <div class="d-flex flex-column">
+        {{if data.receipt_header_store_logo}}
+          <div class="d-flex align-items-center justify-content-center" style="margin-bottom: 15px;">
+              <img src="{{var data.receipt_header_store_logo}}" alt="Store Logo">
+          </div>
+        {{/if}}
+        <div class="d-flex flex-column text-center" style="border-bottom: 1px dashed;">
+            <h3>{{trans 'Receipt'}}</h3>
+            <pre class="{{depend data.text_right}} {{trans 'text-right'}} {{/depend}} {{depend data.text_left}} {{trans 'text-left'}} {{/depend}}" style="font-size:{{var data.receipt_fontsize}}; outline: 0; border: 0;">{{var data.storeDetails}}</pre>
+        </div>
+        <div class="d-flex flex-column" style="border-bottom: 1px dashed;">
+            <div class="d-flex flex-row">
+                <div class="{{depend data.text_right}} {{trans 'text-right'}} {{/depend}} {{depend data.text_left}} {{trans 'text-left'}} {{/depend}}"><span>{{trans 'Order # '}}</span> {{var data.orderId}}</div>
+                <div class="flex-fill {{depend data.text_right}} {{trans 'text-left'}} {{/depend}} {{depend data.text_left}} {{trans 'text-right'}} {{/depend}}">{{var data.orderDate}}</div>
+            </div>
+            <div class="d-flex flex-row">
+                <div class="{{depend data.text_right}} {{trans 'text-right'}} {{/depend}} {{depend data.text_left}} {{trans 'text-left'}} {{/depend}}"><span>{{trans 'Cashier: '}} {{var data.user.user_name}}</span></div>
+                <div class="flex-fill {{depend data.text_right}} {{trans 'text-left'}} {{/depend}} {{depend data.text_left}} {{trans 'text-right'}} {{/depend}}">{{var data.payment}}</div>
+            </div>
+        </div>
+        {{depend data.show_payment_shipping_address}} 
+          <div class="d-flex flex-column" style="padding: 10px 0px; border-bottom: 2px dashed;">
+            {{if data.shippingAddressShowReceipt}}
+              <div class="{{depend data.text_right}} {{trans 'text-right'}} {{/depend}} {{depend data.text_left}} {{trans 'text-left'}} {{/depend}}">
+                <h6>{{trans 'Shipping Address: '}}</h6>
+                {{var data.shippingAddress.firstname}} {{var data.shippingAddress.lastname}}
+                <br>
+                {{depend data.shippingAddress.street}}
+                  {{var data.shippingAddress.street}}
+                {{/depend}}
+                {{depend data.shippingAddress.city}}
+                  <span>,</span> {{var data.shippingAddress.city}} 
+                {{/depend}}
+                {{depend data.shippingAddress.region_name}}
+                  <span>,</span> {{var data.shippingAddress.region_name}}
+                {{/depend}}
+                {{depend data.shippingAddress.country_name}}
+                  <span>,</span> {{var data.shippingAddress.country_name}}
+                {{/depend}}
+                {{depend data.shippingAddress.postcode}}
+                  <span>,</span> {{var data.shippingAddress.postcode}}
+                {{/depend}}
+                {{depend data.shippingAddress.telephone}}
+                  <span>,</span> {{var data.shippingAddress.telephone}}
+                {{/depend}}
+              </div>
+            {{/if}}
+            {{if data.space_condition_for_address}} &nbsp; {{/if}}
+            {{if data.paymentAddressShowReceipt}}
+              <div class="{{depend data.text_right}} {{trans 'text-right'}} {{/depend}} {{depend data.text_left}} {{trans 'text-left'}} {{/depend}}">
+                <h6>{{trans 'Payment Address: '}}</h6>
+                {{var data.paymentAddress.firstname}} {{var data.paymentAddress.lastname}}<br>
+                {{depend data.paymentAddress.street}}
+                    {{var data.paymentAddress.street}}
+                  {{/depend}}
+                  {{depend data.paymentAddress.city}}
+                    <span>,</span> {{var data.paymentAddress.city}} 
+                  {{/depend}}
+                  {{depend data.paymentAddress.region_name}}
+                    <span>,</span> {{var data.paymentAddress.region_name}}
+                  {{/depend}}
+                  {{depend data.paymentAddress.country_name}}
+                    <span>,</span> {{var data.paymentAddress.country_name}}
+                  {{/depend}}
+                  {{depend data.paymentAddress.postcode}}
+                    <span>,</span> {{var data.paymentAddress.postcode}}
+                  {{/depend}}
+                  {{depend data.paymentAddress.telephone}}
+                    <span>,</span> {{var data.paymentAddress.telephone}}
+                  {{/depend}}
+              </div>
+            {{/if}}
+          </div>
+        {{/depend}}
+        <div class="d-flex flex-column" style="border-bottom: 1px dashed;">
+          <div class="d-flex flex-row" style="border-bottom: 2px dashed;">
+            <div class="{{depend data.text_right}} {{trans 'text-right'}} {{/depend}} {{depend data.text_left}} {{trans 'text-left'}} {{/depend}}" style="max-width: 20%; word-break: break-all;">{{trans 'Items'}}</div>
+            <div class="flex-fill {{depend data.text_right}} {{trans 'text-left'}} {{/depend}} {{depend data.text_left}} {{trans 'text-right'}} {{/depend}}" style="max-width: 15%; word-break: break-all;">{{trans 'Qty'}}</div>
+            <div class="flex-fill {{depend data.text_right}} {{trans 'text-left'}} {{/depend}} {{depend data.text_left}} {{trans 'text-right'}} {{/depend}}" style="max-width: 20%; word-break: break-all;">{{trans 'Price'}}</div>
+            <div class="flex-fill {{depend data.text_right}} {{trans 'text-left'}} {{/depend}} {{depend data.text_left}} {{trans 'text-right'}} {{/depend}}" style="max-width: 20%; word-break: break-all;">{{trans 'Disc. Price'}}</div>
+            <div class="flex-fill {{depend data.text_right}} {{trans 'text-left'}} {{/depend}} {{depend data.text_left}} {{trans 'text-right'}} {{/depend}}" style="max-width: 25%; word-break: break-all;">{{trans 'Amount'}}</div>
+          </div>
+          
+          {{for product in data.products}}
+            <div class="d-flex flex-column">
+              <div class="d-flex flex-wrap">
+                <div class="flex-fill {{depend data.text_right}} {{trans 'text-right'}} {{/depend}} {{depend data.text_left}} {{trans 'text-left'}} {{/depend}}">{{var product.name}}
+                  {{depend data.productOptions[product.cartKey]}}
+                    {{for option in data.productOptions[product.cartKey]}}
+                      <div class="flex-fill m-1">{{var option.value.name}} {{trans ': '}} {{var option.value.value}}</div>
+                    {{/for}}
+                  {{/depend}}
+                </div>
+              </div>
+              <div class="d-flex flex-wrap">
+                <div class="flex-fill {{depend data.text_right}} {{trans 'text-left'}} {{/depend}} {{depend data.text_left}} {{trans 'text-right'}} {{/depend}}" >x {{var product.quantity}}</div>
+
+                <div class="flex-fill {{depend data.text_right}} {{trans 'text-left'}} {{/depend}} {{depend data.text_left}} {{trans 'text-right'}} {{/depend}}">{{var product.product_price}}</div>
+                
+                <div class="flex-fill {{depend data.text_right}} {{trans 'text-left'}} {{/depend}} {{depend data.text_left}} {{trans 'text-right'}} {{/depend}}">{{var product.product_disc_price}}</div>
+
+                <div class="flex-fill {{depend data.text_right}} {{trans 'text-left'}} {{/depend}} {{depend data.text_left}} {{trans 'text-right'}} {{/depend}}">{{var product.final_price_without_tax_formatted}}</div>
+              </div>
+            </div>
+          {{/for}}
+        </div>
+        <div class="d-flex flex-column">
+          {{for total in data.totals}}
+            <div class="d-flex flex-row">
+              <div class="flex-fill {{depend data.text_right}} {{trans 'text-right'}} {{/depend}} {{depend data.text_left}} {{trans 'text-left'}} {{/depend}}" style="max-width: 50%; word-break: break-all;">{{var total.title}}</div>
+              <div class="flex-fill  {{depend data.text_right}} {{trans 'text-left'}} {{/depend}} {{depend data.text_left}} {{trans 'text-right'}} {{/depend}}" style="max-width: 50%; word-break: break-all;">{{var total.formatted}}</div>
+            </div>
+          {{/for}}
+          <div id="total" class="d-flex flex-row">
+            <div class="flex-fill {{depend data.text_right}} {{trans 'text-right'}} {{/depend}} {{depend data.text_left}}{{trans 'text-left'}} {{/depend}}" style="max-width: 50%; word-break: break-all;">{{trans 'Total'}}</div>
+            <div class="flex-fill {{depend data.text_right}} {{trans 'text-left'}} {{/depend}} {{depend data.text_left}} {{trans 'text-right'}} {{/depend}}" style="max-width: 50%; word-break: break-all;">{{var data.grandTotal}}</div>
+          </div>
+          <div class="d-flex flex-column">
+            <div class="flex-fill {{depend data.text_right}} {{trans 'text-right'}} {{/depend}} {{depend data.text_left}} {{trans 'text-left'}} {{/depend}}"><span>{{trans 'Total Items: '}}</span> {{var data.total_products}}</div>
+            <div class="flex-fill {{depend data.text_right}} {{trans 'text-right'}} {{/depend}} {{depend data.text_left}} {{trans 'text-left'}} {{/depend}}"><span>{{trans 'Total Quantity: '}}</span> {{var data.totalCartQuantity}}</div>
+            <div class="flex-fill {{depend data.text_right}} {{trans 'text-right'}} {{/depend}} {{depend data.text_left}} {{trans 'text-left'}} {{/depend}}"><span>{{trans 'Total Saving: '}}</span> {{var data.totalSavedAmount}}</div>
+          </div>            
+        </div>
+        {{if data.show_cash_paid_and_change}}
+          <div class="d-flex flex-column" style="margin-top: 10px; border-bottom: 1px dashed; border-top: 1px dashed;">
+            <div class="flex-fill {{depend data.text_right}} {{trans 'text-right'}} {{/depend}} {{depend data.text_left}}{{trans 'text-left'}} {{/depend}}"><span>{{trans 'Cash Paid: '}}</span> {{var data.cashPaidText}}</div>
+            <div class="flex-fill {{depend data.text_right}} {{trans 'text-right'}} {{/depend}} {{depend data.text_left}}{{trans 'text-left'}} {{/depend}}"><span>{{trans 'Cash Change: '}}</span> {{var data.cashChangeText}}</div>
+          </div>
+        {{/if}}
+        <div style="margin-top: 10px;">
+          <pre class="{{depend data.text_right}} {{trans 'text-right'}} {{/depend}} {{depend data.text_left}} {{trans 'text-left'}} {{/depend}}" style="font-size: {{var data.receipt_fontsize}}; outline: 0; border: 0;">{{var data.footerDetailsReceipt}}</pre>
+        </div>
+        <div class="d-flex align-items-center justify-content-center" style="margin-top: 10px; width:100%;">
+          {{if data.barcode_url}}
+            <img src="{{var data.barcode_url}}" alt="No Barcode Image" style="width:{{var data.receipt_barcode_width}};">
+          {{else}}
+            <div id="receipt_barcode" style="width:{{var data.receipt_barcode_width}};"></div>
+          {{/if}}
+        </div>
+        <div class="d-flex justify-content-center">
+          {{var data.barcode}}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */ 
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+   
+    <!-- product save after event -->
+    <!-- <event name="catalog_product_save_after">
+        <observer name="supermax_product_save_after" instance="Anyhow\SupermaxPos\Observer\ProductSaveAfter" />
+    </event>  -->
+    
+    <!-- product save after event -->
+    <!-- <event name="checkout_submit_all_after">
+        <observer name="supermax_sales_order_place_after" instance="Anyhow\SupermaxPos\Observer\SalesOrderPlaceAfter" />
+    </event>  -->
+
+    <!-- customer save after event -->
+    <!-- <event name="customer_save_after">
+        <observer name="supermax_customer_save_after" instance="Anyhow\SupermaxPos\Observer\CustomerSaveAfter" />
+    </event> -->
+
+    <!-- customer register success event -->
+    <!-- <event name="customer_register_success">
+        <observer name="supermax_customer_register_success" instance="Anyhow\SupermaxPos\Observer\CustomerSaveAfter" />
+    </event> -->
+
+    <!-- customer address save event -->
+    <!-- <event name="customer_address_save_after">
+        <observer name="supermax_customer_address_save_after" instance="Anyhow\SupermaxPos\Observer\CustomerAddressSaveAfter" />
+    </event> -->
+
+    <!-- delete product after event -->
+    <!-- <event name="catalog_product_delete_after">
+        <observer name="supermax_product_delete_after" instance="Anyhow\SupermaxPos\Observer\ProductDeleteAfter" />
+    </event> -->
+
+    <!-- delete customer after event -->
+    <!-- <event name="customer_delete_after">
+        <observer name="supermax_customer_delete_after" instance="Anyhow\SupermaxPos\Observer\CustomerDeleteAfter"/>
+    </event> -->
+    <!-- <event name="ah_supermax_place_order_after">
+        <observer name="ah_supermax_order_after_observer" instance="Magento\CustomerSegment\Observer\ProcessEventObserver"/>
+    </event> -->
+    <event name="sales_quote_collect_totals_before">
+        <observer name="tax_override" instance="Anyhow\SupermaxPos\Observer\TaxOverride"/>
+    </event>
+</config>
+

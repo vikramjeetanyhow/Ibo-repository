@@ -1,0 +1,185 @@
+<div class="admin__data-grid-header" style="margin-bottom: 15px;">
+    <div class="admin__data-grid-header-row">
+        <div class="admin__data-grid-actions-wrap">
+            <button id="assign-by-barcode" style="float:right !important; font-size: 1.3rem; padding-left: 1.7rem; padding-right: 2.1rem; padding-top: 0.7rem; background: #e3e3e3;border-color: #adadad; color: #514943;">Assign By Barcode</button>
+        </div>
+    </div>
+</div>
+
+<div id="barcode-modal-popup" style="display:none;">
+    <p class="statusMsg" style="display:none;"></p>
+    <div class="product-detail" style="display:none;"></div>
+    <form action="<?php echo $block->getAdminUrl() ?>" method="post" enctype="multipart/form-data" id ="assign-products-form">
+        <input name="form_key" type="hidden" value="<?php echo $block->getFormKey() ?>" />
+        <input name="doneurl" id ="doneurl" type="hidden" value="<?php echo $block->getAssignProductUrl() ?>" />
+        <input name="url" id ="url" type="hidden" value="<?php echo $block->getAdminUrl() ?>" />
+        <input name="outlet_id" type="hidden" value="<?php echo $block->outletId() ?>" />
+        <fieldset class="fieldset admin__fieldset">
+            <div class="_required">
+                <label for="from" class="admin__field-label" style="font-weight: 500; font-size: 18px;"><span>Search Product</span></label> 
+                <div class="admin__field-control" style="margin-top: 10px;">
+                    <input class="admin__control-text" type="text" name="barcode-input" id= "barcode-input" required/>
+                </div>
+            </div>
+        </fieldset>
+        <footer class="modal-footer">
+            <button class="go-succes action- scalable save primary ui-button"><span>Go</span></button>
+            <button class="barcode-reset action- scalable save primary ui-button" style="display:none;"><span>Reset</span></button>
+            <button class="done-success action- scalable save primary ui-button" style="display:none;"><span>Done</span></button>
+        </footer>
+    </form>     
+</div>
+
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function($, modal) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                modalClass: 'supermax-barcode-popup',
+                innerScroll: true,
+                title: 'Assign Products By Barcode Reader',
+                buttons: []
+            };
+
+            var popup = modal(options, $('#barcode-modal-popup'));
+            $("#assign-by-barcode").on('click',function(){ 
+                $("#barcode-modal-popup").modal("openModal");
+                setTimeout(function (){
+                    $("input[name=barcode-input]").focus();
+
+                    let code = "", shift = false;
+                    document.addEventListener("keyup", function(e) {
+                        if (e.which == 13 && !code) {
+                            $("input[name=barcode-input]").val(code);
+                            $('.go-succes').trigger('click');
+                            code = "";
+                        } else if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 90)) {
+                            if (shift) {
+                                code += e.key.toUpperCase();
+                                shift = false;
+                            } else {
+                                code += e.key;
+                            }
+                        } else if (e.keyCode == 16) {
+                            shift = true;
+                        }
+                    });
+                }, 2000);
+
+                    $(".go-succes").on('click',function(){ 
+                        var barcode = $('#barcode-input').val();
+                        if(barcode.trim() == ''){
+                            $('.statusMsg').show();
+                            $('.statusMsg').html("<div class='messages'><div class='message message-error success'>Please enter the barcode</div></div>");
+                        } else {
+                            $.ajax({
+                                url: $("#url").val(),
+                                type: "POST",
+                                data: jQuery('#assign-products-form').serialize(),
+                                cache: false,
+                                showLoader: 'true',
+                                success: function (result) {
+                                    if(result.data!=''){
+                                        $('.statusMsg').hide();
+                                        $('.product-detail').show();
+
+                                        $('.product-detail').html("<table class='product-detail' style='width: 30%;margin: 20px; font-size: 14px;font-weight: 600;'><tbody><tr><td colspan='2'><a href="+result.productimage+"><img src="+result.productimage+" style='max-width: 50%;'></a></td></tr><tr><td>Id</td><td>"+result.productid+"</td></tr><tr><td>Barcode</td><td>"+result.productbarcode+"</td></tr><tr><td>Name</td><td>"+result.productname+"</td></tr><tr><td>SKU</td><td>"+result.productsku+"</td></tr><tr><td>Price</td><td>"+result.productprice+"</td></tr><tr><td>Status</td><td>"+result.productstatus+"</td></tr></tbody></table>");
+                                        $('.go-succes').hide();
+                                        $('.done-success').show();
+                                        $('.barcode-reset').show();
+                                    }else{
+                                        $('.statusMsg').show();
+                                        $('.statusMsg').html("<div class='messages'><div class='message message-error success'>"+result.error+"</div></div>");
+                                        $("input[name=barcode-input]").val('');
+                                    }
+                                },
+                                error: function (e){
+                                    console.log(e);
+                                    
+                                    $('.statusMsg').html("<div class='messages'><div class='message message-error success'>"+ e +"</div></div>");
+                                }
+                                
+                            });
+                        }
+                        $("input[name=barcode-input]").focus();
+                        return false;
+                    });
+
+                $('.barcode-reset').on('click',function(){ 
+                    $("input[name=barcode-input]").val('');
+                    $("input[name=barcode-input]").focus();
+                    $('.product-detail').hide();
+                    $('.go-succes').show();
+                    $('.done-success').hide();
+                    $('.barcode-reset').hide();
+                });
+
+                $(".done-success").on('click',function(){ 
+                    var barcode = $('#barcode-input').val();
+                    if(barcode.trim() == ''){
+                        $('.statusMsg').show();
+                        $('.statusMsg').html("<div class='messages'><div class='message message-error success'>Please enter the barcode</div></div>");
+                    } else {
+                        $.ajax({
+                            url: $("#doneurl").val(),
+                            type: "POST",
+                            data: jQuery('#assign-products-form').serialize(),
+                            cache: false,
+                            showLoader: 'true',
+                            success: function (result) {
+                                $('.product-detail').hide();
+                                $('.statusMsg').hide();
+                                if(result.data!=''){
+                                    $('.statusMsg').html("<div class='messages'><div class='message message-success success'>"+result.data+"</div></div>");
+                                    $('.statusMsg').show();
+                                }else{
+                                    if(result.error!=''){
+                                        $('.statusMsg').html("<div class='messages'><div class='message message-error success'>"+result.error+"</div></div>");
+                                        $('.statusMsg').show();
+                                    }
+                                }
+                                $("input[name=barcode-input]").val('');
+                                $('.go-succes').show();
+                                $('.done-success').hide();
+                                $('.barcode-reset').hide();
+                            },
+                            error: function (e){
+                                console.log(e);
+                                $('.statusMsg').html("<div class='messages'><div class='message message-error success'>"+ e +"</div></div>");
+                            }
+                        });
+                    }
+                    $("input[name=barcode-input]").focus();
+                    return false;
+                });
+
+                // let code = "", shift = false;
+                // document.addEventListener("keyup", function(e) {
+                //     if (e.which == 13) {
+                //         $("input[name=barcode-input]").val(code);
+                //         $('.go-succes').trigger('click');
+                //         code = "";
+                //     } else if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 90)) {
+                //         if (shift) {
+                //             code += e.key.toUpperCase();
+                //             shift = false;
+                //         } else {
+                //             code += e.key;
+                //         }
+                //     } else if (e.keyCode == 16) {
+                //         shift = true;
+                //     }
+                // });
+
+                $(".action-close").on('click',function(){     
+                    window.location.reload();                 
+                });
+            });
+        }
+    );
+</script>

@@ -27,7 +27,7 @@ class SalesReportActions extends Column
     const CMS_URL_PATH_DETAIL = 'supermax/report/salesdetails';
     const CMS_URL_PATH_DOWNLOAD = 'supermax/report/salesdetailreportexport';
     const CMS_URL_PATH_SUMMARY = 'supermax/report/salessummary';
-    const CMS_URL_PATH_report = 'supermax/report/salesreport';
+
     /**
      * @var \Magento\Framework\UrlInterface
      */
@@ -61,12 +61,10 @@ class SalesReportActions extends Column
         array $data = [],
         $editUrl = self::CMS_URL_PATH_DETAIL,
         $downloadUrl = self::CMS_URL_PATH_DOWNLOAD,
-        $summaryUrl = self::CMS_URL_PATH_SUMMARY,
-        $reportUrl = self::CMS_URL_PATH_report
+        $summaryUrl = self::CMS_URL_PATH_SUMMARY
     ) {
         $this->urlBuilder = $urlBuilder;
         $this->editUrl = $editUrl;
-        $this->reporttUrl = $reportUrl;
         $this->downloadUrl = $downloadUrl;
         $this->summaryUrl = $summaryUrl;
         parent::__construct($context, $uiComponentFactory, $components, $data);
@@ -100,10 +98,6 @@ class SalesReportActions extends Column
                         'edit' => [
                             'href' => $this->urlBuilder->getUrl($this->editUrl, ['date_start' => $item['date_start'], 'date_end'=>$item['date_end'] ]),
                             'label' => __('Details')
-                        ],
-                        'report' => [
-                            'href' => $this->urlBuilder->getUrl($this->reporttUrl, ['date_start' => $item['date_start'], 'date_end'=>$item['date_end'] ]),
-                            'label' => __('Report')
                         ]
                     ];
                 }

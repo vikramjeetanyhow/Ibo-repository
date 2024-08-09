@@ -1,0 +1,138 @@
+<?php 
+$to = date('Y-m-d');
+$from = date('Y-m-01');
+$period = 'day';
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
+$connection = $resource->getConnection();
+$tableName = $resource->getTableName('ah_supermax_pos_report'); 
+$sql = "SELECT * FROM $tableName Where type ='tax' ";
+$reportData = $connection->query($sql);
+$assignedOutletIds = $objectManager->get('Anyhow\SupermaxPos\Helper\Data')->assignedOutletIds();
+if(!empty($reportData)){
+    foreach($reportData as $report){
+        $to = $report['to'];
+        $from = $report['from'];
+        $period = $report['period'];
+        $posUserId = $report['pos_user_id'];
+        $posOutletId = json_decode($report['pos_outlet_id']);
+    }
+}
+
+
+$day = $week = $month = $year = '';
+
+if($period == 'day'){
+    $day = "selected='selected'";
+}elseif($period == 'week'){
+    $week = "selected='selected'";
+}elseif($period == 'month'){
+    $month = "selected='selected'";
+}elseif($period == 'year'){
+    $year = "selected='selected'";
+}
+?>
+<form action="<?php echo $block->getAdminUrl() ?>" method="post" enctype="multipart/form-data">
+    <input name="form_key" type="hidden" value="<?php echo $block->getFormKey() ?>" />
+    <fieldset class="fieldset admin__fieldset">
+        <div class="admin__field field field-report_type  with-note">
+            <label for="from" class="label admin__field-label"><span>From: </span></label> 
+            <div class="admin__field-control control">
+                <?=
+                    $block->getLayout()->createBlock('Magento\Framework\View\Element\Html\Date')
+                        ->setData([
+                            'name' => 'from',
+                            'id' => 'from',
+                            'value' => $from,
+                            'date_format' => 'Y-M-d',
+                            'image' => $this->getViewFileUrl('Magento_Theme::calendar.png'),
+                            'years_range' => '-120y:c+nn',
+                            'change_month' => 'true',
+                            'change_year' => 'true',
+                            'show_on' => 'both',
+                            'first_day' => 1,
+                            'class' => "admin__control-text"
+                        ])
+                        ->toHtml()
+                ?>
+            </div>
+        </div>
+        <div class="admin__field field field-report_type  with-note">
+            <label for="to" class="label admin__field-label"><span>To: </span></label>
+            <div class="admin__field-control control">
+                <?=
+                    $block->getLayout()->createBlock('Magento\Framework\View\Element\Html\Date')
+                        ->setData([
+                            'name' => 'to',
+                            'id' => 'to',
+                            'value' => $to,
+                            'date_format' => 'Y-M-d',
+                            'image' => $this->getViewFileUrl('Magento_Theme::calendar.png'),
+                            'years_range' => '-120y:c+nn',
+                            'change_month' => 'true',
+                            'change_year' => 'true',
+                            'show_on' => 'both',
+                            'first_day' => 1,
+                            'class' => "admin__control-text"
+                        ])
+                        ->toHtml()
+                ?>
+            </div>
+        </div>
+        <div class="admin__field field field-report_type  with-note">
+            <label for="period" class="label admin__field-label"><span>Show By: </span></label>
+            <div class="admin__field-control control">
+                <select class="admin__control-select" name="period" id="period" value="<?php echo $period ?>">
+                    <option value="day" <?php echo $day; ?> >Day</option>
+                    <option value="week" <?php echo $week; ?>>Week</option>
+                    <option value="month" <?php echo $month; ?>>Month</option>
+                    <option value="year" <?php echo $year; ?>>Year</option>
+                </select> 
+            </div>
+        </div>
+        <div class="admin__field field field-report_type  with-note">
+            <label for="cashier" class="label admin__field-label"><span>Employee: </span></label>
+            <div class="admin__field-control control">
+                <select  id="cashier" name ="cashier" class="admin__control-select">
+                    <option value = 0> Select Employee </option>
+                    <?php foreach ($block->getCashierData() as $cashier) { ?>
+                        <option value="<?php echo $cashier['pos_user_id']; ?>" <?php
+                            if(isset($posUserId)) { 
+                                if($cashier['pos_user_id'] == $posUserId){echo "selected='selected'";}
+                            }?>>
+                            <?php echo $cashier['firstname'].' '.$cashier['lastname'] ?>
+                        </option>
+                    <?php } ?>
+                </select>
+            </div>
+        </div>
+        <div class="admin__field field field-report_type  with-note">
+            <label for="outlet" class="label admin__field-label"><span>Store: </span></label>
+            <div class="admin__field-control control">
+            <select id="outlet" name ="outlet[]"  class="select multiselect admin__control-multiselect" multiple>
+            <?php //if((is_array($assignedOutletIds) && count($assignedOutletIds) > 1) || ($assignedOutletIds == 0)) { ?>
+                    <!-- <option value=0> Select Store </option> -->
+                <?php //}
+                if(is_array($assignedOutletIds) || (!is_array($assignedOutletIds) &&$assignedOutletIds == 0)) {?>
+                    <?php foreach ($block->getOutletData() as $outlet) { ?>
+                        <option value="<?php echo $outlet['pos_outlet_id']; ?>" <?php 
+                            if(is_array($assignedOutletIds) && count($assignedOutletIds) == 1 && in_array($outlet['pos_outlet_id'], $assignedOutletIds)) {
+                                {echo "selected='selected'";}
+                            }else if(isset($posOutletId) && (is_array($posOutletId))){
+                                if(in_array($outlet['pos_outlet_id'], $posOutletId)){echo "selected='selected'";}
+                            }?>>
+                            <?php echo $outlet['outlet_name']; ?>
+                        </option>
+                    <?php } ?>
+                <?php } ?>
+            </select>
+            </div>
+        </div>
+        <div class="admin__field field field-report_type  with-note">
+            <div class="label admin__field-label supermax-button">
+                <input type="submit" value="Show Report" class="action-default scalable task" />
+            </div>
+        </div>
+    </fieldset>
+</form>

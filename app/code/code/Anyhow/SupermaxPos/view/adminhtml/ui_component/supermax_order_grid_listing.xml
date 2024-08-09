@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">supermax_order_grid_listing.supermax_order_grid_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>supermax_order_columns</spinner>
+        <deps>
+            <dep>supermax_order_grid_listing.supermax_order_grid_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="supermax_order_grid_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">supermax_order_grid_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">order_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+			<argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">order_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <exportButton name="export_button"/>
+        <!-- <filterSearch name="fulltext"/> -->
+        <filters name="listing_filters" />
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="supermax_order_columns">
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>entity_id</indexField>
+                <draggable>true</draggable>
+            </settings>
+        </selectionsColumn>
+        <column name="increment_id">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Order ID</label>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Purchase Date</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+         <column name="pos_outlet_id" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Anyhow\SupermaxPos\Model\Cashier\Attribute\Outlets\AllOutletOptions"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Store</label>
+            </settings>
+        </column>
+        <column name="pos_user_id" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Anyhow\SupermaxPos\Model\Cashier\Attribute\Outlets\AllCashierOptions"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Employee Name</label>
+            </settings>
+        </column>
+        <column name="customer_name">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Customer Name</label>
+            </settings>
+        </column>
+        
+        <column name="base_grand_total" class="Magento\Sales\Ui\Component\Listing\Column\Price">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Grand Total (Base)</label>
+            </settings>
+        </column>
+        <column name="grand_total" class="Magento\Sales\Ui\Component\Listing\Column\PurchasedPrice">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Grand Total (Purchased)</label>
+            </settings>
+        </column>
+        <column name="status" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <options class="Magento\Sales\Ui\Component\Listing\Column\Status\Options"/>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <column name="device_type" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <options class="Anyhow\SupermaxPos\Model\Cashier\Attribute\Stores\AllDeviceOptions"/>
+                <dataType>select</dataType>
+                <label translate="true">Device Type</label>
+            </settings>
+        </column>
+        <!-- <column name="sales_associate_1" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Anyhow\SupermaxPos\Model\Cashier\Attribute\Stores\SalesAssociatesOptions"/>
+                <dataType>select</dataType>
+                <label translate="true">Sales Associate 1</label>
+            </settings>
+        </column> -->
+        <!-- <column name="sales_associate_2" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Anyhow\SupermaxPos\Model\Cashier\Attribute\Stores\SalesAssociatesOptions"/>
+                <dataType>select</dataType>
+                <label translate="true">Sales Associate 2</label>
+            </settings>
+        </column> -->
+        <column name="additional_data" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\SalesAssociate">
+            <settings>
+                <!-- <filter>textRange</filter> -->
+                <label translate="true">Sales Associate</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\SupermaxPosOrderAction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="viewUrlPath" xsi:type="string">sales/order/view</item>
+                    <item name="urlEntityParamName" xsi:type="string">order_id</item>
+                </item>
+            </argument>
+            <settings>
+                <indexField>order_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

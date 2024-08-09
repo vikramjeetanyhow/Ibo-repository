@@ -89,7 +89,7 @@ class PaymentMethod extends Column
         if (!empty($storeCurrencyCode)) {
             $storeCurrencySymbol = $this->currency->getCurrency($storeCurrencyCode)->getSymbol();
         }
-        $cash_amount = $offline_amount = $credit_card = $debit_card = $net_banking = $upi = $wallet = $emi = $card = $bankDeposit = $saraLoan = $bharatPe = $pinelabsUpi = $ezetapEmi = 0;
+        $cash_amount = $offline_amount = $credit_card = $debit_card = $net_banking = $upi = $wallet = $emi = $card = $bankDeposit = $saraLoan = $bharatPe = $pinelabsUpi = $ezetapEmi = $partialBalance = 0;
         if (isset($dataSource['data']['items'])) {
             $fieldName = $this->getData('name');            
             if (!empty($orderData)) {
@@ -123,6 +123,8 @@ class PaymentMethod extends Column
                             $saraLoan += $payment['amount'];
                         } else if ($payment['payment_code'] == 'BHARATPE') {
                             $bharatPe += $payment['amount'];
+                        } else if ($payment['payment_code'] == 'PARTIAL-PAYMENT-BALANCE') {
+                            $partialBalance += $payment['amount'];
                         } 
                     }
                 }
@@ -132,31 +134,33 @@ class PaymentMethod extends Column
         $i = 0;
         foreach ($dataSource['data']['items'] as &$item) {
             if($item['methods'] == 'CASH') {
-                $item[$fieldName] = $storeCurrencySymbol . $item['amount_details'];
+                $item[$fieldName] = $storeCurrencySymbol . round($item['amount_details'], 2);
             } else if ($item['methods'] == 'OFFLINE') {
-                $item[$fieldName] = $storeCurrencySymbol . $item['amount_details'];
+                $item[$fieldName] = $storeCurrencySymbol . round($item['amount_details'], 2);
             } else if ($item['methods'] == 'CREDIT-CARD') {
-                $item[$fieldName] = $storeCurrencySymbol . $item['amount_details'];
+                $item[$fieldName] = $storeCurrencySymbol . round($item['amount_details'], 2);
             } else if ($item['methods'] == 'DEBIT-CARD') {
-                $item[$fieldName] = $storeCurrencySymbol . $item['amount_details'];
+                $item[$fieldName] = $storeCurrencySymbol . round($item['amount_details'], 2);
             } else if ($item['methods'] == 'UPI') {
-                $item[$fieldName] = $storeCurrencySymbol . $item['amount_details'];
+                $item[$fieldName] = $storeCurrencySymbol . round($item['amount_details'], 2);
             } else if ($item['methods'] == 'WALLET') {
-                $item[$fieldName] = $storeCurrencySymbol . $item['amount_details'];
-            } elseif($item['methods'] == 'EMI') {
-                $item[$fieldName] = $storeCurrencySymbol . $item['amount_details'];
-            } else if ($payment['payment_code'] == 'EZETAP-EMI') {
-                $item[$fieldName] = $storeCurrencySymbol . $item['amount_details'];
+                $item[$fieldName] = $storeCurrencySymbol . round($item['amount_details'], 2);
+            } else if($item['methods'] == 'EMI') {
+                $item[$fieldName] = $storeCurrencySymbol . round($item['amount_details'], 2);
+            } else if ($item['methods'] == 'EZETAP-EMI') {
+                $item[$fieldName] = $storeCurrencySymbol . round($item['amount_details'], 2);
             } else if ($item['methods'] == 'CARD') {
-                $item[$fieldName] = $storeCurrencySymbol . $item['amount_details'];
+                $item[$fieldName] = $storeCurrencySymbol . round($item['amount_details'], 2);
             } else if ($item['methods'] == 'PINELABS-UPI') {
-                $item[$fieldName] = $storeCurrencySymbol . $item['amount_details'];
+                $item[$fieldName] = $storeCurrencySymbol . round($item['amount_details'], 2);
             } else if ($item['methods'] == 'BANK-DEPOSIT') {
-                $item[$fieldName] = $storeCurrencySymbol . $item['amount_details'];
+                $item[$fieldName] = $storeCurrencySymbol . round($item['amount_details'], 2);
             } else if ($item['methods'] == 'SARALOAN') {
-                $item[$fieldName] = $storeCurrencySymbol . $item['amount_details'];
+                $item[$fieldName] = $storeCurrencySymbol . round($item['amount_details'], 2);
             } else if ($item['methods'] == 'BHARATPE') {
-                $item[$fieldName] = $storeCurrencySymbol . $item['amount_details'];
+                $item[$fieldName] = $storeCurrencySymbol . round($item['amount_details'], 2);
+            } else if ($item['methods'] == 'PARTIAL-PAYMENT-BALANCE') {
+                $item[$fieldName] = $storeCurrencySymbol . round($item['amount_details'], 2);
             }
         }
         return $dataSource;

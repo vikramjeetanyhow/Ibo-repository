@@ -58,8 +58,12 @@
         <add id="Anyhow_SupermaxPos::ah_reports" title="Reports" module="Anyhow_SupermaxPos" sortOrder="9" parent="Anyhow_SupermaxPos::ah_supermaxpos" resource="Anyhow_SupermaxPos::ah_reports"/>
 
         <!-- submenu Sales Report Management -->
-        <add id="Anyhow_SupermaxPos::ah_sales_reports" title="Sales Report" module="Anyhow_SupermaxPos" sortOrder="80" parent="Anyhow_SupermaxPos::ah_reports" 
+        <add id="Anyhow_SupermaxPos::ah_sales_reports" title="Sales Report" module="Anyhow_SupermaxPos" sortOrder="60" parent="Anyhow_SupermaxPos::ah_reports" 
         action="supermax/report/sales" resource="Anyhow_SupermaxPos::ah_sales_reports"/>
+
+        <!-- submenu Sales Report with payment Management -->
+        <add id="Anyhow_SupermaxPos::ah_sales_reports_mops" title="Sales Report MOPS" module="Anyhow_SupermaxPos" sortOrder="70" parent="Anyhow_SupermaxPos::ah_reports" 
+        action="supermax/report/salesreportmops" resource="Anyhow_SupermaxPos::ah_sales_reports_mops"/>
 
         <!-- submenu Old Sales Report Management -->
         <add id="Anyhow_SupermaxPos::ah_oldsales_reports" title="Old Sales Report" module="Anyhow_SupermaxPos" sortOrder="80" parent="Anyhow_SupermaxPos::ah_reports" 
@@ -110,5 +114,12 @@
         <!-- submenu Register Management -->
         <add id="Anyhow_SupermaxPos::ah_registers" title="Register &amp; Cash Management" module="Anyhow_SupermaxPos" sortOrder="10" parent="Anyhow_SupermaxPos::ah_supermax_cash_register" 
         action="supermax/register/index" resource="Anyhow_SupermaxPos::ah_registers"/>
+
+        <!-- main menu Pincode Master -->
+        <add id="Anyhow_SupermaxPos::ah_supermax_pincode_master" title="Pincode Master" module="Anyhow_SupermaxPos" sortOrder="20"  parent="Anyhow_SupermaxPos::ah_supermaxpos" resource="Anyhow_SupermaxPos::ah_supermax_pincode_master"/>
+
+        <!-- submenu Pincode Master Management -->
+        <add id="Anyhow_SupermaxPos::ah_pincodes" title="Pincodes Management" module="Anyhow_SupermaxPos" sortOrder="10" parent="Anyhow_SupermaxPos::ah_supermax_pincode_master" 
+        action="supermax/pincodemaster/index" resource="Anyhow_SupermaxPos::ah_pincodes"/>
     </menu>
 </config>

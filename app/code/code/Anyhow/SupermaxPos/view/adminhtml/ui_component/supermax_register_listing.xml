@@ -1,0 +1,406 @@
+<!-- 
+    /**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */
+
+ -->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">supermax_register_listing.supermax_register_listing_data_source</item>
+            <item name="deps" xsi:type="string">supermax_register_listing.supermax_register_listing_data_source</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="export" xsi:type="array">
+                <item name="name" xsi:type="string">export</item>
+                <item name="label" xsi:type="string" translate="true">Export Registers</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">supermax/register/exportdata</item>
+                <item name="sortOrder" xsi:type="number">30</item>
+            </item>
+        </item>
+        <item name="spinner" xsi:type="string">register_columns</item>
+    </argument>
+	<dataSource name="supermax_register_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">supermax_register_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">pos_register_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+			<argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">pos_register_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+	<listingToolbar name="listing_top">
+		<bookmark name="bookmarks"/>
+		<columnsControls name="columns_controls" />
+		<filterSearch name="fulltext"/>
+		<filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+        </filters>
+		<paging name="listing_paging"/>
+    </listingToolbar>
+	<columns name="register_columns">
+        <settings>
+            <editorConfig>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="supermax/register/update"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+                <param name="indexField" xsi:type="string">pos_register_id</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <param name="selectProvider" xsi:type="string">supermax_register_listing.supermax_register_listing.register_columns.ids</param>
+            </editorConfig>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">supermax_register_listing.supermax_register_listing.register_columns_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>pos_register_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>55</resizeDefaultWidth>
+            </settings>
+        </selectionsColumn>
+        <column name="pos_register_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="date_open">
+            <settings>
+                <filter>dateRange</filter>
+                <label translate="true">Opened At</label>
+                <!-- <sorting>desc</sorting> -->
+            </settings>
+        </column>
+        <column name="date_close">
+            <settings>
+                <filter>dateRange</filter>
+                <label translate="true">Closed At</label>
+            </settings>
+        </column>
+        <column name="reconciliation_status" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\ReconcileStatus">
+            <settings>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <label translate="true">Reconciliation Status</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="name">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Register Name</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="pos_outlet_id" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Anyhow\SupermaxPos\Model\Cashier\Attribute\Outlets\AllOutletOptions"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Store Name</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="pos_user_id" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Anyhow\SupermaxPos\Model\Cashier\Attribute\Outlets\AllCashierOptions"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Employee Name</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="status" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Magento\Config\Model\Config\Source\Enabledisable"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <column name="close_note">
+            <settings>
+                <label translate="true">Cashier Clouser Note</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="totalexpected" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\TotalExpected">
+            <settings>
+                <label translate="true">Total Expected</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="floatamount" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\FloatAmount">
+            <settings>
+                <label translate="true">Float Amount</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="totaldeclared" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\TotalDeclared">
+            <settings>
+                <label translate="true">Total Declared</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="totaldifference" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\TotalDifference">
+            <settings>
+                <label translate="true">Total Difference</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <!-- <column name="cashexpected" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\CashExpected">
+            <settings>
+                <label translate="true">Cash Expected</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="cashtotal" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\CashTotal">
+            <settings>
+                <label translate="true">Cash Cashier Declared</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="cashdifference" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\CashDifference">
+            <settings>
+                <label translate="true">Cash Cashier Difference</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="head_cashier_cash_total" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\PriceWithCurrency">
+            <settings>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Head-Cashier Cash Input</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="head_cashier_cash_difference" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\HeadCashDifference">
+            <settings>
+                <label translate="true">Head-Cashier Cash Difference</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="cardexpected" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\CardExpected">
+            <settings>
+                <label translate="true">Card Expected</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="cardtotal" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\CardTotal">
+            <settings>
+                <label translate="true">Card Cashier Declared</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="carddifference" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\CardDifference">
+            <settings>
+                <label translate="true">Card Cashier Difference</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="head_cashier_card_total" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\PriceWithCurrency">
+            <settings>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Head-Cashier Card Input</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="head_cashier_card_difference" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\HeadCardDifference">
+            <settings>
+                <label translate="true">Head-Cashier Card Difference</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="customexpected" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\CustomExpected">
+            <settings>
+                <label translate="true">UPI Expected</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="customtotal" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\CustomTotal">
+            <settings>
+                <label translate="true">UPI Cashier Declared</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="customdifference" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\CustomDifference">
+            <settings>
+                <label translate="true">UPI Cashier Difference</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="head_cashier_custom_total" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\PriceWithCurrency">
+            <settings>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Head-Cashier UPI Input</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="head_cashier_custom_difference" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\HeadCustomDifference">
+            <settings>
+                <label translate="true">Head-Cashier UPI Difference</label>
+                <sortable>false</sortable>
+            </settings>
+        </column> -->
+        <!-- <column name="podexpected" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\PodExpected">
+            <settings>
+                <label translate="true">POD Expected</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="podtotal" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\PodTotal">
+            <settings>
+                <label translate="true">POD Cashier Declared</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="poddifference" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\PodDifference">
+            <settings>
+                <label translate="true">POD Cashier Difference</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="head_cashier_pod_total" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\PriceWithCurrency">
+            <settings>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Head-Cashier POD Input</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="head_cashier_pod_difference" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\HeadPodDifference">
+            <settings>
+                <label translate="true">Head-Cashier POD Difference</label>
+                <sortable>false</sortable>
+            </settings>
+        </column> -->
+        <!-- <column name="offlineexpected" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\OfflineExpected">
+            <settings>
+                <label translate="true">Offline Expected</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="offlinetotal" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\OfflineTotal">
+            <settings>
+                <label translate="true">Offline Cashier Declared</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="offlinedifference" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\OfflineDifference">
+            <settings>
+                <label translate="true">Offline Cashier Difference</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="head_cashier_offline_total" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\PriceWithCurrency">
+            <settings>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Head-Cashier Offline Input</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="head_cashier_offline_difference" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\HeadOfflineDifference">
+            <settings>
+                <label translate="true">Head-Cashier Offline Difference</label>
+                <sortable>false</sortable>
+            </settings>
+        </column> -->
+
+         
+         <!-- <column name="walletexpected" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\WalletExpected">
+            <settings>
+                <label translate="true">Wallet Expected</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="wallettotal" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\WalletTotal">
+            <settings>
+                <label translate="true">Wallet Cashier Declared</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="walletdifference" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\WalletDifference">
+            <settings>
+                <label translate="true">Wallet Cashier Difference</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="head_cashier_wallet_total" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\PriceWithCurrency">
+            <settings>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Head-Cashier Wallet Input</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="head_cashier_wallet_difference" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\HeadWalletDifference">
+            <settings>
+                <label translate="true">Head-Cashier Wallet Difference</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+         -->
+        <column name="head_cashier_close_note">
+            <settings>
+                <label translate="true">Head Cashier Clouser Note</label>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+		<actionsColumn name="actions" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\RegisterActions">
+            <settings>
+                <indexField>pos_register_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

@@ -27,6 +27,7 @@ class Salessummaryexport extends \Magento\Backend\App\Action
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\Locale\CurrencyInterface $currency,
         \Magento\Framework\App\ResourceConnection $resourceConnection,
+        \Magento\Backend\Model\Auth\Session $adminSession,
         \Anyhow\SupermaxPos\Model\ResourceModel\SupermaxUser\Collection $supermaxUserCollection
     ) {
         parent::__construct($context);
@@ -38,6 +39,7 @@ class Salessummaryexport extends \Magento\Backend\App\Action
         $this->currency = $currency;
         $this->resource = $resourceConnection;
         $this->supermaxUserCollection = $supermaxUserCollection;
+        $this->adminSession = $adminSession;
     }
 
     public function execute()
@@ -55,7 +57,7 @@ class Salessummaryexport extends \Magento\Backend\App\Action
         $stream = $this->directory->openFile($filepath, 'w+');
         $stream->lock();
 
-        $columns = ['Payment Method', 'Total (' . $storeCurrencyCode . ')'];
+        $columns = ['Date Start', 'Date End', 'Payment Method', 'Total (' . $storeCurrencyCode . ')'];
 
         foreach ($columns as $column) {
             $header[] = $column;
@@ -74,7 +76,7 @@ class Salessummaryexport extends \Magento\Backend\App\Action
         $orderTable = $this->resource->getTableName('sales_order');
         $orderData = $connection->query("SELECT po.payment_data FROM $posOrderTable as po LEFT JOIN $orderTable as so ON(po.order_id =  so.entity_id) WHERE DATE(so.created_at) >= '$from' And DATE(so.created_at) <= '$to'")->fetchAll();
 
-        $cash_amount = $offline_amount = $credit_card = $debit_card = $net_banking = $upi = $wallet = $emi = $card = $bankDeposit = $saraLoan = $bharatPe = $pinelabsUpi = $ezetapEmi = 0;
+        $cash_amount = $offline_amount = $credit_card = $debit_card = $net_banking = $upi = $wallet = $emi = $card = $bankDeposit = $saraLoan = $bharatPe = $pinelabsUpi = $ezetapEmi = $partialBalance = 0;
         if (!empty($orderData)) {
             foreach ($orderData as $order) {
                 $paymentdata = (array) json_decode($order['payment_data']);
@@ -106,6 +108,8 @@ class Salessummaryexport extends \Magento\Backend\App\Action
                         $saraLoan += $payment['amount'];
                     } else if ($payment['payment_code'] == 'BHARATPE') {
                         $bharatPe += $payment['amount'];
+                    }  else if ($payment['payment_code'] == 'PARTIAL-PAYMENT-BALANCE') {
+                        $partialBalance += $payment['amount'];
                     } 
                 }
             }
@@ -117,6 +121,8 @@ class Salessummaryexport extends \Magento\Backend\App\Action
         $i = 0;
         foreach ($register_collection as $item) {
             $itemData = [];
+            $itemData[] = $this->adminSession->getData("ah_report_from_date");
+            $itemData[] = $this->adminSession->getData("ah_report_to_date");
             if($item['methods'] == 'CASH') {
                 $itemData[] = 'Cash Payment';
                 $itemData[] =  $item['amount_details'];
@@ -138,7 +144,7 @@ class Salessummaryexport extends \Magento\Backend\App\Action
             } elseif($item['methods'] == 'EMI') {
                 $itemData[] = 'Pinelab EMI Payment';
                 $itemData[] =  $item['amount_details'];
-            } else if ($payment['payment_code'] == 'EZETAP-EMI') {
+            } else if ($item['methods'] == 'EZETAP-EMI') {
                 $itemData[] = 'Ezetap EMI Payment';
                 $itemData[] =  $item['amount_details'];
             } else if ($item['methods'] == 'CARD') {
@@ -156,9 +162,12 @@ class Salessummaryexport extends \Magento\Backend\App\Action
             } else if ($item['methods'] == 'SARALOAN') {
                 $itemData[] = 'Saraloant Payment';
                 $itemData[] = $saraLoan;
+            } else if ($item['methods'] == 'PARTIAL-PAYMENT-BALANCE') {
+                $itemData[] = 'Pay On Invoice Payment';
+                $itemData[] = $partialBalance;
             }
              
-        $stream->writeCsv($itemData);
+            $stream->writeCsv($itemData);
         }
         $stream->unlock();
         $stream->close();

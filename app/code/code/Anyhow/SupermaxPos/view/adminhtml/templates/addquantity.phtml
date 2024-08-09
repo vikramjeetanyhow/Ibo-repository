@@ -1,0 +1,34 @@
+<?php
+
+use Magento\Framework\View\Element\Template;
+/** @var Template $block */
+$products = (array)$block->getData('product_parameter'); 
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeBaseUrl = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore()->getBaseUrl();
+?>
+
+<form id="print-barcode-form-quantity" method="post" enctype="multipart/form-data" action="<?php echo $storeBaseUrl.'supermaxpos/printbracode.php'?>">
+<input name="form_key" type="hidden" value="<?php echo $block->getFormKey() ?>" />
+    <div class="page-main-actions">
+        <div class="page-actions">
+            <div class="page-actions-buttons">
+                <button type="submit" class="action-default scalable save primary"><span>Print Barcodes</span></button>
+                <a href="<?php echo $block->getUrl('supermax/product/index');?>" class="action-default scalable primary" style="background-color: #eb5202; border-color: #eb5202; color: #ffffff;text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25); font-size: 1.6rem; letter-spacing: .025em;padding-bottom: 0.6875em; padding-top: 0.6875em;"><span>Back</span></a>
+            </div>
+            
+        </div>
+    </div>
+    <fieldset class="fieldset admin__fieldset">
+        <div class="admin__field _required">
+            
+            <label for="quantity" class="admin__field-label"><span>Quantity:</span></label>
+            
+            <div class="admin__field-control" >
+                <input type="text" name="quantity" placeholder="Quantity" class="admin__control-text" required> 
+            </div> 
+            
+        </div> 
+        <input type="hidden" name="entity_id" value= "<?php echo implode(',',$products); ?>">
+    </fieldset>
+</form>

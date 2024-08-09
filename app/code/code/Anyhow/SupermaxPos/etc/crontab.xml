@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="report_oldsales">
+        <job name="report_oldsales" instance="Anyhow\SupermaxPos\Cron\OldSalesReport" method="execute" >
+            <!-- <schedule>* * * * *</schedule> -->
+            <config_path>ah_supermax_pos_configuration/oldsales/report</config_path>
+        </job>
+    </group>
+</config>

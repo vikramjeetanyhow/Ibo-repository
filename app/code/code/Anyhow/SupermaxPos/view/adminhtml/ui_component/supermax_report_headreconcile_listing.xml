@@ -1,0 +1,144 @@
+<!-- 
+    /**
+ * @version [product Version 1.1.0] [Supported Magento Version 2.3.x.x]
+ * @category Anyhow Infosystems
+ * @package Magento Supermax POS
+ * @author [Anyhow Infosystems] <[<https://anyhowinfo.com/>]>
+ * @copyright Copyright (c) 2020 Anyhow Infosystems (OPC) Private Limited (https://anyhowinfo.com)
+ * @license https://store.anyhowinfo.com/software-license
+ */
+
+ -->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">supermax_report_headreconcile_listing.supermax_report_headreconcile_listing_data_source</item>
+            <item name="deps" xsi:type="string">supermax_report_headreconcile_listing.supermax_report_headreconcile_listing_data_source</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="export" xsi:type="array">
+                <item name="name" xsi:type="string">export</item>
+                <item name="label" xsi:type="string" translate="true">Export Head Cashier Report</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">supermax/report/Headreconcileexport</item>
+                <item name="sortOrder" xsi:type="number">30</item>
+            </item>
+        </item>
+        <item name="spinner" xsi:type="string">reconcile_columns</item>
+    </argument>
+	<dataSource name="supermax_report_headreconcile_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">supermax_report_headreconcile_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">pos_register_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+			<argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">pos_register_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>	
+    <listingToolbar name="listing_top">
+		<paging name="listing_paging"/>
+    </listingToolbar>
+	<columns name="reconcile_columns">       
+        <column name="date_open" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <label translate="true">Opened At</label>
+                <!-- <sorting>desc</sorting> -->
+            </settings>
+        </column>
+        <column name="date_close" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <label translate="true">Closed At</label>
+            </settings>
+        </column>
+        <column name="reconciliation_status" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\ReconcileStatus">
+            <settings>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <label translate="true">Reconciliation Status</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="name">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Register Name</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="pos_outlet_id" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Anyhow\SupermaxPos\Model\Cashier\Attribute\Outlets\AllOutletOptions"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Store Name</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="pos_user_id" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Anyhow\SupermaxPos\Model\Cashier\Attribute\Outlets\AllCashierOptions"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Cashier Name</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="status" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Magento\Config\Model\Config\Source\Enabledisable"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+         <column name="floatamount" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\FloatAmount">
+            <settings>
+                <label translate="true">Float Amount</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="totalexpected" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\PaymentExpected">
+            <settings>
+                <label translate="true">Total Expected</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="totaldeclared" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\PaymentDeclared">
+            <settings>
+                <label translate="true">Total Declared</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="totaldifference" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\TotalDifference">
+            <settings>
+                <label translate="true">Total Difference</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>        
+        <column name="head_cashier_close_note">
+            <settings>
+                <label translate="true">Head Cashier Clouser Note</label>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+       <actionsColumn name="actions" class="Anyhow\SupermaxPos\Ui\Component\Listing\Columns\ReconcileActions">
+           <settings>
+                <indexField>pos_register_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+           </actionsColumn>
+    </columns>
+</listing>
