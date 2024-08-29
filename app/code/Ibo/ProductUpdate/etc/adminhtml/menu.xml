@@ -10,5 +10,6 @@
     <menu>
         <add id="Ibo_ProductUpdate::import" title="IBO Subclass Import" module="Ibo_ProductUpdate" sortOrder="100" parent="Magento_Backend::system_convert" action="ibo_productupdate/import" resource="Ibo_ProductUpdate::import"/>
         <add id="Ibo_ProductUpdate::dimension" title="IBO Package Dimension Import" module="Ibo_ProductUpdate" sortOrder="100" parent="Magento_Backend::system_convert" action="ibo_productupdate/dimension" resource="Ibo_ProductUpdate::dimension"/>
+        <add id="Ibo_ProductUpdate::updatelotcontrol" title="IBO LotControl Update" module="Ibo_ProductUpdate" sortOrder="100" parent="Magento_Backend::system_convert" action="ibo_productupdate/updatecontrol" resource="Ibo_ProductUpdate::updatelotcontrol"/>
     </menu>
 </config>

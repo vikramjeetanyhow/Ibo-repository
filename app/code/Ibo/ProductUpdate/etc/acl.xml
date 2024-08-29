@@ -12,7 +12,8 @@
                 <resource id="Magento_Backend::system">
                     <resource id="Magento_Backend::convert">
                         <resource id="Ibo_ProductUpdate::import" title="IBO Subclass Import" sortOrder="100" />
-                        <resource id="Ibo_ProductUpdate::dimension" title="IBO Package Dimension Import" sortOrder="100" />
+                        <resource id="Ibo_ProductUpdate::dimension" title="IBO Package Dimension Import" sortOrder="110" />
+                        <resource id="Ibo_ProductUpdate::updatelotcontrol" title="IBO LotControl Update" sortOrder="120" />
                     </resource>
                 </resource>
             </resource>
