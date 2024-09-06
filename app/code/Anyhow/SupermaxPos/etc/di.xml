@@ -470,6 +470,23 @@
         </arguments>
     </type>
 
+        <!-- For Sales Reports New Modify -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="supermax_report_sales_new_listing_data_source" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxSalesNewOrders\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Anyhow\SupermaxPos\Model\ResourceModel\SupermaxSalesNewOrders\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order</argument>
+            <argument name="eventPrefix" xsi:type="string">Anyhow_SupermaxPos_grid_collection_new</argument>
+            <argument name="eventObject" xsi:type="string">supermax_sales_orders_grid_collection_new</argument>
+            <argument name="resourceModel" xsi:type="string">Anyhow\SupermaxPos\Model\ResourceModel\SupermaxSalesOrders</argument>
+        </arguments>
+    </type>
+
     <!-- For Old Sales Reports -->
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>

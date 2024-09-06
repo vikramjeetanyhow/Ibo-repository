@@ -33,18 +33,8 @@ if($period == 'day'){
     $year = "selected='selected'";
 }
 
-$todaySystemDate = date('Y-m-d');
-$FromDate = date('Y-m-d', strtotime('-7 days'));
-
-if($block->getSessionFromDate()){
-    $FromDate = $block->getSessionFromDate();
-}
-
-if($block->getSessionToDate()){
-    $todaySystemDate = $block->getSessionToDate();
-}
 ?>
-<form action="<?php echo $block->getAdminUrl() ?>" method="post" enctype="multipart/form-data">
+<form action="<?php echo $block->getAdminUrlSalesNew() ?>" method="post" enctype="multipart/form-data">
     <input name="form_key" type="hidden" value="<?php echo $block->getFormKey() ?>" />
     <fieldset class="fieldset admin__fieldset">
         <div class="admin__field field field-report_type  with-note">
@@ -55,7 +45,7 @@ if($block->getSessionToDate()){
                         ->setData([
                             'name' => 'from',
                             'id' => 'from',
-                            'value' => $FromDate,
+                            'value' => $from,
                             'date_format' => 'Y-M-d',
                             'image' => $this->getViewFileUrl('Magento_Theme::calendar.png'),
                             'years_range' => '-120y:c+nn',
@@ -80,7 +70,7 @@ if($block->getSessionToDate()){
                         ->setData([
                             'name' => 'to',
                             'id' => 'to',
-                            'value' => $todaySystemDate,
+                            'value' => $to,
                             'date_format' => 'Y-M-d',
                             'image' => $this->getViewFileUrl('Magento_Theme::calendar.png'),
                             'years_range' => '-120y:c+nn',
@@ -185,55 +175,3 @@ if($block->getSessionToDate()){
         </div>
     </fieldset>
 </form>
-<script>
-    require([
-        "jquery",
-        "jquery/ui",
-        ], function($){
-            $(document).ready(function() {
-                const InitalState_to = $(".control-to-date").children('.admin__control-text').attr("value");
-                const InitalState_from = $(".control-from-date").children('.admin__control-text').attr("value");
-                var systemGenarateDate = "";
-                $("input[name=to]").on("change",function(){ 
-                    const to_date = $(this).attr("value");
-                    if(to_date>InitalState_to){
-                        $(this).val(InitalState_to);
-                        $(this).text(InitalState_to);
-                       // localStorage.setItem("toDate", InitalState_to);
-                    }else{
-                        //localStorage.setItem("toDate", to_date);
-                        systemGenarateDate = to_date;
-                    }
-                });
-
-                $("input[name=from]").on("change",function(){ 
-                    const from_date = $(this).attr("value");
-                    const Catches_form_dates = (from_date !== "") ? from_date : InitalState_from;
-                    const Catches_to_dates = (systemGenarateDate !== "") ? systemGenarateDate : InitalState_to;
-                    const Diff_to_from_days = Math.floor((Date.parse(Catches_to_dates) - Date.parse(Catches_form_dates)) / 86400000);
-                    if((Diff_to_from_days<=7) && (Diff_to_from_days>=0)){
-                        $(this).val(from_date);
-                        $(this).text(from_date);  
-                        //localStorage.setItem("fromDate", from_date);
-                    }else{
-                        var date = new Date(systemGenarateDate);
-                        date.setDate(date.getDate() - 7);
-                        var finalDate = date.getFullYear()+'-'+ (date.getMonth()+1) +'-'+date.getDate();
-                        var fromValidate = isNaN(date.getDate()) ? InitalState_from: finalDate;
-                        $(this).val(fromValidate);
-                        $(this).text(fromValidate);
-                       // localStorage.setItem("fromDate", fromValidate);
-                    }
-                });
-
-                /*if(localStorage.getItem("toDate")!=null){
-                    $("input[name=to]").text(localStorage.getItem("toDate"));
-                    $("input[name=to]").val(localStorage.getItem("toDate"));
-                }
-                if(localStorage.getItem("fromDate")!=null){
-                    $("input[name=from]").text(localStorage.getItem("fromDate"));
-                    $("input[name=from]").val(localStorage.getItem("fromDate"));
-                }*/
-            });
-        });
-</script>

@@ -7,13 +7,15 @@ namespace Anyhow\SupermaxPos\Block\Adminhtml;
  * @since 100.0.2
  */
 class Form extends \Magento\Backend\Block\Template
-{
+{   
+    protected $backSession;
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\App\ResourceConnection $resourceConnection,
         \Magento\Sales\Model\ResourceModel\Order\Status\CollectionFactory $statusCollectionFactory,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Anyhow\SupermaxPos\Helper\Data $helper,
+        \Magento\Backend\Model\Session $backSession,
         array $data = []
 	) {
         parent::__construct($context, $data);
@@ -21,9 +23,23 @@ class Form extends \Magento\Backend\Block\Template
         $this->statusCollectionFactory = $statusCollectionFactory;
         $this->scopeConfig = $scopeConfig;
         $this->helper = $helper;
+        $this->backSession =  $backSession;
 	}
+
+    public function getSessionFromDate(){
+        return $this->backSession->getSessionFromDate();
+    }
+
+    public function getSessionToDate(){
+        return $this->backSession->getSessionToDate();
+    }
+
     public function getAdminUrl(){
         return $this->getUrl('supermax/report/save');
+    }
+
+    public function getAdminUrlSalesNew(){
+        return $this->getUrl('supermax/report/savenew');
     }
 
     public function getAdminUrlMops(){

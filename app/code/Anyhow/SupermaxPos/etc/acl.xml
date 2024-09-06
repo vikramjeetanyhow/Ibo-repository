@@ -55,7 +55,9 @@
 
 					<resource id="Anyhow_SupermaxPos::ah_reports" title="Supermax Reports Management" sortOrder="40">
 						<resource id="Anyhow_SupermaxPos::ah_sales_reports" title="Supermax Sales Reports" sortOrder="10"/>
-						<resource id="Anyhow_SupermaxPos::ah_inventory_reports" title="Supermax Inventory Reports" sortOrder="20"/>
+						<resource id="Anyhow_SupermaxPos::ah_sales_reports_mops" title="Supermax Sales MOPS" sortOrder="15"/>
+						<resource id="Anyhow_SupermaxPos::ah_sales_reports_new" title="Supermax Sales New" sortOrder="20"/>
+						<resource id="Anyhow_SupermaxPos::ah_inventory_reports" title="Supermax Inventory Reports" sortOrder="25"/>
 						<resource id="Anyhow_SupermaxPos::ah_customer_reports" title="Supermax Customer Reports" sortOrder="30"/>
 						<resource id="Anyhow_SupermaxPos::ah_tax_reports" title="Supermax Tax Reports" sortOrder="40"/>
 						<resource id="Anyhow_SupermaxPos::ah_overrides_reports" title="Supermax Overrides Reports" sortOrder="50"/>

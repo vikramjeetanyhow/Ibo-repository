@@ -11,19 +11,17 @@
 
 namespace Anyhow\SupermaxPos\Controller\Adminhtml\Report;
 
-class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App\Action\HttpPostActionInterface
+class Savenew extends \Magento\Backend\App\Action implements \Magento\Framework\App\Action\HttpPostActionInterface
 {
 	
 	public function __construct(
 		\Magento\Backend\App\Action\Context $context,
 		\Magento\Framework\App\ResourceConnection $resourceConnection,
-		\Magento\Backend\Model\View\Result\Redirect $resultRedirect,
-		\Magento\Backend\Model\Session $backSession
+		\Magento\Backend\Model\View\Result\Redirect $resultRedirect
 	) {
 		parent::__construct($context);
 		$this->resource = $resourceConnection;
 		$this->resultRedirect = $resultRedirect;
-		$this->backSession = $backSession;
 	}
 
 	public function execute() {
@@ -32,23 +30,21 @@ class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App
 		$data = $this->getRequest()->getPostValue();
 		$data['payment_method'] = 0;
 		$data['status'] = 0;
-		$this->backSession->setSessionFromDate($data['from']);
-		$this->backSession->setSessionToDate($data['to']);
 		$reportData = $connection->query("SELECT * FROM $reportTable Where type ='sales' ")->fetchAll();
 		// $outlet = !empty($data['outlet']) ? implode(",",$data['outlet']) : ' ';
 		$outlet = isset($data['outlet']) ? json_encode($data['outlet']) : '';
 		if(!empty($data['to']) && !empty($data['from']) && !empty($data['period'])){
 			if(empty($reportData)){
 				$connection->insert($reportTable,
-						['period'=> $data['period'], 'filter'=> 'no', 'type' => 'sales', 'pos_user_id' => $data['cashier'], 'pos_outlet_id' => $outlet, 'status' => $data['status'], 'payment_method' => $data['payment_method']]);       
+						['to'=> $data['to'], 'from'=> $data['from'], 'period'=> $data['period'], 'filter'=> 'no', 'type' => 'sales', 'pos_user_id' => $data['cashier'], 'pos_outlet_id' => $outlet, 'status' => $data['status'], 'payment_method' => $data['payment_method']]);       
 			} else {
 				$where = $connection->quoteInto('type = ?', 'sales');
             	$query = $connection->update($reportTable,
-                        ['period'=> $data['period'], 'filter'=> 'no', 'pos_user_id' => $data['cashier'], 'pos_outlet_id' => $outlet, 'status' => $data['status'],'payment_method' => $data['payment_method']], $where );
+                            ['to'=> $data['to'], 'from'=> $data['from'], 'period'=> $data['period'], 'filter'=> 'no', 'pos_user_id' => $data['cashier'], 'pos_outlet_id' => $outlet, 'status' => $data['status'],'payment_method' => $data['payment_method']], $where );
 			}
 		}
 
-		return $this->resultRedirect->setPath('supermax/report/sales');
+		return $this->resultRedirect->setPath('supermax/report/salesnew');
 		// $resultPage = $this->resultPageFactory->create();
 		// $resultPage->getConfig()->getTitle()->prepend(__('Sales Report'));
 		// return $resultPage;

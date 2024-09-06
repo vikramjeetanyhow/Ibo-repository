@@ -9,7 +9,7 @@
  * @license https://store.anyhowinfo.com/software-license
  */
 
-namespace Anyhow\SupermaxPos\Model\ResourceModel\SupermaxSalesOrders;
+namespace Anyhow\SupermaxPos\Model\ResourceModel\SupermaxSalesNewOrders;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
@@ -39,10 +39,8 @@ class Collection extends AbstractCollection
 
     protected function _initSelect()
     {
-        // $from = date('Y-m-01');
-        // $to = date('Y-m-d');
+        $from = date('Y-m-01');
         $to = date('Y-m-d');
-        $from = date('Y-m-d', strtotime('-7 days'));
         $period = 'day';
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $user = $objectManager->get('Magento\Backend\Model\Auth\Session')->getUser(); 
@@ -52,12 +50,6 @@ class Collection extends AbstractCollection
             $assignedOutletIds = !isset($outletID) ? -1 : (($outletID != 0) ? [$outletID] : 0);
         }
         $session = $objectManager->create('\Magento\Backend\Model\Session');
-        if(!empty($session->getSessionFromDate())){
-            $from = $session->getSessionFromDate();
-        }
-        if(!empty($session->getSessionToDate())){
-            $to = $session->getSessionToDate();
-        }
         $resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
         $connection = $resource->getConnection();
         $tableName = $resource->getTableName('ah_supermax_pos_report'); 
@@ -65,8 +57,8 @@ class Collection extends AbstractCollection
         $reportData = $connection->query($sql)->fetchAll();
         if(!empty($reportData)){
             foreach($reportData as $report){
-                // $to = $report['to'];
-                // $from = $report['from'];
+                $to = $report['to'];
+                $from = $report['from'];
                 $period = $report['period'];
                 $posUserId = $report['pos_user_id'];
                 $posOutletId = json_decode($report['pos_outlet_id']);
